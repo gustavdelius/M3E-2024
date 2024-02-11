@@ -1,0 +1,56 @@
+project:
+  type: book
+  output-dir: docs
+  preview: 
+    browser: true
+    port: 4200
+    watch-inputs: true
+
+book:
+  title: "Mathematical Ecology and Epidemiology"
+  subtitle: "Lecture notes for Spring 2024"
+  author: 
+    - name: Gustav Delius
+      email: gustav.delius@york.ac.uk
+      affiliation:
+      - name: Department of Mathematics, University of York
+  date: today
+  license: CC BY-NC-SA
+  description: Work in progress
+  downloads: pdf
+  repo-url: https://github.com/gustavdelius/M3E-2024/
+  repo-branch: main
+  repo-actions: edit
+  favicon: virus.png
+  twitter-card: true
+  open-graph: true
+  sidebar:
+    subtitle: Lecture notes
+    tools: 
+      - icon: mortarboard-fill
+        href: https://maths.york.ac.uk/moodle/course/view.php?id=2656
+        text: Moodle page
+      - icon: bug-fill
+        href: https://forms.gle/naVqtYVGNqWmVDgRA
+        text: Submit a correction
+  chapters:
+    - index.qmd
+    - sheet1.qmd
+
+bibliography: references.bib
+
+format:  
+  html:
+    theme: cosmo
+    code-fold: true
+    reference-location: margin
+    cap-location: margin
+    link-external-newwindow: true
+  pdf:
+    documentclass: scrreport
+
+toc: true
+toc-depth: 4
+number-sections: true
+crossref:
+  eq-prefix: Eq.
