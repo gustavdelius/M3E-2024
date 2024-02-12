@@ -46,11 +46,13 @@ format:
     reference-location: margin
     cap-location: margin
     link-external-newwindow: true
+    toc-depth: 4
   pdf:
     documentclass: scrreport
+    papersize: a4
+    toc-depth: 3
 
 toc: true
-toc-depth: 4
 number-sections: true
 crossref:
   eq-prefix: Eq.
