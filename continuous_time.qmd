@@ -1,0 +1,184 @@
+# Continuous-time population models
+
+We are interested in modelling the time evolution of the population number $N(t)$, starting with the current population number $N(0)=N_0$. Thinking about the processes by which the population number can change, we see that we can write the rate of change in the population number as
+$$
+\frac{dN}{dt} = \text{birth rate} - \text{death rate} + \text{immigration rate} - \text{emigration rate}.
+$$ {#eq-dNdt}
+The idea behind this approach is that if we understand how these processes depend on the population number $N$, then we can find $N(t)$ by solving the above differential equation. Different assumptions about the individual rates will give us different models for N(t). We will look at some influential models now.
+
+## Exponential model
+This is the simplest and oldest model, introduced by Thomas Robert Malthus in 1798. If we assume that the per-capita birth rate $b$ and the per-capita death rate $d$ are fixed constants, then the general differential equation @eq-dNdt becomes the linear equation
+$$
+\frac{dN}{dt}=bN-dN=rN,
+$$ {#eq-exponential}
+where we introduced the new parameter $r=b-d$. This equation is easy to solve:
+$$
+N(t)=N_0e^{rt}.
+$$ {#eq-exponential-solution}
+So if the birth rate exceeds the death rate and hence $r>0$, the model predicts exponential growth. In the opposite case of lower birth rate than death rate the model predicts exponential decay of the population number towards extinction. Only when birth and death rates are perfectly equal can the population stay steady over time. We illustrate that in @fig-exponential_solutions.
+
+```{python}
+#| label: fig-exponential_solutions
+#| fig-cap: Solutions to the exponential model.
+#| fig-alt: Solutions to the exponential model.
+#| echo: false
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Adjusting the font size for better readability
+plt.rcParams.update({'font.size': 14})
+
+# Parameters for the exponential growth model
+r1 = 0.1
+r2 = -0.3
+N0 = 10  # initial population number
+
+# Time values
+t = np.linspace(0, 10, 400)
+# Exponential growth equation: dN/dt = rN
+N_1 = N0 * np.exp(r1 * t)
+N_2 = N0 * np.exp(r2 * t)
+N_0 = N0 * np.exp(0 * t)
+
+# Creating the plot
+plt.plot(t, N_1, label="r>0")
+plt.plot(t, N_0, label="r=0")
+plt.plot(t, N_2, label="r<0")
+plt.title('Solutions of exponential model')
+
+# Removing numerical labels from the axes
+plt.xticks([])  # Removing labels on the horizontal axis
+plt.yticks([])  # Removing labels on the vertical axis
+
+# Setting the N axis (x-axis) to cross at dN/dt = 0
+plt.axhline(0, color='black', linewidth=0.5)  # Horizontal line at dN/dt = 0
+plt.axvline(0, color='black', linewidth=0.5)  # Vertical line at N = 0
+
+# Adding axis labels
+plt.xlabel('t')
+plt.ylabel('N(t)')
+
+plt.legend()
+plt.show()
+```
+
+## Logistic model
+Exponential population growth can not be maintained for ever. There will be a limit to the size of population that an ecosystem can maintain. When the population gets closer to this limit its growth rate will decrease, for example due to competition for limited food sources or space, or due to disease. This decrease in the growth rate is captured by the logistic equation
+$$
+\frac{dN}{dt}=rN\left(1-\frac{N}{K}\right),
+$$ {#eq-logistic}
+where $K$ is the carrying capacity of the environment. To see how the logistic equation captures the idea of a carrying capacity, we can look at the two limiting cases. When $N\ll K$, the logistic equation reduces to the exponential equation @eq-exponential. When $N\approx K$, the growth rate is approximately zero.
+
+In @fig-logistic_growth_rate make a plot of the right-hand side of the logistic equation @eq-logistic to see how the growth rate depends on the population number.
+
+```{python}
+#| label: fig-logistic_growth_rate
+#| fig-cap: The logistic growth rate as a function of the population number.
+#| fig-alt: The logistic growth rate as a function of the population number.
+#| echo: false
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Adjusting the font size for better readability
+plt.rcParams.update({'font.size': 14})
+
+# Parameters for the logistic growth model
+r = 1.0  # intrinsic growth rate
+K = 100  # carrying capacity
+
+# Population values
+N = np.linspace(0, K*1.1, 100)
+# Logistic growth rate equation: dN/dt = rN(1 - N/K)
+growth_rate = r * N * (1 - N / K)
+
+# Creating the plot
+plt.figure(figsize=(8, 6))
+plt.plot(N, growth_rate, label='dN/dt = rN(1 - N/K)')
+plt.title('Logistic Growth Rate')
+
+# Adding axis labels
+plt.xlabel('N')
+plt.ylabel('dN/dt')
+
+# Removing numerical labels from the axes
+plt.xticks([])  # Removing labels on the horizontal axis
+plt.yticks([])  # Removing labels on the vertical axis
+
+# Setting the N axis (x-axis) to cross at dN/dt = 0
+plt.axhline(0, color='black', linewidth=0.5)  # Horizontal line at dN/dt = 0
+plt.axvline(0, color='black', linewidth=0.5)  # Vertical line at N = 0
+
+# Placing a red dot at N = K on the N axis and labeling it
+plt.plot(K, 0, 'ro')  # Red dot at N = K
+plt.text(K, -0.02 * max(growth_rate), 'K', color='red', verticalalignment='top', horizontalalignment='center')
+
+# Plotting grey dotted lines at the maximum
+K_half = K / 2      # Half of the carrying capacity
+r_max = r*K / 4   # A quarter of the intrinsic growth rate
+plt.axvline(K_half, color='grey', linestyle=':', linewidth=1)  # Vertical line at N = K/2
+plt.axhline(r_max, color='grey', linestyle=':', linewidth=1)  # Horizontal line at dN/dt = rK/4
+# Labeling the points where these lines cross the axis
+plt.text(K_half, -0.02 * max(growth_rate), 'K/2', color='grey', verticalalignment='top', horizontalalignment='center')
+plt.text(-0.07 * K, r_max, 'rK/4', color='grey', verticalalignment='center', horizontalalignment='right')
+
+plt.legend()
+plt.show()
+```
+
+From the plot we see that the growth rate is zero at $N=0$ and $N=K$, and it is maximal at $N=K/2.$ By realising that $dN/dt$ is the slope of the graph of $N(t)$ we can sketch a few solutions to the logistic equation @eq-logistic in @fig-logistic_solutions.
+
+```{python}
+#| label: fig-logistic_solutions
+#| fig-cap: Solutions to the logistic equation.
+#| fig-alt: Solutions to the logistic equation.
+#| echo: false
+# Parameters for the logistic growth model
+r = 1.0  # intrinsic growth rate
+K = 100  # carrying capacity
+# initial population number
+N0_1 = 10
+N0_2 = 60
+N0_3 = 100
+N0_4 = 130
+N0_5 = 1
+N0_0 = 0
+
+# Time values
+t = np.linspace(0, 10, 100)
+# Logistic growth equation: dN/dt = rN(1 - N/K)
+N_0 = K * N0_0 * np.exp(r * t) / (K + N0_0 * (np.exp(r * t) - 1))
+N_1 = K * N0_1 * np.exp(r * t) / (K + N0_1 * (np.exp(r * t) - 1))
+N_2 = K * N0_2 * np.exp(r * t) / (K + N0_2 * (np.exp(r * t) - 1))
+N_3 = K * N0_3 * np.exp(r * t) / (K + N0_3 * (np.exp(r * t) - 1))
+N_4 = K * N0_4 * np.exp(r * t) / (K + N0_4 * (np.exp(r * t) - 1))
+N_5 = K * N0_5 * np.exp(r * t) / (K + N0_5 * (np.exp(r * t) - 1))
+
+# Creating the plot
+plt.plot(t, N_0)
+plt.plot(t, N_1)
+plt.plot(t, N_2)
+plt.plot(t, N_3)
+plt.plot(t, N_4)
+plt.plot(t, N_5)
+plt.title('Solutions of logistic model')
+
+# Removing numerical labels from the axes
+plt.xticks([])  # Removing labels on the horizontal axis
+plt.yticks([])  # Removing labels on the vertical axis
+
+# Labeling the fixed points
+plt.text(-0.2, K, 'K', verticalalignment='center', horizontalalignment='center')
+plt.text(-0.2, 0, '0', verticalalignment='center', horizontalalignment='right')
+
+# Adding axis labels
+plt.xlabel('t')
+plt.ylabel('N(t)')
+plt.show()
+```
+
+The logistic equation @eq-logistic can be solved analytically to give
+$$
+N(t)=\frac{K}{1+\left(\frac{K}{N_0}-1\right)e^{-rt}}=\frac{N_0 K e^{rt}}{K+N_0(e^{rt}-1)}.
+$$ {#eq-logistic-solution}
+
+

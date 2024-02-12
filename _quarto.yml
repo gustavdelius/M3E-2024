@@ -35,6 +35,7 @@ book:
         text: Submit a correction
   chapters:
     - index.qmd
+    - continuous_time.qmd
     - sheet1.qmd
 
 bibliography: references.bib
