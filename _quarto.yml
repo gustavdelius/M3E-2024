@@ -17,7 +17,6 @@ book:
   date: today
   license: CC BY-NC-SA
   description: Work in progress
-  downloads: pdf
   repo-url: https://github.com/gustavdelius/M3E-2024/
   repo-branch: main
   repo-actions: edit
@@ -36,7 +35,7 @@ book:
   chapters:
     - index.qmd
     - continuous_time.qmd
-    - sheet1.qmd
+    - discrete_time.qmd
 
 bibliography: references.bib
 
@@ -47,13 +46,12 @@ format:
     reference-location: margin
     cap-location: margin
     link-external-newwindow: true
-    toc-depth: 4
   pdf:
     documentclass: scrreport
-    papersize: a4
-    toc-depth: 3
 
 toc: true
+toc-depth: 4
+number-depth: 3
 number-sections: true
 crossref:
   eq-prefix: Eq.

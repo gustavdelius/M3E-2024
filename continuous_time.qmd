@@ -4,7 +4,7 @@ We are interested in modelling the time evolution of the population number $N(t)
 $$
 \frac{dN}{dt} = \text{birth rate} - \text{death rate} + \text{immigration rate} - \text{emigration rate}.
 $$ {#eq-dNdt}
-The idea behind this approach is that if we understand how these processes depend on the population number $N$, then we can find $N(t)$ by solving the above differential equation. Different assumptions about the individual rates will give us different models for N(t). We will look at some influential models now.
+The idea behind this approach is that if we understand how the rates at which these processes take place depend on the population number $N$, then we can find $N(t)$ by solving the above differential equation. Different assumptions about the individual rates will give us different models for N(t). We will look at some influential models now.
 
 ## Exponential model
 This is the simplest and oldest model, introduced by Thomas Robert Malthus in 1798. If we assume that the per-capita birth rate $b$ and the per-capita death rate $d$ are fixed constants, then the general differential equation @eq-dNdt becomes the linear equation
@@ -13,9 +13,9 @@ $$
 $$ {#eq-exponential}
 where we introduced the new parameter $r=b-d$. This equation is easy to solve:
 $$
-N(t)=N_0e^{rt}.
+N(t)=N_0\,e^{rt}.
 $$ {#eq-exponential-solution}
-So if the birth rate exceeds the death rate and hence $r>0$, the model predicts exponential growth. In the opposite case of lower birth rate than death rate the model predicts exponential decay of the population number towards extinction. Only when birth and death rates are perfectly equal can the population stay steady over time. We illustrate that in @fig-exponential_solutions.
+If the birth rate exceeds the death rate and hence $r>0$, the model predicts exponential growth. In the opposite case of lower birth rate than death rate the model predicts exponential decay of the population number towards extinction. Only when birth and death rates are perfectly equal can the population stay steady over time. We illustrate that in @fig-exponential_solutions.
 
 ```{python}
 #| label: fig-exponential_solutions
@@ -50,15 +50,19 @@ plt.title('Solutions of exponential model')
 plt.xticks([])  # Removing labels on the horizontal axis
 plt.yticks([])  # Removing labels on the vertical axis
 
-# Setting the N axis (x-axis) to cross at dN/dt = 0
-plt.axhline(0, color='black', linewidth=0.5)  # Horizontal line at dN/dt = 0
-plt.axvline(0, color='black', linewidth=0.5)  # Vertical line at N = 0
+# Hide the top and right spines
+ax = plt.gca()
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+# Move the bottom spine to y=0 and the left spine to x=0
+ax.spines['bottom'].set_position(('data', 0))
+ax.spines['left'].set_position(('data', 0))
 
 # Adding axis labels
-plt.xlabel('t')
-plt.ylabel('N(t)')
+plt.xlabel('t', loc='right')
+plt.ylabel('N(t)', loc='top')
 
-plt.legend()
+plt.legend(loc='center right')
 plt.show()
 ```
 
@@ -67,9 +71,9 @@ Exponential population growth can not be maintained for ever. There will be a li
 $$
 \frac{dN}{dt}=rN\left(1-\frac{N}{K}\right),
 $$ {#eq-logistic}
-where $K$ is the carrying capacity of the environment. To see how the logistic equation captures the idea of a carrying capacity, we can look at the two limiting cases. When $N\ll K$, the logistic equation reduces to the exponential equation @eq-exponential. When $N\approx K$, the growth rate is approximately zero.
+where $K$ is the carrying capacity of the environment. The extra factor of $1-N/K$ decreases the growth rate towards zero as the population number $N$ approaches the carrying capacity $K$.
 
-In @fig-logistic_growth_rate make a plot of the right-hand side of the logistic equation @eq-logistic to see how the growth rate depends on the population number.
+In @fig-logistic_growth_rate make a plot of the right-hand side of the logistic equation @eq-logistic to see how the growth rate depends on the population number. While that figure was created by the computer, the plot is easy to sketch by hand because the function we want to sketch is simply an upside-down parabola. The maximum of the parabola is at $N=K/2$ and the parabola crosses the $N$-axis at $N=0$ and $N=K$. This means that the population growth rate is zero at $N=0$ and $N=K$, and it is maximal at $N=K/2$.
 
 ```{python}
 #| label: fig-logistic_growth_rate
@@ -97,16 +101,20 @@ plt.plot(N, growth_rate, label='dN/dt = rN(1 - N/K)')
 plt.title('Logistic Growth Rate')
 
 # Adding axis labels
-plt.xlabel('N')
-plt.ylabel('dN/dt')
+plt.xlabel('N', loc='right')
+plt.ylabel('dN/dt', loc='top')
 
 # Removing numerical labels from the axes
 plt.xticks([])  # Removing labels on the horizontal axis
 plt.yticks([])  # Removing labels on the vertical axis
 
-# Setting the N axis (x-axis) to cross at dN/dt = 0
-plt.axhline(0, color='black', linewidth=0.5)  # Horizontal line at dN/dt = 0
-plt.axvline(0, color='black', linewidth=0.5)  # Vertical line at N = 0
+# Hide the top and right spines
+ax = plt.gca()
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+# Move the bottom spine to y=0 and the left spine to x=0
+ax.spines['bottom'].set_position(('data', 0))
+ax.spines['left'].set_position(('data', 0))
 
 # Placing a red dot at N = K on the N axis and labeling it
 plt.plot(K, 0, 'ro')  # Red dot at N = K
@@ -181,4 +189,394 @@ $$
 N(t)=\frac{K}{1+\left(\frac{K}{N_0}-1\right)e^{-rt}}=\frac{N_0 K e^{rt}}{K+N_0(e^{rt}-1)}.
 $$ {#eq-logistic-solution}
 
+
+## Allee effect
+Warder Clyde Allee (1885-1955) was an American ecologist who studied the effects of population density on the growth rate of a population. He found that in some cases the per-capita growth rate can increase with $N$. This is called the Allee effect. It can occur when the population is too small to find a mate, to find food, or to avoid predators.
+
+Figure @fig-per_capita_growth_rate shows the per-capita growth rate as a function of the population number for exponential growth in black, for logistic growth in blue and two different growth rates exhibiting the Allee effect in green and red.
+
+```{python}
+#| label: fig-per_capita_growth_rate
+#| fig-cap: The per-capita growth rate as a function of the population number.
+#| fig-alt: The per-capita growth rate as a function of the population number.
+#| echo: false
+# Parameters for the Allee growth model
+r = 1  # intrinsic growth rate
+K = 100  # carrying capacity
+K0 = 20  # critical population size
+KM = -20
+
+# Population values
+N = np.linspace(0, K*1.15, 100)
+# constant growth
+gc = N * 0 + r
+gl = r * (1 - N / K)
+# Allee growth rate equation: dN/dt = rN(1 - N/K)(N/K0 - 1)
+gs = r/2 * (1 - N / K) * (N / K0 - 1)
+gw = r/2 * (1 - N / K) * (1- N / KM)
+
+# Creating the plot
+plt.figure(figsize=(8, 6))
+plt.plot(N, gc, 'k:', label='exponential model')
+plt.plot(N, gl, 'b-.', label='logistic model')
+plt.plot(N, gw, 'g--', label='weak Allee effect')
+plt.plot(N, gs, 'r-', label='strong Allee effect')
+
+# Adding axis labels
+plt.xlabel('N', loc='right')
+plt.ylabel('per-capita rate', loc='top')
+
+# Removing numerical labels from the axes
+plt.xticks([])  # Removing labels on the horizontal axis
+plt.yticks([])  # Removing labels on the vertical axis
+
+# Hide the top and right spines
+ax = plt.gca()
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+# Move the bottom spine to y=0 and the left spine to x=0
+ax.spines['bottom'].set_position(('data', 0))
+ax.spines['left'].set_position(('data', 0))
+
+# Placing a red circle at N = K0 and a red dot at N = K and N=0
+# on the N axis and labeling them
+plt.plot(K0, 0, 'ro', fillstyle='none')  # Red circle at N = K0
+plt.text(K0, -0.03 * r, 'K0', color='red', verticalalignment='top', horizontalalignment='center')
+plt.text(0, -0.03 * r, '0', color='red', verticalalignment='top', horizontalalignment='center')
+plt.plot(K, 0, 'ro')  # Red dot at N = K
+plt.text(K, -0.03 * r, 'K', color='red', verticalalignment='top', horizontalalignment='center')
+
+plt.legend()
+plt.show()
+```
+
+The green curve in @fig-per_capita_growth_rate shows a weak Allee effect, where the per-capita rate is small but possitive for small population sizes, then initially increases with the population size before then decreasing again as the population approaches its carrying capacity. The red curve shows a strong Allee effect, which is similar but so strong that the growth rate starts out not just small but actually negative for small $N$. 
+
+The simplest model for the Allee effect is the logistic equation with a modified growth rate that includes another factor that decreases the growth rate for small $N$:
+$$
+\frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)\left(\frac{N}{K_0}-1\right).
+$$ {#eq-allee}
+If $0<K_0<K$, this exhibits the strong Allee effect because the growth rate is negative when $N<K_0$. This means that the population will be driven towards extinction when it is below the threshold size $K_0$ and it will grow towards its carrying capacity when it is above $K_0$. This is illustrated in @fig-allee_growth_rate.
+
+```{python}
+#| label: fig-allee_growth_rate
+#| fig-cap: The Allee growth rate as a function of the population number.
+#| fig-alt: The Allee growth rate as a function of the population number.
+#| echo: false
+# Parameters for the Allee growth model
+r = 1  # intrinsic growth rate
+K = 100  # carrying capacity
+K0 = 30  # critical population size
+
+# Population values
+N = np.linspace(0, K*1.05, 100)
+# Allee growth rate equation: dN/dt = rN(1 - N/K)(N/K0 - 1)
+growth_rate = r * N * (1 - N / K) * (N / K0 - 1)
+
+# Creating the plot
+plt.figure(figsize=(8, 6))
+plt.plot(N, growth_rate, label='dN/dt = rN(1 - N/K)(N/K0 - 1)')
+
+# Adding axis labels
+plt.xlabel('N', loc='right')
+plt.ylabel('dN/dt', loc='top')
+
+# Removing numerical labels from the axes
+plt.xticks([])  # Removing labels on the horizontal axis
+plt.yticks([])  # Removing labels on the vertical axis
+
+# Hide the top and right spines
+ax = plt.gca()
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+# Move the bottom spine to y=0 and the left spine to x=0
+ax.spines['bottom'].set_position(('data', 0))
+ax.spines['left'].set_position(('data', 0))
+
+# Placing a red circle at N = K0 and a red dot at N = K and N=0
+# on the N axis and labeling them
+plt.plot(K0, 0, 'ro', fillstyle='none')  # Red circle at N = K0
+plt.text(K0, -0.03 * max(growth_rate), 'K0', color='red', verticalalignment='top', horizontalalignment='center')
+plt.plot(0, 0, 'ro')  # Red dot at N = 0
+plt.text(0, -0.03 * max(growth_rate), '0', color='red', verticalalignment='top', horizontalalignment='center')
+plt.plot(K, 0, 'ro')  # Red dot at N = K
+plt.text(K, -0.03 * max(growth_rate), 'K', color='red', verticalalignment='top', horizontalalignment='center')
+
+# Placing arrows indicating direction of flow
+plt.annotate('', xy = (K0*0.4, 0), xytext = (K0*0.6, 0),
+             arrowprops=dict(facecolor='blue'))
+plt.annotate('', xy = (K0 + (K-K0)*0.4, 0), xytext = (K0 + (K-K0)*0.3, 0),
+             arrowprops=dict(facecolor='blue'))
+plt.annotate('', xy = (K0 + (K-K0)*0.7, 0), xytext = (K0 + (K-K0)*0.6, 0),
+             arrowprops=dict(facecolor='blue'))
+plt.annotate('', xy = (K*1.05, 0), xytext = (K*1.1, 0),
+             arrowprops=dict(facecolor='blue'))
+
+plt.legend()
+plt.show()
+```
+
+This phenomenon is important for conservation biology because it means that small populations are particularly vulnerable to extinction. It is also important for fisheries management because it means that the population can collapse if it falls below a certain threshold size. The phenomenon is called "critical depensation". We will meet it again when we discuss harvesting later in this section.
+
+## General autonomous ODE model
+The logistic model is a special case of a general autonomous ordinary differential equation (ODE) model
+$$
+\frac{dN}{dt}=f(N),
+$$ {#eq-autonomous}
+where $f(N)$ is a function of $N$ only, not $t$. The logistic equation @eq-logistic is an example of such a model with        
+$$
+f(N)=rN\left(1-\frac{N}{K}\right).
+$$
+
+If $f$ is Lipschitz continuous, then, given $N(0)=N_0$, there exists a unique solution $N(t)$ to the initial value problem @eq-autonomous. This is a consequence of the Picard-Lindelöf theorem. 
+
+We are interested in the steady states of the model, i.e. the values $N^*$ for which $f(N^*)=0$. These are the values of $N$ for which the population number does not change. To determine the stability of the steady states, we can look near $N^*$ by writing $N(t)=N^*+n(t)$ with $n(t)$ small. Then
+$$
+\frac{dN}{dt}=\frac{dN^*}{dt}+\frac{dn}{dt} = f(N^*+n(t))\approx f(N^*)+f'(N^*)\,n(t).
+$$
+We now use that $dN^*/dt=0$ and $f(N^*)=0$ to find
+$$
+\frac{dn}{dt}\approx f'(N^*)\,n(t).
+$$
+This is a linear equation for $n(t)$ with solution
+$$
+n(t)=n(0)e^{f'(N^*)t}
+$$
+and we can use the sign of $f'(N^*)$ to determine the stability of the steady state:
+
+* If $f'(N^*)<0$, then $n(t)$ will decrease towards zero, and the steady state is stable. 
+
+* If $f'(N^*)>0$, then $n(t)$ will increase away from zero, and the steady state is unstable. 
+
+If $f'(N^*)=0$, then we need to look at higher order terms to determine the stability.
+
+We illustrate this in the example of the logistic model. The fixed points are $N^*=0$ and $N^*=K$. The derivative of $f(N)$ is
+$$
+f'(N)=r\left(1-\frac{2N}{K}\right).
+$$
+So we find that $f'(0)=r>0$ and $f'(K)=-r<0$. This means that the steady state $N^*=0$ is unstable and the steady state $N^*=K$ is stable. This agrees with what we had already seen graphically in @fig-logistic_growth_rate and @fig-logistic_solutions.
+
+
+## Harvesting a renewable resource
+Ecologists model populations not only out of academic interest but also for practical purposes. Humans are interested in exploiting the natural resources. They want o harvest fish from the sea, to hunt deer in the forest, and to cut down trees in the jungle. They want to do this in a way that is sustainable, i.e. that does not lead to the extinction of the resource, while at the same time giving the highest yield.
+
+My personal interest is in understanding how fish populations react to different kinds of fishing. I use coupled partial integro-differential equations for that purpose, but most fisheries management is based on simpler models and we get a good first idea by using the logistic model, which we will now modify to include harvesting.
+
+### Harvesting with fixed effort
+
+We assume that in the absence of fishing the fish population number $N(t)$ is governed by the logistic equation @eq-logistic. We also assume that the fish are harvested at a rate $E N(t)$, where $E$ is the harvesting rate, which is determined by the effort that is put into fishing. This means that the rate of change in the fish population number is given by
+$$
+\frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)-EN = f(N).
+$$ {#eq-logistic-harvesting}
+We can rewrite this equation in the form of a logistic equation with modified parameters:
+$$
+\frac{dN}{dt}=rN\left(\left(1-\frac{E}{r}\right)-\frac{N}{K}\right).
+$$ {#eq-logistic-harvesting-parameters}
+This makes it easy to read off the fixed points $N^*=0$ and $N^*=K\left(1-\frac{E}{r}\right)$. The nonzero fixed point gets smaller when fishing effort $E$ increases. This is illustrated in @fig-logistic_harvesting.
+
+```{python}
+#| label: fig-logistic_harvesting
+#| fig-cap: Growth rate when harvesting with fixed effort.
+#| fig-alt: Growth rate when harvesting with fixed effort.
+#| echo: false
+# Parameters for the logistic growth model
+r = 1.0  # intrinsic growth rate
+K = 100  # carrying capacity
+E1 = 0.3  # harvesting rate
+E2 = 1.1
+
+# Population values
+N = np.linspace(0, K*1.1, 100)
+# Logistic growth rate equation: dN/dt = rN(1 - N/K) - EN
+g0 = r * N * (1 - N / K)
+g1 = r * N * (1 - N / K) - E1 * N
+g2 = r * N * (1 - N / K) - E2 * N
+
+# Creating the plot
+plt.plot(N, g0, label='$E=0$')
+plt.plot(N, g1, label='$0<E<r$')
+plt.plot(N, g2, label='$E>r$')
+plt.ylim(-max(g0)*0.4, max(g0)*1.1)
+
+# Adding axis labels
+plt.xlabel('N', loc='right')
+plt.ylabel('dN/dt', loc='top')
+
+# Removing numerical labels from the axes
+plt.xticks([])  # Removing labels on the horizontal axis
+plt.yticks([])  # Removing labels on the vertical axis
+
+# Hide the top and right spines
+ax = plt.gca()
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+# Move the bottom spine to y=0 and the left spine to x=0
+ax.spines['bottom'].set_position(('data', 0))
+ax.spines['left'].set_position(('data', 0))
+
+plt.legend()
+plt.show()
+```
+
+We are now interested in finding out at what level we should fish in order to achive the maximum sustainable yield (MSY). This is the level of fishing effort that gives the highest possible yield that can be sustained indefinitely. So we are interested in the yield at the non-zero fixed point $N^*=K\left(1-\frac{E}{r}\right)$. The yield is the amount of fish that can be harvested per unit time, and it is given at the fixed point by 
+$$
+Y=EN^*=EK\left(1-\frac{E}{r}\right).
+$$
+We can find the maximum of $Y$ by differentiating with respect to $E$ and setting the derivative equal to zero:
+$$
+\frac{dY}{dE}=K\left(1-\frac{2E}{r}\right)=0.
+$$
+We can solve this equation for $E$ to find the optimal fishing effort $E^*$:
+$$
+E^*=\frac{r}{2}.
+$$
+The resulting maximum sustainable yield is
+$$
+MSY=\frac{r}{2}K\left(1-\frac{r}{2r}\right)=\frac{rK}{4}.
+$$
+
+
+### Harvesting with fixed quote
+Fisheries managers in the Mediterranean are aiming to control the fishing effort in order to achieve the maximum sustainable yield, and we have seen how to model that in the previous section. Fisheries in the North Sea or the North Atlantic however are instead managed by setting the total allowable catch (TAC) for the whole fleet. This is a fixed quota for the total amount of fish that can be harvested in a year. To model that policy we use the logistic equation with harvesting, but we replace the harvesting rate $EN$ by a harvesting quota $Q$:
+$$
+\frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)-Q.
+$$ {#eq-logistic-quota}
+This is visualised in @fig-logistic_quota.
+
+```{python}
+#| label: fig-logistic_quota
+#| fig-cap: Growth rate when harvesting with fixed quota.
+#| fig-alt: Growth rate when harvesting with fixed quota.
+#| echo: false
+# Parameters for the logistic growth model
+r = 1.0  # intrinsic growth rate
+K = 100  # carrying capacity
+Q1 = 13  # harvesting rate
+Q2 = 26
+
+# Population values
+N = np.linspace(0, K*1.1, 100)
+# Logistic growth rate equation: dN/dt = rN(1 - N/K) - Q
+g0 = r * N * (1 - N / K)
+g1 = r * N * (1 - N / K) - Q1
+g2 = r * N * (1 - N / K) - Q2
+
+# Creating the plot
+plt.plot(N, g0, label='$Q=0$')
+plt.plot(N, g1, label='$rK/4>Q>0$')
+plt.plot(N, g2, label='$Q>rK/4$')
+plt.ylim(-max(g0)*0.6, max(g0)*1.1)
+
+# Adding axis labels
+plt.xlabel('N', loc='right')
+plt.ylabel('dN/dt', loc='top')
+
+# Removing numerical labels from the axes
+plt.xticks([])  # Removing labels on the horizontal axis
+plt.yticks([])  # Removing labels on the vertical axis
+
+# Hide the top and right spines
+ax = plt.gca()
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+# Move the bottom spine to y=0 and the left spine to x=0
+ax.spines['bottom'].set_position(('data', 0))
+ax.spines['left'].set_position(('data', 0))
+
+plt.legend()
+plt.show()
+```
+
+We see that any non-zero quota leads to critical depensation, i.e., it introduces a critical threshold below which the population will collapse. This is a well-known problem in fisheries management, and it is the reason why the TAC is set to zero for some fish stocks. As the fishing quota is increased, the critical depensation threshold moves to higher population numbers and the stable steady state moves to lower population numbers. Eventually all non-zero fixed points disappear and the population collapses. 
+
+## Exercises
+
+Exercises marked with a * are essential and are to be handed in. Exercises marked with a + are important and you are urged to complete them. Other exercises are optional but recommended.
+
+
+#### *Sketching solutions
+::: {#exr-sketch_solutions}
+Consider the population model with carrying capacity and Allee effect given by the differential equation
+$$\frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)\left(\frac{N}{K_0}-1\right).$$
+Here $r>0$, $K>K_0>0$ are constants. Simply by considering the shape of the right hand side, sketch a graph with several solutions for different initial conditions. Choose two initial conditions between $0$ and $K_0$, two initial conditions between $K_0$ and $K$ and one initial condition larger than $K$. Note that the graph only needs to be qualitatively correct, similar to the rough sketch for the solutions of the logistic model sketched in the first lecture.
+:::
+
+#### +Von Bertalanffy growth
+::: {#exr-vonBertalanffy_growth}
+Assume the weight $w(t)$ of an individual fish at time $t$ is
+governed by the differential equation
+$$\frac{dw}{dt}=\alpha\,w^{2/3}-\beta w$$
+with initial condition $w(0)=w_0$ (the weight at birth), and where
+$\alpha$ and $\beta$ are positive parameters depending on the fish species.
+
+i) Without solving the differential equation, just thinking about fixed points and their stability, determine $\lim_{t\rightarrow\infty}w(t)$.
+
+ii) Derive the linear first order ODE for $u=w^{1/3}$ and solve it.
+
+iii) Use the solution for $u$ to find the solution for $w$.
+:::
+
+
+#### Solving logistic equation
+::: {#exr-logistic_solution}
+By using separation of variables and partial fractions, solve the logistic equation
+$$\frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)$$
+with initial condition $N(0)=N_0$.
+:::
+
+
+#### * Harvesting with fixed effort
+::: {#exr-harvest_effort}
+Consider a population $N(t)$ that is described by the by the Gompertz model
+$$
+\frac{dN}{dt} = \alpha N \log\frac{K}{N},
+$$
+where $\alpha$ and $K$ are positive constants. You want to harvest this population, for example
+by hunting or fishing, with some effort $E$. The rate at which you harvest individuals (which removes them from
+the population and hence results in an additional source of death) is proportional to the size of the population:
+$Y = E N$. This is called the yield.  Write down the differential equation for $N(t)$ including this harvesting term. Determine the
+fixed points and their stability. Find the maximum sustainable yield, i.e., the maximum yield that can be sustained indefinitely.
+:::
+
+#### Harvesting with fixed quota
+::: {#exr-harvest_quota}
+As in @exr-harvest_effort, consider a population $N(t)$ that is described by the Gompertz model. Imagine that this describes a fish population in a lake where fishing is going to be introduced, and that you are tasked with setting the quota that 
+limits the rate at which the fishers are allowed to take fish out of the lake. The fishers demand that you set the quota to the
+maximum sustainable level. What is the maximum sustainable quota according to the model? Would it be wise to give in to the demand of
+the fishers and set the quota at this level?
+:::
+
+#### Wasps
+::: {#exr-Hornet}
+In a colony of the European Hornet there is a single queen that produces all the offspring. It
+produces two kinds of offspring: workers and reproducers.
+We'll denote the number of workers alive at time $t$ by $n(t)$ and the number of reproducers by $N(t)$.
+The workers are responsible for collecting food. They can't breed themselves and they die in the winter. However
+they are necessary to allow the queen to reproduce because without the food that they are collecting
+the queen would have nothing to eat. So we need workers. But because they die in winter, they don't help the survival of the colony in the long run.
+That's where the reproducers come in. They don't do any work, but they can, if they survive the winter, breed in the next spring as new queens.
+
+So the queen now has a strategy of how to proceed:
+It first of all needs to produce workers, and from time zero to time $t_c$ it only produces workers.
+We assume that the birth rate is proportional to the number of workers,
+so that the total birth rate of workers is $r n(t)$ for some constant $r>0$.
+The queen then switches to producing only reproducers from time $t_c$ up to the start of winter at time $T$
+and we assume that the total birth rate of reproducers is $R n(t)$ for some constant $R>0$.
+We also assume that until the start of winter there are no deaths. 
+
+What is the optimal  time $t_c$ at which the queen should switch from producing workers to producing reproducers
+in order to achieve the largest number of producers $N(T)$ at the start of the winter and therefore to the largest
+number of wasps in the following year.
+:::
+
+#### Wasps with death
+::: {#exr-wasp_death}
+In the wasp example from question 1, assume that the worker wasps die
+at a constant per-capita rate $d$ but the reproducers do not die. 
+Also assume that at time t=0 there is one worker, n(0)=1. Keep the birth rates as in @exr-Hornet.
+Determine the number of workers $n(t)$ for any time between $t_c$ and $T$.
+Determine the number of reproducers at the onset of winter at time $T$.
+Derive the optimal time for the switchover time $t_c$.
+
+:::
 

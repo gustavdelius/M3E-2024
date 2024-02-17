@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./sheet1.html" rel="next">
+<link href="./discrete_time.html" rel="next">
 <link href="./index.html" rel="prev">
 <link href="./virus.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -49,7 +49,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -58,6 +64,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -67,14 +74,39 @@ ul.task-list li input[type="checkbox"] {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 <meta property="og:title" content="Mathematical Ecology and Epidemiology - 1&nbsp; Continuous-time population models">
 <meta property="og:description" content="Work in progress">
-<meta property="og:image" content="continuous_time_files/figure-html/fig-exponential_solutions-output-1.png">
-<meta property="og:site-name" content="Mathematical Ecology and Epidemiology">
+<meta property="og:site_name" content="Mathematical Ecology and Epidemiology">
 <meta name="twitter:title" content="Mathematical Ecology and Epidemiology - 1&nbsp; Continuous-time population models">
 <meta name="twitter:description" content="Work in progress">
-<meta name="twitter:image" content="continuous_time_files/figure-html/fig-exponential_solutions-output-1.png">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-sidebar floating slimcontent">
@@ -83,12 +115,12 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./continuous_time.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Continuous-time population models</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./continuous_time.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Continuous-time population models</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
@@ -98,15 +130,14 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Mathematical Ecology and Epidemiology</a> 
         <div class="sidebar-tools-main tools-wide">
-    <a href="https://maths.york.ac.uk/moodle/course/view.php?id=2656" rel="" title="Moodle page" class="quarto-navigation-tool px-1" aria-label="Moodle page"><i class="bi bi-mortarboard-fill"></i></a>
-    <a href="https://forms.gle/naVqtYVGNqWmVDgRA" rel="" title="Submit a correction" class="quarto-navigation-tool px-1" aria-label="Submit a correction"><i class="bi bi-bug-fill"></i></a>
-    <a href="https://github.com/gustavdelius/M3E-2024/" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="./Mathematical-Ecology-and-Epidemiology.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="https://maths.york.ac.uk/moodle/course/view.php?id=2656" title="Moodle page" class="quarto-navigation-tool px-1" aria-label="Moodle page"><i class="bi bi-mortarboard-fill"></i></a>
+    <a href="https://forms.gle/naVqtYVGNqWmVDgRA" title="Submit a correction" class="quarto-navigation-tool px-1" aria-label="Submit a correction"><i class="bi bi-bug-fill"></i></a>
+    <a href="https://github.com/gustavdelius/M3E-2024/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
 </div>
     </div>
       </div>
@@ -131,14 +162,14 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./sheet1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Problem sheet 1</span></a>
+  <a href="./discrete_time.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Discrete-time population models</span></span></a>
   </div>
 </li>
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -147,8 +178,25 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#exponential-model" id="toc-exponential-model" class="nav-link active" data-scroll-target="#exponential-model"><span class="header-section-number">1.1</span> Exponential model</a></li>
   <li><a href="#logistic-model" id="toc-logistic-model" class="nav-link" data-scroll-target="#logistic-model"><span class="header-section-number">1.2</span> Logistic model</a></li>
+  <li><a href="#allee-effect" id="toc-allee-effect" class="nav-link" data-scroll-target="#allee-effect"><span class="header-section-number">1.3</span> Allee effect</a></li>
+  <li><a href="#general-autonomous-ode-model" id="toc-general-autonomous-ode-model" class="nav-link" data-scroll-target="#general-autonomous-ode-model"><span class="header-section-number">1.4</span> General autonomous ODE model</a></li>
+  <li><a href="#harvesting-a-renewable-resource" id="toc-harvesting-a-renewable-resource" class="nav-link" data-scroll-target="#harvesting-a-renewable-resource"><span class="header-section-number">1.5</span> Harvesting a renewable resource</a>
+  <ul>
+  <li><a href="#harvesting-with-fixed-effort" id="toc-harvesting-with-fixed-effort" class="nav-link" data-scroll-target="#harvesting-with-fixed-effort"><span class="header-section-number">1.5.1</span> Harvesting with fixed effort</a></li>
+  <li><a href="#harvesting-with-fixed-quote" id="toc-harvesting-with-fixed-quote" class="nav-link" data-scroll-target="#harvesting-with-fixed-quote"><span class="header-section-number">1.5.2</span> Harvesting with fixed quote</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">1.6</span> Exercises</a>
+  <ul>
+  <li><a href="#sketching-solutions" id="toc-sketching-solutions" class="nav-link" data-scroll-target="#sketching-solutions">*Sketching solutions</a></li>
+  <li><a href="#von-bertalanffy-growth" id="toc-von-bertalanffy-growth" class="nav-link" data-scroll-target="#von-bertalanffy-growth">+Von Bertalanffy growth</a></li>
+  <li><a href="#solving-logistic-equation" id="toc-solving-logistic-equation" class="nav-link" data-scroll-target="#solving-logistic-equation">Solving logistic equation</a></li>
+  <li><a href="#harvesting-with-fixed-effort-1" id="toc-harvesting-with-fixed-effort-1" class="nav-link" data-scroll-target="#harvesting-with-fixed-effort-1">* Harvesting with fixed effort</a></li>
+  <li><a href="#harvesting-with-fixed-quota" id="toc-harvesting-with-fixed-quota" class="nav-link" data-scroll-target="#harvesting-with-fixed-quota">Harvesting with fixed quota</a></li>
+  <li><a href="#wasps" id="toc-wasps" class="nav-link" data-scroll-target="#wasps">Wasps</a></li>
+  <li><a href="#wasps-with-death" id="toc-wasps-with-death" class="nav-link" data-scroll-target="#wasps-with-death">Wasps with death</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/gustavdelius/M3E-2024/edit/main/continuous_time.qmd" class="toc-action">Edit this page</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/gustavdelius/M3E-2024/edit/main/continuous_time.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
@@ -168,24 +216,30 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+
 </header>
+
 
 <p>We are interested in modelling the time evolution of the population number <span class="math inline">\(N(t)\)</span>, starting with the current population number <span class="math inline">\(N(0)=N_0\)</span>. Thinking about the processes by which the population number can change, we see that we can write the rate of change in the population number as <span id="eq-dNdt"><span class="math display">\[
 \frac{dN}{dt} = \text{birth rate} - \text{death rate} + \text{immigration rate} - \text{emigration rate}.
-\tag{1.1}\]</span></span> The idea behind this approach is that if we understand how these processes depend on the population number <span class="math inline">\(N\)</span>, then we can find <span class="math inline">\(N(t)\)</span> by solving the above differential equation. Different assumptions about the individual rates will give us different models for N(t). We will look at some influential models now.</p>
+\tag{1.1}\]</span></span> The idea behind this approach is that if we understand how the rates at which these processes take place depend on the population number <span class="math inline">\(N\)</span>, then we can find <span class="math inline">\(N(t)\)</span> by solving the above differential equation. Different assumptions about the individual rates will give us different models for N(t). We will look at some influential models now.</p>
 <section id="exponential-model" class="level2 page-columns page-full" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="exponential-model"><span class="header-section-number">1.1</span> Exponential model</h2>
-<p>This is the simplest and oldest model, introduced by Thomas Robert Malthus in 1798. If we assume that the per-capita birth rate <span class="math inline">\(b\)</span> and the per-capita death rate <span class="math inline">\(d\)</span> are fixed constants, then the general differential equation <a href="#eq-dNdt">Eq.&nbsp;<span>1.1</span></a> becomes the linear equation <span id="eq-exponential"><span class="math display">\[
+<p>This is the simplest and oldest model, introduced by Thomas Robert Malthus in 1798. If we assume that the per-capita birth rate <span class="math inline">\(b\)</span> and the per-capita death rate <span class="math inline">\(d\)</span> are fixed constants, then the general differential equation <a href="#eq-dNdt" class="quarto-xref">Eq.&nbsp;<span>1.1</span></a> becomes the linear equation <span id="eq-exponential"><span class="math display">\[
 \frac{dN}{dt}=bN-dN=rN,
 \tag{1.2}\]</span></span> where we introduced the new parameter <span class="math inline">\(r=b-d\)</span>. This equation is easy to solve: <span id="eq-exponential-solution"><span class="math display">\[
-N(t)=N_0e^{rt}.
-\tag{1.3}\]</span></span> So if the birth rate exceeds the death rate and hence <span class="math inline">\(r&gt;0\)</span>, the model predicts exponential growth. In the opposite case of lower birth rate than death rate the model predicts exponential decay of the population number towards extinction. Only when birth and death rates are perfectly equal can the population stay steady over time. We illustrate that in <a href="#fig-exponential_solutions">Figure&nbsp;<span>1.1</span></a>.</p>
-<div class="cell page-columns page-full" data-execution_count="1">
+N(t)=N_0\,e^{rt}.
+\tag{1.3}\]</span></span> If the birth rate exceeds the death rate and hence <span class="math inline">\(r&gt;0\)</span>, the model predicts exponential growth. In the opposite case of lower birth rate than death rate the model predicts exponential decay of the population number towards extinction. Only when birth and death rates are perfectly equal can the population stay steady over time. We illustrate that in <a href="#fig-exponential_solutions" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>.</p>
+<div id="cell-fig-exponential_solutions" class="cell page-columns page-full" data-execution_count="1">
 <div class="cell-output cell-output-display page-columns page-full">
-<div id="fig-exponential_solutions" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="continuous_time_files/figure-html/fig-exponential_solutions-output-1.png" class="figure-img" alt="Solutions to the exponential model." width="564" height="438"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;1.1: Solutions to the exponential model.</figcaption>
+<div id="fig-exponential_solutions" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" alt="Solutions to the exponential model.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-exponential_solutions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="continuous_time_files/figure-html/fig-exponential_solutions-output-1.png" alt="Solutions to the exponential model." width="540" height="427" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-exponential_solutions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.1: Solutions to the exponential model.
+</figcaption>
 </figure>
 </div>
 </div>
@@ -195,34 +249,217 @@ N(t)=N_0e^{rt}.
 <h2 data-number="1.2" class="anchored" data-anchor-id="logistic-model"><span class="header-section-number">1.2</span> Logistic model</h2>
 <p>Exponential population growth can not be maintained for ever. There will be a limit to the size of population that an ecosystem can maintain. When the population gets closer to this limit its growth rate will decrease, for example due to competition for limited food sources or space, or due to disease. This decrease in the growth rate is captured by the logistic equation <span id="eq-logistic"><span class="math display">\[
 \frac{dN}{dt}=rN\left(1-\frac{N}{K}\right),
-\tag{1.4}\]</span></span> where <span class="math inline">\(K\)</span> is the carrying capacity of the environment. To see how the logistic equation captures the idea of a carrying capacity, we can look at the two limiting cases. When <span class="math inline">\(N\ll K\)</span>, the logistic equation reduces to the exponential equation <a href="#eq-exponential">Eq.&nbsp;<span>1.2</span></a>. When <span class="math inline">\(N\approx K\)</span>, the growth rate is approximately zero.</p>
-<p>In <a href="#fig-logistic_growth_rate">Figure&nbsp;<span>1.2</span></a> make a plot of the right-hand side of the logistic equation <a href="#eq-logistic">Eq.&nbsp;<span>1.4</span></a> to see how the growth rate depends on the population number.</p>
-<div class="cell page-columns page-full" data-execution_count="2">
+\tag{1.4}\]</span></span> where <span class="math inline">\(K\)</span> is the carrying capacity of the environment. The extra factor of <span class="math inline">\(1-N/K\)</span> decreases the growth rate towards zero as the population number <span class="math inline">\(N\)</span> approaches the carrying capacity <span class="math inline">\(K\)</span>.</p>
+<p>In <a href="#fig-logistic_growth_rate" class="quarto-xref">Figure&nbsp;<span>1.2</span></a> make a plot of the right-hand side of the logistic equation <a href="#eq-logistic" class="quarto-xref">Eq.&nbsp;<span>1.4</span></a> to see how the growth rate depends on the population number. While that figure was created by the computer, the plot is easy to sketch by hand because the function we want to sketch is simply an upside-down parabola. The maximum of the parabola is at <span class="math inline">\(N=K/2\)</span> and the parabola crosses the <span class="math inline">\(N\)</span>-axis at <span class="math inline">\(N=0\)</span> and <span class="math inline">\(N=K\)</span>. This means that the population growth rate is zero at <span class="math inline">\(N=0\)</span> and <span class="math inline">\(N=K\)</span>, and it is maximal at <span class="math inline">\(N=K/2\)</span>.</p>
+<div id="cell-fig-logistic_growth_rate" class="cell page-columns page-full" data-execution_count="2">
 <div class="cell-output cell-output-display page-columns page-full">
-<div id="fig-logistic_growth_rate" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="continuous_time_files/figure-html/fig-logistic_growth_rate-output-1.png" class="figure-img" alt="The logistic growth rate as a function of the population number." width="660" height="512"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;1.2: The logistic growth rate as a function of the population number.</figcaption>
+<div id="fig-logistic_growth_rate" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" alt="The logistic growth rate as a function of the population number.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-logistic_growth_rate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="continuous_time_files/figure-html/fig-logistic_growth_rate-output-1.png" alt="The logistic growth rate as a function of the population number." width="660" height="488" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-logistic_growth_rate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.2: The logistic growth rate as a function of the population number.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>From the plot we see that the growth rate is zero at <span class="math inline">\(N=0\)</span> and <span class="math inline">\(N=K\)</span>, and it is maximal at <span class="math inline">\(N=K/2.\)</span> By realising that <span class="math inline">\(dN/dt\)</span> is the slope of the graph of <span class="math inline">\(N(t)\)</span> we can sketch a few solutions to the logistic equation <a href="#eq-logistic">Eq.&nbsp;<span>1.4</span></a> in <a href="#fig-logistic_solutions">Figure&nbsp;<span>1.3</span></a>.</p>
-<div class="cell page-columns page-full" data-execution_count="3">
+<p>From the plot we see that the growth rate is zero at <span class="math inline">\(N=0\)</span> and <span class="math inline">\(N=K\)</span>, and it is maximal at <span class="math inline">\(N=K/2.\)</span> By realising that <span class="math inline">\(dN/dt\)</span> is the slope of the graph of <span class="math inline">\(N(t)\)</span> we can sketch a few solutions to the logistic equation <a href="#eq-logistic" class="quarto-xref">Eq.&nbsp;<span>1.4</span></a> in <a href="#fig-logistic_solutions" class="quarto-xref">Figure&nbsp;<span>1.3</span></a>.</p>
+<div id="cell-fig-logistic_solutions" class="cell page-columns page-full" data-execution_count="3">
 <div class="cell-output cell-output-display page-columns page-full">
-<div id="fig-logistic_solutions" class="quarto-figure quarto-figure-center anchored page-columns page-full">
-<figure class="figure page-columns page-full">
-<p><img src="continuous_time_files/figure-html/fig-logistic_solutions-output-1.png" class="figure-img" alt="Solutions to the logistic equation." width="564" height="438"></p>
-<figcaption class="figure-caption margin-caption">Figure&nbsp;1.3: Solutions to the logistic equation.</figcaption>
+<div id="fig-logistic_solutions" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" alt="Solutions to the logistic equation.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-logistic_solutions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="continuous_time_files/figure-html/fig-logistic_solutions-output-1.png" alt="Solutions to the logistic equation." width="564" height="438" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-logistic_solutions-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.3: Solutions to the logistic equation.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>The logistic equation <a href="#eq-logistic">Eq.&nbsp;<span>1.4</span></a> can be solved analytically to give <span id="eq-logistic-solution"><span class="math display">\[
+<p>The logistic equation <a href="#eq-logistic" class="quarto-xref">Eq.&nbsp;<span>1.4</span></a> can be solved analytically to give <span id="eq-logistic-solution"><span class="math display">\[
 N(t)=\frac{K}{1+\left(\frac{K}{N_0}-1\right)e^{-rt}}=\frac{N_0 K e^{rt}}{K+N_0(e^{rt}-1)}.
 \tag{1.5}\]</span></span></p>
+</section>
+<section id="allee-effect" class="level2 page-columns page-full" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="allee-effect"><span class="header-section-number">1.3</span> Allee effect</h2>
+<p>Warder Clyde Allee (1885-1955) was an American ecologist who studied the effects of population density on the growth rate of a population. He found that in some cases the per-capita growth rate can increase with <span class="math inline">\(N\)</span>. This is called the Allee effect. It can occur when the population is too small to find a mate, to find food, or to avoid predators.</p>
+<p>Figure <a href="#fig-per_capita_growth_rate" class="quarto-xref">Figure&nbsp;<span>1.4</span></a> shows the per-capita growth rate as a function of the population number for exponential growth in black, for logistic growth in blue and two different growth rates exhibiting the Allee effect in green and red.</p>
+<div id="cell-fig-per_capita_growth_rate" class="cell page-columns page-full" data-execution_count="4">
+<div class="cell-output cell-output-display page-columns page-full">
+<div id="fig-per_capita_growth_rate" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" alt="The per-capita growth rate as a function of the population number.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-per_capita_growth_rate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="continuous_time_files/figure-html/fig-per_capita_growth_rate-output-1.png" alt="The per-capita growth rate as a function of the population number." width="614" height="463" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-per_capita_growth_rate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.4: The per-capita growth rate as a function of the population number.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The green curve in <a href="#fig-per_capita_growth_rate" class="quarto-xref">Figure&nbsp;<span>1.4</span></a> shows a weak Allee effect, where the per-capita rate is small but possitive for small population sizes, then initially increases with the population size before then decreasing again as the population approaches its carrying capacity. The red curve shows a strong Allee effect, which is similar but so strong that the growth rate starts out not just small but actually negative for small <span class="math inline">\(N\)</span>.</p>
+<p>The simplest model for the Allee effect is the logistic equation with a modified growth rate that includes another factor that decreases the growth rate for small <span class="math inline">\(N\)</span>: <span id="eq-allee"><span class="math display">\[
+\frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)\left(\frac{N}{K_0}-1\right).
+\tag{1.6}\]</span></span> If <span class="math inline">\(0&lt;K_0&lt;K\)</span>, this exhibits the strong Allee effect because the growth rate is negative when <span class="math inline">\(N&lt;K_0\)</span>. This means that the population will be driven towards extinction when it is below the threshold size <span class="math inline">\(K_0\)</span> and it will grow towards its carrying capacity when it is above <span class="math inline">\(K_0\)</span>. This is illustrated in <a href="#fig-allee_growth_rate" class="quarto-xref">Figure&nbsp;<span>1.5</span></a>.</p>
+<div id="cell-fig-allee_growth_rate" class="cell page-columns page-full" data-execution_count="5">
+<div class="cell-output cell-output-display page-columns page-full">
+<div id="fig-allee_growth_rate" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" alt="The Allee growth rate as a function of the population number.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-allee_growth_rate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="continuous_time_files/figure-html/fig-allee_growth_rate-output-1.png" alt="The Allee growth rate as a function of the population number." width="614" height="463" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-allee_growth_rate-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.5: The Allee growth rate as a function of the population number.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This phenomenon is important for conservation biology because it means that small populations are particularly vulnerable to extinction. It is also important for fisheries management because it means that the population can collapse if it falls below a certain threshold size. The phenomenon is called “critical depensation”. We will meet it again when we discuss harvesting later in this section.</p>
+</section>
+<section id="general-autonomous-ode-model" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="general-autonomous-ode-model"><span class="header-section-number">1.4</span> General autonomous ODE model</h2>
+<p>The logistic model is a special case of a general autonomous ordinary differential equation (ODE) model <span id="eq-autonomous"><span class="math display">\[
+\frac{dN}{dt}=f(N),
+\tag{1.7}\]</span></span> where <span class="math inline">\(f(N)\)</span> is a function of <span class="math inline">\(N\)</span> only, not <span class="math inline">\(t\)</span>. The logistic equation <a href="#eq-logistic" class="quarto-xref">Eq.&nbsp;<span>1.4</span></a> is an example of such a model with<br>
+<span class="math display">\[
+f(N)=rN\left(1-\frac{N}{K}\right).
+\]</span></p>
+<p>If <span class="math inline">\(f\)</span> is Lipschitz continuous, then, given <span class="math inline">\(N(0)=N_0\)</span>, there exists a unique solution <span class="math inline">\(N(t)\)</span> to the initial value problem <a href="#eq-autonomous" class="quarto-xref">Eq.&nbsp;<span>1.7</span></a>. This is a consequence of the Picard-Lindelöf theorem.</p>
+<p>We are interested in the steady states of the model, i.e.&nbsp;the values <span class="math inline">\(N^*\)</span> for which <span class="math inline">\(f(N^*)=0\)</span>. These are the values of <span class="math inline">\(N\)</span> for which the population number does not change. To determine the stability of the steady states, we can look near <span class="math inline">\(N^*\)</span> by writing <span class="math inline">\(N(t)=N^*+n(t)\)</span> with <span class="math inline">\(n(t)\)</span> small. Then <span class="math display">\[
+\frac{dN}{dt}=\frac{dN^*}{dt}+\frac{dn}{dt} = f(N^*+n(t))\approx f(N^*)+f'(N^*)\,n(t).
+\]</span> We now use that <span class="math inline">\(dN^*/dt=0\)</span> and <span class="math inline">\(f(N^*)=0\)</span> to find <span class="math display">\[
+\frac{dn}{dt}\approx f'(N^*)\,n(t).
+\]</span> This is a linear equation for <span class="math inline">\(n(t)\)</span> with solution <span class="math display">\[
+n(t)=n(0)e^{f'(N^*)t}
+\]</span> and we can use the sign of <span class="math inline">\(f'(N^*)\)</span> to determine the stability of the steady state:</p>
+<ul>
+<li><p>If <span class="math inline">\(f'(N^*)&lt;0\)</span>, then <span class="math inline">\(n(t)\)</span> will decrease towards zero, and the steady state is stable.</p></li>
+<li><p>If <span class="math inline">\(f'(N^*)&gt;0\)</span>, then <span class="math inline">\(n(t)\)</span> will increase away from zero, and the steady state is unstable.</p></li>
+</ul>
+<p>If <span class="math inline">\(f'(N^*)=0\)</span>, then we need to look at higher order terms to determine the stability.</p>
+<p>We illustrate this in the example of the logistic model. The fixed points are <span class="math inline">\(N^*=0\)</span> and <span class="math inline">\(N^*=K\)</span>. The derivative of <span class="math inline">\(f(N)\)</span> is <span class="math display">\[
+f'(N)=r\left(1-\frac{2N}{K}\right).
+\]</span> So we find that <span class="math inline">\(f'(0)=r&gt;0\)</span> and <span class="math inline">\(f'(K)=-r&lt;0\)</span>. This means that the steady state <span class="math inline">\(N^*=0\)</span> is unstable and the steady state <span class="math inline">\(N^*=K\)</span> is stable. This agrees with what we had already seen graphically in <a href="#fig-logistic_growth_rate" class="quarto-xref">Figure&nbsp;<span>1.2</span></a> and <a href="#fig-logistic_solutions" class="quarto-xref">Figure&nbsp;<span>1.3</span></a>.</p>
+</section>
+<section id="harvesting-a-renewable-resource" class="level2 page-columns page-full" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="harvesting-a-renewable-resource"><span class="header-section-number">1.5</span> Harvesting a renewable resource</h2>
+<p>Ecologists model populations not only out of academic interest but also for practical purposes. Humans are interested in exploiting the natural resources. They want o harvest fish from the sea, to hunt deer in the forest, and to cut down trees in the jungle. They want to do this in a way that is sustainable, i.e.&nbsp;that does not lead to the extinction of the resource, while at the same time giving the highest yield.</p>
+<p>My personal interest is in understanding how fish populations react to different kinds of fishing. I use coupled partial integro-differential equations for that purpose, but most fisheries management is based on simpler models and we get a good first idea by using the logistic model, which we will now modify to include harvesting.</p>
+<section id="harvesting-with-fixed-effort" class="level3 page-columns page-full" data-number="1.5.1">
+<h3 data-number="1.5.1" class="anchored" data-anchor-id="harvesting-with-fixed-effort"><span class="header-section-number">1.5.1</span> Harvesting with fixed effort</h3>
+<p>We assume that in the absence of fishing the fish population number <span class="math inline">\(N(t)\)</span> is governed by the logistic equation <a href="#eq-logistic" class="quarto-xref">Eq.&nbsp;<span>1.4</span></a>. We also assume that the fish are harvested at a rate <span class="math inline">\(E N(t)\)</span>, where <span class="math inline">\(E\)</span> is the harvesting rate, which is determined by the effort that is put into fishing. This means that the rate of change in the fish population number is given by <span id="eq-logistic-harvesting"><span class="math display">\[
+\frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)-EN = f(N).
+\tag{1.8}\]</span></span> We can rewrite this equation in the form of a logistic equation with modified parameters: <span id="eq-logistic-harvesting-parameters"><span class="math display">\[
+\frac{dN}{dt}=rN\left(\left(1-\frac{E}{r}\right)-\frac{N}{K}\right).
+\tag{1.9}\]</span></span> This makes it easy to read off the fixed points <span class="math inline">\(N^*=0\)</span> and <span class="math inline">\(N^*=K\left(1-\frac{E}{r}\right)\)</span>. The nonzero fixed point gets smaller when fishing effort <span class="math inline">\(E\)</span> increases. This is illustrated in <a href="#fig-logistic_harvesting" class="quarto-xref">Figure&nbsp;<span>1.6</span></a>.</p>
+<div id="cell-fig-logistic_harvesting" class="cell page-columns page-full" data-execution_count="6">
+<div class="cell-output cell-output-display page-columns page-full">
+<div id="fig-logistic_harvesting" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" alt="Growth rate when harvesting with fixed effort.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-logistic_harvesting-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="continuous_time_files/figure-html/fig-logistic_harvesting-output-1.png" alt="Growth rate when harvesting with fixed effort." width="540" height="389" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-logistic_harvesting-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.6: Growth rate when harvesting with fixed effort.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We are now interested in finding out at what level we should fish in order to achive the maximum sustainable yield (MSY). This is the level of fishing effort that gives the highest possible yield that can be sustained indefinitely. So we are interested in the yield at the non-zero fixed point <span class="math inline">\(N^*=K\left(1-\frac{E}{r}\right)\)</span>. The yield is the amount of fish that can be harvested per unit time, and it is given at the fixed point by <span class="math display">\[
+Y=EN^*=EK\left(1-\frac{E}{r}\right).
+\]</span> We can find the maximum of <span class="math inline">\(Y\)</span> by differentiating with respect to <span class="math inline">\(E\)</span> and setting the derivative equal to zero: <span class="math display">\[
+\frac{dY}{dE}=K\left(1-\frac{2E}{r}\right)=0.
+\]</span> We can solve this equation for <span class="math inline">\(E\)</span> to find the optimal fishing effort <span class="math inline">\(E^*\)</span>: <span class="math display">\[
+E^*=\frac{r}{2}.
+\]</span> The resulting maximum sustainable yield is <span class="math display">\[
+MSY=\frac{r}{2}K\left(1-\frac{r}{2r}\right)=\frac{rK}{4}.
+\]</span></p>
+</section>
+<section id="harvesting-with-fixed-quote" class="level3 page-columns page-full" data-number="1.5.2">
+<h3 data-number="1.5.2" class="anchored" data-anchor-id="harvesting-with-fixed-quote"><span class="header-section-number">1.5.2</span> Harvesting with fixed quote</h3>
+<p>Fisheries managers in the Mediterranean are aiming to control the fishing effort in order to achieve the maximum sustainable yield, and we have seen how to model that in the previous section. Fisheries in the North Sea or the North Atlantic however are instead managed by setting the total allowable catch (TAC) for the whole fleet. This is a fixed quota for the total amount of fish that can be harvested in a year. To model that policy we use the logistic equation with harvesting, but we replace the harvesting rate <span class="math inline">\(EN\)</span> by a harvesting quota <span class="math inline">\(Q\)</span>: <span id="eq-logistic-quota"><span class="math display">\[
+\frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)-Q.
+\tag{1.10}\]</span></span> This is visualised in <a href="#fig-logistic_quota" class="quarto-xref">Figure&nbsp;<span>1.7</span></a>.</p>
+<div id="cell-fig-logistic_quota" class="cell page-columns page-full" data-execution_count="7">
+<div class="cell-output cell-output-display page-columns page-full">
+<div id="fig-logistic_quota" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" alt="Growth rate when harvesting with fixed quota.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-logistic_quota-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="continuous_time_files/figure-html/fig-logistic_quota-output-1.png" alt="Growth rate when harvesting with fixed quota." width="540" height="389" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-logistic_quota-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.7: Growth rate when harvesting with fixed quota.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We see that any non-zero quota leads to critical depensation, i.e., it introduces a critical threshold below which the population will collapse. This is a well-known problem in fisheries management, and it is the reason why the TAC is set to zero for some fish stocks. As the fishing quota is increased, the critical depensation threshold moves to higher population numbers and the stable steady state moves to lower population numbers. Eventually all non-zero fixed points disappear and the population collapses.</p>
+</section>
+</section>
+<section id="exercises" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">1.6</span> Exercises</h2>
+<p>Exercises marked with a * are essential and are to be handed in. Exercises marked with a + are important and you are urged to complete them. Other exercises are optional but recommended.</p>
+<section id="sketching-solutions" class="level4">
+<h4 class="anchored" data-anchor-id="sketching-solutions">*Sketching solutions</h4>
+<div id="exr-sketch_solutions" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.1</strong></span> Consider the population model with carrying capacity and Allee effect given by the differential equation <span class="math display">\[\frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)\left(\frac{N}{K_0}-1\right).\]</span> Here <span class="math inline">\(r&gt;0\)</span>, <span class="math inline">\(K&gt;K_0&gt;0\)</span> are constants. Simply by considering the shape of the right hand side, sketch a graph with several solutions for different initial conditions. Choose two initial conditions between <span class="math inline">\(0\)</span> and <span class="math inline">\(K_0\)</span>, two initial conditions between <span class="math inline">\(K_0\)</span> and <span class="math inline">\(K\)</span> and one initial condition larger than <span class="math inline">\(K\)</span>. Note that the graph only needs to be qualitatively correct, similar to the rough sketch for the solutions of the logistic model sketched in the first lecture.</p>
+</div>
+</section>
+<section id="von-bertalanffy-growth" class="level4">
+<h4 class="anchored" data-anchor-id="von-bertalanffy-growth">+Von Bertalanffy growth</h4>
+<div id="exr-vonBertalanffy_growth" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.2</strong></span> Assume the weight <span class="math inline">\(w(t)\)</span> of an individual fish at time <span class="math inline">\(t\)</span> is governed by the differential equation <span class="math display">\[\frac{dw}{dt}=\alpha\,w^{2/3}-\beta w\]</span> with initial condition <span class="math inline">\(w(0)=w_0\)</span> (the weight at birth), and where <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are positive parameters depending on the fish species.</p>
+<ol type="i">
+<li><p>Without solving the differential equation, just thinking about fixed points and their stability, determine <span class="math inline">\(\lim_{t\rightarrow\infty}w(t)\)</span>.</p></li>
+<li><p>Derive the linear first order ODE for <span class="math inline">\(u=w^{1/3}\)</span> and solve it.</p></li>
+<li><p>Use the solution for <span class="math inline">\(u\)</span> to find the solution for <span class="math inline">\(w\)</span>.</p></li>
+</ol>
+</div>
+</section>
+<section id="solving-logistic-equation" class="level4">
+<h4 class="anchored" data-anchor-id="solving-logistic-equation">Solving logistic equation</h4>
+<div id="exr-logistic_solution" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.3</strong></span> By using separation of variables and partial fractions, solve the logistic equation <span class="math display">\[\frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)\]</span> with initial condition <span class="math inline">\(N(0)=N_0\)</span>.</p>
+</div>
+</section>
+<section id="harvesting-with-fixed-effort-1" class="level4">
+<h4 class="anchored" data-anchor-id="harvesting-with-fixed-effort-1">* Harvesting with fixed effort</h4>
+<div id="exr-harvest_effort" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.4</strong></span> Consider a population <span class="math inline">\(N(t)\)</span> that is described by the by the Gompertz model <span class="math display">\[
+\frac{dN}{dt} = \alpha N \log\frac{K}{N},
+\]</span> where <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(K\)</span> are positive constants. You want to harvest this population, for example by hunting or fishing, with some effort <span class="math inline">\(E\)</span>. The rate at which you harvest individuals (which removes them from the population and hence results in an additional source of death) is proportional to the size of the population: <span class="math inline">\(Y = E N\)</span>. This is called the yield. Write down the differential equation for <span class="math inline">\(N(t)\)</span> including this harvesting term. Determine the fixed points and their stability. Find the maximum sustainable yield, i.e., the maximum yield that can be sustained indefinitely.</p>
+</div>
+</section>
+<section id="harvesting-with-fixed-quota" class="level4">
+<h4 class="anchored" data-anchor-id="harvesting-with-fixed-quota">Harvesting with fixed quota</h4>
+<div id="exr-harvest_quota" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.5</strong></span> As in <a href="#exr-harvest_effort" class="quarto-xref">Exercise&nbsp;<span>1.4</span></a>, consider a population <span class="math inline">\(N(t)\)</span> that is described by the Gompertz model. Imagine that this describes a fish population in a lake where fishing is going to be introduced, and that you are tasked with setting the quota that limits the rate at which the fishers are allowed to take fish out of the lake. The fishers demand that you set the quota to the maximum sustainable level. What is the maximum sustainable quota according to the model? Would it be wise to give in to the demand of the fishers and set the quota at this level?</p>
+</div>
+</section>
+<section id="wasps" class="level4">
+<h4 class="anchored" data-anchor-id="wasps">Wasps</h4>
+<div id="exr-Hornet" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.6</strong></span> In a colony of the European Hornet there is a single queen that produces all the offspring. It produces two kinds of offspring: workers and reproducers. We’ll denote the number of workers alive at time <span class="math inline">\(t\)</span> by <span class="math inline">\(n(t)\)</span> and the number of reproducers by <span class="math inline">\(N(t)\)</span>. The workers are responsible for collecting food. They can’t breed themselves and they die in the winter. However they are necessary to allow the queen to reproduce because without the food that they are collecting the queen would have nothing to eat. So we need workers. But because they die in winter, they don’t help the survival of the colony in the long run. That’s where the reproducers come in. They don’t do any work, but they can, if they survive the winter, breed in the next spring as new queens.</p>
+<p>So the queen now has a strategy of how to proceed: It first of all needs to produce workers, and from time zero to time <span class="math inline">\(t_c\)</span> it only produces workers. We assume that the birth rate is proportional to the number of workers, so that the total birth rate of workers is <span class="math inline">\(r n(t)\)</span> for some constant <span class="math inline">\(r&gt;0\)</span>. The queen then switches to producing only reproducers from time <span class="math inline">\(t_c\)</span> up to the start of winter at time <span class="math inline">\(T\)</span> and we assume that the total birth rate of reproducers is <span class="math inline">\(R n(t)\)</span> for some constant <span class="math inline">\(R&gt;0\)</span>. We also assume that until the start of winter there are no deaths.</p>
+<p>What is the optimal time <span class="math inline">\(t_c\)</span> at which the queen should switch from producing workers to producing reproducers in order to achieve the largest number of producers <span class="math inline">\(N(T)\)</span> at the start of the winter and therefore to the largest number of wasps in the following year.</p>
+</div>
+</section>
+<section id="wasps-with-death" class="level4">
+<h4 class="anchored" data-anchor-id="wasps-with-death">Wasps with death</h4>
+<div id="exr-wasp_death" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 1.7</strong></span> In the wasp example from question 1, assume that the worker wasps die at a constant per-capita rate <span class="math inline">\(d\)</span> but the reproducers do not die. Also assume that at time t=0 there is one worker, n(0)=1. Keep the birth rates as in <a href="#exr-Hornet" class="quarto-xref">Exercise&nbsp;<span>1.6</span></a>. Determine the number of workers <span class="math inline">\(n(t)\)</span> for any time between <span class="math inline">\(t_c\)</span> and <span class="math inline">\(T\)</span>. Determine the number of reproducers at the onset of winter at time <span class="math inline">\(T\)</span>. Derive the optimal time for the switchover time <span class="math inline">\(t_c\)</span>.</p>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -305,10 +542,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -318,8 +572,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -332,6 +595,125 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -375,6 +757,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -400,6 +783,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -457,31 +866,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       });
     }
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-          // target, if specified
-          link.setAttribute("target", "_blank");
-      }
-    }
 });
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link">
+      <a href="./index.html" class="pagination-link  aria-label=" welcome"="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Welcome</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./sheet1.html" class="pagination-link">
-        <span class="nav-page-text">Problem sheet 1</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./discrete_time.html" class="pagination-link" aria-label="<span class='chapter-number'>2</span>&nbsp; <span class='chapter-title'>Discrete-time population models</span>">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Discrete-time population models</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -489,4 +884,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</body></html>
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gustavdelius/M3E-2024/edit/main/continuous_time.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>

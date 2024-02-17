@@ -1,0 +1,496 @@
+# Discrete-time population models
+
+So far we have assumed that the rate of change of the population number has no explicit time dependence. However births and also deaths often happen on an annual cycle. Many fish have their spawning season in the spring, and many birds breed in the summer and annual plants produce their seed and then die in winter. In this case, the rate of change of the population number is not constant, but depends on the time of the year. We can model this by introducing a time dependence in the birth and death rates. However this will lead to equations that will be difficult to analyse. Instead we can give up on the idea of modelling the population numbers continuously through time and instead only follow how the population changes from year to year. 
+
+So we will use models of the form
+$$
+N_{t+1} = f(N_t)
+$$ {#eq-discrete_time}
+where $N_t$ is the population number at time $t$ and $f$ is some function. Time $t$ now takes on only integer values, and the population number is only defined at these times. This is called a discrete-time model. Given the initial population number $N_0$, we can calculate the population number at any future time $t$ by iterating the function $f$: $N_1 = f(N_0)$, $N_2 = f(N_1)=f(f(N_0)),\ldots N_t = f(f(\ldots f(N_0)\ldots))$.
+
+## Exponential model
+
+The simplest discrete-time model is the exponential model
+$$
+N_{t+1} = R N_t
+$$ {#eq-discrete_exponential}
+where $R>0$ is the growth factor. This is the discrete-time version of the continuous-time exponential model. The solution to this equation is
+$$
+N_t = N_0 R^t.
+$$ {#eq-discrete_exponential_solution}
+It is important to stress that $R$ is not a growth _rate_ but a dimensionless growth factor. Comparing the discrete-time solution to the continuous-time solution $N(t)=N_0\exp(rt)$ we see that they agree at integer times $t$ if we measure time in years and set 
+$$
+R=\exp(r \cdot 1\text{ year}).
+$$ {#eq-discrete_continuous_relation}
+If you are confused by the units, remember that the exponential function is dimensionless, so the argument of the exponential function must be dimensionless. We need the extra factor of 1 year because $r$ is a rate and has dimension 1/time.
+
+The population number grows exponentially with time if $R>1$ and declines exponentially if $R<1$. To get more realistic models we again need to introduce a limited carrying capacity.
+
+
+## Models with limited carrying capacity
+
+Recall how we introduced the logistic model by assuming that the per-capita birth rate declines linearly with the population number and vanishes when the population reaches its carrying capacity. This gave us the equation
+$$
+\frac{dN}{dt} = rN\left(1 - \frac{N}{K}\right)
+$$ {#eq-recall_logistic}
+where $r$ is the per-capita growth rate and $K$ is the carrying capacity. 
+
+It turns out that there are several models which all deserve to be called the discrete-time logistic model.
+
+### Verhulst model
+
+The most famous discrete-time logistic model is the Verhulst model.
+
+$$
+\begin{split}
+N_{t+1} &= (R_0+1)N_t\left(1 - \frac{N_t}{K(R_0+1)/R_0}\right)\\
+&=N_t + R_0 N_t\left(1 - \frac{N_t}{K}\right)=f(N_t).
+\end{split}
+$$ {#eq-verhulst}
+Again it is important to stress that $R_0$ is not a growth _rate_ but a dimensionless growth factor. 
+
+We have written the model in two alternative forms because the first form makes the analogy with the continuous-time logistic model more obvious, while the second form makes it easier to read off the fixed point. 
+
+The fixed point is a value for which $N_{t+1}=N_t$, i.e. a value of $N$ for which the population number does not change from year to year. Thus it is a value $N^*$ for which $f(N^*)=N^*$. Using the second form of the model, we can see easily that the fixed points are $N^*=0$ and $N^*=K$, so $K$ is the carrying capacity.
+
+A problem with the Verhulst model is that it can give rise to negative population numbers. This is not realistic, so we are motivated to modify the model to prevent this.
+
+### Ricker model
+
+The Ricker model is a modification of the Verhulst model that prevents negative population numbers. It is given by
+$$
+N_{t+1} = N_t\, e^{R_0\left(1 - \frac{N_t}{K}\right)}.
+$$ {#eq-ricker}
+By moving the logistic factor inside the exponential, the Ricker model prevents negative population numbers. The fixed points are still $N^*=0$ and $N^*=K$. Ricker introduced this model to describe salmon populations.
+
+### Beverton-Holt model
+
+The Beverton-Holt model is another modification of the Verhulst model which prevents negative population numbers. It is given by
+$$
+N_{t+1} = \frac{R N_t}{1 - \frac{R-1}{K}N_t}.
+$$ {#eq-beverton_holt}
+This has been a very influential model in fisheries science. On the face of it the model does not look very similar to the logistic model, but we will see the relationship when we solve the model. The Beverton-Holt model is one of the rare cases where a non-linear model can be solved exactly. The trick is to make a change of variables from $N_t$ to $u_t = 1/N_t$. Then we have
+$$
+u_{t+1} = \frac{1}{N_{t+1}} = \frac{1 - \frac{R-1}{K}N_t}{R N_t} = \frac{u_t}{R} - \frac{R-1}{R K}.
+$$ {#eq-beverton_holt_u}
+This is a linear equation for $u_t$, and linear equations are easy to solve. The easiest way to proceed is to look at the first few terms of the sequence $u_t$ and guess the general form of the solution. We find
+$$\begin{split}
+u_1 &= \frac{u_0}{R} - \frac{R-1}{R K},\\
+u_2 &= \frac{u_0}{R^2} - \frac{R-1}{R K}\left(1 + \frac{1}{R}\right),\\
+u_3 &= \frac{u_0}{R^3} - \frac{R-1}{R K}\left(1 + \frac{1}{R} + \frac{1}{R^2}\right),\\
+&\vdots\\
+u_t &= \frac{u_0}{R^t} - \frac{R-1}{R K}\left(1 + \frac{1}{R} + \frac{1}{R^2} + \ldots + \frac{1}{R^{t-1}}\right).
+\end{split}
+$$ {#eq-beverton_holt_u_solution}
+The sum in the second term is a geometric series. We know the general formula for a geometric series:
+$$
+1 + x + x^2 + \ldots + x^{t-1} = \frac{1 - x^t}{1 - x}.
+$$ {#eq-geometric_series}
+
+We can use this with $x=1/R$ to sum terms in the second term. We find
+$$
+u_t = \frac{u_0}{R^t} - \frac{R-1}{R K}\frac{1 - (1/R)^t}{1 - 1/R}.
+$$
+We simplify this a bit and bring everything on the same denominator.
+$$
+u_t = \frac{u_0}{R^t} - \frac{(1/R)^t-1}{K}
+=\frac{Ku_0-1+R^t}{KR^t}.
+$$ {#eq-beverton_holt_u_solution_simplified}
+
+
+We can now change back to $N_t=1/u_t$ to find the solution to the Beverton-Holt model. We find
+$$\begin{split}
+N_t &= \frac{1}{u_t}=\frac{K R^t}{Ku_0-1+R^t}\\
+&=\frac{K/u_0}{KR^{-t}-R^{-t}/u_0+1/u_0}\\
+&=\frac{KN_0}{N_0+(K-N_0)R^{-t}}.
+\end{split}$$ {#eq-beverton_holt_solution}
+
+This is the solution to the Beverton-Holt model. Comparing this to the solution of the continuous-time logistic model
+$$
+N(t) = \frac{KN_0}{N_0+(K-N_0)\exp(-rt)}
+$$ {#eq-recall_logistic_solution}
+we see that they agree at integer times $t$ if we measure time in years and set
+$R=\exp(r \cdot 1\text{ year}).$
+
+
+## Stability and Cobwebs
+
+We now want to study the stability of the fixed points in discrete-time models. As discussed, fixed points $N^*$ satisfy the equation $N^*=f(N^*)$. We study the stability of the fixed points by looking at the sequence $N_t$ for $t$ close to the fixed point. That means we write $N(t)=N^*+n_t$ for $n_t<<1$. We then have
+$$
+\begin{split}
+N_{t+1} = N^*+n_{t+1}=f(N_t) = f(N^*+n_t) = f(N^*) + f'(N^*)n_t + \ldots
+\end{split}
+$$ {#eq-taylor_discrete}
+where we have used the Taylor expansion of $f$ around $N^*$. Because $N^*$ is a fixed point, we have $f(N^*)=N^*$. Thus we find that
+$$
+n_{t+1} \approx f'(N^*)n_t
+$$ {#eq-linear_discrete}
+where we neglected the higher order terms in the Taylor expansion. This is a linear equation for $n_t$ that we know how to solve:
+$$
+n_t = n_0 (f'(N^*))^t.
+$$ {#eq-linear_discrete_solution}
+So we have found that:
+
+* If $|f'(N^*)|<1$, then $n_t$ will decrease with time and the fixed point is stable. 
+
+* If $|f'(N^*)|>1$, then $n_t$ will increase with time and the fixed point is unstable. 
+
+If $|f'(N^*)|=1$, then we cannot say anything about the stability of the fixed point from this analysis.
+
+In the continuous-time case we also had a graphical way to see the stability of fixed points. We will now introduce a graphical method for studying the stability of fixed points in discrete-time models, called the cobweb method.
+
+We plot the function $f(N_t)$ and the line $N_{t+1}=N_t$. The fixed points are the intersection points of the function and the line. We then draw the graph of the sequence $N_t$ by starting at the initial population number $N_0$ and iterating the function $f(N_t)$ to find $N_1$, then iterating the function again to find $N_2$, and so on. The graph of the sequence $N_t$ is called the cobweb. The stability of the fixed points can be read off from the cobweb. If the cobweb spirals into the fixed point, as shown in @fig-cobweb_stable, then the fixed point is stable. If the cobweb spirals out of the fixed point, as shown in @fig-cobweb_unstable, then the fixed point is unstable. You have to press the play button below the figures to see the cobweb diagrams in action.
+
+``` {python}
+#| label: fig-cobweb_stable
+#| fig-cap: Cobweb diagram for a stable fixed point.
+#| fig-alt: Cobweb diagram for a stable fixed point.
+#| echo: false
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from IPython.display import HTML
+
+# Define the function
+def f(x):
+    return x+1.8*x*(1-x)
+
+# Set up the figure and axis
+fig, ax = plt.subplots()
+
+# Add axis labels
+ax.set_xlabel("$N_t$", loc='right')
+ax.set_ylabel("$N_{t+1}$", loc='top')
+
+# Removing numerical labels from the axes
+ax.set_xticks([])
+ax.set_yticks([])
+
+# Hide the top and right spines
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+
+# Move the bottom spine to y=0 and the left spine to x=0
+ax.spines['bottom'].set_position(('data', 0))
+ax.spines['left'].set_position(('data', 0))
+
+
+# Initialize x and y
+x, y = 0.8, f(0.8)
+# Initialise flag for ignoring first call to animate()
+first_call = True
+
+# Animation function
+def animate(n):
+    global x, y, first_call
+    # ignore the first call which is an initialisation call
+    if first_call:
+        first_call = False
+    elif n == 0:
+        # Draw initial plots
+        x_vals = np.linspace(0, 1.4, 200)
+        ax.plot(x_vals, f(x_vals), label='$y=f(N)$')
+        ax.plot(x_vals, x_vals, color='black', label='$y=N$')
+        # mark the fixed point with a dotted line and a label
+        ax.vlines(x=1, ymin=0, ymax=f(1), color='gray', linestyle=':')
+        ax.text(1, -0.05, '$N^*$', verticalalignment='top', horizontalalignment='center')
+        # add legend
+        ax.legend(loc=(0.1, 0.9))
+    elif n == 1:
+        # On first iteration start on x axis
+        # Draw vertical line at x
+        ax.plot([x, x], [0, y], color='red')
+        # Draw horizontal line at y
+        ax.plot([x, y], [y, y], color='red')
+    else:
+        # Update x and y
+        x, new_y = y, f(y)
+        # Draw vertical line at x
+        ax.plot([x, x], [x, new_y], color='red')
+        # Draw horizontal line at y
+        ax.plot([x, new_y], [new_y, new_y], color='red')
+        y = new_y
+
+# Creating the animation
+ani = animation.FuncAnimation(fig, animate, frames=9, repeat=False)
+
+# Display the animation
+plt.close()
+HTML(ani.to_jshtml())
+```
+
+``` {python}
+#| label: fig-cobweb_unstable
+#| fig-cap: Cobweb diagram for an unstable fixed point.
+#| fig-alt: Cobweb diagram for an unstable fixed point.
+#| echo: false
+# Define the function
+def f(x):
+    return x+2.5*x*(1-x)
+
+# Set up the figure and axis
+fig, ax = plt.subplots()
+
+# Add axis labels
+ax.set_xlabel("$N_t$", loc='right')
+ax.set_ylabel("$N_{t+1}$", loc='top')
+
+# Removing numerical labels from the axes
+ax.set_xticks([])
+ax.set_yticks([])
+
+# Hide the top and right spines
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+
+# Move the bottom spine to y=0 and the left spine to x=0
+ax.spines['bottom'].set_position(('data', 0))
+ax.spines['left'].set_position(('data', 0))
+
+
+# Initialize x and y
+x, y = 0.99, f(0.99)
+# Initialise flag for ignoring first call to animate()
+first_call = True
+
+# Animation function
+def animate(n):
+    global x, y, first_call
+    # ignore the first call which is an initialisation call
+    if first_call:
+        first_call = False
+    elif n == 0:
+        # Draw initial plots
+        x_vals = np.linspace(0, 1.4, 200)
+        ax.plot(x_vals, f(x_vals), label='$y=f(N)$')
+        ax.plot(x_vals, x_vals, color='black', label='$y=N$')
+        # mark the fixed point with a dotted line and a label
+        ax.vlines(x=1, ymin=0, ymax=f(1), color='gray', linestyle=':')
+        ax.text(1, -0.05, '$N^*$', verticalalignment='top', horizontalalignment='center')
+        # add legend
+        ax.legend(loc=(0.1, 0.9))
+    elif n == 1:
+        # On first iteration start on x axis
+        # Draw vertical line at x
+        ax.plot([x, x], [0, y], color='red')
+        # Draw horizontal line at y
+        ax.plot([x, y], [y, y], color='red')
+    else:
+        # Update x and y
+        x, new_y = y, f(y)
+        # Draw vertical line at x
+        ax.plot([x, x], [x, new_y], color='red')
+        # Draw horizontal line at y
+        ax.plot([x, new_y], [new_y, new_y], color='red')
+        y = new_y
+
+# Creating the animation
+ani = animation.FuncAnimation(fig, animate, frames=9, repeat=False)
+
+# Display the animation
+plt.close()
+HTML(ani.to_jshtml())
+```
+
+The oscillatory nature of the sequence $N_t$, hopping from one side of the fixed point to the other, that creates the cobweb pattern is due to the fact that the slope of $f$ is negative at the fixed point. The graphical method for visualising the iterations will work also when the slope is positive at the fixed point, but it will not look like a cobweb. @fig-cobweb_positive_slope shows the cobweb for a stable fixed point with positive slope.
+
+```{python}
+#| label: fig-cobweb_positive_slope
+#| fig-cap: Cobweb diagram for a fixed point with positive slope.
+#| fig-alt: Cobweb diagram for a fixed point with positive slope.
+#| echo: false
+# Define the function
+def f(x):
+    return x+0.8*x*(1-x)
+
+# Set up the figure and axis
+fig, ax = plt.subplots()
+
+# Add axis labels
+ax.set_xlabel("$N_t$", loc='right')
+ax.set_ylabel("$N_{t+1}$", loc='top')
+
+# Removing numerical labels from the axes
+ax.set_xticks([])
+ax.set_yticks([])
+
+# Hide the top and right spines
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+
+# Move the bottom spine to y=0 and the left spine to x=0
+ax.spines['bottom'].set_position(('data', 0))
+ax.spines['left'].set_position(('data', 0))
+
+
+# Initialize x and y
+x, y = 0.5, f(0.5)
+# Initialise flag for ignoring first call to animate()
+first_call = True
+
+# Animation function
+def animate(n):
+    global x, y, first_call
+    # ignore the first call which is an initialisation call
+    if first_call:
+        first_call = False
+    elif n == 0:
+        # Draw initial plots
+        x_vals = np.linspace(0, 1.4, 200)
+        ax.plot(x_vals, f(x_vals), label='$y=f(N)$')
+        ax.plot(x_vals, x_vals, color='black', label='$y=N$')
+        # mark the fixed point with a dotted line and a label
+        ax.vlines(x=1, ymin=0, ymax=f(1), color='gray', linestyle=':')
+        ax.text(1, -0.05, '$N^*$', verticalalignment='top', horizontalalignment='center')
+        # add legend
+        ax.legend(loc=(0.1, 0.9))
+    elif n == 1:
+        # On first iteration start on x axis
+        # Draw vertical line at x
+        ax.plot([x, x], [0, y], color='red')
+        # Draw horizontal line at y
+        ax.plot([x, y], [y, y], color='red')
+    else:
+        # Update x and y
+        x, new_y = y, f(y)
+        # Draw vertical line at x
+        ax.plot([x, x], [x, new_y], color='red')
+        # Draw horizontal line at y
+        ax.plot([x, new_y], [new_y, new_y], color='red')
+        y = new_y
+
+# Creating the animation
+ani = animation.FuncAnimation(fig, animate, frames=9, repeat=False)
+
+# Display the animation
+plt.close()
+HTML(ani.to_jshtml())
+```
+## Discrete-time harvesting model
+
+Coming on Monday of week 2
+
+## Bifurcations
+
+Coming on Monday of week 2
+
+## Exercises
+
+Exercises marked with a * are essential and are to be handed in. Exercises marked with a + are important and you are urged to complete them. Other exercises are optional but recommended.
+
+
+#### + Verhulst model
+::: {#exr-discrete_logistic}
+For some choices of the parameters, the Verhulst model
+$$N_{t+1}=rN_t\left(1-\frac{N_t}{K}\right)$$ {#eq-ex_Verhulst}
+can
+lead to negative population numbers even when initially starting with a positive population below
+its carrying capacity. Derive the condition on the parameters for this to happen. One good
+way to approach this is to think about what the cobweb diagram would have to look like for
+such a scenario.
+:::
+
+#### * Ricker model
+::: {#exr-ricker}
+Find the fixed points in the Ricker model
+$$
+N_{t+1} = N_t\, e^{R_0\left(1 - \frac{N_t}{K}\right)}.
+$$ {#eq-ex_ricker}
+and investigate their stability. Do this both analytically and by drawing cobweb diagrams.
+:::
+
+
+#### Beverton-Holt model
+::: {#exr-beverton_holt}
+Find the fixed points in the Beverton-Holt model
+$$
+N_{t+1} = \frac{R N_t}{1 - \frac{R-1}{K}N_t}.
+$$ {#eq-ex_beverton_holt}
+and investigate their stability. Do this both analytically and by drawing cobweb diagrams.
+:::
+
+More exercises coming after the lecture on Monday of week 2.
+<!----
+#### House finches
+::: {#exr-finches}
+_[Note: in this problem we combine a continuous time model for the dynamics within a single year with
+a discrete model for the dynamics from one year to the next.
+ The subscript $t \in \mathbb{Z}$ refers to the discrete year $t$, whereas
+$\tau\in\mathbb{R}$ will indicate the continuous time within a single year.]_
+
+A population of house finches resides in an isolated region in North America. 
+In this problem you want to find out about the long-term prospects for the population.
+
+Each year the
+males and females begin their search for mates at the beginning of winter with a
+combined population number $N_t$ in year $t$, and form $P_t$ breeding pairs by the end
+of this search period, the start of the breeding season.
+
+The mate search period lasts from within-year time $\tau = 0$ to the end of the search
+period at within-year time $\tau = T$. Assume that there is a 1:1 sex ratio and that
+males $M(\tau)$ and females $F(\tau)$ locate one another randomly to make a pair 
+at rate $\sigma$, such that the number  $M(\tau)$ of males  that are not in a pair at time $\tau$ satisfies
+$$\frac{dM}{d\tau}=-\sigma \,M\,F $$
+and similarly  the number  $F$ of females  that are not in a pair at time $\tau$  satisfies
+$$\frac{dF}{d\tau}=-\sigma \,M\,F. $$
+
+You are given that the number of breeding pairs that establish a nest and breed
+successfully is $G(P_t)P_t$, where the fraction $G(P_t)$ takes the particular form
+$$G(P_t) = \frac{1}{1+P_t/\delta},$$
+where $\delta$ represents the density of available nesting sites.
+Each pair that reproduces successfully has a mean number $c$ of offspring.
+
+The probability that a bird will survive from one year to the next is $s$.
+
+a) Show that the number $n(\tau)=M(\tau)+F(\tau)$ of birds _not_ in a pair 
+is governed by
+$$\frac{dn}{d\tau}=-\frac{\sigma}{2}n^2, ~~~n(0)=N_t.$$
+
+b) Using the above, show that the number $n(T)$ of birds that have not found a mate at the start of
+the breeding season in year $t$ is
+$$n(T)=\frac{r\,N_t}{r+2N_t}$$
+where $N_t$ is the number of birds at the start of the season in that particular year and
+where $r=4/(\sigma T)$.
+
+c) Explain why the number of pairs $P(\tau)$ is governed by
+$$\frac{dP}{d\tau}=-\frac12\frac{dn}{d\tau},~~~P(0)=0.$$
+
+d) Use the above to show that the number of breeding pairs at the start of the
+breeding season in year $t$ is 
+$$P_t:=P(T)=\frac{N_t^2}{r+2N_t}.$$
+
+e) Show that the population $N_{t+1}$ at the beginning of winter in year $t+1$ is given
+by
+$$
+N_{t+1}=s\,N_t+\frac{c\,N_t^2}{r+2N_t+N_t^2/\delta}.
+$$ {#eq-Nt}
+
+f) Find the realistic steady states of the model in @eq-Nt for the case that
+$$\frac{c}{1-s}-2\geq \sqrt{\frac{4r}{\delta}}.$$
+
+g) Draw a cobweb diagram to illustrate the stability of the steady states in the case that there
+are two positive steady states. Label key features of the curves.
+
+h) What type of bifurcation occurs when there is equality in the condition in part f)?
+
+:::
+
+#### Discrete time model
+::: {#exr-1.1}
+Consider the discrete time model
+$$
+N_{t+1}=\frac{rN_t}{1+(N_t/K)^b}
+$$ {#eq-ex_discrete_time}
+where $r$, $b$ and $K$ are positive parameters with $b>1$. Show that
+the model has two steady states. Investigate the stability of the
+extinction steady state. Show that the non-trivial (non-zero) steady state can lose
+stability through a period doubling bifurcation at $b=2r/(r-1)$, or a
+tangent bifurcation at $r=1$. Show also that, after a sufficient
+amount of time,
+$$
+\frac{Kr^2b^{b-1}(b-1)^{(b-1)/b}}{b^b+r^b(b-1)^{b-1}}\leq 
+N_t\leq \frac{rK}{b}(b-1)^{(b-1)/b}.
+$$ {#eq-ex_discrete_time_steady_state}
+:::
+
+---->
