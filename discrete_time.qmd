@@ -368,15 +368,187 @@ HTML(ani.to_jshtml())
 ```
 ## Discrete-time harvesting model
 
-Coming on Monday of week 2
+We will now look at an example of a discrete-time model with harvesting and apply the techniques we have learned. The model has the standard discrete-time model form $N_{t+1}=f(N_t)$, where $f$ in our example is
+$$
+f(N) = \frac{b N^2}{1+N^2}-EN.
+$$
+The constant $b>2$ determines the growth rate of the population and the harvesting rate is determined by the harvesting effort $E$. 
+
+We start by studying the model without harvesting, so we set $E=0$ for now. As usual, we start by looking at the steady states of the model. The fixed points are the solutions to the equation 
+$$
+N^* = \frac{b\,{N^*}^2}{1+{N^*}^2}.
+$$ 
+There is the obvious solution $N^*=0$. We can then find the non-zero solutions by dividing both sides by $N^*$ and multiply them by $1+{N^*}^2$ to get the equation
+$$
+1+{N^*}^2 = bN^*.
+$$
+This is a quadratic equation for $N^*$, which we could rewrite in the more convential form
+$$
+{N^*}^2 - bN^* + 1 = 0.
+$$
+The solutions to this equation are
+$$
+N^*_\pm = \frac{b\pm\sqrt{b^2-4}}{2}.
+$$
+The solutions are real if $b^2-4\geq 0$, i.e. if $b\geq 2$, which we have stipulated earlier. Both solutions are positive. 
+
+We now have enough information to draw a good sketch to understand the dynamics of the model. We can draw the function $f(N)$ and the line $N_{t+1}=N_t$. It may not be immediately obvious what the sketch of $f(N)=bN^2/(1+N^2)$ looks like. We'll reason ourselves through this in steps:
+
+- First let us consider what happens near $N=0$. There the function is approximately $f(N)\approx bN^2$. This is a parabola that opens upwards. The function is zero at $N=0$ and increases quadratically with $N$. 
+
+- Next we consider what happens as $N$ becomes large. There the function is approximately $f(N)\approx b$. So the graph has a horizontal asymptote at $y=b$.
+
+- We know that in between there are two fixed points. That means the graph needs to cross the diagonal line $y=N$ twice.
+
+- Finally we observe that the function is monotonically increasing. 
+
+If we now draw something that has all these features, we will have a sufficiently good sketch of the function for our purpose of understanding the dynamics of the model. We will necessarily end up with something that qualitatively looks like the graph in @fig-discrete_harvesting_function.
+
+```{python}
+#| label: fig-discrete_harvesting_function
+#| fig-cap: Graph of the function $f(N)=\frac{bN^2}{1+N^2}$.
+#| fig-alt: Graph of the function $f(N)=\frac{bN^2}{1+N^2}$.
+#| echo: false
+from matplotlib.patches import Circle
+
+# Define the function
+def f(N, b):
+    return b*N**2/(1+N**2)
+
+# Parameter value
+b = 2.4
+
+# Fixed points
+Np = (b+np.sqrt(b**2-4))/2
+Nm = (b-np.sqrt(b**2-4))/2
+
+# Adding axis labels
+plt.xlabel('$N_t$', loc='right')
+plt.ylabel('$N_{t+1}$', loc='top')
+
+# Removing numerical labels from the axes
+plt.xticks([])  # Removing labels on the horizontal axis
+plt.yticks([])  # Removing labels on the vertical axis
+
+# Hide the top and right spines
+ax = plt.gca()
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+# Move the bottom spine to y=0 and the left spine to x=0
+ax.spines['bottom'].set_position(('data', 0))
+ax.spines['left'].set_position(('data', 0))
+
+# Plot the function
+N_vals = np.linspace(0, b*1.2, 200)
+plt.plot(N_vals, f(N_vals, b), label='$y=f(N)$')
+
+# Add diagonal
+plt.plot(N_vals, N_vals, 'k-', label='$y=N$')
+
+# Add red dot at stable fixed points
+circle = Circle((Np,Np), 0.05, color='red', fill=True)
+ax.add_patch(circle)
+circle = Circle((0,0), 0.05, color='red', fill=True)
+ax.add_patch(circle)
+# Add red circle at unstable fixed point
+circle = Circle((Nm,Nm), 0.05, color='red', fill=False)
+ax.add_patch(circle)
+
+# Mark fixed points on x axis
+plt.vlines(Np, 0, Np, color='gray', linestyle=':')
+plt.text(Np, -0.15, '$N^*_+$', ha='center')
+plt.vlines(Nm, 0, Nm, color='gray', linestyle=':')
+plt.text(Nm, -0.15, '$N^*_-$', ha='center')
+
+# Add horizontal asymptote
+plt.hlines(b, 0, b*1.2, color='gray', linestyle='--', label='$y=b$')
+
+ax.legend(loc='center right')
+plt.show()
+```
+
+Using our cobweb technique, or simply looking at the slope of $f$ at the fixed points, we can easily convince ourselves that the extinction fixed point is stable, the smaller non-zero fixed point $N^*_-$ is unstable and the larger fixed point $N^*_+$ is stable. in @fig-discrete_harvesting_function we have indicated the stable fixed points by solid circles and the unstable fixed points by open circles. So when the population number is larger than $N^*_-$ it will grow towards $N^*_+$, and when it is smaller than $N^*_-$ it will go extinct. So this model exhibits a strong Allee effect with critical depensation. $N^*_-$ is the smallest viable population size.
+
+We can now add harvesting to the model. The extra term in the function $f(N)$ is $-EN$. This lowers the graph of $f(N)$ by an amount that grows linearly with $N$. This is illustrated in @fig-discrete_harvesting_function_harvesting. 
+
+```{python}
+#| label: fig-discrete_harvesting_function_harvesting
+#| fig-cap: Graph of the function $f(N)=\frac{bN^2}{1+N^2}-EN$.
+#| fig-alt: Graph of the function $f(N)=\frac{bN^2}{1+N^2}-EN$.
+#| echo: false
+# Define the function
+def f(N, b, E):
+    return b*N**2/(1+N**2)-E*N
+
+# Parameter value
+b = 2.4
+E1 = 0.1
+E2 = 0.2
+E3 = 0.3
+
+# Adding axis labels
+plt.xlabel('$N_t$', loc='right')
+plt.ylabel('$N_{t+1}$', loc='top')
+
+# Removing numerical labels from the axes
+plt.xticks([])  # Removing labels on the horizontal axis
+plt.yticks([])  # Removing labels on the vertical axis
+
+# Hide the top and right spines
+ax = plt.gca()
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+# Move the bottom spine to y=0 and the left spine to x=0
+ax.spines['bottom'].set_position(('data', 0))
+ax.spines['left'].set_position(('data', 0))
+
+# Plot the function
+N_vals = np.linspace(0, b*1.2, 200)
+plt.plot(N_vals, f(N_vals, b, 0), label='$E=0$')
+plt.plot(N_vals, f(N_vals, b, E1), label='$0<E<E_c$')
+plt.plot(N_vals, f(N_vals, b, E2), label='$E=E_c$')
+plt.plot(N_vals, f(N_vals, b, E3), label='$E>E_c$')
+
+# Add diagonal
+plt.plot(N_vals, N_vals, 'k-',)
+
+ax.legend(loc='upper center')
+plt.show()
+```
+We see that as the harvesting effort $E$ increases, the two fixed points move closer together. At a critical value $E_c$ the two fixed points merge and disappear. The population number will then go extinct for all initial population numbers. 
+
+Let us find the critical value $E_c$. For that we first determine the location of the fixed points in the presence of harvesting. So we solve the equation
+$$
+N^* = \frac{b\,{N^*}^2}{1+{N^*}^2}-EN^*.
+$$
+Again this has a solution $N^*=0$. We can then find the non-zero solutions by dividing both sides by $N^*$ and multiply them by $1+{N^*}^2$ to get the equation
+$$
+(1+E){N^*}^2-bN^*+1+E = 0.
+$$
+This is solved by
+$$
+N^*_\pm = \frac{\frac{b}{1+E}\pm\sqrt{\left(\frac{b}{1+E}\right)^2-4}}{2}.
+$$
+We see that these solutions are real only if $\left(\frac{b}{1+E}\right)^2-4\geq 0$, i.e., if $E< \frac{b-2}{2}$. Thus the critical effort is $E_c=\frac{b-2}{2}$. Fishing above this level will lead to extinction of the population. But even fishing just near this level is risky because the population number will be very close to the minimum viable population and a small disturbance could lead to extinction.
+
 
 ## Bifurcations
 
-Coming on Monday of week 2
+A bifurcation is a change in the existence and/or stability of the fixed points as the parameters of the model are varied.
+
+You have met bifurcations in continuous-time models already in your Dynamical Systems module. You have seen there that in one-dimensional systems described by a single ODE there are three different types of bifurcation: saddle-node, pitchfork, transcritical. The same types of bifurcations can occur in discrete-time models but there is also one more type: the period-doubling bifurcation.
+
+We have already seen a bifurcation in the discrete-time harvesting model. The bifurcation was a saddle-node bifurcation, where two fixed points merge and disappear. This is also sometimes referred to as a tangent bifurcation, because at the critical value of the parameter the curve $y=f(N)$ is tangent to the line $y=N$ at the fixed point.
+
+In the period-doubling bifurcation the stability of the fixed point changes as the parameter is varied. The fixed point changes from stable to unstable, and at the same time a stable period-2 orbit appears, where the population number oscillates between two values. The period-2 orbit is stable in the sense that if the population number is close to the orbit it will converge to the orbit. This kind of bifurcation can obviously not arise in one-dimensional continuous-time models because a continuous orbit can not move from one side of a fixed point to the other.
+
+In the lectures we drew diagrams illustrating three of the four types of bifurcations. For a discussion of all four types in a similar fashion, you can view the following video.
+
+<iframe src="https://york.cloud.panopto.eu/Panopto/Pages/Embed.aspx?id=39938f32-82cf-42e3-8385-ae17013e61b0&autoplay=false&offerviewer=true&showtitle=true&showbrand=false&captions=false&interactivity=all" height="405" width="720" style="border: 1px solid #464646;" allowfullscreen allow="autoplay"></iframe>
 
 ## Exercises
 
-Exercises marked with a * are essential and are to be handed in. Exercises marked with a + are important and you are urged to complete them. Other exercises are optional but recommended.
+Exercises marked with a * are essential and are to be handed in. Exercises marked with a + are important and you are urged to complete them. Other exercises are optional but recommended. The exercise marked with an o will be worked through in the problems class.
 
 
 #### + Verhulst model
@@ -409,13 +581,12 @@ $$ {#eq-ex_beverton_holt}
 and investigate their stability. Do this both analytically and by drawing cobweb diagrams.
 :::
 
-More exercises coming after the lecture on Monday of week 2.
-<!----
-#### House finches
+#### o House finches
 ::: {#exr-finches}
+
 _[Note: in this problem we combine a continuous time model for the dynamics within a single year with
 a discrete model for the dynamics from one year to the next.
- The subscript $t \in \mathbb{Z}$ refers to the discrete year $t$, whereas
+ The subscript $t \in \mathbb{Z}$ refers to the discrete year whereas
 $\tau\in\mathbb{R}$ will indicate the continuous time within a single year.]_
 
 A population of house finches resides in an isolated region in North America. 
@@ -475,7 +646,7 @@ h) What type of bifurcation occurs when there is equality in the condition in pa
 
 :::
 
-#### Discrete time model
+#### Another model
 ::: {#exr-1.1}
 Consider the discrete time model
 $$
@@ -485,12 +656,5 @@ where $r$, $b$ and $K$ are positive parameters with $b>1$. Show that
 the model has two steady states. Investigate the stability of the
 extinction steady state. Show that the non-trivial (non-zero) steady state can lose
 stability through a period doubling bifurcation at $b=2r/(r-1)$, or a
-tangent bifurcation at $r=1$. Show also that, after a sufficient
-amount of time,
-$$
-\frac{Kr^2b^{b-1}(b-1)^{(b-1)/b}}{b^b+r^b(b-1)^{b-1}}\leq 
-N_t\leq \frac{rK}{b}(b-1)^{(b-1)/b}.
-$$ {#eq-ex_discrete_time_steady_state}
+tangent bifurcation at $r=1$. 
 :::
-
----->

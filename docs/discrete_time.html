@@ -193,6 +193,8 @@ window.Quarto = {
   <li><a href="#verhulst-model-1" id="toc-verhulst-model-1" class="nav-link" data-scroll-target="#verhulst-model-1">+ Verhulst model</a></li>
   <li><a href="#ricker-model-1" id="toc-ricker-model-1" class="nav-link" data-scroll-target="#ricker-model-1">* Ricker model</a></li>
   <li><a href="#beverton-holt-model-1" id="toc-beverton-holt-model-1" class="nav-link" data-scroll-target="#beverton-holt-model-1">Beverton-Holt model</a></li>
+  <li><a href="#o-house-finches" id="toc-o-house-finches" class="nav-link" data-scroll-target="#o-house-finches">o House finches</a></li>
+  <li><a href="#another-model" id="toc-another-model" class="nav-link" data-scroll-target="#another-model">Another model</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/gustavdelius/M3E-2024/edit/main/discrete_time.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
@@ -497,36 +499,36 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_img62a981fd98ad42f5b01bb98af4b6bb6a" class="figure-img">
+  <img id="_anim_img8b3838ab1db44e049712c0f1b5816221" class="figure-img">
   <div class="anim-controls">
-    <input id="_anim_slider62a981fd98ad42f5b01bb98af4b6bb6a" type="range" class="anim-slider" name="points" min="0" max="1" step="1" value="0" oninput="anim62a981fd98ad42f5b01bb98af4b6bb6a.set_frame(parseInt(this.value));">
+    <input id="_anim_slider8b3838ab1db44e049712c0f1b5816221" type="range" class="anim-slider" name="points" min="0" max="1" step="1" value="0" oninput="anim8b3838ab1db44e049712c0f1b5816221.set_frame(parseInt(this.value));">
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim62a981fd98ad42f5b01bb98af4b6bb6a.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim8b3838ab1db44e049712c0f1b5816221.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="anim62a981fd98ad42f5b01bb98af4b6bb6a.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="anim8b3838ab1db44e049712c0f1b5816221.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="anim62a981fd98ad42f5b01bb98af4b6bb6a.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="anim8b3838ab1db44e049712c0f1b5816221.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="anim62a981fd98ad42f5b01bb98af4b6bb6a.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="anim8b3838ab1db44e049712c0f1b5816221.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="anim62a981fd98ad42f5b01bb98af4b6bb6a.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="anim8b3838ab1db44e049712c0f1b5816221.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="anim62a981fd98ad42f5b01bb98af4b6bb6a.play_animation()">
+      <button title="Play" aria-label="Play" onclick="anim8b3838ab1db44e049712c0f1b5816221.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="anim62a981fd98ad42f5b01bb98af4b6bb6a.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="anim8b3838ab1db44e049712c0f1b5816221.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="anim62a981fd98ad42f5b01bb98af4b6bb6a.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="anim8b3838ab1db44e049712c0f1b5816221.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="anim62a981fd98ad42f5b01bb98af4b6bb6a.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="anim8b3838ab1db44e049712c0f1b5816221.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select62a981fd98ad42f5b01bb98af4b6bb6a" class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_62a981fd98ad42f5b01bb98af4b6bb6a" checked="">
-      <label for="_anim_radio1_62a981fd98ad42f5b01bb98af4b6bb6a">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_62a981fd98ad42f5b01bb98af4b6bb6a">
-      <label for="_anim_radio2_62a981fd98ad42f5b01bb98af4b6bb6a">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_62a981fd98ad42f5b01bb98af4b6bb6a">
-      <label for="_anim_radio3_62a981fd98ad42f5b01bb98af4b6bb6a">Reflect</label>
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select8b3838ab1db44e049712c0f1b5816221" class="anim-state">
+      <input type="radio" name="state" value="once" id="_anim_radio1_8b3838ab1db44e049712c0f1b5816221" checked="">
+      <label for="_anim_radio1_8b3838ab1db44e049712c0f1b5816221">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_8b3838ab1db44e049712c0f1b5816221">
+      <label for="_anim_radio2_8b3838ab1db44e049712c0f1b5816221">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_8b3838ab1db44e049712c0f1b5816221">
+      <label for="_anim_radio3_8b3838ab1db44e049712c0f1b5816221">Reflect</label>
     </form>
   </div>
 </div>
@@ -536,9 +538,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_img62a981fd98ad42f5b01bb98af4b6bb6a";
-    var slider_id = "_anim_slider62a981fd98ad42f5b01bb98af4b6bb6a";
-    var loop_select_id = "_anim_loop_select62a981fd98ad42f5b01bb98af4b6bb6a";
+    var img_id = "_anim_img8b3838ab1db44e049712c0f1b5816221";
+    var slider_id = "_anim_slider8b3838ab1db44e049712c0f1b5816221";
+    var loop_select_id = "_anim_loop_select8b3838ab1db44e049712c0f1b5816221";
     var frames = new Array(9);
     
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAqAAAAHgCAYAAAB6jN80AAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -4734,7 +4736,7 @@ Bzi+hSpGeAAAAABJRU5ErkJggg==\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        anim62a981fd98ad42f5b01bb98af4b6bb6a = new Animation(frames, img_id, slider_id, 200.0,
+        anim8b3838ab1db44e049712c0f1b5816221 = new Animation(frames, img_id, slider_id, 200.0,
                                  loop_select_id);
     }, 0);
   })()
@@ -4934,36 +4936,36 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_imga498d5c7595f4bb29ecfd6641c069a28" class="figure-img">
+  <img id="_anim_img50300634b80b472b887c6a70097cca0b" class="figure-img">
   <div class="anim-controls">
-    <input id="_anim_slidera498d5c7595f4bb29ecfd6641c069a28" type="range" class="anim-slider" name="points" min="0" max="1" step="1" value="0" oninput="anima498d5c7595f4bb29ecfd6641c069a28.set_frame(parseInt(this.value));">
+    <input id="_anim_slider50300634b80b472b887c6a70097cca0b" type="range" class="anim-slider" name="points" min="0" max="1" step="1" value="0" oninput="anim50300634b80b472b887c6a70097cca0b.set_frame(parseInt(this.value));">
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="anima498d5c7595f4bb29ecfd6641c069a28.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="anim50300634b80b472b887c6a70097cca0b.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="anima498d5c7595f4bb29ecfd6641c069a28.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="anim50300634b80b472b887c6a70097cca0b.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="anima498d5c7595f4bb29ecfd6641c069a28.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="anim50300634b80b472b887c6a70097cca0b.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="anima498d5c7595f4bb29ecfd6641c069a28.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="anim50300634b80b472b887c6a70097cca0b.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="anima498d5c7595f4bb29ecfd6641c069a28.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="anim50300634b80b472b887c6a70097cca0b.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="anima498d5c7595f4bb29ecfd6641c069a28.play_animation()">
+      <button title="Play" aria-label="Play" onclick="anim50300634b80b472b887c6a70097cca0b.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="anima498d5c7595f4bb29ecfd6641c069a28.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="anim50300634b80b472b887c6a70097cca0b.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="anima498d5c7595f4bb29ecfd6641c069a28.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="anim50300634b80b472b887c6a70097cca0b.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="anima498d5c7595f4bb29ecfd6641c069a28.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="anim50300634b80b472b887c6a70097cca0b.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selecta498d5c7595f4bb29ecfd6641c069a28" class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_a498d5c7595f4bb29ecfd6641c069a28" checked="">
-      <label for="_anim_radio1_a498d5c7595f4bb29ecfd6641c069a28">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_a498d5c7595f4bb29ecfd6641c069a28">
-      <label for="_anim_radio2_a498d5c7595f4bb29ecfd6641c069a28">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_a498d5c7595f4bb29ecfd6641c069a28">
-      <label for="_anim_radio3_a498d5c7595f4bb29ecfd6641c069a28">Reflect</label>
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_select50300634b80b472b887c6a70097cca0b" class="anim-state">
+      <input type="radio" name="state" value="once" id="_anim_radio1_50300634b80b472b887c6a70097cca0b" checked="">
+      <label for="_anim_radio1_50300634b80b472b887c6a70097cca0b">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_50300634b80b472b887c6a70097cca0b">
+      <label for="_anim_radio2_50300634b80b472b887c6a70097cca0b">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_50300634b80b472b887c6a70097cca0b">
+      <label for="_anim_radio3_50300634b80b472b887c6a70097cca0b">Reflect</label>
     </form>
   </div>
 </div>
@@ -4973,9 +4975,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_imga498d5c7595f4bb29ecfd6641c069a28";
-    var slider_id = "_anim_slidera498d5c7595f4bb29ecfd6641c069a28";
-    var loop_select_id = "_anim_loop_selecta498d5c7595f4bb29ecfd6641c069a28";
+    var img_id = "_anim_img50300634b80b472b887c6a70097cca0b";
+    var slider_id = "_anim_slider50300634b80b472b887c6a70097cca0b";
+    var loop_select_id = "_anim_loop_select50300634b80b472b887c6a70097cca0b";
     var frames = new Array(9);
     
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAqAAAAHgCAYAAAB6jN80AAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -9485,7 +9487,7 @@ ASUiIiIivfp/pbqd9CR/Jn8AAAAASUVORK5CYII=\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        anima498d5c7595f4bb29ecfd6641c069a28 = new Animation(frames, img_id, slider_id, 200.0,
+        anim50300634b80b472b887c6a70097cca0b = new Animation(frames, img_id, slider_id, 200.0,
                                  loop_select_id);
     }, 0);
   })()
@@ -9686,36 +9688,36 @@ input[type=range].anim-slider {
 </style>
 
 <div class="animation">
-  <img id="_anim_imgdd8fef1aa3f14d0d8111cb824fb93a83" class="figure-img">
+  <img id="_anim_imgd3ab4edd1e254316903bdcf9c7e9c6a4" class="figure-img">
   <div class="anim-controls">
-    <input id="_anim_sliderdd8fef1aa3f14d0d8111cb824fb93a83" type="range" class="anim-slider" name="points" min="0" max="1" step="1" value="0" oninput="animdd8fef1aa3f14d0d8111cb824fb93a83.set_frame(parseInt(this.value));">
+    <input id="_anim_sliderd3ab4edd1e254316903bdcf9c7e9c6a4" type="range" class="anim-slider" name="points" min="0" max="1" step="1" value="0" oninput="animd3ab4edd1e254316903bdcf9c7e9c6a4.set_frame(parseInt(this.value));">
     <div class="anim-buttons">
-      <button title="Decrease speed" aria-label="Decrease speed" onclick="animdd8fef1aa3f14d0d8111cb824fb93a83.slower()">
+      <button title="Decrease speed" aria-label="Decrease speed" onclick="animd3ab4edd1e254316903bdcf9c7e9c6a4.slower()">
           <i class="fa fa-minus"></i></button>
-      <button title="First frame" aria-label="First frame" onclick="animdd8fef1aa3f14d0d8111cb824fb93a83.first_frame()">
+      <button title="First frame" aria-label="First frame" onclick="animd3ab4edd1e254316903bdcf9c7e9c6a4.first_frame()">
         <i class="fa fa-fast-backward"></i></button>
-      <button title="Previous frame" aria-label="Previous frame" onclick="animdd8fef1aa3f14d0d8111cb824fb93a83.previous_frame()">
+      <button title="Previous frame" aria-label="Previous frame" onclick="animd3ab4edd1e254316903bdcf9c7e9c6a4.previous_frame()">
           <i class="fa fa-step-backward"></i></button>
-      <button title="Play backwards" aria-label="Play backwards" onclick="animdd8fef1aa3f14d0d8111cb824fb93a83.reverse_animation()">
+      <button title="Play backwards" aria-label="Play backwards" onclick="animd3ab4edd1e254316903bdcf9c7e9c6a4.reverse_animation()">
           <i class="fa fa-play fa-flip-horizontal"></i></button>
-      <button title="Pause" aria-label="Pause" onclick="animdd8fef1aa3f14d0d8111cb824fb93a83.pause_animation()">
+      <button title="Pause" aria-label="Pause" onclick="animd3ab4edd1e254316903bdcf9c7e9c6a4.pause_animation()">
           <i class="fa fa-pause"></i></button>
-      <button title="Play" aria-label="Play" onclick="animdd8fef1aa3f14d0d8111cb824fb93a83.play_animation()">
+      <button title="Play" aria-label="Play" onclick="animd3ab4edd1e254316903bdcf9c7e9c6a4.play_animation()">
           <i class="fa fa-play"></i></button>
-      <button title="Next frame" aria-label="Next frame" onclick="animdd8fef1aa3f14d0d8111cb824fb93a83.next_frame()">
+      <button title="Next frame" aria-label="Next frame" onclick="animd3ab4edd1e254316903bdcf9c7e9c6a4.next_frame()">
           <i class="fa fa-step-forward"></i></button>
-      <button title="Last frame" aria-label="Last frame" onclick="animdd8fef1aa3f14d0d8111cb824fb93a83.last_frame()">
+      <button title="Last frame" aria-label="Last frame" onclick="animd3ab4edd1e254316903bdcf9c7e9c6a4.last_frame()">
           <i class="fa fa-fast-forward"></i></button>
-      <button title="Increase speed" aria-label="Increase speed" onclick="animdd8fef1aa3f14d0d8111cb824fb93a83.faster()">
+      <button title="Increase speed" aria-label="Increase speed" onclick="animd3ab4edd1e254316903bdcf9c7e9c6a4.faster()">
           <i class="fa fa-plus"></i></button>
     </div>
-    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selectdd8fef1aa3f14d0d8111cb824fb93a83" class="anim-state">
-      <input type="radio" name="state" value="once" id="_anim_radio1_dd8fef1aa3f14d0d8111cb824fb93a83" checked="">
-      <label for="_anim_radio1_dd8fef1aa3f14d0d8111cb824fb93a83">Once</label>
-      <input type="radio" name="state" value="loop" id="_anim_radio2_dd8fef1aa3f14d0d8111cb824fb93a83">
-      <label for="_anim_radio2_dd8fef1aa3f14d0d8111cb824fb93a83">Loop</label>
-      <input type="radio" name="state" value="reflect" id="_anim_radio3_dd8fef1aa3f14d0d8111cb824fb93a83">
-      <label for="_anim_radio3_dd8fef1aa3f14d0d8111cb824fb93a83">Reflect</label>
+    <form title="Repetition mode" aria-label="Repetition mode" action="#n" name="_anim_loop_selectd3ab4edd1e254316903bdcf9c7e9c6a4" class="anim-state">
+      <input type="radio" name="state" value="once" id="_anim_radio1_d3ab4edd1e254316903bdcf9c7e9c6a4" checked="">
+      <label for="_anim_radio1_d3ab4edd1e254316903bdcf9c7e9c6a4">Once</label>
+      <input type="radio" name="state" value="loop" id="_anim_radio2_d3ab4edd1e254316903bdcf9c7e9c6a4">
+      <label for="_anim_radio2_d3ab4edd1e254316903bdcf9c7e9c6a4">Loop</label>
+      <input type="radio" name="state" value="reflect" id="_anim_radio3_d3ab4edd1e254316903bdcf9c7e9c6a4">
+      <label for="_anim_radio3_d3ab4edd1e254316903bdcf9c7e9c6a4">Reflect</label>
     </form>
   </div>
 </div>
@@ -9725,9 +9727,9 @@ input[type=range].anim-slider {
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_imgdd8fef1aa3f14d0d8111cb824fb93a83";
-    var slider_id = "_anim_sliderdd8fef1aa3f14d0d8111cb824fb93a83";
-    var loop_select_id = "_anim_loop_selectdd8fef1aa3f14d0d8111cb824fb93a83";
+    var img_id = "_anim_imgd3ab4edd1e254316903bdcf9c7e9c6a4";
+    var slider_id = "_anim_sliderd3ab4edd1e254316903bdcf9c7e9c6a4";
+    var loop_select_id = "_anim_loop_selectd3ab4edd1e254316903bdcf9c7e9c6a4";
     var frames = new Array(9);
     
   frames[0] = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAqAAAAHgCAYAAAB6jN80AAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90\
@@ -13441,7 +13443,7 @@ AAAASUVORK5CYII=\
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        animdd8fef1aa3f14d0d8111cb824fb93a83 = new Animation(frames, img_id, slider_id, 200.0,
+        animd3ab4edd1e254316903bdcf9c7e9c6a4 = new Animation(frames, img_id, slider_id, 200.0,
                                  loop_select_id);
     }, 0);
   })()
@@ -13454,17 +13456,80 @@ Figure&nbsp;2.3: Cobweb diagram for a fixed point with positive slope.
 </div>
 </div>
 </section>
-<section id="discrete-time-harvesting-model" class="level2" data-number="2.4">
+<section id="discrete-time-harvesting-model" class="level2 page-columns page-full" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="discrete-time-harvesting-model"><span class="header-section-number">2.4</span> Discrete-time harvesting model</h2>
-<p>Coming on Monday of week 2</p>
+<p>We will now look at an example of a discrete-time model with harvesting and apply the techniques we have learned. The model has the standard discrete-time model form <span class="math inline">\(N_{t+1}=f(N_t)\)</span>, where <span class="math inline">\(f\)</span> in our example is <span class="math display">\[
+f(N) = \frac{b N^2}{1+N^2}-EN.
+\]</span> The constant <span class="math inline">\(b&gt;2\)</span> determines the growth rate of the population and the harvesting rate is determined by the harvesting effort <span class="math inline">\(E\)</span>.</p>
+<p>We start by studying the model without harvesting, so we set <span class="math inline">\(E=0\)</span> for now. As usual, we start by looking at the steady states of the model. The fixed points are the solutions to the equation <span class="math display">\[
+N^* = \frac{b\,{N^*}^2}{1+{N^*}^2}.
+\]</span> There is the obvious solution <span class="math inline">\(N^*=0\)</span>. We can then find the non-zero solutions by dividing both sides by <span class="math inline">\(N^*\)</span> and multiply them by <span class="math inline">\(1+{N^*}^2\)</span> to get the equation <span class="math display">\[
+1+{N^*}^2 = bN^*.
+\]</span> This is a quadratic equation for <span class="math inline">\(N^*\)</span>, which we could rewrite in the more convential form <span class="math display">\[
+{N^*}^2 - bN^* + 1 = 0.
+\]</span> The solutions to this equation are <span class="math display">\[
+N^*_\pm = \frac{b\pm\sqrt{b^2-4}}{2}.
+\]</span> The solutions are real if <span class="math inline">\(b^2-4\geq 0\)</span>, i.e.&nbsp;if <span class="math inline">\(b\geq 2\)</span>, which we have stipulated earlier. Both solutions are positive.</p>
+<p>We now have enough information to draw a good sketch to understand the dynamics of the model. We can draw the function <span class="math inline">\(f(N)\)</span> and the line <span class="math inline">\(N_{t+1}=N_t\)</span>. It may not be immediately obvious what the sketch of <span class="math inline">\(f(N)=bN^2/(1+N^2)\)</span> looks like. We’ll reason ourselves through this in steps:</p>
+<ul>
+<li><p>First let us consider what happens near <span class="math inline">\(N=0\)</span>. There the function is approximately <span class="math inline">\(f(N)\approx bN^2\)</span>. This is a parabola that opens upwards. The function is zero at <span class="math inline">\(N=0\)</span> and increases quadratically with <span class="math inline">\(N\)</span>.</p></li>
+<li><p>Next we consider what happens as <span class="math inline">\(N\)</span> becomes large. There the function is approximately <span class="math inline">\(f(N)\approx b\)</span>. So the graph has a horizontal asymptote at <span class="math inline">\(y=b\)</span>.</p></li>
+<li><p>We know that in between there are two fixed points. That means the graph needs to cross the diagonal line <span class="math inline">\(y=N\)</span> twice.</p></li>
+<li><p>Finally we observe that the function is monotonically increasing.</p></li>
+</ul>
+<p>If we now draw something that has all these features, we will have a sufficiently good sketch of the function for our purpose of understanding the dynamics of the model. We will necessarily end up with something that qualitatively looks like the graph in <a href="#fig-discrete_harvesting_function" class="quarto-xref">Figure&nbsp;<span>2.4</span></a>.</p>
+<div id="cell-fig-discrete_harvesting_function" class="cell page-columns page-full" data-execution_count="4">
+<div class="cell-output cell-output-display page-columns page-full">
+<div id="fig-discrete_harvesting_function" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" alt="Graph of the function $f(N)=\frac{bN^2}{1+N^2}$.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-discrete_harvesting_function-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="discrete_time_files/figure-html/fig-discrete_harvesting_function-output-1.png" alt="Graph of the function $f(N)=\frac{bN^2}{1+N^2}$." width="540" height="389" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-discrete_harvesting_function-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.4: Graph of the function <span class="math inline">\(f(N)=\frac{bN^2}{1+N^2}\)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Using our cobweb technique, or simply looking at the slope of <span class="math inline">\(f\)</span> at the fixed points, we can easily convince ourselves that the extinction fixed point is stable, the smaller non-zero fixed point <span class="math inline">\(N^*_-\)</span> is unstable and the larger fixed point <span class="math inline">\(N^*_+\)</span> is stable. in <a href="#fig-discrete_harvesting_function" class="quarto-xref">Figure&nbsp;<span>2.4</span></a> we have indicated the stable fixed points by solid circles and the unstable fixed points by open circles. So when the population number is larger than <span class="math inline">\(N^*_-\)</span> it will grow towards <span class="math inline">\(N^*_+\)</span>, and when it is smaller than <span class="math inline">\(N^*_-\)</span> it will go extinct. So this model exhibits a strong Allee effect with critical depensation. <span class="math inline">\(N^*_-\)</span> is the smallest viable population size.</p>
+<p>We can now add harvesting to the model. The extra term in the function <span class="math inline">\(f(N)\)</span> is <span class="math inline">\(-EN\)</span>. This lowers the graph of <span class="math inline">\(f(N)\)</span> by an amount that grows linearly with <span class="math inline">\(N\)</span>. This is illustrated in <a href="#fig-discrete_harvesting_function_harvesting" class="quarto-xref">Figure&nbsp;<span>2.5</span></a>.</p>
+<div id="cell-fig-discrete_harvesting_function_harvesting" class="cell page-columns page-full" data-execution_count="5">
+<div class="cell-output cell-output-display page-columns page-full">
+<div id="fig-discrete_harvesting_function_harvesting" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" alt="Graph of the function $f(N)=\frac{bN^2}{1+N^2}-EN$.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-discrete_harvesting_function_harvesting-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="discrete_time_files/figure-html/fig-discrete_harvesting_function_harvesting-output-1.png" alt="Graph of the function $f(N)=\frac{bN^2}{1+N^2}-EN$." width="540" height="390" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-discrete_harvesting_function_harvesting-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2.5: Graph of the function <span class="math inline">\(f(N)=\frac{bN^2}{1+N^2}-EN\)</span>.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We see that as the harvesting effort <span class="math inline">\(E\)</span> increases, the two fixed points move closer together. At a critical value <span class="math inline">\(E_c\)</span> the two fixed points merge and disappear. The population number will then go extinct for all initial population numbers.</p>
+<p>Let us find the critical value <span class="math inline">\(E_c\)</span>. For that we first determine the location of the fixed points in the presence of harvesting. So we solve the equation <span class="math display">\[
+N^* = \frac{b\,{N^*}^2}{1+{N^*}^2}-EN^*.
+\]</span> Again this has a solution <span class="math inline">\(N^*=0\)</span>. We can then find the non-zero solutions by dividing both sides by <span class="math inline">\(N^*\)</span> and multiply them by <span class="math inline">\(1+{N^*}^2\)</span> to get the equation <span class="math display">\[
+(1+E){N^*}^2-bN^*+1+E = 0.
+\]</span> This is solved by <span class="math display">\[
+N^*_\pm = \frac{\frac{b}{1+E}\pm\sqrt{\left(\frac{b}{1+E}\right)^2-4}}{2}.
+\]</span> We see that these solutions are real only if <span class="math inline">\(\left(\frac{b}{1+E}\right)^2-4\geq 0\)</span>, i.e., if <span class="math inline">\(E&lt; \frac{b-2}{2}\)</span>. Thus the critical effort is <span class="math inline">\(E_c=\frac{b-2}{2}\)</span>. Fishing above this level will lead to extinction of the population. But even fishing just near this level is risky because the population number will be very close to the minimum viable population and a small disturbance could lead to extinction.</p>
 </section>
 <section id="bifurcations" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="bifurcations"><span class="header-section-number">2.5</span> Bifurcations</h2>
-<p>Coming on Monday of week 2</p>
+<p>A bifurcation is a change in the existence and/or stability of the fixed points as the parameters of the model are varied.</p>
+<p>You have met bifurcations in continuous-time models already in your Dynamical Systems module. You have seen there that in one-dimensional systems described by a single ODE there are three different types of bifurcation: saddle-node, pitchfork, transcritical. The same types of bifurcations can occur in discrete-time models but there is also one more type: the period-doubling bifurcation.</p>
+<p>We have already seen a bifurcation in the discrete-time harvesting model. The bifurcation was a saddle-node bifurcation, where two fixed points merge and disappear. This is also sometimes referred to as a tangent bifurcation, because at the critical value of the parameter the curve <span class="math inline">\(y=f(N)\)</span> is tangent to the line <span class="math inline">\(y=N\)</span> at the fixed point.</p>
+<p>In the period-doubling bifurcation the stability of the fixed point changes as the parameter is varied. The fixed point changes from stable to unstable, and at the same time a stable period-2 orbit appears, where the population number oscillates between two values. The period-2 orbit is stable in the sense that if the population number is close to the orbit it will converge to the orbit. This kind of bifurcation can obviously not arise in one-dimensional continuous-time models because a continuous orbit can not move from one side of a fixed point to the other.</p>
+<p>In the lectures we drew diagrams illustrating three of the four types of bifurcations. For a discussion of all four types in a similar fashion, you can view the following video.</p>
+<iframe src="https://york.cloud.panopto.eu/Panopto/Pages/Embed.aspx?id=39938f32-82cf-42e3-8385-ae17013e61b0&amp;autoplay=false&amp;offerviewer=true&amp;showtitle=true&amp;showbrand=false&amp;captions=false&amp;interactivity=all" height="405" width="720" style="border: 1px solid #464646;" allowfullscreen="" allow="autoplay">
+</iframe>
 </section>
 <section id="exercises" class="level2" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">2.6</span> Exercises</h2>
-<p>Exercises marked with a * are essential and are to be handed in. Exercises marked with a + are important and you are urged to complete them. Other exercises are optional but recommended.</p>
+<p>Exercises marked with a * are essential and are to be handed in. Exercises marked with a + are important and you are urged to complete them. Other exercises are optional but recommended. The exercise marked with an o will be worked through in the problems class.</p>
 <section id="verhulst-model-1" class="level4">
 <h4 class="anchored" data-anchor-id="verhulst-model-1">+ Verhulst model</h4>
 <div id="exr-discrete_logistic" class="theorem exercise">
@@ -13486,90 +13551,37 @@ N_{t+1} = N_t\, e^{R_0\left(1 - \frac{N_t}{K}\right)}.
 N_{t+1} = \frac{R N_t}{1 - \frac{R-1}{K}N_t}.
 \tag{2.20}\]</span></span> and investigate their stability. Do this both analytically and by drawing cobweb diagrams.</p>
 </div>
-<p>More exercises coming after the lecture on Monday of week 2. <!----
-#### House finches
-::: {#exr-finches}
-_[Note: in this problem we combine a continuous time model for the dynamics within a single year with
-a discrete model for the dynamics from one year to the next.
- The subscript $t \in \mathbb{Z}$ refers to the discrete year $t$, whereas
-$\tau\in\mathbb{R}$ will indicate the continuous time within a single year.]_
-
-A population of house finches resides in an isolated region in North America. 
-In this problem you want to find out about the long-term prospects for the population.
-
-Each year the
-males and females begin their search for mates at the beginning of winter with a
-combined population number $N_t$ in year $t$, and form $P_t$ breeding pairs by the end
-of this search period, the start of the breeding season.
-
-The mate search period lasts from within-year time $\tau = 0$ to the end of the search
-period at within-year time $\tau = T$. Assume that there is a 1:1 sex ratio and that
-males $M(\tau)$ and females $F(\tau)$ locate one another randomly to make a pair 
-at rate $\sigma$, such that the number  $M(\tau)$ of males  that are not in a pair at time $\tau$ satisfies
-$$\frac{dM}{d\tau}=-\sigma \,M\,F $$
-and similarly  the number  $F$ of females  that are not in a pair at time $\tau$  satisfies
-$$\frac{dF}{d\tau}=-\sigma \,M\,F. $$
-
-You are given that the number of breeding pairs that establish a nest and breed
-successfully is $G(P_t)P_t$, where the fraction $G(P_t)$ takes the particular form
-$$G(P_t) = \frac{1}{1+P_t/\delta},$$
-where $\delta$ represents the density of available nesting sites.
-Each pair that reproduces successfully has a mean number $c$ of offspring.
-
-The probability that a bird will survive from one year to the next is $s$.
-
-a) Show that the number $n(\tau)=M(\tau)+F(\tau)$ of birds _not_ in a pair 
-is governed by
-$$\frac{dn}{d\tau}=-\frac{\sigma}{2}n^2, ~~~n(0)=N_t.$$
-
-b) Using the above, show that the number $n(T)$ of birds that have not found a mate at the start of
-the breeding season in year $t$ is
-$$n(T)=\frac{r\,N_t}{r+2N_t}$$
-where $N_t$ is the number of birds at the start of the season in that particular year and
-where $r=4/(\sigma T)$.
-
-c) Explain why the number of pairs $P(\tau)$ is governed by
-$$\frac{dP}{d\tau}=-\frac12\frac{dn}{d\tau},~~~P(0)=0.$$
-
-d) Use the above to show that the number of breeding pairs at the start of the
-breeding season in year $t$ is 
-$$P_t:=P(T)=\frac{N_t^2}{r+2N_t}.$$
-
-e) Show that the population $N_{t+1}$ at the beginning of winter in year $t+1$ is given
-by
-$$
+</section>
+<section id="o-house-finches" class="level4">
+<h4 class="anchored" data-anchor-id="o-house-finches">o House finches</h4>
+<div id="exr-finches" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.4</strong></span> <em>[Note: in this problem we combine a continuous time model for the dynamics within a single year with a discrete model for the dynamics from one year to the next. The subscript <span class="math inline">\(t \in \mathbb{Z}\)</span> refers to the discrete year whereas <span class="math inline">\(\tau\in\mathbb{R}\)</span> will indicate the continuous time within a single year.]</em></p>
+<p>A population of house finches resides in an isolated region in North America. In this problem you want to find out about the long-term prospects for the population.</p>
+<p>Each year the males and females begin their search for mates at the beginning of winter with a combined population number <span class="math inline">\(N_t\)</span> in year <span class="math inline">\(t\)</span>, and form <span class="math inline">\(P_t\)</span> breeding pairs by the end of this search period, the start of the breeding season.</p>
+<p>The mate search period lasts from within-year time <span class="math inline">\(\tau = 0\)</span> to the end of the search period at within-year time <span class="math inline">\(\tau = T\)</span>. Assume that there is a 1:1 sex ratio and that males <span class="math inline">\(M(\tau)\)</span> and females <span class="math inline">\(F(\tau)\)</span> locate one another randomly to make a pair at rate <span class="math inline">\(\sigma\)</span>, such that the number <span class="math inline">\(M(\tau)\)</span> of males that are not in a pair at time <span class="math inline">\(\tau\)</span> satisfies <span class="math display">\[\frac{dM}{d\tau}=-\sigma \,M\,F \]</span> and similarly the number <span class="math inline">\(F\)</span> of females that are not in a pair at time <span class="math inline">\(\tau\)</span> satisfies <span class="math display">\[\frac{dF}{d\tau}=-\sigma \,M\,F. \]</span></p>
+<p>You are given that the number of breeding pairs that establish a nest and breed successfully is <span class="math inline">\(G(P_t)P_t\)</span>, where the fraction <span class="math inline">\(G(P_t)\)</span> takes the particular form <span class="math display">\[G(P_t) = \frac{1}{1+P_t/\delta},\]</span> where <span class="math inline">\(\delta\)</span> represents the density of available nesting sites. Each pair that reproduces successfully has a mean number <span class="math inline">\(c\)</span> of offspring.</p>
+<p>The probability that a bird will survive from one year to the next is <span class="math inline">\(s\)</span>.</p>
+<ol type="a">
+<li><p>Show that the number <span class="math inline">\(n(\tau)=M(\tau)+F(\tau)\)</span> of birds <em>not</em> in a pair is governed by <span class="math display">\[\frac{dn}{d\tau}=-\frac{\sigma}{2}n^2, ~~~n(0)=N_t.\]</span></p></li>
+<li><p>Using the above, show that the number <span class="math inline">\(n(T)\)</span> of birds that have not found a mate at the start of the breeding season in year <span class="math inline">\(t\)</span> is <span class="math display">\[n(T)=\frac{r\,N_t}{r+2N_t}\]</span> where <span class="math inline">\(N_t\)</span> is the number of birds at the start of the season in that particular year and where <span class="math inline">\(r=4/(\sigma T)\)</span>.</p></li>
+<li><p>Explain why the number of pairs <span class="math inline">\(P(\tau)\)</span> is governed by <span class="math display">\[\frac{dP}{d\tau}=-\frac12\frac{dn}{d\tau},~~~P(0)=0.\]</span></p></li>
+<li><p>Use the above to show that the number of breeding pairs at the start of the breeding season in year <span class="math inline">\(t\)</span> is <span class="math display">\[P_t:=P(T)=\frac{N_t^2}{r+2N_t}.\]</span></p></li>
+<li><p>Show that the population <span class="math inline">\(N_{t+1}\)</span> at the beginning of winter in year <span class="math inline">\(t+1\)</span> is given by <span id="eq-Nt"><span class="math display">\[
 N_{t+1}=s\,N_t+\frac{c\,N_t^2}{r+2N_t+N_t^2/\delta}.
-$$ {#eq-Nt}
-
-f) Find the realistic steady states of the model in @eq-Nt for the case that
-$$\frac{c}{1-s}-2\geq \sqrt{\frac{4r}{\delta}}.$$
-
-g) Draw a cobweb diagram to illustrate the stability of the steady states in the case that there
-are two positive steady states. Label key features of the curves.
-
-h) What type of bifurcation occurs when there is equality in the condition in part f)?
-
-:::
-
-#### Discrete time model
-::: {#exr-1.1}
-Consider the discrete time model
-$$
+\tag{2.21}\]</span></span></p></li>
+<li><p>Find the realistic steady states of the model in <a href="#eq-Nt" class="quarto-xref">Eq.&nbsp;<span>2.21</span></a> for the case that <span class="math display">\[\frac{c}{1-s}-2\geq \sqrt{\frac{4r}{\delta}}.\]</span></p></li>
+<li><p>Draw a cobweb diagram to illustrate the stability of the steady states in the case that there are two positive steady states. Label key features of the curves.</p></li>
+<li><p>What type of bifurcation occurs when there is equality in the condition in part f)?</p></li>
+</ol>
+</div>
+</section>
+<section id="another-model" class="level4">
+<h4 class="anchored" data-anchor-id="another-model">Another model</h4>
+<div id="exr-1.1" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 2.5</strong></span> Consider the discrete time model <span id="eq-ex_discrete_time"><span class="math display">\[
 N_{t+1}=\frac{rN_t}{1+(N_t/K)^b}
-$$ {#eq-ex_discrete_time}
-where $r$, $b$ and $K$ are positive parameters with $b>1$. Show that
-the model has two steady states. Investigate the stability of the
-extinction steady state. Show that the non-trivial (non-zero) steady state can lose
-stability through a period doubling bifurcation at $b=2r/(r-1)$, or a
-tangent bifurcation at $r=1$. Show also that, after a sufficient
-amount of time,
-$$
-\frac{Kr^2b^{b-1}(b-1)^{(b-1)/b}}{b^b+r^b(b-1)^{b-1}}\leq 
-N_t\leq \frac{rK}{b}(b-1)^{(b-1)/b}.
-$$ {#eq-ex_discrete_time_steady_state}
-:::
-
-----></p>
+\tag{2.22}\]</span></span> where <span class="math inline">\(r\)</span>, <span class="math inline">\(b\)</span> and <span class="math inline">\(K\)</span> are positive parameters with <span class="math inline">\(b&gt;1\)</span>. Show that the model has two steady states. Investigate the stability of the extinction steady state. Show that the non-trivial (non-zero) steady state can lose stability through a period doubling bifurcation at <span class="math inline">\(b=2r/(r-1)\)</span>, or a tangent bifurcation at <span class="math inline">\(r=1\)</span>.</p>
+</div>
 
 
 </section>
