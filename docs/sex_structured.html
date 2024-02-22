@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Work in progress">
+
+<title>Mathematical Ecology and Epidemiology - 3&nbsp; Sex-structured population models</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./discrete_time.html" rel="prev">
+<link href="./virus.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Mathematical Ecology and Epidemiology - 3&nbsp; Sex-structured population models">
+<meta property="og:description" content="Work in progress">
+<meta property="og:site_name" content="Mathematical Ecology and Epidemiology">
+<meta name="twitter:title" content="Mathematical Ecology and Epidemiology - 3&nbsp; Sex-structured population models">
+<meta name="twitter:description" content="Work in progress">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating slimcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sex_structured.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Sex-structured population models</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Mathematical Ecology and Epidemiology</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://maths.york.ac.uk/moodle/course/view.php?id=2656" title="Moodle page" class="quarto-navigation-tool px-1" aria-label="Moodle page"><i class="bi bi-mortarboard-fill"></i></a>
+    <a href="https://forms.gle/naVqtYVGNqWmVDgRA" title="Submit a correction" class="quarto-navigation-tool px-1" aria-label="Submit a correction"><i class="bi bi-bug-fill"></i></a>
+    <a href="https://github.com/gustavdelius/M3E-2024/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./continuous_time.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Continuous-time population models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./discrete_time.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Discrete-time population models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sex_structured.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Sex-structured population models</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#symmetric-model" id="toc-symmetric-model" class="nav-link active" data-scroll-target="#symmetric-model"><span class="header-section-number">3.1</span> Symmetric model</a></li>
+  <li><a href="#female-limited-reproduction" id="toc-female-limited-reproduction" class="nav-link" data-scroll-target="#female-limited-reproduction"><span class="header-section-number">3.2</span> Female-limited reproduction</a></li>
+  <li><a href="#harmonic-mean-model" id="toc-harmonic-mean-model" class="nav-link" data-scroll-target="#harmonic-mean-model"><span class="header-section-number">3.3</span> Harmonic mean model</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">3.4</span> Exercises</a>
+  <ul>
+  <li><a href="#geometric-mean-sex-structured-model" id="toc-geometric-mean-sex-structured-model" class="nav-link" data-scroll-target="#geometric-mean-sex-structured-model">* Geometric mean sex-structured model</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/gustavdelius/M3E-2024/edit/main/sex_structured.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Sex-structured population models</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Up to this point we have completely ignored that there are differences between the individuals making up a population. So we ignored all structure within a population. We will now start to remedy this. In this chapter we will start with the simplest possible structure by splitting the population into males and females. Keeping track of both the abundance of males and of females separately makes sense because</p>
+<ul>
+<li><p>birth and death rates depend on the sex</p></li>
+<li><p>both a male and a female are needed to produce offspring</p></li>
+</ul>
+<p>So in this chapter instead of just looking at a single function <span class="math inline">\(N(t)\)</span> giving the total population number, we will look at two functions <span class="math inline">\(M(t)\)</span> and <span class="math inline">\(F(t)\)</span> giving the number of males and females respectively. We again describe them by differential equations that capture that the numbers can decrease due to deaths and increase due to births. <span id="eq-ss1"><span class="math display">\[
+\begin{split}
+\frac{dF}{dt} &amp;= -\mu_F F + b_F\,\varphi(F,M)\\
+\frac{dM}{dt} &amp;= -\mu_M M + b_M\,\varphi(F,M).
+\end{split}
+\tag{3.1}\]</span></span> Here <span class="math inline">\(\mu_F\)</span> and <span class="math inline">\(\mu_M\)</span> are the death rates of females and males respectively. The rate of births now depends both on the number of females and the number of males, because both males and females are needed to produce offspring. We formulate that dependence on the number of females and the number of males as a function <span class="math inline">\(\varphi(F,M)\)</span>. The functional dependence of the rate on <span class="math inline">\(F\)</span> and <span class="math inline">\(M\)</span> is the same for births of females and for births of males, but the extra factors <span class="math inline">\(b_F\)</span> and <span class="math inline">\(b_M\)</span> account for the differences between female and male birth rates.</p>
+<section id="symmetric-model" class="level2 page-columns page-full" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="symmetric-model"><span class="header-section-number">3.1</span> Symmetric model</h2>
+<p>We first consider the simpler situation where birth and mortality rates are the same for males and females: <span id="eq-ss2"><span class="math display">\[
+\mu_F=\mu_M=\mu, ~~~b_F=b_M=b.
+\tag{3.2}\]</span></span> In this case we can get a simple ODE for the difference <span class="math inline">\(F-M\)</span> between the number of females and males: <span id="eq-ss3"><span class="math display">\[
+\frac{d(F-M)}{dt}=-\mu(F-M).
+\tag{3.3}\]</span></span> This equation has the solution <span id="eq-ss4"><span class="math display">\[
+F(t)-M(t)=(F(0)-M(0))e^{-\mu t}.
+\tag{3.4}\]</span></span> This means that the difference decreases exponentially over time. In particular, if we start with equal number females and males then the they will stay equal for all times.</p>
+<p>To make further progress we need to make a concrete choice for the function <span class="math inline">\(\varphi(F,M)\)</span>. We will consider the simplest possible choice <span id="eq-ss5"><span class="math display">\[
+\varphi(F,M)=F\,M.
+\tag{3.5}\]</span></span> This choice is motivated by the fact that both a male and a female is needed to produce offspring. So the rate of births should increase if there are more females but also when there are more males. The simplest way to capture this is to multiply <span class="math inline">\(F\)</span> and <span class="math inline">\(M\)</span>.</p>
+<p>A simple thing to note is that if <span class="math inline">\(M(0)=0\)</span> then <span class="math inline">\(M(t)=0\)</span> for all times. Then the number of females satisfies <span id="eq-ss6"><span class="math display">\[
+\frac{dF}{dt}=-\mu F.
+\tag{3.6}\]</span></span> This has the solution <span id="eq-ss7"><span class="math display">\[
+F(t)=F(0)e^{-\mu t}.
+\tag{3.7}\]</span></span> So if there are no males, the females have to die out as well.</p>
+<p>We noted above that if initially <span class="math inline">\(F(0)=M(0)\)</span> then <span class="math inline">\(F(t)=M(t)\)</span> for all times. In that case the number of females satisfies <span id="eq-ss8"><span class="math display">\[
+\frac{dF}{dt}=-\mu F+bF^2.
+\tag{3.8}\]</span></span> This is illustrated in <a href="#fig-ss1" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>.</p>
+<div id="cell-fig-ss1" class="cell page-columns page-full" data-execution_count="1">
+<div class="cell-output cell-output-display page-columns page-full">
+<div id="fig-ss1" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" alt="Quadratically increasing growth rate.">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-ss1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="sex_structured_files/figure-html/fig-ss1-output-1.png" alt="Quadratically increasing growth rate." width="540" height="389" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-ss1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3.1: Quadratically increasing growth rate.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Note that the non-zero fixed point at <span class="math inline">\(F=\mu/b\)</span> is unstable. If <span class="math inline">\(F(0)&lt;\mu/b\)</span> then the females and hence the males go extinct. If <span class="math inline">\(F(0)&gt;\mu/b\)</span> then the females and hence the males grow rapidly. In fact, they grow so rapidly that the population size becomes infinite in finite time, as we can see when we solve the ODE.</p>
+<p>We can solve <a href="#eq-ss8" class="quarto-xref">Eq.&nbsp;<span>3.8</span></a> by separation of variables: <span class="math display">\[
+\int\frac{dF}{-\mu F+bF^2}=\int dt.
+\]</span> We could do the integral on the left hand side by partial fractions. But to see the problem of the population size becoming infinite in finite time it is sufficient to consider the case of <span class="math inline">\(F&gt;&gt;1\)</span> where we can neglect the term <span class="math inline">\(-\mu F\)</span> in the denominator. Then we get <span class="math display">\[
+\int_{F(0)}^{F(t)}\frac{dF}{F^2}=\frac{1}{F(0)}-\frac{1}{F(t)}=\int_0^t b\, d\tilde{t}=bt.
+\]</span> and hence <span id="eq-ss9"><span class="math display">\[
+F(t)=\frac{1}{1/F(0)-bt}.
+\tag{3.9}\]</span></span> So the population size becomes infinite at time <span class="math inline">\(t=1/(bF(0))\)</span>. So clearly this model is not ecologically sensible.</p>
+</section>
+<section id="female-limited-reproduction" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="female-limited-reproduction"><span class="header-section-number">3.2</span> Female-limited reproduction</h2>
+<p>We will now consider a model where the birth rate depends only on the number of females: <span id="eq-ss10"><span class="math display">\[
+\varphi(F,M)=F.
+\tag{3.10}\]</span></span> This is clearly a strong simplification but is reasonable for populations where there are always more than enough males to fertilize all females.</p>
+<p>With this simplification, the ODE for F becomes <span id="eq-ss11"><span class="math display">\[
+\frac{dF}{dt}=-\mu_F F+b_F F=(-\mu_F+b_F)F.
+\tag{3.11}\]</span></span> This has the solution <span id="eq-ss12"><span class="math display">\[
+F(t)=F(0)e^{(-\mu_F+b_F)t}.
+\tag{3.12}\]</span></span> We can now use this in the equation for M: <span id="eq-ss13"><span class="math display">\[
+\frac{dM}{dt}=-\mu_M M+b_M F=-\mu_M M+b_M F_0\,e^{(-\mu_F+b_F)t}.
+\tag{3.13}\]</span></span> (We have used <span class="math inline">\(F(0)=F_0\)</span> to make the equation more readable.) This is a first-order linear ODE with time-dependent inhomogeneity. We can solve it by the method of integrating factors. We first rewrite it in the form <span id="eq-ss14"><span class="math display">\[
+\frac{dM}{dt}+\mu_M M=b_M F_0\,e^{(-\mu_F+b_F)t}
+\tag{3.14}\]</span></span> and then observe that the left-hand side is proportional to a total derivative: <span id="eq-ss15"><span class="math display">\[
+\frac{dM}{dt}+\mu_M M=\frac{d}{dt}(e^{\mu_M t}M)e^{-\mu_M t}
+\tag{3.15}\]</span></span> Thus after multiplying both sides by <span class="math inline">\(e^{\mu_M t}\)</span> we get <span id="eq-ss16"><span class="math display">\[
+\frac{d}{dt}(e^{\mu_M t}M)=b_M F_0\,e^{(\mu_M-\mu_F+b_F)t}.
+\tag{3.16}\]</span></span> We can now integrate both sides to get <span id="eq-ss17"><span class="math display">\[
+e^{\mu_M t}M(t)-e^{\mu_M t}M_0=\frac{b_M F_0}{\mu_M-\mu_F+b_F}\left(e^{(\mu_M-\mu_F+b_F)t}-1\right).
+\tag{3.17}\]</span></span> This can be solved for <span class="math inline">\(M(t)\)</span>: <span id="eq-ss18"><span class="math display">\[
+M(t)=M_0e^{-\mu_M t}+\frac{b_M F_0}{\mu_M-\mu_F+b_F}\left(e^{(-\mu_F+b_F)t}-e^{-\mu_M t}\right).
+\tag{3.18}\]</span></span> We have been able to fully solve this model. At this stage it is worth checking that the dependence of the solution on the parameters and on the initial conditions is reasonable.</p>
+<p>Next let us take a look at the sex ratio as <span class="math inline">\(t\to\infty\)</span>. We find <span id="eq-ss19"><span class="math display">\[\begin{split}
+s=\lim_{t\to\infty}\frac{M(t)}{F(t)}
+&amp;=\lim_{t\to\infty}\frac{M_0e^{-\mu_M t}+\frac{b_M F_0}{\mu_M-\mu_F+b_F}\left(e^{(-\mu_F+b_F)t}-e^{-\mu_M t}\right)}{F_0e^{(-\mu_F+b_F)t}}\\
+&amp;=\frac{b_M}{b_F-\mu_F+\mu_M}.
+\end{split} \tag{3.19}\]</span></span></p>
+<p>Just for fun let us check what this model would predict for the sex ratio in the population of the US, using data about births and deaths from 1992. <span id="eq-ss20"><span class="math display">\[
+\begin{split}
+\mu_F&amp;=807/100,000/\text{year}, ~~~\mu_M=902/100,000/\text{year},\\
+b_F&amp;=1480/100,000/\text{year}, ~~~b_M=1550/100,000/\text{year}.
+\end{split}
+\tag{3.20}\]</span></span> Substituting these values into <a href="#eq-ss19" class="quarto-xref">Eq.&nbsp;<span>3.19</span></a> we get <span class="math inline">\(s \approx 0.9841\)</span>. The actual ratio in the US in 1992 was <span class="math inline">\(0.953\)</span>. Of course this is not to be taken seriously. To start with, human populations are not solely female-limited. But there are many other criticisms that can be made of this model when applied to human populations.</p>
+</section>
+<section id="harmonic-mean-model" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="harmonic-mean-model"><span class="header-section-number">3.3</span> Harmonic mean model</h2>
+<p>We will now consider a model where the birth rate depends on both the number of males and the number of females. We choose to set <span class="math inline">\(\varphi(F,M)\)</span> to a weighted average of <span class="math inline">\(F\)</span> and <span class="math inline">\(M\)</span>: <span id="eq-ss21"><span class="math display">\[
+\varphi(F,M)=D\,M+(1-D)F
+\tag{3.21}\]</span></span> with some suitably chosen weighting factor <span class="math inline">\(D\)</span>. We want to keep the feature that when there is an overabundance of males, then the birth rate is limited mostly by the number of females and vice versa. So we choose <span class="math inline">\(D=M/(F+M)\)</span>, which is the relative abundance of males. This makes <span class="math inline">\(1-D=F/(F+M)\)</span>, which is the relative abundance of females. This gives <span id="eq-ss22"><span class="math display">\[
+\varphi(F,M)=\frac{M}{F+M}F+\frac{F}{F+M}M=\frac{2FM}{F+M}.
+\tag{3.22}\]</span></span> We can now use this in the ODEs for <span class="math inline">\(F\)</span> and <span class="math inline">\(M\)</span>: <span id="eq-ss23"><span class="math display">\[
+\begin{split}
+\frac{dF}{dt} &amp;= -\mu_F F+b_F\frac{2FM}{F+M},\\
+\frac{dM}{dt} &amp;= -\mu_M M+b_M\frac{2FM}{F+M}.
+\end{split}
+\tag{3.23}\]</span></span> We will not try to solve this coupled system of nonlinear ODEs. Instead we will directly look at the long-term sex ratio. We can derive an ODE for the sex ration <span class="math inline">\(M/F\)</span>: <span id="eq-ss24"><span class="math display">\[
+\frac{d}{dt}\frac{M}{F}=\frac{\frac{dM}{dt}F-M\frac{dF}{dt}}{F^2}.
+\tag{3.24}\]</span></span> Because we are only interested in the long-term behavior we look at the fixed point of this equation, hence we set the left-hand side to zero. We then get <span id="eq-ss25"><span class="math display">\[
+\frac{dM}{dt}F-M\frac{dF}{dt}=0.
+\tag{3.25}\]</span></span> We can now use the ODEs for <span class="math inline">\(F\)</span> and <span class="math inline">\(M\)</span> to get <span id="eq-ss26"><span class="math display">\[
+\frac{dM}{dt}F-M\frac{dF}{dt}=\left(-\mu_M M+b_M\frac{2FM}{F+M}\right)F-M\left(-\mu_F F+b_F\frac{2FM}{F+M}\right)=0.
+\tag{3.26}\]</span></span> We multiply by <span class="math inline">\(F+M\)</span> and divide by <span class="math inline">\(FM\)</span> to get <span id="eq-ss27"><span class="math display">\[
+-\mu_M(F+M)+2b_MF+\mu_F(F+M)-2b_FM=0.
+\tag{3.27}\]</span></span> Collecting terms proportional to <span class="math inline">\(F\)</span> and <span class="math inline">\(M\)</span> we get <span id="eq-ss28"><span class="math display">\[
+(-\mu_M+2b_M+\mu_F)F=(\mu_M-\mu_F+2b_F)M.
+\tag{3.28}\]</span></span> We can now solve this equation for the asymptotic sex ratio <span id="eq-ss30"><span class="math display">\[
+s=\lim_{t\to\infty}\frac{M(t)}{F(t)}=\frac{\mu_M-\mu_F+2b_F}{-\mu_M+2b_M+\mu_F}.
+\tag{3.29}\]</span></span></p>
+<p>Even though the sex ratio approaches a fixed point as <span class="math inline">\(t\to\infty\)</span>, the population numbers themselves do not. Once the sex ratio has settled to the value <span class="math inline">\(s\)</span>, we have <span class="math inline">\(M=sF\)</span> and we can use this to get a single ODE for <span class="math inline">\(F\)</span>: <span id="eq-ss31"><span class="math display">\[
+\begin{split}
+\frac{dF}{dt}&amp;=-\mu_F F+b_F\frac{2MF}{F+M}\\
+&amp;=-\mu_F F+\frac{2s}{s+1}b_FF.
+\end{split}
+\tag{3.30}\]</span></span> This is a linear equation and has the solution <span id="eq-ss32"><span class="math display">\[
+F(t)=F_0e^{\left(-\mu_F+\frac{2s}{s+1}b_F\right)t}.
+\tag{3.31}\]</span></span> Similarly we obtain <span id="eq-ss33"><span class="math display">\[
+M(t)=M_0e^{(-\mu_M+\frac{2}{s+1}b_M)t}.
+\tag{3.32}\]</span></span> So we have an exponential growth model for both <span class="math inline">\(F\)</span> and <span class="math inline">\(M\)</span>, but the exponent has a modified birth rate that takes the sex ratio into account.</p>
+<p>To arrive at more realistic models we should introduce a carrying capacity into the model.</p>
+</section>
+<section id="exercises" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="exercises"><span class="header-section-number">3.4</span> Exercises</h2>
+<section id="geometric-mean-sex-structured-model" class="level4">
+<h4 class="anchored" data-anchor-id="geometric-mean-sex-structured-model">* Geometric mean sex-structured model</h4>
+<div id="exr-ss1" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 3.1</strong></span> Consider the sex-structured population model <span class="math display">\[
+\frac{dF}{dt}=-\mu_F F+b_F\phi(F,M), ~~~\frac{dM}{dt}=-\mu_M M+b_M\phi(F,M),
+\]</span> where <span class="math inline">\(F(t)\)</span> denotes the number of females and <span class="math inline">\(M(t)\)</span> the number of males and <span class="math inline">\(\mu_F,\mu_M,b_F,b_M\)</span> are positive constants. Make the choice <span class="math display">\[
+\phi(F,N)=\sqrt{FM}.
+\]</span> Determine the asymptotic sex ratio <span class="math display">\[
+s=\lim_{t\to\infty}\frac{M(t)}{F(t)}?
+\]</span> What is the numerical value of s when <span class="math inline">\(\mu_F=2,\mu_M=1,b_F=1/2,b_M=3/2\)</span> per year?</p>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./discrete_time.html" class="pagination-link  aria-label=" &lt;span="" population="" models&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Discrete-time population models</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gustavdelius/M3E-2024/edit/main/sex_structured.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
