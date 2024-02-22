@@ -67,19 +67,19 @@ By moving the logistic factor inside the exponential, the Ricker model prevents 
 
 The Beverton-Holt model is another modification of the Verhulst model which prevents negative population numbers. It is given by
 $$
-N_{t+1} = \frac{R N_t}{1 - \frac{R-1}{K}N_t}.
+N_{t+1} = \frac{R N_t}{1 + \frac{R-1}{K}N_t}.
 $$ {#eq-beverton_holt}
 This has been a very influential model in fisheries science. On the face of it the model does not look very similar to the logistic model, but we will see the relationship when we solve the model. The Beverton-Holt model is one of the rare cases where a non-linear model can be solved exactly. The trick is to make a change of variables from $N_t$ to $u_t = 1/N_t$. Then we have
 $$
-u_{t+1} = \frac{1}{N_{t+1}} = \frac{1 - \frac{R-1}{K}N_t}{R N_t} = \frac{u_t}{R} - \frac{R-1}{R K}.
+u_{t+1} = \frac{1}{N_{t+1}} = \frac{1 + \frac{R-1}{K}N_t}{R N_t} = \frac{u_t}{R} + \frac{R-1}{R K}.
 $$ {#eq-beverton_holt_u}
 This is a linear equation for $u_t$, and linear equations are easy to solve. The easiest way to proceed is to look at the first few terms of the sequence $u_t$ and guess the general form of the solution. We find
 $$\begin{split}
-u_1 &= \frac{u_0}{R} - \frac{R-1}{R K},\\
-u_2 &= \frac{u_0}{R^2} - \frac{R-1}{R K}\left(1 + \frac{1}{R}\right),\\
-u_3 &= \frac{u_0}{R^3} - \frac{R-1}{R K}\left(1 + \frac{1}{R} + \frac{1}{R^2}\right),\\
+u_1 &= \frac{u_0}{R} + \frac{R-1}{R K},\\
+u_2 &= \frac{u_0}{R^2} + \frac{R-1}{R K}\left(1 + \frac{1}{R}\right),\\
+u_3 &= \frac{u_0}{R^3} + \frac{R-1}{R K}\left(1 + \frac{1}{R} + \frac{1}{R^2}\right),\\
 &\vdots\\
-u_t &= \frac{u_0}{R^t} - \frac{R-1}{R K}\left(1 + \frac{1}{R} + \frac{1}{R^2} + \ldots + \frac{1}{R^{t-1}}\right).
+u_t &= \frac{u_0}{R^t} + \frac{R-1}{R K}\left(1 + \frac{1}{R} + \frac{1}{R^2} + \ldots + \frac{1}{R^{t-1}}\right).
 \end{split}
 $$ {#eq-beverton_holt_u_solution}
 The sum in the second term is a geometric series. We know the general formula for a geometric series:
@@ -89,7 +89,7 @@ $$ {#eq-geometric_series}
 
 We can use this with $x=1/R$ to sum terms in the second term. We find
 $$
-u_t = \frac{u_0}{R^t} - \frac{R-1}{R K}\frac{1 - (1/R)^t}{1 - 1/R}.
+u_t = \frac{u_0}{R^t} + \frac{R-1}{R K}\frac{1 - (1/R)^t}{1 - 1/R}.
 $$
 We simplify this a bit and bring everything on the same denominator.
 $$
@@ -576,7 +576,7 @@ and investigate their stability. Do this both analytically and by drawing cobweb
 ::: {#exr-beverton_holt}
 Find the fixed points in the Beverton-Holt model
 $$
-N_{t+1} = \frac{R N_t}{1 - \frac{R-1}{K}N_t}.
+N_{t+1} = \frac{R N_t}{1 + \frac{R-1}{K}N_t}.
 $$ {#eq-ex_beverton_holt}
 and investigate their stability. Do this both analytically and by drawing cobweb diagrams.
 :::
