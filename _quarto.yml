@@ -37,6 +37,7 @@ book:
     - continuous_time.qmd
     - discrete_time.qmd
     - sex_structured.qmd
+    - age_structured.qmd
 
 bibliography: references.bib
 

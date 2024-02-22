@@ -6,11 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Gustav Delius">
-<meta name="dcterms.date" content="2024-02-22">
 <meta name="description" content="Work in progress">
 
-<title>Mathematical Ecology and Epidemiology</title>
+<title>Mathematical Ecology and Epidemiology - 4&nbsp; Age-structured population model</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./continuous_time.html" rel="next">
+<link href="./sex_structured.html" rel="prev">
 <link href="./virus.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -72,11 +70,40 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta property="og:title" content="Mathematical Ecology and Epidemiology">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Mathematical Ecology and Epidemiology - 4&nbsp; Age-structured population model">
 <meta property="og:description" content="Work in progress">
 <meta property="og:site_name" content="Mathematical Ecology and Epidemiology">
-<meta name="twitter:title" content="Mathematical Ecology and Epidemiology">
+<meta name="twitter:title" content="Mathematical Ecology and Epidemiology - 4&nbsp; Age-structured population model">
 <meta name="twitter:description" content="Work in progress">
 <meta name="twitter:card" content="summary">
 </head>
@@ -90,7 +117,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Welcome</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./age_structured.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Age-structured population model</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -122,7 +149,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Welcome</span></a>
   </div>
 </li>
@@ -146,7 +173,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./age_structured.html" class="sidebar-item-text sidebar-link">
+  <a href="./age_structured.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Age-structured population model</span></span></a>
   </div>
 </li>
@@ -160,48 +187,28 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome</a></li>
+  <li><a href="#continuous-time-model" id="toc-continuous-time-model" class="nav-link active" data-scroll-target="#continuous-time-model"><span class="header-section-number">4.1</span> Continuous time model</a></li>
+  <li><a href="#discrete-time-model" id="toc-discrete-time-model" class="nav-link" data-scroll-target="#discrete-time-model"><span class="header-section-number">4.2</span> Discrete time model</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">4.3</span> Exercises</a>
+  <ul>
+  <li><a href="#age-independent-rates" id="toc-age-independent-rates" class="nav-link" data-scroll-target="#age-independent-rates">* Age-independent rates</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/gustavdelius/M3E-2024/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/gustavdelius/M3E-2024/edit/main/age_structured.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Mathematical Ecology and Epidemiology</h1>
-<p class="subtitle lead">Lecture notes for Spring 2024</p>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Age-structured population model</span></h1>
 </div>
 
-<div>
-  <div class="description">
-    Work in progress
-  </div>
-</div>
 
-<div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Author</div>
-  <div class="quarto-title-meta-heading">Affiliation</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author">Gustav Delius <a href="mailto:gustav.delius@york.ac.uk" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            Department of Mathematics, University of York
-          </p>
-      </div>
-  </div>
 
 <div class="quarto-title-meta">
 
-      
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">February 22, 2024</p>
-    </div>
-  </div>
+    
   
     
   </div>
@@ -211,16 +218,71 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="welcome" class="level1 unnumbered">
-<h1 class="unnumbered">Welcome</h1>
-<p>This site will contain the lecture notes and problem sheets for the Ecology and Epidemiology part of the “Mathematical Ecology, Epidemiology and Evolution” module as taught at the University of York in the Spring of 2024. The mathematics used in Mathematical Ecology and in Mathematical Epidemiology are quite similar, whereas the mathematics used in Mathematical Evolution has a different flair and that part is taught by a different lecturer, George Constable.</p>
-<p>The Mathematical Ecology and Epidemiology part is taught in three two-week blocks, with each block consisting of 6 lectures, one problem sheet, one examples class and one small-group seminar. Between each block there will be a two-week block of Mathematical Evolution.</p>
-<p>The notes will be created after each lecture and will continue to be periodically revised. Whenever you spot something that is not quite right, please email me at <a href="mailto:gustav.delius@york.ac.uk">gustav.delius@york.ac.uk</a> or submit your correction in the correction form at <a href="https://forms.gle/w17c19vWnM7wpLpz7" class="uri">https://forms.gle/w17c19vWnM7wpLpz7</a>.</p>
-<!-- ::: {.content-visible unless-format="pdf"} -->
-<!-- If you want to print these notes you should download the [pdf version](Waves-and-Fluids.pdf). -->
-<!-- ::: -->
+<section id="continuous-time-model" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="continuous-time-model"><span class="header-section-number">4.1</span> Continuous time model</h2>
+<p>In the previous chapter we structured the population by a discrete variable, the sex of the individuals. This gave rise to a system of coupled ODEs, one ODE for each class of individuals. In this section we will structure the population by a continuous variable, the age of the individuals. This will give rise to a partial differential equation (PDE) for the age-dependent population density. We will solve this PDE and study the long-term behaviour of the population and its age distribution.</p>
+<p>So instead of describing the population just by the total number of individuals <span class="math inline">\(N(t)\)</span>, we will describe it by the density <span class="math inline">\(n(t,a)\)</span> of individuals at age <span class="math inline">\(a\)</span>. The total number <span class="math inline">\(N(t)\)</span> of individuals in the population is then given by the integral of <span class="math inline">\(n(at,a)\)</span> over all ages. More generally, the total number of individuals in the population that are between age <span class="math inline">\(a_1\)</span> and <span class="math inline">\(a_2\)</span> is given by the integral of <span class="math inline">\(n(t,a)\)</span> over the interval <span class="math inline">\([a_1,a_2]\)</span>. You are familiar with the concept of density from probability theory, where continuous random variables are described by a probability density rather than a probability. You may also be familiar with the concept from physics, where the density of a material describes how the mass is distributed over space. Here, the density <span class="math inline">\(n(t,a)\)</span> describes how the individuals are distributed over ages.</p>
+<p>To derive the PDE for the age-structured population density, we consider how the density changes over an infinitesimal time interval <span class="math inline">\(\delta t\)</span> due to deaths: <span id="eq-a1"><span class="math display">\[
+n(t+\delta t, a+\delta t) = n(t,a) - \mu(a) n(t,a) \delta t.
+\tag{4.1}\]</span></span> Note how we had to take into account that over the time interval <span class="math inline">\(\delta t\)</span> the age of the individuals has increased by <span class="math inline">\(\delta t\)</span>. We now Taylor-expand the left-hand side around <span class="math inline">\(t\)</span> and <span class="math inline">\(a\)</span>: <span id="eq-a2"><span class="math display">\[
+n(t+\delta t, a+\delta t) = n(t,a) + \frac{\partial n}{\partial t} \delta t + \frac{\partial n}{\partial a} \delta t + \mathcal{O}(\delta t^2).
+\tag{4.2}\]</span></span> Cancelling the <span class="math inline">\(n(t,a)\)</span> terms on both sides and dividing by <span class="math inline">\(\delta t\)</span> gives us the PDE for the age-structured population density: <span id="eq-a3"><span class="math display">\[
+\frac{\partial n}{\partial t} + \frac{\partial n}{\partial a} = -\mu(a) n.
+\tag{4.3}\]</span></span></p>
+<p>This equation captures the effect of individuals aging and dying, but it does not capture how they are born. Individuals are born with age <span class="math inline">\(0\)</span>. These offspring can be produced by parents of any ages, but with an age-dependent rate <span class="math inline">\(b(a)\)</span>. This gives <span id="eq-a4"><span class="math display">\[
+n(t,0) = \int_0^\infty b(a) n(t,a) \, da.
+\tag{4.4}\]</span></span> This is a boundary condition for the PDE. It says that the density of individuals at age <span class="math inline">\(0\)</span> is given by the total number of offspring produced by the individuals of all ages.</p>
+<p>We will now solve the PDE for the age-structured population density by the method of separation of variables. We will make the Ansatz <span class="math inline">\(n(t,a) = f(t) r(a)\)</span>. You have seen this trick for finding solutions of linear, homogeneous PDEs in other modules, like Waves and Fluids for example. Substituting this Ansatz into the PDE gives <span id="eq-a5"><span class="math display">\[
+f'(t) r(a) + f(t) r'(a) = -\mu(a) f(t) r(a).
+\tag{4.5}\]</span></span> Dividing by <span class="math inline">\(f(t) r(a)\)</span> gives <span id="eq-a6"><span class="math display">\[
+\frac{f'(t)}{f(t)} + \frac{r'(a)}{r(a)} = -\mu(a).
+\tag{4.6}\]</span></span> We now collect all terms that depend on <span class="math inline">\(t\)</span> on the left-hand side and all terms that depend on <span class="math inline">\(a\)</span> on the right-hand side: <span id="eq-a7"><span class="math display">\[
+\frac{f'(t)}{f(t)} = - \frac{r'(a)}{r(a)} - \mu(a).
+\tag{4.7}\]</span></span> Because the left-hand side is independent of <span class="math inline">\(a\)</span> and the right-hand side is independent of <span class="math inline">\(t\)</span>, both sides must be equal to a constant. We introduce the separation constant <span class="math inline">\(\gamma\)</span> and write <span id="eq-a8"><span class="math display">\[
+\frac{f'(t)}{f(t)} = \gamma, \quad \frac{r'(a)}{r(a)} = -\gamma - \mu(a).
+\tag{4.8}\]</span></span> These are now linear ODEs and hence easy to solve. The first ODE has the solution <span id="eq-a9"><span class="math display">\[
+f(t) = f(0) e^{\gamma t}
+\tag{4.9}\]</span></span> and the second ODE has the solution <span id="eq-a10"><span class="math display">\[
+r(a) = r(0) \exp\left(-\int_0^a \mu(a') \, da'-\gamma a\right).
+\tag{4.10}\]</span></span></p>
+<p>So altogether we have the population density <span id="eq-a11"><span class="math display">\[
+n(t,a) = n(0,0) e^{\gamma t} \exp\left(-\int_0^a \mu(a') \, da'-\gamma a\right),
+\tag{4.11}\]</span></span> where <span class="math inline">\(n(0,0)=f(0)r(0)\)</span> is the initial density of individuals at age <span class="math inline">\(0\)</span>.</p>
+<p>So far we don’t yet know the value of the separation constant <span class="math inline">\(\gamma\)</span>. This will be determined by the boundary condition. If we substitute the solution <a href="#eq-a11" class="quarto-xref">Eq.&nbsp;<span>4.11</span></a> into the boundary condition <a href="#eq-a4" class="quarto-xref">Eq.&nbsp;<span>4.4</span></a>, we get <span id="eq-a12"><span class="math display">\[
+n(0,0)e^{\gamma t} = \int_0^\infty b(a) n(0,0)e^{\gamma t} \exp\left(-\int_0^a \mu(a') \, da'-\gamma a\right)\, da.
+\tag{4.12}\]</span></span> We can cancel the common factor <span class="math inline">\(n(0,0)e^{\gamma t}\)</span> on both sides to get the condition <span class="math display">\[
+1= \int_0^\infty b(a) \exp\left(-\int_0^a \mu(a') \, da'-\gamma a\right) \, da = \phi(\gamma).
+\]</span> We have introduced the shorthand notation <span class="math inline">\(\phi(\gamma)\)</span> for the integral on the right-hand side. The condition <a href="#eq-a12" class="quarto-xref">Eq.&nbsp;<span>4.12</span></a> is a transcendental equation for <span class="math inline">\(\gamma\)</span>. We cannot solve it analytically for <span class="math inline">\(\gamma\)</span>. But we observe that <span class="math inline">\(\phi\)</span> is a monotonically decreasing function of <span class="math inline">\(\gamma\)</span>. This observation alone allows us to make a statement about the sign of <span class="math inline">\(\gamma\)</span>. According to <a href="#eq-a9" class="quarto-xref">Eq.&nbsp;<span>4.9</span></a> the sign of <span class="math inline">\(\gamma\)</span> determines whether the total population grows expnentially or goes extinct.</p>
+<p>If <span class="math inline">\(\gamma\)</span> is positive, then the monotonicity of <span class="math inline">\(\phi\)</span> tells us that <span class="math inline">\(\phi(0) &gt; \phi(\gamma)  = 1\)</span> and vice versa. Conversely, if <span class="math inline">\(\gamma\)</span> is negative, then <span class="math inline">\(\phi(0) &lt; \phi(\gamma) = 1\)</span> and vice versa. So to determine the sign of <span class="math inline">\(\gamma\)</span> we only have to look at the value of <span class="math display">\[
+\phi(0) = \int_0^\infty b(a) \exp\left(-\int_0^a \mu(a') \, da'\right)\, da.
+\]</span></p>
+<ul>
+<li><p>If <span class="math inline">\(\phi(0) &gt; 1\)</span>, then <span class="math inline">\(\gamma &gt; 0\)</span> and the population grows exponentially.</p></li>
+<li><p>If <span class="math inline">\(\phi(0) &lt; 1\)</span>, then <span class="math inline">\(\gamma &lt; 0\)</span> and the population goes extinct.</p></li>
+</ul>
+<p>This result actually has a very intuitive explanation. The factor <span class="math display">\[
+\exp\left(-\int_0^a \mu(a') \, da'\right)
+\]</span> is the probability that an individual survives up to age <span class="math inline">\(a\)</span>. Therefore <span class="math inline">\(\phi(0)\)</span> is the expected number of offspring produced by an individual during its lifetime. If this number is greater than <span class="math inline">\(1\)</span>, then the population grows exponentially. If it is less than <span class="math inline">\(1\)</span>, then the population goes extinct.</p>
+</section>
+<section id="discrete-time-model" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="discrete-time-model"><span class="header-section-number">4.2</span> Discrete time model</h2>
+<p>To come in week 5.</p>
+</section>
+<section id="exercises" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="exercises"><span class="header-section-number">4.3</span> Exercises</h2>
+<section id="age-independent-rates" class="level4">
+<h4 class="anchored" data-anchor-id="age-independent-rates">* Age-independent rates</h4>
+<div id="exr-age_structured" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4.1</strong></span> In the age structured population model of chapter 4, consider the case where <span class="math inline">\(b(a)=b\)</span> and <span class="math inline">\(\mu(a)=\mu\)</span> are both constant. Repeat all steps of the analysis but simplifying the expressions at each step by using the constant values for birth and death rates.</p>
+<ol type="1">
+<li>Solve the partial differential equation of the age-structured model by making the Ansatz <span class="math inline">\(n(t,a)=f(t)r(a)\)</span> and introducing the separation constant <span class="math inline">\(\gamma\)</span>.</li>
+<li>Use the boundary condition at <span class="math inline">\(a=0\)</span> to determine the value of <span class="math inline">\(\gamma\)</span>.</li>
+<li>Give the condition under which the population goes extinct and compare it to the condition in the exponential model from chapter 1.</li>
+</ol>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -631,11 +693,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./sex_structured.html" class="pagination-link  aria-label=" &lt;span="" population="" models&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Sex-structured population models</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./continuous_time.html" class="pagination-link" aria-label="<span class='chapter-number'>1</span>&nbsp; <span class='chapter-title'>Continuous-time population models</span>">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Continuous-time population models</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -643,4 +705,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gustavdelius/M3E-2024/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gustavdelius/M3E-2024/edit/main/age_structured.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>

@@ -3,7 +3,7 @@
 This site will contain the lecture notes and problem sheets for the Ecology and Epidemiology part of the "Mathematical Ecology, Epidemiology and Evolution" 
 module as taught at the University of York in the Spring of 2024. The mathematics used in Mathematical Ecology and in Mathematical Epidemiology are quite similar, whereas the mathematics used in Mathematical Evolution has a different flair and that part is taught by a different lecturer, George Constable.
 
-This part is taught in three two-week blocks, with each block consisting of 6 lectures, one problem sheet, one examples class and one small-group seminar. Between each block there will be a two-week block of Mathematical Evolution.
+The Mathematical Ecology and Epidemiology part is taught in three two-week blocks, with each block consisting of 6 lectures, one problem sheet, one examples class and one small-group seminar. Between each block there will be a two-week block of Mathematical Evolution.
 
 The notes will be created after each lecture and will continue to be periodically revised. Whenever you spot something that is not quite right, please email me at [gustav.delius\@york.ac.uk](mailto:gustav.delius@york.ac.uk) or submit your correction in the correction form at <https://forms.gle/w17c19vWnM7wpLpz7>.
 
