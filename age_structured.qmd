@@ -63,13 +63,13 @@ $$ {#eq-a12}
 We can cancel the common factor $n(0,0)e^{\gamma t}$ on both sides to get the condition
 $$
 1= \int_0^\infty b(a) \exp\left(-\int_0^a \mu(a') \, da'-\gamma a\right) \, da = \phi(\gamma).
-$$
+$$ {#eq-a13}
 We have introduced the shorthand notation $\phi(\gamma)$ for the integral on the right-hand side. The condition @eq-a12 is a transcendental equation for $\gamma$. We cannot solve it analytically for $\gamma$. But we observe that $\phi$ is a monotonically decreasing function of $\gamma$. This observation alone allows us to make a statement about the sign of $\gamma$. According to @eq-a9 the sign of $\gamma$ determines whether the total population grows expnentially or goes extinct.
 
 If $\gamma$ is positive, then the monotonicity of $\phi$ tells us that $\phi(0) > \phi(\gamma)  = 1$ and vice versa. Conversely, if $\gamma$ is negative, then $\phi(0) < \phi(\gamma) = 1$ and vice versa. So to determine the sign of $\gamma$ we only have to look at the value of
 $$
 \phi(0) = \int_0^\infty b(a) \exp\left(-\int_0^a \mu(a') \, da'\right)\, da.
-$$
+$$ {#eq-a14}
 
 * If $\phi(0) > 1$, then  $\gamma > 0$ and the population grows exponentially.
 
@@ -77,8 +77,8 @@ $$
 
 This result actually has a very intuitive explanation. The factor
 $$
-\exp\left(-\int_0^a \mu(a') \, da'\right)
-$$
+\exp\left(-\int_0^a \mu(a') \, da'\right)=:l(a)
+$$ {#eq-a15}
 is the probability that an individual survives up to age $a$. Therefore $\phi(0)$ is the expected number of offspring produced by an individual during its lifetime. If this number is greater than $1$, then the population grows exponentially. If it is less than $1$, then the population goes extinct.
 
 
@@ -90,11 +90,30 @@ To come in week 5.
 
 #### * Age-independent rates
 ::: {#exr-age_structured}
-In the age structured population model of chapter 4, consider the case where $b(a)=b$
+In the continuous-time age-structured population model consider the case where $b(a)=b$
 and $\mu(a)=\mu$ are both constant. Repeat all steps of the analysis but simplifying the expressions at each step by using the constant values for birth and death rates.
 
 1. Solve the partial differential
 equation of the age-structured model by making the Ansatz $n(t,a)=f(t)r(a)$ and introducing the separation constant $\gamma$.
 2. Use the boundary condition at $a=0$ to determine the value of $\gamma$.
 3. Give the condition under which the population goes extinct and compare it to the condition in the exponential model from chapter 1.
+:::
+
+#### o Harvestings an age-structured population
+::: {#exr-age_harvesting}
+Consider an age-structured fish population in which all individuals above the maturity age $a_m$ are reproducing, at a fixed rate, so that
+$$
+b(a) = \begin{cases}
+0 & \text{if } a < a_m, \\
+b & \text{if } a \geq a_m.
+\end{cases}
+$$ {#eq-age_harvesting_1}
+All fish at all ages experience a natural death rate $\mu_0$. In addition, fish above the maturity size are harvested at a constant rate $\mu_F$, so that
+$$
+\mu(a) = \begin{cases}
+\mu_0 & \text{if } a < a_m, \\
+\mu_0 + \mu_F & \text{if } a \geq a_m.
+\end{cases}
+$$ {#eq-age_harvesting_2}
+By calculating the expected number of offspring per individual, determine the limit on the harvesting rate $\mu_F$ that allows the population to be sustainable.
 :::

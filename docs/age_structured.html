@@ -192,6 +192,7 @@ window.Quarto = {
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">4.3</span> Exercises</a>
   <ul>
   <li><a href="#age-independent-rates" id="toc-age-independent-rates" class="nav-link" data-scroll-target="#age-independent-rates">* Age-independent rates</a></li>
+  <li><a href="#o-harvestings-an-age-structured-population" id="toc-o-harvestings-an-age-structured-population" class="nav-link" data-scroll-target="#o-harvestings-an-age-structured-population">o Harvestings an age-structured population</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/gustavdelius/M3E-2024/edit/main/age_structured.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
@@ -250,19 +251,19 @@ n(t,a) = n(0,0) e^{\gamma t} \exp\left(-\int_0^a \mu(a') \, da'-\gamma a\right),
 \tag{4.11}\]</span></span> where <span class="math inline">\(n(0,0)=f(0)r(0)\)</span> is the initial density of individuals at age <span class="math inline">\(0\)</span>.</p>
 <p>So far we don’t yet know the value of the separation constant <span class="math inline">\(\gamma\)</span>. This will be determined by the boundary condition. If we substitute the solution <a href="#eq-a11" class="quarto-xref">Eq.&nbsp;<span>4.11</span></a> into the boundary condition <a href="#eq-a4" class="quarto-xref">Eq.&nbsp;<span>4.4</span></a>, we get <span id="eq-a12"><span class="math display">\[
 n(0,0)e^{\gamma t} = \int_0^\infty b(a) n(0,0)e^{\gamma t} \exp\left(-\int_0^a \mu(a') \, da'-\gamma a\right)\, da.
-\tag{4.12}\]</span></span> We can cancel the common factor <span class="math inline">\(n(0,0)e^{\gamma t}\)</span> on both sides to get the condition <span class="math display">\[
+\tag{4.12}\]</span></span> We can cancel the common factor <span class="math inline">\(n(0,0)e^{\gamma t}\)</span> on both sides to get the condition <span id="eq-a13"><span class="math display">\[
 1= \int_0^\infty b(a) \exp\left(-\int_0^a \mu(a') \, da'-\gamma a\right) \, da = \phi(\gamma).
-\]</span> We have introduced the shorthand notation <span class="math inline">\(\phi(\gamma)\)</span> for the integral on the right-hand side. The condition <a href="#eq-a12" class="quarto-xref">Eq.&nbsp;<span>4.12</span></a> is a transcendental equation for <span class="math inline">\(\gamma\)</span>. We cannot solve it analytically for <span class="math inline">\(\gamma\)</span>. But we observe that <span class="math inline">\(\phi\)</span> is a monotonically decreasing function of <span class="math inline">\(\gamma\)</span>. This observation alone allows us to make a statement about the sign of <span class="math inline">\(\gamma\)</span>. According to <a href="#eq-a9" class="quarto-xref">Eq.&nbsp;<span>4.9</span></a> the sign of <span class="math inline">\(\gamma\)</span> determines whether the total population grows expnentially or goes extinct.</p>
-<p>If <span class="math inline">\(\gamma\)</span> is positive, then the monotonicity of <span class="math inline">\(\phi\)</span> tells us that <span class="math inline">\(\phi(0) &gt; \phi(\gamma)  = 1\)</span> and vice versa. Conversely, if <span class="math inline">\(\gamma\)</span> is negative, then <span class="math inline">\(\phi(0) &lt; \phi(\gamma) = 1\)</span> and vice versa. So to determine the sign of <span class="math inline">\(\gamma\)</span> we only have to look at the value of <span class="math display">\[
+\tag{4.13}\]</span></span> We have introduced the shorthand notation <span class="math inline">\(\phi(\gamma)\)</span> for the integral on the right-hand side. The condition <a href="#eq-a12" class="quarto-xref">Eq.&nbsp;<span>4.12</span></a> is a transcendental equation for <span class="math inline">\(\gamma\)</span>. We cannot solve it analytically for <span class="math inline">\(\gamma\)</span>. But we observe that <span class="math inline">\(\phi\)</span> is a monotonically decreasing function of <span class="math inline">\(\gamma\)</span>. This observation alone allows us to make a statement about the sign of <span class="math inline">\(\gamma\)</span>. According to <a href="#eq-a9" class="quarto-xref">Eq.&nbsp;<span>4.9</span></a> the sign of <span class="math inline">\(\gamma\)</span> determines whether the total population grows expnentially or goes extinct.</p>
+<p>If <span class="math inline">\(\gamma\)</span> is positive, then the monotonicity of <span class="math inline">\(\phi\)</span> tells us that <span class="math inline">\(\phi(0) &gt; \phi(\gamma)  = 1\)</span> and vice versa. Conversely, if <span class="math inline">\(\gamma\)</span> is negative, then <span class="math inline">\(\phi(0) &lt; \phi(\gamma) = 1\)</span> and vice versa. So to determine the sign of <span class="math inline">\(\gamma\)</span> we only have to look at the value of <span id="eq-a14"><span class="math display">\[
 \phi(0) = \int_0^\infty b(a) \exp\left(-\int_0^a \mu(a') \, da'\right)\, da.
-\]</span></p>
+\tag{4.14}\]</span></span></p>
 <ul>
 <li><p>If <span class="math inline">\(\phi(0) &gt; 1\)</span>, then <span class="math inline">\(\gamma &gt; 0\)</span> and the population grows exponentially.</p></li>
 <li><p>If <span class="math inline">\(\phi(0) &lt; 1\)</span>, then <span class="math inline">\(\gamma &lt; 0\)</span> and the population goes extinct.</p></li>
 </ul>
-<p>This result actually has a very intuitive explanation. The factor <span class="math display">\[
-\exp\left(-\int_0^a \mu(a') \, da'\right)
-\]</span> is the probability that an individual survives up to age <span class="math inline">\(a\)</span>. Therefore <span class="math inline">\(\phi(0)\)</span> is the expected number of offspring produced by an individual during its lifetime. If this number is greater than <span class="math inline">\(1\)</span>, then the population grows exponentially. If it is less than <span class="math inline">\(1\)</span>, then the population goes extinct.</p>
+<p>This result actually has a very intuitive explanation. The factor <span id="eq-a15"><span class="math display">\[
+\exp\left(-\int_0^a \mu(a') \, da'\right)=:l(a)
+\tag{4.15}\]</span></span> is the probability that an individual survives up to age <span class="math inline">\(a\)</span>. Therefore <span class="math inline">\(\phi(0)\)</span> is the expected number of offspring produced by an individual during its lifetime. If this number is greater than <span class="math inline">\(1\)</span>, then the population grows exponentially. If it is less than <span class="math inline">\(1\)</span>, then the population goes extinct.</p>
 </section>
 <section id="discrete-time-model" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="discrete-time-model"><span class="header-section-number">4.2</span> Discrete time model</h2>
@@ -273,12 +274,28 @@ n(0,0)e^{\gamma t} = \int_0^\infty b(a) n(0,0)e^{\gamma t} \exp\left(-\int_0^a \
 <section id="age-independent-rates" class="level4">
 <h4 class="anchored" data-anchor-id="age-independent-rates">* Age-independent rates</h4>
 <div id="exr-age_structured" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 4.1</strong></span> In the age structured population model of chapter 4, consider the case where <span class="math inline">\(b(a)=b\)</span> and <span class="math inline">\(\mu(a)=\mu\)</span> are both constant. Repeat all steps of the analysis but simplifying the expressions at each step by using the constant values for birth and death rates.</p>
+<p><span class="theorem-title"><strong>Exercise 4.1</strong></span> In the continuous-time age-structured population model consider the case where <span class="math inline">\(b(a)=b\)</span> and <span class="math inline">\(\mu(a)=\mu\)</span> are both constant. Repeat all steps of the analysis but simplifying the expressions at each step by using the constant values for birth and death rates.</p>
 <ol type="1">
 <li>Solve the partial differential equation of the age-structured model by making the Ansatz <span class="math inline">\(n(t,a)=f(t)r(a)\)</span> and introducing the separation constant <span class="math inline">\(\gamma\)</span>.</li>
 <li>Use the boundary condition at <span class="math inline">\(a=0\)</span> to determine the value of <span class="math inline">\(\gamma\)</span>.</li>
 <li>Give the condition under which the population goes extinct and compare it to the condition in the exponential model from chapter 1.</li>
 </ol>
+</div>
+</section>
+<section id="o-harvestings-an-age-structured-population" class="level4">
+<h4 class="anchored" data-anchor-id="o-harvestings-an-age-structured-population">o Harvestings an age-structured population</h4>
+<div id="exr-age_harvesting" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4.2</strong></span> Consider an age-structured fish population in which all individuals above the maturity age <span class="math inline">\(a_m\)</span> are reproducing, at a fixed rate, so that <span id="eq-age_harvesting_1"><span class="math display">\[
+b(a) = \begin{cases}
+0 &amp; \text{if } a &lt; a_m, \\
+b &amp; \text{if } a \geq a_m.
+\end{cases}
+\tag{4.16}\]</span></span> All fish at all ages experience a natural death rate <span class="math inline">\(\mu_0\)</span>. In addition, fish above the maturity size are harvested at a constant rate <span class="math inline">\(\mu_F\)</span>, so that <span id="eq-age_harvesting_2"><span class="math display">\[
+\mu(a) = \begin{cases}
+\mu_0 &amp; \text{if } a &lt; a_m, \\
+\mu_0 + \mu_F &amp; \text{if } a \geq a_m.
+\end{cases}
+\tag{4.17}\]</span></span> By calculating the expected number of offspring per individual, determine the limit on the harvesting rate <span class="math inline">\(\mu_F\)</span> that allows the population to be sustainable.</p>
 </div>
 
 
