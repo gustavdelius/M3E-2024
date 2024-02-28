@@ -65,6 +65,7 @@ mu = 1
 b = 1
 F = np.linspace(0, mu/b*1.5, 100)
 dFdt = -mu*F + b*F**2
+plt.figure(figsize=(6, 2))
 plt.plot(F, dFdt, label=r'$-\mu F + b F^2$')
 plt.xlabel('$F$', loc='right')
 plt.ylabel('$dF/dt$', loc='top')

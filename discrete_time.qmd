@@ -156,7 +156,7 @@ def f(x):
     return x+1.8*x*(1-x)
 
 # Set up the figure and axis
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(6,3))
 
 # Add axis labels
 ax.set_xlabel("$N_t$", loc='right')
@@ -229,7 +229,7 @@ def f(x):
     return x+2.5*x*(1-x)
 
 # Set up the figure and axis
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(6,3))
 
 # Add axis labels
 ax.set_xlabel("$N_t$", loc='right')
@@ -285,7 +285,7 @@ def animate(n):
         y = new_y
 
 # Creating the animation
-ani = animation.FuncAnimation(fig, animate, frames=9, repeat=False)
+ani = animation.FuncAnimation(fig, animate, frames=20, repeat=False)
 
 # Display the animation
 plt.close()
@@ -304,7 +304,7 @@ def f(x):
     return x+0.8*x*(1-x)
 
 # Set up the figure and axis
-fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(6,3))
 
 # Add axis labels
 ax.set_xlabel("$N_t$", loc='right')
@@ -360,7 +360,7 @@ def animate(n):
         y = new_y
 
 # Creating the animation
-ani = animation.FuncAnimation(fig, animate, frames=9, repeat=False)
+ani = animation.FuncAnimation(fig, animate, frames=7, repeat=False)
 
 # Display the animation
 plt.close()
@@ -423,6 +423,7 @@ Np = (b+np.sqrt(b**2-4))/2
 Nm = (b-np.sqrt(b**2-4))/2
 
 # Adding axis labels
+plt.figure(figsize=(6,3))
 plt.xlabel('$N_t$', loc='right')
 plt.ylabel('$N_{t+1}$', loc='top')
 
@@ -456,9 +457,9 @@ ax.add_patch(circle)
 
 # Mark fixed points on x axis
 plt.vlines(Np, 0, Np, color='gray', linestyle=':')
-plt.text(Np, -0.15, '$N^*_+$', ha='center')
+plt.text(Np, -0.3, '$N^*_+$', ha='center')
 plt.vlines(Nm, 0, Nm, color='gray', linestyle=':')
-plt.text(Nm, -0.15, '$N^*_-$', ha='center')
+plt.text(Nm, -0.3, '$N^*_-$', ha='center')
 
 # Add horizontal asymptote
 plt.hlines(b, 0, b*1.2, color='gray', linestyle='--', label='$y=b$')
@@ -487,6 +488,7 @@ E2 = 0.2
 E3 = 0.3
 
 # Adding axis labels
+plt.figure(figsize=(6,3))
 plt.xlabel('$N_t$', loc='right')
 plt.ylabel('$N_{t+1}$', loc='top')
 
@@ -512,7 +514,7 @@ plt.plot(N_vals, f(N_vals, b, E3), label='$E>E_c$')
 # Add diagonal
 plt.plot(N_vals, N_vals, 'k-',)
 
-ax.legend(loc='upper center')
+ax.legend(loc=(0.1,0.6))
 plt.show()
 ```
 We see that as the harvesting effort $E$ increases, the two fixed points move closer together. At a critical value $E_c$ the two fixed points merge and disappear. The population number will then go extinct for all initial population numbers. 

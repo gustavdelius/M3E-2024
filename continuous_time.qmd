@@ -25,9 +25,6 @@ If the birth rate exceeds the death rate and hence $r>0$, the model predicts exp
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Adjusting the font size for better readability
-plt.rcParams.update({'font.size': 14})
-
 # Parameters for the exponential growth model
 r1 = 0.1
 r2 = -0.3
@@ -41,6 +38,7 @@ N_2 = N0 * np.exp(r2 * t)
 N_0 = N0 * np.exp(0 * t)
 
 # Creating the plot
+plt.figure(figsize=(6,3))
 plt.plot(t, N_1, label="r>0")
 plt.plot(t, N_0, label="r=0")
 plt.plot(t, N_2, label="r<0")
@@ -83,9 +81,6 @@ In @fig-logistic-growth-rate make a plot of the right-hand side of the logistic 
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Adjusting the font size for better readability
-plt.rcParams.update({'font.size': 14})
-
 # Parameters for the logistic growth model
 r = 1.0  # intrinsic growth rate
 K = 100  # carrying capacity
@@ -96,7 +91,7 @@ N = np.linspace(0, K*1.1, 100)
 growth_rate = r * N * (1 - N / K)
 
 # Creating the plot
-plt.figure(figsize=(8, 6))
+plt.figure(figsize=(6,3))
 plt.plot(N, growth_rate, label='dN/dt = rN(1 - N/K)')
 plt.title('Logistic Growth Rate')
 
@@ -162,6 +157,7 @@ N_4 = K * N0_4 * np.exp(r * t) / (K + N0_4 * (np.exp(r * t) - 1))
 N_5 = K * N0_5 * np.exp(r * t) / (K + N0_5 * (np.exp(r * t) - 1))
 
 # Creating the plot
+plt.figure(figsize=(6,3))
 plt.plot(t, N_0)
 plt.plot(t, N_1)
 plt.plot(t, N_2)
@@ -216,14 +212,14 @@ gs = r/2 * (1 - N / K) * (N / K0 - 1)
 gw = r/2 * (1 - N / K) * (1- N / KM)
 
 # Creating the plot
-plt.figure(figsize=(8, 6))
+plt.figure(figsize=(6,4))
 plt.plot(N, gc, 'k:', label='exponential model')
 plt.plot(N, gl, 'b-.', label='logistic model')
 plt.plot(N, gw, 'g--', label='weak Allee effect')
 plt.plot(N, gs, 'r-', label='strong Allee effect')
 
 # Adding axis labels
-plt.xlabel('N', loc='right')
+plt.xlabel('$N$', loc='right')
 plt.ylabel('per-capita rate', loc='top')
 
 # Removing numerical labels from the axes
@@ -241,10 +237,10 @@ ax.spines['left'].set_position(('data', 0))
 # Placing a red circle at N = K0 and a red dot at N = K and N=0
 # on the N axis and labeling them
 plt.plot(K0, 0, 'ro', fillstyle='none')  # Red circle at N = K0
-plt.text(K0, -0.03 * r, 'K0', color='red', verticalalignment='top', horizontalalignment='center')
-plt.text(0, -0.03 * r, '0', color='red', verticalalignment='top', horizontalalignment='center')
+plt.text(K0, -0.05 * r, '$K_0$', color='red', verticalalignment='top', horizontalalignment='center')
+plt.text(-0.03*K, -0.05 * r, '$0$', color='red', verticalalignment='top', horizontalalignment='center')
 plt.plot(K, 0, 'ro')  # Red dot at N = K
-plt.text(K, -0.03 * r, 'K', color='red', verticalalignment='top', horizontalalignment='center')
+plt.text(K, -0.05 * r, '$K$', color='red', verticalalignment='top', horizontalalignment='center')
 
 plt.legend()
 plt.show()
@@ -274,8 +270,8 @@ N = np.linspace(0, K*1.05, 100)
 growth_rate = r * N * (1 - N / K) * (N / K0 - 1)
 
 # Creating the plot
-plt.figure(figsize=(8, 6))
-plt.plot(N, growth_rate, label='dN/dt = rN(1 - N/K)(N/K0 - 1)')
+plt.figure(figsize=(6,3))
+plt.plot(N, growth_rate)
 
 # Adding axis labels
 plt.xlabel('N', loc='right')
@@ -296,11 +292,11 @@ ax.spines['left'].set_position(('data', 0))
 # Placing a red circle at N = K0 and a red dot at N = K and N=0
 # on the N axis and labeling them
 plt.plot(K0, 0, 'ro', fillstyle='none')  # Red circle at N = K0
-plt.text(K0, -0.03 * max(growth_rate), 'K0', color='red', verticalalignment='top', horizontalalignment='center')
+plt.text(K0, -0.05 * max(growth_rate), '$K_0$', color='red', verticalalignment='top', horizontalalignment='center')
 plt.plot(0, 0, 'ro')  # Red dot at N = 0
-plt.text(0, -0.03 * max(growth_rate), '0', color='red', verticalalignment='top', horizontalalignment='center')
+plt.text(-0.03*K, -0.05 * max(growth_rate), '$0$', color='red', verticalalignment='top', horizontalalignment='center')
 plt.plot(K, 0, 'ro')  # Red dot at N = K
-plt.text(K, -0.03 * max(growth_rate), 'K', color='red', verticalalignment='top', horizontalalignment='center')
+plt.text(K, -0.05 * max(growth_rate), '$K$', color='red', verticalalignment='top', horizontalalignment='center')
 
 # Placing arrows indicating direction of flow
 plt.annotate('', xy = (K0*0.4, 0), xytext = (K0*0.6, 0),
@@ -312,7 +308,6 @@ plt.annotate('', xy = (K0 + (K-K0)*0.7, 0), xytext = (K0 + (K-K0)*0.6, 0),
 plt.annotate('', xy = (K*1.05, 0), xytext = (K*1.1, 0),
              arrowprops=dict(facecolor='blue'))
 
-plt.legend()
 plt.show()
 ```
 
@@ -393,6 +388,7 @@ g1 = r * N * (1 - N / K) - E1 * N
 g2 = r * N * (1 - N / K) - E2 * N
 
 # Creating the plot
+plt.figure(figsize=(6,3))
 plt.plot(N, g0, label='$E=0$')
 plt.plot(N, g1, label='$0<E<r$')
 plt.plot(N, g2, label='$E>r$')
@@ -462,6 +458,7 @@ g1 = r * N * (1 - N / K) - Q1
 g2 = r * N * (1 - N / K) - Q2
 
 # Creating the plot
+plt.figure(figsize=(6,3))
 plt.plot(N, g0, label='$Q=0$')
 plt.plot(N, g1, label='$rK/4>Q>0$')
 plt.plot(N, g2, label='$Q>rK/4$')
