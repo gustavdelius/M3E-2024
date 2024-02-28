@@ -109,7 +109,7 @@ window.Quarto = {
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-sidebar floating slimcontent">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -138,6 +138,7 @@ window.Quarto = {
     <a href="https://maths.york.ac.uk/moodle/course/view.php?id=2656" title="Moodle page" class="quarto-navigation-tool px-1" aria-label="Moodle page"><i class="bi bi-mortarboard-fill"></i></a>
     <a href="https://forms.gle/naVqtYVGNqWmVDgRA" title="Submit a correction" class="quarto-navigation-tool px-1" aria-label="Submit a correction"><i class="bi bi-bug-fill"></i></a>
     <a href="https://github.com/gustavdelius/M3E-2024/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./Mathematical-Ecology-and-Epidemiology.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
@@ -199,7 +200,7 @@ window.Quarto = {
 <div class="toc-actions"><ul><li><a href="https://github.com/gustavdelius/M3E-2024/edit/main/sex_structured.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -231,7 +232,7 @@ window.Quarto = {
 \frac{dM}{dt} &amp;= -\mu_M M + b_M\,\varphi(F,M).
 \end{split}
 \tag{3.1}\]</span></span> Here <span class="math inline">\(\mu_F\)</span> and <span class="math inline">\(\mu_M\)</span> are the death rates of females and males respectively. The rate of births now depends both on the number of females and the number of males, because both males and females are needed to produce offspring. We formulate that dependence on the number of females and the number of males as a function <span class="math inline">\(\varphi(F,M)\)</span>. The functional dependence of the rate on <span class="math inline">\(F\)</span> and <span class="math inline">\(M\)</span> is the same for births of females and for births of males, but the extra factors <span class="math inline">\(b_F\)</span> and <span class="math inline">\(b_M\)</span> account for the differences between female and male birth rates.</p>
-<section id="symmetric-model" class="level2 page-columns page-full" data-number="3.1">
+<section id="symmetric-model" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="symmetric-model"><span class="header-section-number">3.1</span> Symmetric model</h2>
 <p>We first consider the simpler situation where birth and mortality rates are the same for males and females: <span id="eq-ss2"><span class="math display">\[
 \mu_F=\mu_M=\mu, ~~~b_F=b_M=b.
@@ -251,14 +252,14 @@ F(t)=F(0)e^{-\mu t}.
 <p>We noted above that if initially <span class="math inline">\(F(0)=M(0)\)</span> then <span class="math inline">\(F(t)=M(t)\)</span> for all times. In that case the number of females satisfies <span id="eq-ss8"><span class="math display">\[
 \frac{dF}{dt}=-\mu F+bF^2.
 \tag{3.8}\]</span></span> This is illustrated in <a href="#fig-ss1" class="quarto-xref">Figure&nbsp;<span>3.1</span></a>.</p>
-<div id="cell-fig-ss1" class="cell page-columns page-full" data-execution_count="1">
-<div class="cell-output cell-output-display page-columns page-full">
-<div id="fig-ss1" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full" alt="Quadratically increasing growth rate.">
-<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div id="cell-fig-ss1" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div id="fig-ss1" class="quarto-figure quarto-figure-center quarto-float anchored" alt="Quadratically increasing growth rate.">
+<figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ss1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="sex_structured_files/figure-html/fig-ss1-output-1.png" alt="Quadratically increasing growth rate." width="540" height="389" class="figure-img">
+<img src="sex_structured_files/figure-html/fig-ss1-output-1.png" alt="Quadratically increasing growth rate." width="466" height="167" class="figure-img">
 </div>
-<figcaption class="quarto-float-caption-margin quarto-float-caption quarto-float-fig margin-caption" id="fig-ss1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ss1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3.1: Quadratically increasing growth rate.
 </figcaption>
 </figure>
