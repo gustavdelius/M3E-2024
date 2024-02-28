@@ -67,19 +67,19 @@ By moving the logistic factor inside the exponential, the Ricker model prevents 
 
 The Beverton-Holt model is another modification of the Verhulst model which prevents negative population numbers. It is given by
 $$
-N_{t+1} = \frac{R N_t}{1 + \frac{R-1}{K}N_t}.
+N_{t+1} = \frac{R N_t}{1 - \frac{R-1}{K}N_t}.
 $$ {#eq-beverton_holt}
 This has been a very influential model in fisheries science. On the face of it the model does not look very similar to the logistic model, but we will see the relationship when we solve the model. The Beverton-Holt model is one of the rare cases where a non-linear model can be solved exactly. The trick is to make a change of variables from $N_t$ to $u_t = 1/N_t$. Then we have
 $$
-u_{t+1} = \frac{1}{N_{t+1}} = \frac{1 + \frac{R-1}{K}N_t}{R N_t} = \frac{u_t}{R} + \frac{R-1}{R K}.
+u_{t+1} = \frac{1}{N_{t+1}} = \frac{1 - \frac{R-1}{K}N_t}{R N_t} = \frac{u_t}{R} - \frac{R-1}{R K}.
 $$ {#eq-beverton_holt_u}
 This is a linear equation for $u_t$, and linear equations are easy to solve. The easiest way to proceed is to look at the first few terms of the sequence $u_t$ and guess the general form of the solution. We find
 $$\begin{split}
-u_1 &= \frac{u_0}{R} + \frac{R-1}{R K},\\
-u_2 &= \frac{u_0}{R^2} + \frac{R-1}{R K}\left(1 + \frac{1}{R}\right),\\
-u_3 &= \frac{u_0}{R^3} + \frac{R-1}{R K}\left(1 + \frac{1}{R} + \frac{1}{R^2}\right),\\
+u_1 &= \frac{u_0}{R} - \frac{R-1}{R K},\\
+u_2 &= \frac{u_0}{R^2} - \frac{R-1}{R K}\left(1 + \frac{1}{R}\right),\\
+u_3 &= \frac{u_0}{R^3} - \frac{R-1}{R K}\left(1 + \frac{1}{R} + \frac{1}{R^2}\right),\\
 &\vdots\\
-u_t &= \frac{u_0}{R^t} + \frac{R-1}{R K}\left(1 + \frac{1}{R} + \frac{1}{R^2} + \ldots + \frac{1}{R^{t-1}}\right).
+u_t &= \frac{u_0}{R^t} - \frac{R-1}{R K}\left(1 + \frac{1}{R} + \frac{1}{R^2} + \ldots + \frac{1}{R^{t-1}}\right).
 \end{split}
 $$ {#eq-beverton_holt_u_solution}
 The sum in the second term is a geometric series. We know the general formula for a geometric series:
@@ -89,7 +89,7 @@ $$ {#eq-geometric_series}
 
 We can use this with $x=1/R$ to sum terms in the second term. We find
 $$
-u_t = \frac{u_0}{R^t} + \frac{R-1}{R K}\frac{1 - (1/R)^t}{1 - 1/R}.
+u_t = \frac{u_0}{R^t} - \frac{R-1}{R K}\frac{1 - (1/R)^t}{1 - 1/R}.
 $$
 We simplify this a bit and bring everything on the same denominator.
 $$
@@ -139,10 +139,10 @@ If $|f'(N^*)|=1$, then we cannot say anything about the stability of the fixed p
 
 In the continuous-time case we also had a graphical way to see the stability of fixed points. We will now introduce a graphical method for studying the stability of fixed points in discrete-time models, called the cobweb method.
 
-We plot the function $f(N_t)$ and the line $N_{t+1}=N_t$. The fixed points are the intersection points of the function and the line. We then draw the graph of the sequence $N_t$ by starting at the initial population number $N_0$ and iterating the function $f(N_t)$ to find $N_1$, then iterating the function again to find $N_2$, and so on. The graph of the sequence $N_t$ is called the cobweb. The stability of the fixed points can be read off from the cobweb. If the cobweb spirals into the fixed point, as shown in @fig-cobweb_stable, then the fixed point is stable. If the cobweb spirals out of the fixed point, as shown in @fig-cobweb_unstable, then the fixed point is unstable. You have to press the play button below the figures to see the cobweb diagrams in action.
+We plot the function $f(N_t)$ and the line $N_{t+1}=N_t$. The fixed points are the intersection points of the function and the line. We then draw the graph of the sequence $N_t$ by starting at the initial population number $N_0$ and iterating the function $f(N_t)$ to find $N_1$, then iterating the function again to find $N_2$, and so on. The graph of the sequence $N_t$ is called the cobweb. The stability of the fixed points can be read off from the cobweb. If the cobweb spirals into the fixed point, as shown in @fig-cobweb-stable, then the fixed point is stable. If the cobweb spirals out of the fixed point, as shown in @fig-cobweb-unstable, then the fixed point is unstable. You have to press the play button below the figures to see the cobweb diagrams in action.
 
 ``` {python}
-#| label: fig-cobweb_stable
+#| label: fig-cobweb-stable
 #| fig-cap: Cobweb diagram for a stable fixed point.
 #| fig-alt: Cobweb diagram for a stable fixed point.
 #| echo: false
@@ -220,7 +220,7 @@ HTML(ani.to_jshtml())
 ```
 
 ``` {python}
-#| label: fig-cobweb_unstable
+#| label: fig-cobweb-unstable
 #| fig-cap: Cobweb diagram for an unstable fixed point.
 #| fig-alt: Cobweb diagram for an unstable fixed point.
 #| echo: false
@@ -292,10 +292,10 @@ plt.close()
 HTML(ani.to_jshtml())
 ```
 
-The oscillatory nature of the sequence $N_t$, hopping from one side of the fixed point to the other, that creates the cobweb pattern is due to the fact that the slope of $f$ is negative at the fixed point. The graphical method for visualising the iterations will work also when the slope is positive at the fixed point, but it will not look like a cobweb. @fig-cobweb_positive_slope shows the cobweb for a stable fixed point with positive slope.
+The oscillatory nature of the sequence $N_t$, hopping from one side of the fixed point to the other, that creates the cobweb pattern is due to the fact that the slope of $f$ is negative at the fixed point. The graphical method for visualising the iterations will work also when the slope is positive at the fixed point, but it will not look like a cobweb. @fig-cobweb-positive-slope shows the cobweb for a stable fixed point with positive slope.
 
 ```{python}
-#| label: fig-cobweb_positive_slope
+#| label: fig-cobweb-positive-slope
 #| fig-cap: Cobweb diagram for a fixed point with positive slope.
 #| fig-alt: Cobweb diagram for a fixed point with positive slope.
 #| echo: false
@@ -402,10 +402,10 @@ We now have enough information to draw a good sketch to understand the dynamics 
 
 - Finally we observe that the function is monotonically increasing. 
 
-If we now draw something that has all these features, we will have a sufficiently good sketch of the function for our purpose of understanding the dynamics of the model. We will necessarily end up with something that qualitatively looks like the graph in @fig-discrete_harvesting_function.
+If we now draw something that has all these features, we will have a sufficiently good sketch of the function for our purpose of understanding the dynamics of the model. We will necessarily end up with something that qualitatively looks like the graph in @fig-discrete-harvesting-function.
 
 ```{python}
-#| label: fig-discrete_harvesting_function
+#| label: fig-discrete-harvesting-function
 #| fig-cap: Graph of the function $f(N)=\frac{bN^2}{1+N^2}$.
 #| fig-alt: Graph of the function $f(N)=\frac{bN^2}{1+N^2}$.
 #| echo: false
@@ -467,12 +467,12 @@ ax.legend(loc='center right')
 plt.show()
 ```
 
-Using our cobweb technique, or simply looking at the slope of $f$ at the fixed points, we can easily convince ourselves that the extinction fixed point is stable, the smaller non-zero fixed point $N^*_-$ is unstable and the larger fixed point $N^*_+$ is stable. in @fig-discrete_harvesting_function we have indicated the stable fixed points by solid circles and the unstable fixed points by open circles. So when the population number is larger than $N^*_-$ it will grow towards $N^*_+$, and when it is smaller than $N^*_-$ it will go extinct. So this model exhibits a strong Allee effect with critical depensation. $N^*_-$ is the smallest viable population size.
+Using our cobweb technique, or simply looking at the slope of $f$ at the fixed points, we can easily convince ourselves that the extinction fixed point is stable, the smaller non-zero fixed point $N^*_-$ is unstable and the larger fixed point $N^*_+$ is stable. in @fig-discrete-harvesting-function we have indicated the stable fixed points by solid circles and the unstable fixed points by open circles. So when the population number is larger than $N^*_-$ it will grow towards $N^*_+$, and when it is smaller than $N^*_-$ it will go extinct. So this model exhibits a strong Allee effect with critical depensation. $N^*_-$ is the smallest viable population size.
 
-We can now add harvesting to the model. The extra term in the function $f(N)$ is $-EN$. This lowers the graph of $f(N)$ by an amount that grows linearly with $N$. This is illustrated in @fig-discrete_harvesting_function_harvesting. 
+We can now add harvesting to the model. The extra term in the function $f(N)$ is $-EN$. This lowers the graph of $f(N)$ by an amount that grows linearly with $N$. This is illustrated in @fig-discrete-harvesting-function-harvesting. 
 
 ```{python}
-#| label: fig-discrete_harvesting_function_harvesting
+#| label: fig-discrete-harvesting-function-harvesting
 #| fig-cap: Graph of the function $f(N)=\frac{bN^2}{1+N^2}-EN$.
 #| fig-alt: Graph of the function $f(N)=\frac{bN^2}{1+N^2}-EN$.
 #| echo: false
@@ -576,7 +576,7 @@ and investigate their stability. Do this both analytically and by drawing cobweb
 ::: {#exr-beverton_holt}
 Find the fixed points in the Beverton-Holt model
 $$
-N_{t+1} = \frac{R N_t}{1 + \frac{R-1}{K}N_t}.
+N_{t+1} = \frac{R N_t}{1 - \frac{R-1}{K}N_t}.
 $$ {#eq-ex_beverton_holt}
 and investigate their stability. Do this both analytically and by drawing cobweb diagrams.
 :::

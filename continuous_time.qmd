@@ -15,10 +15,10 @@ where we introduced the new parameter $r=b-d$. This equation is easy to solve:
 $$
 N(t)=N_0\,e^{rt}.
 $$ {#eq-exponential-solution}
-If the birth rate exceeds the death rate and hence $r>0$, the model predicts exponential growth. In the opposite case of lower birth rate than death rate the model predicts exponential decay of the population number towards extinction. Only when birth and death rates are perfectly equal can the population stay steady over time. We illustrate that in @fig-exponential_solutions.
+If the birth rate exceeds the death rate and hence $r>0$, the model predicts exponential growth. In the opposite case of lower birth rate than death rate the model predicts exponential decay of the population number towards extinction. Only when birth and death rates are perfectly equal can the population stay steady over time. We illustrate that in @fig-exponential-solutions.
 
 ```{python}
-#| label: fig-exponential_solutions
+#| label: fig-exponential-solutions
 #| fig-cap: Solutions to the exponential model.
 #| fig-alt: Solutions to the exponential model.
 #| echo: false
@@ -73,10 +73,10 @@ $$
 $$ {#eq-logistic}
 where $K$ is the carrying capacity of the environment. The extra factor of $1-N/K$ decreases the growth rate towards zero as the population number $N$ approaches the carrying capacity $K$.
 
-In @fig-logistic_growth_rate make a plot of the right-hand side of the logistic equation @eq-logistic to see how the growth rate depends on the population number. While that figure was created by the computer, the plot is easy to sketch by hand because the function we want to sketch is simply an upside-down parabola. The maximum of the parabola is at $N=K/2$ and the parabola crosses the $N$-axis at $N=0$ and $N=K$. This means that the population growth rate is zero at $N=0$ and $N=K$, and it is maximal at $N=K/2$.
+In @fig-logistic-growth-rate make a plot of the right-hand side of the logistic equation @eq-logistic to see how the growth rate depends on the population number. While that figure was created by the computer, the plot is easy to sketch by hand because the function we want to sketch is simply an upside-down parabola. The maximum of the parabola is at $N=K/2$ and the parabola crosses the $N$-axis at $N=0$ and $N=K$. This means that the population growth rate is zero at $N=0$ and $N=K$, and it is maximal at $N=K/2$.
 
 ```{python}
-#| label: fig-logistic_growth_rate
+#| label: fig-logistic-growth-rate
 #| fig-cap: The logistic growth rate as a function of the population number.
 #| fig-alt: The logistic growth rate as a function of the population number.
 #| echo: false
@@ -133,10 +133,10 @@ plt.legend()
 plt.show()
 ```
 
-From the plot we see that the growth rate is zero at $N=0$ and $N=K$, and it is maximal at $N=K/2.$ By realising that $dN/dt$ is the slope of the graph of $N(t)$ we can sketch a few solutions to the logistic equation @eq-logistic in @fig-logistic_solutions.
+From the plot we see that the growth rate is zero at $N=0$ and $N=K$, and it is maximal at $N=K/2.$ By realising that $dN/dt$ is the slope of the graph of $N(t)$ we can sketch a few solutions to the logistic equation @eq-logistic in @fig-logistic-solutions.
 
 ```{python}
-#| label: fig-logistic_solutions
+#| label: fig-logistic-solutions
 #| fig-cap: Solutions to the logistic equation.
 #| fig-alt: Solutions to the logistic equation.
 #| echo: false
@@ -193,10 +193,10 @@ $$ {#eq-logistic-solution}
 ## Allee effect
 Warder Clyde Allee (1885-1955) was an American ecologist who studied the effects of population density on the growth rate of a population. He found that in some cases the per-capita growth rate can increase with $N$. This is called the Allee effect. It can occur when the population is too small to find a mate, to find food, or to avoid predators.
 
-Figure @fig-per_capita_growth_rate shows the per-capita growth rate as a function of the population number for exponential growth in black, for logistic growth in blue and two different growth rates exhibiting the Allee effect in green and red.
+Figure @fig-per-capita-growth-rate shows the per-capita growth rate as a function of the population number for exponential growth in black, for logistic growth in blue and two different growth rates exhibiting the Allee effect in green and red.
 
 ```{python}
-#| label: fig-per_capita_growth_rate
+#| label: fig-per-capita-growth-rate
 #| fig-cap: The per-capita growth rate as a function of the population number.
 #| fig-alt: The per-capita growth rate as a function of the population number.
 #| echo: false
@@ -250,16 +250,16 @@ plt.legend()
 plt.show()
 ```
 
-The green curve in @fig-per_capita_growth_rate shows a weak Allee effect, where the per-capita rate is small but possitive for small population sizes, then initially increases with the population size before then decreasing again as the population approaches its carrying capacity. The red curve shows a strong Allee effect, which is similar but so strong that the growth rate starts out not just small but actually negative for small $N$. 
+The green curve in @fig-per-capita-growth-rate shows a weak Allee effect, where the per-capita rate is small but possitive for small population sizes, then initially increases with the population size before then decreasing again as the population approaches its carrying capacity. The red curve shows a strong Allee effect, which is similar but so strong that the growth rate starts out not just small but actually negative for small $N$. 
 
 The simplest model for the Allee effect is the logistic equation with a modified growth rate that includes another factor that decreases the growth rate for small $N$:
 $$
 \frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)\left(\frac{N}{K_0}-1\right).
 $$ {#eq-allee}
-If $0<K_0<K$, this exhibits the strong Allee effect because the growth rate is negative when $N<K_0$. This means that the population will be driven towards extinction when it is below the threshold size $K_0$ and it will grow towards its carrying capacity when it is above $K_0$. This is illustrated in @fig-allee_growth_rate.
+If $0<K_0<K$, this exhibits the strong Allee effect because the growth rate is negative when $N<K_0$. This means that the population will be driven towards extinction when it is below the threshold size $K_0$ and it will grow towards its carrying capacity when it is above $K_0$. This is illustrated in @fig-allee-growth-rate.
 
 ```{python}
-#| label: fig-allee_growth_rate
+#| label: fig-allee-growth-rate
 #| fig-cap: The Allee growth rate as a function of the population number.
 #| fig-alt: The Allee growth rate as a function of the population number.
 #| echo: false
@@ -354,7 +354,7 @@ We illustrate this in the example of the logistic model. The fixed points are $N
 $$
 f'(N)=r\left(1-\frac{2N}{K}\right).
 $$
-So we find that $f'(0)=r>0$ and $f'(K)=-r<0$. This means that the steady state $N^*=0$ is unstable and the steady state $N^*=K$ is stable. This agrees with what we had already seen graphically in @fig-logistic_growth_rate and @fig-logistic_solutions.
+So we find that $f'(0)=r>0$ and $f'(K)=-r<0$. This means that the steady state $N^*=0$ is unstable and the steady state $N^*=K$ is stable. This agrees with what we had already seen graphically in @fig-logistic-growth-rate and @fig-logistic-solutions.
 
 
 ## Harvesting a renewable resource
@@ -372,10 +372,10 @@ We can rewrite this equation in the form of a logistic equation with modified pa
 $$
 \frac{dN}{dt}=rN\left(\left(1-\frac{E}{r}\right)-\frac{N}{K}\right).
 $$ {#eq-logistic-harvesting-parameters}
-This makes it easy to read off the fixed points $N^*=0$ and $N^*=K\left(1-\frac{E}{r}\right)$. The nonzero fixed point gets smaller when fishing effort $E$ increases. This is illustrated in @fig-logistic_harvesting.
+This makes it easy to read off the fixed points $N^*=0$ and $N^*=K\left(1-\frac{E}{r}\right)$. The nonzero fixed point gets smaller when fishing effort $E$ increases. This is illustrated in @fig-logistic-harvesting.
 
 ```{python}
-#| label: fig-logistic_harvesting
+#| label: fig-logistic-harvesting
 #| fig-cap: Growth rate when harvesting with fixed effort.
 #| fig-alt: Growth rate when harvesting with fixed effort.
 #| echo: false
@@ -441,10 +441,10 @@ Fisheries managers in the Mediterranean are aiming to control the fishing effort
 $$
 \frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)-Q.
 $$ {#eq-logistic-quota}
-This is visualised in @fig-logistic_quota.
+This is visualised in @fig-logistic-quota.
 
 ```{python}
-#| label: fig-logistic_quota
+#| label: fig-logistic-quota
 #| fig-cap: Growth rate when harvesting with fixed quota.
 #| fig-alt: Growth rate when harvesting with fixed quota.
 #| echo: false
