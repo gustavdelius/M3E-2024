@@ -16,6 +16,7 @@ book:
       - name: Department of Mathematics, University of York
   date: today
   license: CC BY-NC-SA
+  downloads: pdf
   description: Work in progress
   repo-url: https://github.com/gustavdelius/M3E-2024/
   repo-branch: main
