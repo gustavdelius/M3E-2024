@@ -45,15 +45,16 @@ format:
   html:
     theme: cosmo
     code-fold: true
-    reference-location: margin
-    cap-location: margin
     link-external-newwindow: true
+    toc-depth: 4
+    number-sections: true
+    number-depth: 3
   pdf:
     documentclass: scrreport
+    toc_depth: 3
+    number-sections: true
+    number-depth: 2
 
 toc: true
-toc-depth: 4
-number-depth: 3
-number-sections: true
 crossref:
   eq-prefix: Eq.
