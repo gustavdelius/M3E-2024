@@ -84,7 +84,189 @@ is the probability that an individual survives up to age $a$. Therefore $\phi(0)
 
 ## Discrete time model
 
-To come in week 5.
+In the continuous-time age-structured population model discussed in the previous section we had assumed that births take place continuously through time. If however reproduction is an annual event, taking place in a short breeding season for example, then it is more natural to model the population in discrete time. We will now derive the discrete-time version of the age-structured population model and then study the long-term behaviour of the population and its age distribution.
+
+### Model description
+
+Both time and age will be discrete variables. We will take them to be integers counting years. We will describe the population by the numbers $N_{a,t}$ of individuals of age $a$ at time $t$. The total number $N_t$ of individuals in the population at time $t$ is then given by the sum of $N_{a,t}$ over all ages.
+
+The parameters of our model will be the probabilities $S_a$ of surviving from age $a-1$ to age $a$ and the number of offspring $b_a$ produced by an individual when they reach age $a$. Because the number of individuals at age $a$ at time $t+1$ is the number of individuals that a year earlier were at age $a-1$ and have survived to age $a$, we have
+$$
+N_{a,t+1} = S_{a} N_{a-1,t}.
+$$ {#eq-a16}
+When individuals reach age $a$, they each produce $b_a$ offspring. The total number of offspring produced at time $t$ is therefore given by
+$$
+N_{0,t} = \sum_{a=1}^\infty b_a N_{a,t}.
+$$ {#eq-a17}
+This is a boundary condition for the discrete-time model. It says that the number of individuals at age $0$ at time $t$ is given by the total number of offspring produced by the individuals of all ages at time $t$. This is the discrete-time analogue of the boundary condition @eq-a4 for the continuous-time model.
+
+Note that in @eq-a17 both sides of the equation are at time $t$. That is because reproduction is taken to happen instantaneously at time $t$. It is conventional to use @eq-a16 to rewrite the boundary condition @eq-a17 as an equation for $N_{0,t+1}$:
+$$
+N_{0,t+1} = \sum_{a=1}^\infty b_a N_{a,t+1}= \sum_{a=1}^\infty b_a S_{a} N_{a-1,t}
+= \sum_{a=1}^\infty F_a N_{a-1,t},
+$$ {#eq-a18}
+where we have introduced the fecundity $F_a:=b_a S_a$.
+
+@eq-a16 and @eq-a18 are the equations for the discrete-time age-structured population model. They are a system of coupled difference equations, one equation for each age class. We would like to solve them to determine the numbers $N_{a,t}$ of individuals at each age at each time. Notice that @eq-a16 looks very simple and we could use it to determine $N_{a,t}$ for $a=1,2,3,\ldots$ in terms of $N_{0,t}$,
+$$
+\begin{split}
+N_{a,t} &= S_{a} N_{a-1,t} = S_{a} S_{a-1} N_{a-2,t} = \cdots \\
+&= S_aS_{a-1}\cdots S_1 N_{0,t}
+= l_{a} N_{0,t},
+\end{split}
+$$ {#eq-ac18}
+where we used that the product $S_aS_{a-1}\cdots S_1$ is the probability of surviving from age $0$ to age $a$, which we denote by $l_a$. However @eq-a18 spoils the game because it tells us that we won't know $N_{0,t}$ until we know $N_{a,t}$ for all ages $a$. This is a typical feature of age-structured population models. The number of individuals at age $0$ at time $t$ depends on the number of individuals at all other ages at time $t$. Solving both @eq-a16 and @eq-a18 together is a non-trivial task.
+
+### Stable age distribution
+In analogy to the continuous-time model, we will now look for a solution of the form
+$$
+N_{a,t} = \lambda^t r(a)
+$$ {#eq-ab19}
+This is a solution in which the age distribution $r(a)$ remains stable from one year to the next, but the total population grows or shrinks by a factor $\lambda$ each year. 
+This means in particular that for this solution $N_{a,t+1} = \lambda N_{a,t}$ for all ages $a$. For $a=1$ this gives
+$$
+N_{1,t+1} = \lambda N_{1,t} = S_1 N_{0,t}
+$$ {#eq-a23}
+and hence
+$$
+N_{1,t} = \frac{S_1}{\lambda} N_{0,t}.
+$$ {#eq-a24}
+Similarly we can express $N_{2,t}$ in terms of $N_{0,t}$:
+$$
+N_{2,t} = \frac{S_2}{\lambda} N_{1,t} = \frac{S_1 S_2}{\lambda^2} N_{0,t}.
+$$ {#eq-a25}
+We can continue this process to express $N_{a,t}$ in terms of $N_{0,t}$:
+$$
+N_{a,t} = \frac{S_1 S_2 \cdots S_{a}}{\lambda^a} N_{0,t}= \frac{l_{a}}{\lambda^a} N_{0,t}.
+$$ {#eq-a26}
+
+
+Finally, for the newborns we have
+$$
+N_{0,t+1} = \lambda N_{0,t} = \sum_{a=1}^M F_a N_{a-1,t} = \sum_{a=1}^M F_a \frac{l_{a-1}}{\lambda^{a-1}} N_{0,t}.
+$$ {#eq-a27}
+Dividing the equation by $\lambda N_{0,t}$ gives
+$$
+1 = \sum_{a=1}^M F_a\frac{l_{a-1}}{\lambda^a}.
+$$ {#eq-a28}
+Using that $F_a = b_a S_a$ and $S_al_{a-1}=l_a$ we can rewrite this equation as
+$$
+1 = \sum_{a=1}^M b_a \,l_a\,\lambda^{-a} =:\psi(\lambda).
+$$ {#eq-a29}
+This is the Euler-Lotka equation for the stable age distribution. Compare it to the corresponding equation for the continuous-time model @eq-a13 with $e^{\gamma}=\lambda$. The only difference is that the continuous-time model has an integral over age, while the discrete-time model has a sum over age.
+
+By the same argument as in the continuous case we can see that if the expected number of offspring produced by an individual during its lifetime, $\sum_{a=1}^M b_a \,l_a=\psi(1)$, is greater than $1$ then the population grows exponentially. If it is less than $1$, then the population goes extinct.
+
+We will now determine the stable age distribution for a specific example.
+
+::: {#exm-spotted_owl}
+For the spotted owl the age-dependent reproduction numbers are
+$$
+b_a = \begin{cases}
+0 & \text{if } a < 2, \\
+b & \text{if } a \geq 2
+\end{cases}
+$$ {#eq-a30}
+for some constant $b$. The age-dependent survival probabilities are
+$$
+S_a = \begin{cases}
+1 & \text{if } a = 1, \\
+l & \text{if } a = 2, \\
+p & \text{if } a > 2
+\end{cases}
+$$ {#eq-a31}
+for some constants $l$ and $p$. Those values of the survival probabilities from year to year lead to the following values of the survival probabilities from birth to age $a$:
+$$
+l_a = \begin{cases}
+1 & \text{if } a = 1, \\
+l\, p^{a-2} & \text{if } a \geq 2.
+\end{cases}
+$$ {#eq-a32}
+Substituting these values into the expression for $\psi(\lambda)$ in @eq-a29 gives
+$$
+\begin{split}
+\psi(\lambda) &= b l \sum_{a=2}^\infty p^{a-2} \lambda^{-a} = lb\lambda^{-2}\sum_{n=0}^\infty \frac{p}{\lambda}\\
+&= lb\lambda^{-2}\frac{1}{1-\frac{p}{\lambda}}
+=\frac{lb}{\lambda(\lambda-p)},
+\end{split}
+$$ {#eq-a33}
+where we made use of the formula for a geometric series, valid if $|p/\lambda|<1$ ^[If $\lambda\geq p$, then $\psi(\lambda)$ diverges and does not satisfy the Euler-Lotka equation $\psi(\lambda)=1$.]. 
+In particular, the expected number of offspring produced by an individual in their lifetime is $$
+\psi(1)=lb/(1-p).
+$$
+If this is greater than $1$, then the population grows exponentially. If it is less than $1$, then the population goes extinct.
+
+
+In this case the Euler-Lotka equation $\psi(\lambda)=1$ becomes the quadratic equation for $\lambda$:
+$$
+\psi(\lambda)=\frac{lb}{\lambda(\lambda-p)}=1 \quad \Leftrightarrow \quad \lambda^2 - \lambda p - lb = 0.
+$$ {#eq-a34}
+The solutions are
+$$
+\lambda_\pm = \frac{p \pm \sqrt{p^2 + 4lb}}{2}.
+$$ {#eq-a35}
+We are interested in the positive solution $\lambda_+$. 
+Substituting this value for $\lambda$ back into @eq-a26 and @eq-ab19 we see that we have found the solution
+$$
+N_{a,t} = \left(\frac{p + \sqrt{p^2 + 4lb}}{2}\right)^{t-a}l_a N_{0,0}
+$$ {#eq-a36}
+for any choice of $N_{0,0}$.
+
+:::
+
+
+
+
+<!----
+In the case where there is a maximal age $M$, we can collect the equations for $N_{a,t+1}$ for $a=0,1,2,\ldots,M-1$ (@eq-a16 and @eq-a18) into a matrix equation:
+
+$$
+\begin{pmatrix}
+N_{0} \\
+N_{1} \\
+N_{2} \\
+\vdots \\
+N_{M-1}
+\end{pmatrix}_{t+1}
+=
+\begin{pmatrix}
+F_1 & F_2 & \cdots & F_{M-1} & F_M \\
+S_1 & 0 & \cdots & 0 & 0 \\
+0 & S_2 & \cdots & 0 & 0 \\
+\vdots & \vdots & \ddots & \vdots & \vdots \\
+0 & 0 & \cdots & S_{M-1} & 0
+\end{pmatrix}
+\begin{pmatrix}
+N_{0} \\
+N_{1} \\
+N_{2} \\
+\vdots \\
+N_{M-1}
+\end{pmatrix}_{t}.
+$$ {#eq-a19}
+
+Note that we did not include the equation for $N_{M,t+1}$ in the matrix equation. This is because individuals at age $M$ are assumed to die at the end of the year before they get a chance to reproduce, hence they do not contribute back to the other age classes. Once the matrix equation @eq-a19 is solved, we can determine $N_{M,t+1}$ separately from @eq-a16 if we are interested.
+
+The matrix on the right-hand side of @eq-a19 is a so-called Leslie matrix. Let us denote it by $L$. The equation @eq-a19 is a matrix equation of the form
+$$
+\mathbf{N}_{t+1} = L\, \mathbf{N}_t,
+$$ {#eq-a20}
+where $\mathbf{N}_t$ is the column vector of the numbers $N_{a,t}$ and $L$ is the Leslie matrix. 
+
+In this notation it is easy to formally write down the solution:
+$$
+\mathbf{N}_t = L^t \mathbf{N}_0.
+$$ {#eq-a21}
+
+
+Next we want to look at the stable age distribution of the population. This is a distribution of the population over ages that remains unchanged from one year to the next. It is the distribution that the population will eventually settle into, no matter what the initial distribution was. The total population may still change by a factor $\lambda$ each year, but this factor changes the population at all ages equally. This stable age distribution therefore has to satisfy the equation
+$$
+\mathbf{N}_{t+1} = L\, \mathbf{N}_t = \lambda\,\mathbf{N}_{t},
+$$ {#eq-a22}
+In other words, it is an eigenvector of the Leslie matrix with real eigenvalue $\lambda$.
+
+
+---->
 
 ## Exercises
 
@@ -117,3 +299,81 @@ $$
 $$ {#eq-age_harvesting_2}
 By calculating the expected number of offspring per individual, determine the limit on the harvesting rate $\mu_F$ that allows the population to be sustainable.
 :::
+
+<!----
+#### o Leslie matrix
+::: {#exr-leslie}
+Consider the Leslie matrix
+$$
+L = \begin{pmatrix}
+0 & 2 & 0 \\
+0.5 & 0 & 0 \\
+0 & 0.5 & 0
+\end{pmatrix}.
+$$ {#eq-leslie}
+
+1. Calculate the stable age distribution of the population.
+2. Calculate the growth rate of the population.
+:::
+
+#### o Leslie matrix with harvesting
+::: {#exr-leslie_harvesting}
+Consider the Leslie matrix
+$$
+L = \begin{pmatrix}
+0 & 2 & 0 \\
+0.5 & 0 & 0 \\
+0 & 0.5 & 0
+\end{pmatrix}.
+$$ {#eq-leslie_harvesting}
+Now assume that the population is harvested at a constant rate $\mu_F$ at all ages. The harvesting rate is such that
+$$
+\mu(a) = \begin{cases}
+\mu_0 & \text{if } a < a_m, \\
+\mu_0 + \mu_F & \text{if } a \geq a_m.
+\end{cases}
+$$ {#eq-leslie_harvesting_2}
+Calculate the stable age distribution of the population and the growth rate of the population.
+:::
+
+#### o Leslie matrix with age-independent rates
+::: {#exr-leslie_age_independent}
+Consider the Leslie matrix
+$$
+L = \begin{pmatrix}
+0 & 2 & 0 \\
+0.5 & 0 & 0 \\
+0 & 0.5 & 0
+\end{pmatrix}.
+$$ {#eq-leslie_age_independent}
+Now assume that the birth and death rates are constant, so that
+$$
+b(a) = b, \quad \mu(a) = \mu.
+$$ {#eq-leslie_age_independent_2}
+Calculate the stable age distribution of the population and the growth rate of the population.
+:::
+
+#### Eastern Screech Owl
+::: {#exr-owl}
+The Eastern Screech Owl is a small owl that is found in the eastern United States and Canada. It is a cavity-nesting bird, which means that it nests in holes in trees. The Eastern Screech Owl has a lifespan of about 10 years. It reaches maturity at 1 year and has a clutch size of 3-5 eggs. The Eastern Screech Owl is a nocturnal bird and feeds on small mammals, birds, and insects. It is a common bird in its range and is not considered to be threatened.
+
+| Age | Suburban     |           | Rural        |           |
+| --- | ------------ | --------- | ------------ | --------- |
+| $a$ |   $l_a$      |   $m_a$   |   $l_a$      |   $m_a$   |
+| 0   | 1.00         | 0.0       | 1.00         | 0.0       |
+| 1   | 0.49         | 0.8       | 0.30         | 0.8       |
+| 2   | 0.18         | 1.3       | 0.11         | 1.1       |
+| 3   | 0.10         | 1.5       | 0.06         | 1.6       |
+| 4   | 0.06         | 1.6       | 0.04         | 1.0       |
+| 5   | 0.04         | 1.3       | 0.02         | 1.0       |
+| 6   | 0.03         | 1.3       |              |           |
+| 7   | 0.02         | 1.3       |              |           |
+| 8   | 0.02         | 1.3       |              |           |
+| 9   | 0.01         | 1.3       |              |           |
+| 10  | 0.01         | 1.3       |              |           |
+
+1. Use the Leslie matrix model to calculate the stable age distribution of the Eastern Screech Owl population.
+2. Calculate the growth rate of the Eastern Screech Owl population.
+:::
+
+---->
