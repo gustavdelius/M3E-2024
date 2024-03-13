@@ -193,6 +193,7 @@ window.Quarto = {
   <ul>
   <li><a href="#model-description" id="toc-model-description" class="nav-link" data-scroll-target="#model-description"><span class="header-section-number">4.2.1</span> Model description</a></li>
   <li><a href="#stable-age-distribution" id="toc-stable-age-distribution" class="nav-link" data-scroll-target="#stable-age-distribution"><span class="header-section-number">4.2.2</span> Stable age distribution</a></li>
+  <li><a href="#leslie-matrix" id="toc-leslie-matrix" class="nav-link" data-scroll-target="#leslie-matrix"><span class="header-section-number">4.2.3</span> Leslie matrix</a></li>
   </ul></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">4.3</span> Exercises</a>
   <ul>
@@ -332,7 +333,7 @@ l_a = \begin{cases}
 1 &amp; \text{if } a = 1, \\
 l\, p^{a-2} &amp; \text{if } a \geq 2.
 \end{cases}
-\tag{4.30}\]</span></span> Substituting these values into the expression for <span class="math inline">\(\psi(\lambda)\)</span> in <a href="#eq-a29" class="quarto-xref">Eq.&nbsp;<span>4.27</span></a> gives <span id="eq-a33"><span class="math display">\[
+\tag{4.30}\]</span></span> Substituting these values into the expression for <span class="math inline">\(\psi(\lambda)\)</span> in <a href="#eq-a29" class="quarto-xref">Eq.&nbsp;<span>4.44</span></a> gives <span id="eq-a33"><span class="math display">\[
 \begin{split}
 \psi(\lambda) &amp;= b l \sum_{a=2}^\infty p^{a-2} \lambda^{-a} = lb\lambda^{-2}\sum_{n=0}^\infty \frac{p}{\lambda}\\
 &amp;= lb\lambda^{-2}\frac{1}{1-\frac{p}{\lambda}}
@@ -345,60 +346,173 @@ l\, p^{a-2} &amp; \text{if } a \geq 2.
 \psi(\lambda)=\frac{lb}{\lambda(\lambda-p)}=1 \quad \Leftrightarrow \quad \lambda^2 - \lambda p - lb = 0.
 \tag{4.32}\]</span></span> The solutions are <span id="eq-a35"><span class="math display">\[
 \lambda_\pm = \frac{p \pm \sqrt{p^2 + 4lb}}{2}.
-\tag{4.33}\]</span></span> We are interested in the positive solution <span class="math inline">\(\lambda_+\)</span>. Substituting this value for <span class="math inline">\(\lambda\)</span> back into <a href="#eq-a26" class="quarto-xref">Eq.&nbsp;<span>4.24</span></a> and <a href="#eq-ab19" class="quarto-xref">Eq.&nbsp;<span>4.20</span></a> we see that we have found the solution <span id="eq-a36"><span class="math display">\[
+\tag{4.33}\]</span></span> We are interested in the positive solution <span class="math inline">\(\lambda_+\)</span>. Substituting this value for <span class="math inline">\(\lambda\)</span> back into <a href="#eq-a26" class="quarto-xref">Eq.&nbsp;<span>4.42</span></a> and <a href="#eq-ab19" class="quarto-xref">Eq.&nbsp;<span>4.20</span></a> we see that we have found the solution <span id="eq-a36"><span class="math display">\[
 N_{a,t} = \left(\frac{p + \sqrt{p^2 + 4lb}}{2}\right)^{t-a}l_a N_{0,0}
 \tag{4.34}\]</span></span> for any choice of <span class="math inline">\(N_{0,0}\)</span>.</p>
 </div>
-<!----
-In the case where there is a maximal age $M$, we can collect the equations for $N_{a,t+1}$ for $a=0,1,2,\ldots,M-1$ (@eq-a16 and @eq-a18) into a matrix equation:
-
-$$
+</section>
+<section id="leslie-matrix" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="leslie-matrix"><span class="header-section-number">4.2.3</span> Leslie matrix</h3>
+<p>In the case where there is a maximal age <span class="math inline">\(m\)</span> beyond which there is no reproduction, either because <span class="math inline">\(b_a = 0\)</span> for <span class="math inline">\(a&gt;m\)</span> or because there are not older individuals because <span class="math inline">\(S_{m+1} = 0\)</span>, we can then collect the equations for <span class="math inline">\(N_{a,t+1}\)</span> for <span class="math inline">\(a=0,1,2,\ldots,m-1\)</span> (<a href="#eq-a16" class="quarto-xref">Eq.&nbsp;<span>4.16</span></a> and <a href="#eq-a18" class="quarto-xref">Eq.&nbsp;<span>4.18</span></a>) into a matrix equation:</p>
+<p><span id="eq-a19"><span class="math display">\[
 \begin{pmatrix}
 N_{0} \\
 N_{1} \\
 N_{2} \\
 \vdots \\
-N_{M-1}
+N_{m-1}
 \end{pmatrix}_{t+1}
 =
 \begin{pmatrix}
-F_1 & F_2 & \cdots & F_{M-1} & F_M \\
-S_1 & 0 & \cdots & 0 & 0 \\
-0 & S_2 & \cdots & 0 & 0 \\
-\vdots & \vdots & \ddots & \vdots & \vdots \\
-0 & 0 & \cdots & S_{M-1} & 0
+F_0 &amp; F_2 &amp; \cdots &amp; F_{m-2} &amp; F_{m-1} \\
+S_1 &amp; 0 &amp; \cdots &amp; 0 &amp; 0 \\
+0 &amp; S_2 &amp; \cdots &amp; 0 &amp; 0 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\
+0 &amp; 0 &amp; \cdots &amp; S_{m-1} &amp; 0
 \end{pmatrix}
 \begin{pmatrix}
 N_{0} \\
 N_{1} \\
 N_{2} \\
 \vdots \\
-N_{M-1}
+N_{m-1}
 \end{pmatrix}_{t}.
-$$ {#eq-a19}
-
-Note that we did not include the equation for $N_{M,t+1}$ in the matrix equation. This is because individuals at age $M$ are assumed to die at the end of the year before they get a chance to reproduce, hence they do not contribute back to the other age classes. Once the matrix equation @eq-a19 is solved, we can determine $N_{M,t+1}$ separately from @eq-a16 if we are interested.
-
-The matrix on the right-hand side of @eq-a19 is a so-called Leslie matrix. Let us denote it by $L$. The equation @eq-a19 is a matrix equation of the form
-$$
+\tag{4.35}\]</span></span></p>
+<p>Note that we did not need to include the equation for <span class="math inline">\(N_{m,t+1}\)</span> in the matrix equation because <span class="math inline">\(N_{m,t+1}\)</span> is not needed to calculate the reproduction. Once the matrix equation <a href="#eq-a19" class="quarto-xref">Eq.&nbsp;<span>4.35</span></a> is solved, we can determine <span class="math inline">\(N_{m,t+1}\)</span> separately from <a href="#eq-a16" class="quarto-xref">Eq.&nbsp;<span>4.16</span></a> if we are interested, and similarly for all older age classes that do not reproduce, if any.</p>
+<p>The matrix on the right-hand side of <a href="#eq-a19" class="quarto-xref">Eq.&nbsp;<span>4.35</span></a> is a so-called Leslie matrix. Let us denote it by <span class="math inline">\(L\)</span>. The equation <a href="#eq-a19" class="quarto-xref">Eq.&nbsp;<span>4.35</span></a> is a matrix equation of the form <span id="eq-a20"><span class="math display">\[
 \mathbf{N}_{t+1} = L\, \mathbf{N}_t,
-$$ {#eq-a20}
-where $\mathbf{N}_t$ is the column vector of the numbers $N_{a,t}$ and $L$ is the Leslie matrix. 
-
-In this notation it is easy to formally write down the solution:
-$$
-\mathbf{N}_t = L^t \mathbf{N}_0.
-$$ {#eq-a21}
-
-
-Next we want to look at the stable age distribution of the population. This is a distribution of the population over ages that remains unchanged from one year to the next. It is the distribution that the population will eventually settle into, no matter what the initial distribution was. The total population may still change by a factor $\lambda$ each year, but this factor changes the population at all ages equally. This stable age distribution therefore has to satisfy the equation
-$$
-\mathbf{N}_{t+1} = L\, \mathbf{N}_t = \lambda\,\mathbf{N}_{t},
-$$ {#eq-a22}
-In other words, it is an eigenvector of the Leslie matrix with real eigenvalue $\lambda$.
-
-
----->
+\tag{4.36}\]</span></span> where <span class="math inline">\(\mathbf{N}_t\)</span> is the column vector of the numbers <span class="math inline">\(N_{a,t}\)</span> and <span class="math inline">\(L\)</span> is the Leslie matrix.</p>
+<p>We now have the task of solving the homogeneous linear difference equation <a href="#eq-a20" class="quarto-xref">Eq.&nbsp;<span>4.36</span></a> with constant coefficients (the Leslie matrix <span class="math inline">\(L\)</span> does not depend on time). You know from earlier modules that when confronted with a homogeneous linear <em>differential</em> equation with constant coefficients you can solve it with an exponential Ansatz. The same works for linear difference equations. We make the Ansatz <span id="eq-a21"><span class="math display">\[
+\mathbf{N}_t = \lambda^t \mathbf{v}
+\tag{4.37}\]</span></span> and substitute it into <a href="#eq-a20" class="quarto-xref">Eq.&nbsp;<span>4.36</span></a>. This gives <span id="eq-a22"><span class="math display">\[
+\lambda^{t+1} \mathbf{v} = L \lambda^t \mathbf{v}.
+\tag{4.38}\]</span></span> Dividing by <span class="math inline">\(\lambda^t\)</span> gives <span id="eq-a23"><span class="math display">\[
+\lambda \mathbf{v} = L \mathbf{v}.
+\tag{4.39}\]</span></span> This means that our Ansatz works if we choose <span class="math inline">\(\lambda\)</span> to be an eigenvalue of the Leslie matrix <span class="math inline">\(L\)</span> and <span class="math inline">\(\mathbf{v}\)</span> to be the corresponding eigenvector.</p>
+<p>In the case where all eigenvalues of the Leslie matrix are distinct<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, the general solution is the linear combination of the solutions for each eigenvalue. <span id="eq-a24"><span class="math display">\[
+\mathbf{N}_t = c_1 \lambda_1^t \mathbf{v}_1 + c_2 \lambda_2^t \mathbf{v}_2 + \cdots + c_m \lambda_m^t \mathbf{v}_m,
+\tag{4.40}\]</span></span> where <span class="math inline">\(\lambda_1,\lambda_2,\ldots,\lambda_m\)</span> are the eigenvalues of the Leslie matrix and <span class="math inline">\(\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_m\)</span> are the corresponding eigenvectors. The constants <span class="math inline">\(c_1,c_2,\ldots,c_m\)</span> are determined by the initial conditions.</p>
+<div id="exm-leslie1" class="theorem example">
+<p><span class="theorem-title"><strong>Example 4.2</strong></span> Consider a population with the reproduction numbers <span class="math inline">\(b_a\)</span> and the survival probabilities <span class="math inline">\(S_a\)</span> given in the following table:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(a\)</span></th>
+<th><span class="math inline">\(b_a\)</span></th>
+<th><span class="math inline">\(S_a\)</span></th>
+<th><span class="math inline">\(F_a\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0</td>
+<td>—</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1/2</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>1</td>
+<td>1/2</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>2</td>
+<td>1/2</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>0</td>
+<td>1/2</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>The final column in that table is calculated from the previous ones using <span class="math inline">\(F_a:=b_{a+1}S_{a+1}\)</span>. In this example the maximum age <span class="math inline">\(m\)</span> beyond which there is no reproduction is <span class="math inline">\(m=3\)</span>. Hence the corresponding Leslie matrix is a <span class="math inline">\(3\times 3\)</span> matrix. It is given by <span id="eq-a25"><span class="math display">\[
+L = \begin{pmatrix}
+F_0&amp;F_1&amp;F_2 \\
+S_1 &amp; 0 &amp; 0 \\
+0 &amp; S_2 &amp; 0
+\end{pmatrix}=\begin{pmatrix}
+0 &amp; 1/2 &amp; 1 \\
+1 &amp; 0 &amp; 0 \\
+0 &amp; 1/2 &amp; 0
+\end{pmatrix}.
+\tag{4.41}\]</span></span></p>
+<p>Assume that the at time <span class="math inline">\(t=0\)</span> we only have 10 individuals all of age 0, i.e., <span id="eq-a26"><span class="math display">\[
+\mathbf{N}_0 = \begin{pmatrix}
+10 \\
+0 \\
+0
+\end{pmatrix}.
+\tag{4.42}\]</span></span> We can then calculate the numbers at the following times <span class="math inline">\(t=1,2,3,\ldots\)</span> by repeated multiplication by the Leslie matrix <span class="math inline">\(L\)</span>: <span class="math display">\[
+\mathbf{N}_1 = L \mathbf{N}_0 = \begin{pmatrix}
+0 &amp; 1/2 &amp; 1 \\
+1 &amp; 0 &amp; 0 \\
+0 &amp; 1/2 &amp; 0
+\end{pmatrix}
+\begin{pmatrix}
+10 \\
+0 \\
+0
+\end{pmatrix}
+= \begin{pmatrix}
+0 \\
+10 \\
+0
+\end{pmatrix},
+\]</span> <span class="math display">\[
+\mathbf{N}_2 = L \mathbf{N}_1
+= \begin{pmatrix}
+5 \\
+0 \\
+5
+\end{pmatrix},
+~~~
+\mathbf{N}_3 = L \mathbf{N}_2 = \begin{pmatrix}
+5 \\
+5 \\
+0
+\end{pmatrix}, \cdots.
+\]</span> Continuing like this (using a computer) we observe that the population converges to a stable age distribution. <span id="eq-a27"><span class="math display">\[
+\lim_{t\to\infty}\mathbf{N}_t = \begin{pmatrix}
+4 \\
+4 \\
+2
+\end{pmatrix}.
+\tag{4.43}\]</span></span></p>
+<p>To understand this phenomenon we look for the eigenvalues and eigenvectors of the Leslie matrix. The eigenvalues are the solutions of the characteristic equation <span id="eq-a29"><span class="math display">\[
+\begin{split}
+0&amp;=\det(L-\lambda I)=\begin{vmatrix}
+-\lambda &amp; 1/2 &amp; 1 \\
+1 &amp; -\lambda &amp; 0 \\
+0 &amp; 1/2 &amp; -\lambda
+\end{vmatrix}
+= -\lambda^3 + \frac{1}{2}\lambda+\frac12\\
+&amp;= (1-\lambda)\left(\lambda^2+\lambda+\frac12\right)
+\end{split}
+\tag{4.44}\]</span></span> We can read off that the solutions are <span id="eq-a30"><span class="math display">\[
+\lambda_) = 1, \quad \lambda_\pm = -\frac{1}{2} \pm \frac{1}{2}i.
+\tag{4.45}\]</span></span> Because the magnitude of the eigenvalues <span class="math inline">\(\lambda_\pm\)</span> is less than <span class="math inline">\(1\)</span>, we have that <span class="math inline">\(\lim_{t\to\infty}\lambda_\pm^t=0\)</span>. This means that the stable age distribution is given by the eigenvector corresponding to the eigenvalue <span class="math inline">\(\lambda_0=1\)</span>: <span class="math display">\[
+\lim_{t\to\infty}\mathbf{N}_t = \lim_{t\to\infty}\left(c_0 \lambda_0^t \mathbf{v}_0 + c_+ \lambda_+^t \mathbf{v}_+ + c_- \lambda_-^t \mathbf{v}_-\right) = c_0 \mathbf{v}_0.
+\]</span></p>
+</div>
+<p>In general, if the Leslie matrix has a unique dominatn eigenvalue <span class="math inline">\(\lambda_0\)</span> with a corresponding eigenvector <span class="math inline">\(\mathbf{v}_0\)</span>, then <span class="math display">\[
+\lim_{t\to\infty}\frac{\mathbf{N}_t}{\lambda_0^t} = c_0 \mathbf{v}_0,
+\]</span> where <span class="math inline">\(c_0\)</span> is a constant that depends on the initial conditions. This means that the population converges to a stable age distribution. The stable age distribution is given by the eigenvector corresponding to the dominant eigenvalue of the Leslie matrix.</p>
+<p>Luckily, there is a theorem about the eigenvalues and eigenvectors of non-negative matrices that we can use to determine whether a Leslie matrix has a unique dominant eigenvalue. We start by associating the Leslie matrix with a directed graph. The graph has <span class="math inline">\(m\)</span> vertices and a directed edge from vertex <span class="math inline">\(i\)</span> to vertex <span class="math inline">\(j\)</span> if and only if the Leslie matrix has a non-zero entry in column <span class="math inline">\(i\)</span> and row <span class="math inline">\(j\)</span>. The graph is called the Leslie graph. We call the Leslie matrix irreducible if its Leslie graph is strongly connected, which means that there is a directed path between any two nodes. We call the Leslie matrix primitive if the greatest common divisor of the lengths of all circuits in the Leslie graph is <span class="math inline">\(1\)</span>. The following theorem is then true:</p>
+<div id="thm-leslie" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 4.1</strong></span> If the Leslie matrix is irreducible and primitive, then it has a unique dominant eigenvalue that is real and positive. The corresponding right eigenvector is real and strictly positive.</p>
+</div>
+<p>This is a special case of the Perron-Frobenius theorem, which is a general theorem about non-negative matrices, and is used extensively in the theory of Markov chains. The above theorem is exactly what we need, because it tells us when the Leslie matrix has a unique dominant eigenvalue and a corresponding eigenvector that gives the stable age distribution.</p>
 </section>
 </section>
 <section id="exercises" class="level2" data-number="4.3">
@@ -422,12 +536,12 @@ b(a) = \begin{cases}
 0 &amp; \text{if } a &lt; a_m, \\
 b &amp; \text{if } a \geq a_m.
 \end{cases}
-\tag{4.35}\]</span></span> All fish at all ages experience a natural death rate <span class="math inline">\(\mu_0\)</span>. In addition, fish above the maturity size are harvested at a constant rate <span class="math inline">\(\mu_F\)</span>, so that <span id="eq-age_harvesting_2"><span class="math display">\[
+\tag{4.46}\]</span></span> All fish at all ages experience a natural death rate <span class="math inline">\(\mu_0\)</span>. In addition, fish above the maturity size are harvested at a constant rate <span class="math inline">\(\mu_F\)</span>, so that <span id="eq-age_harvesting_2"><span class="math display">\[
 \mu(a) = \begin{cases}
 \mu_0 &amp; \text{if } a &lt; a_m, \\
 \mu_0 + \mu_F &amp; \text{if } a \geq a_m.
 \end{cases}
-\tag{4.36}\]</span></span> By calculating the expected number of offspring per individual, determine the limit on the harvesting rate <span class="math inline">\(\mu_F\)</span> that allows the population to be sustainable.</p>
+\tag{4.47}\]</span></span> By calculating the expected number of offspring per individual, determine the limit on the harvesting rate <span class="math inline">\(\mu_F\)</span> that allows the population to be sustainable.</p>
 </div>
 <!----
 #### o Leslie matrix
@@ -514,6 +628,7 @@ The Eastern Screech Owl is a small owl that is found in the eastern United State
 <hr>
 <ol>
 <li id="fn1"><p>If <span class="math inline">\(\lambda\geq p\)</span>, then <span class="math inline">\(\psi(\lambda)\)</span> diverges and does not satisfy the Euler-Lotka equation <span class="math inline">\(\psi(\lambda)=1\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>In the case where there are repeated eigenvalues, the general solution is just a bit more complicated. Luckily in ecology, we are rarely interested in that case, because the probability that a real ecosystem is exactly so that this special case arises is zero.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 

@@ -214,11 +214,9 @@ for any choice of $N_{0,0}$.
 
 :::
 
+### Leslie matrix
 
-
-
-<!----
-In the case where there is a maximal age $M$, we can collect the equations for $N_{a,t+1}$ for $a=0,1,2,\ldots,M-1$ (@eq-a16 and @eq-a18) into a matrix equation:
+In the case where there is a maximal age $m$ beyond which there is no reproduction, either because $b_a = 0$ for $a>m$ or because there are not older individuals because $S_{m+1} = 0$, we can then collect the equations for $N_{a,t+1}$ for $a=0,1,2,\ldots,m-1$ (@eq-a16 and @eq-a18) into a matrix equation:
 
 $$
 \begin{pmatrix}
@@ -226,26 +224,26 @@ N_{0} \\
 N_{1} \\
 N_{2} \\
 \vdots \\
-N_{M-1}
+N_{m-1}
 \end{pmatrix}_{t+1}
 =
 \begin{pmatrix}
-F_1 & F_2 & \cdots & F_{M-1} & F_M \\
+F_0 & F_2 & \cdots & F_{m-2} & F_{m-1} \\
 S_1 & 0 & \cdots & 0 & 0 \\
 0 & S_2 & \cdots & 0 & 0 \\
 \vdots & \vdots & \ddots & \vdots & \vdots \\
-0 & 0 & \cdots & S_{M-1} & 0
+0 & 0 & \cdots & S_{m-1} & 0
 \end{pmatrix}
 \begin{pmatrix}
 N_{0} \\
 N_{1} \\
 N_{2} \\
 \vdots \\
-N_{M-1}
+N_{m-1}
 \end{pmatrix}_{t}.
 $$ {#eq-a19}
 
-Note that we did not include the equation for $N_{M,t+1}$ in the matrix equation. This is because individuals at age $M$ are assumed to die at the end of the year before they get a chance to reproduce, hence they do not contribute back to the other age classes. Once the matrix equation @eq-a19 is solved, we can determine $N_{M,t+1}$ separately from @eq-a16 if we are interested.
+Note that we did not need to include the equation for $N_{m,t+1}$ in the matrix equation because $N_{m,t+1}$ is not needed to calculate the reproduction. Once the matrix equation @eq-a19 is solved, we can determine $N_{m,t+1}$ separately from @eq-a16 if we are interested, and similarly for all older age classes that do not reproduce, if any.
 
 The matrix on the right-hand side of @eq-a19 is a so-called Leslie matrix. Let us denote it by $L$. The equation @eq-a19 is a matrix equation of the form
 $$
@@ -253,20 +251,136 @@ $$
 $$ {#eq-a20}
 where $\mathbf{N}_t$ is the column vector of the numbers $N_{a,t}$ and $L$ is the Leslie matrix. 
 
-In this notation it is easy to formally write down the solution:
+We now have the task of solving the homogeneous linear difference equation @eq-a20 with constant coefficients (the Leslie matrix $L$ does not depend on time). You know from earlier modules that when confronted with a homogeneous linear _differential_ equation with constant coefficients you can solve it with an exponential Ansatz. The same works for linear difference equations. We make the Ansatz
 $$
-\mathbf{N}_t = L^t \mathbf{N}_0.
+\mathbf{N}_t = \lambda^t \mathbf{v}
 $$ {#eq-a21}
-
-
-Next we want to look at the stable age distribution of the population. This is a distribution of the population over ages that remains unchanged from one year to the next. It is the distribution that the population will eventually settle into, no matter what the initial distribution was. The total population may still change by a factor $\lambda$ each year, but this factor changes the population at all ages equally. This stable age distribution therefore has to satisfy the equation
+and substitute it into @eq-a20. This gives
 $$
-\mathbf{N}_{t+1} = L\, \mathbf{N}_t = \lambda\,\mathbf{N}_{t},
+\lambda^{t+1} \mathbf{v} = L \lambda^t \mathbf{v}.
 $$ {#eq-a22}
-In other words, it is an eigenvector of the Leslie matrix with real eigenvalue $\lambda$.
+Dividing by $\lambda^t$ gives
+$$
+\lambda \mathbf{v} = L \mathbf{v}.
+$$ {#eq-a23}
+This means that our Ansatz works if we choose $\lambda$ to be an eigenvalue of the Leslie matrix $L$ and $\mathbf{v}$ to be the corresponding eigenvector. 
 
+In the case where all eigenvalues of the Leslie matrix are distinct^[In the case where there are repeated eigenvalues, the general solution is just a bit more complicated. Luckily in ecology, we are rarely interested in that case, because the probability that a real ecosystem is exactly so that this special case arises is zero.], the general solution is the linear combination of the solutions for each eigenvalue.
+$$
+\mathbf{N}_t = c_1 \lambda_1^t \mathbf{v}_1 + c_2 \lambda_2^t \mathbf{v}_2 + \cdots + c_m \lambda_m^t \mathbf{v}_m,
+$$ {#eq-a24}
+where $\lambda_1,\lambda_2,\ldots,\lambda_m$ are the eigenvalues of the Leslie matrix and $\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_m$ are the corresponding eigenvectors. The constants $c_1,c_2,\ldots,c_m$ are determined by the initial conditions.
 
----->
+::: {#exm-leslie1}
+
+Consider a population with the reproduction numbers $b_a$ and the survival probabilities $S_a$ given in the following table:
+
+| $a$ | $b_a$ | $S_a$ | $F_a$ |
+| --- | ----- | ----- | ----- |
+| 0   | 0     | ---   |  0    |
+| 1   | 0     |  1    |  1/2  |
+| 2   | 1     |  1/2  |  1    |
+| 3   | 2     |  1/2  |  0    | 
+| 4   | 0     |  1/2  |  0    |
+
+The final column in that table is calculated from the previous ones using $F_a:=b_{a+1}S_{a+1}$. In this example the maximum age $m$ beyond which there is no reproduction is $m=3$. Hence the corresponding Leslie matrix is a $3\times 3$ matrix. It is given by
+$$
+L = \begin{pmatrix}
+F_0&F_1&F_2 \\
+S_1 & 0 & 0 \\
+0 & S_2 & 0
+\end{pmatrix}=\begin{pmatrix}
+0 & 1/2 & 1 \\
+1 & 0 & 0 \\
+0 & 1/2 & 0
+\end{pmatrix}.
+$$ {#eq-a25}
+
+Assume that the at time $t=0$ we only have 10 individuals all of age 0, i.e.,
+$$
+\mathbf{N}_0 = \begin{pmatrix}
+10 \\
+0 \\
+0
+\end{pmatrix}.
+$$ {#eq-a26}
+We can then calculate the numbers at the following times $t=1,2,3,\ldots$ by repeated multiplication by the Leslie matrix $L$:
+$$
+\mathbf{N}_1 = L \mathbf{N}_0 = \begin{pmatrix}
+0 & 1/2 & 1 \\
+1 & 0 & 0 \\
+0 & 1/2 & 0
+\end{pmatrix}
+\begin{pmatrix}
+10 \\
+0 \\
+0 
+\end{pmatrix}
+= \begin{pmatrix}
+0 \\
+10 \\
+0
+\end{pmatrix},
+$$
+$$
+\mathbf{N}_2 = L \mathbf{N}_1
+= \begin{pmatrix}
+5 \\
+0 \\
+5
+\end{pmatrix}, 
+~~~
+\mathbf{N}_3 = L \mathbf{N}_2 = \begin{pmatrix}
+5 \\
+5 \\
+0
+\end{pmatrix}, \cdots.
+$$
+Continuing like this (using a computer) we observe that the population converges to a stable age distribution. 
+$$
+\lim_{t\to\infty}\mathbf{N}_t = \begin{pmatrix}
+4 \\
+4 \\
+2
+\end{pmatrix}.
+$$ {#eq-a27}
+
+To understand this phenomenon we look for the eigenvalues and eigenvectors of the Leslie matrix. The eigenvalues are the solutions of the characteristic equation
+$$
+\begin{split}
+0&=\det(L-\lambda I)=\begin{vmatrix}
+-\lambda & 1/2 & 1 \\
+1 & -\lambda & 0 \\
+0 & 1/2 & -\lambda
+\end{vmatrix}
+= -\lambda^3 + \frac{1}{2}\lambda+\frac12\\
+&= (1-\lambda)\left(\lambda^2+\lambda+\frac12\right)
+\end{split}
+$$ {#eq-a29}
+We can read off that the solutions are
+$$
+\lambda_) = 1, \quad \lambda_\pm = -\frac{1}{2} \pm \frac{1}{2}i.
+$$ {#eq-a30}
+Because the magnitude of the eigenvalues $\lambda_\pm$ is less than $1$, we have that $\lim_{t\to\infty}\lambda_\pm^t=0$. This means that the stable age distribution is given by the eigenvector corresponding to the eigenvalue $\lambda_0=1$:
+$$
+\lim_{t\to\infty}\mathbf{N}_t = \lim_{t\to\infty}\left(c_0 \lambda_0^t \mathbf{v}_0 + c_+ \lambda_+^t \mathbf{v}_+ + c_- \lambda_-^t \mathbf{v}_-\right) = c_0 \mathbf{v}_0.
+$$
+:::
+
+In general, if the Leslie matrix has a unique dominatn eigenvalue $\lambda_0$ with a corresponding eigenvector $\mathbf{v}_0$, then 
+$$
+\lim_{t\to\infty}\frac{\mathbf{N}_t}{\lambda_0^t} = c_0 \mathbf{v}_0,
+$$
+where $c_0$ is a constant that depends on the initial conditions. This means that the population converges to a stable age distribution. The stable age distribution is given by the eigenvector corresponding to the dominant eigenvalue of the Leslie matrix.
+
+Luckily, there is a theorem about the eigenvalues and eigenvectors of non-negative matrices that we can use to determine whether a Leslie matrix has a unique dominant eigenvalue. We start by associating the Leslie matrix with a directed graph. The graph has $m$ vertices and a directed edge from vertex $i$ to vertex $j$ if and only if the Leslie matrix has a non-zero entry in column $i$ and row $j$. The graph is called the Leslie graph. We call the Leslie matrix irreducible if its Leslie graph is strongly connected, which means that there is a directed path between any two nodes. We call the Leslie matrix primitive if the greatest common divisor of the lengths of all circuits in the Leslie graph is $1$. The following theorem is then true:
+
+::: {#thm-leslie}
+If the Leslie matrix is irreducible and primitive, then it has a unique dominant eigenvalue that is real and positive. The corresponding right eigenvector is real and strictly positive.
+:::
+
+This is a special case of the Perron-Frobenius theorem, which is a general theorem about non-negative matrices, and is used extensively in the theory of Markov chains. The above theorem is exactly what we need, because it tells us when the Leslie matrix has a unique dominant eigenvalue and a corresponding eigenvector that gives the stable age distribution.
+
 
 ## Exercises
 
