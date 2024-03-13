@@ -499,7 +499,7 @@ Here $r>0$, $K>K_0>0$ are constants. Simply by considering the shape of the righ
 :::
 
 #### +Von Bertalanffy growth
-::: {#exr-vonBertalanffy_growth}
+::: {#exr-vonBertalanffy-growth}
 Assume the weight $w(t)$ of an individual fish at time $t$ is
 governed by the differential equation
 $$\frac{dw}{dt}=\alpha\,w^{2/3}-\beta w$$
