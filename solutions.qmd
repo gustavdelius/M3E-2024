@@ -1,0 +1,191 @@
+# Solutions
+
+This appendix holds the solutions to selected exercises in the book. Please look at these solutions only after having made a serious attempt at solving the exercises and knowing exactly where you got stuck.
+
+## Continuous-time population models
+
+<!----
+### @exr-sketch_solutions {.unnumbered}
+*Sketching solutions*
+
+See solution sheet published on Moodle.
+--->
+
+### @exr-vonBertalanffy-growth {.unnumbered}
+*Von Bertalanffy growth*
+
+i) Seeking a steady state we find $\alpha w^{2/3}-\beta w = 0$  $\implies$  $w^{2/3}(\alpha-\beta w^{1/3})=0$ $\implies$ $w=0$ or $w^{1/3} = \alpha/\beta$.
+With the graphical approach in @fig-vonBertalanffy-growth we see that the non-zero steady state is stable. Hence, 
+$$
+\lim_{t \rightarrow \infty} w(t) = \left( \frac{\alpha}{\beta} \right)^{3}.
+$$
+
+![$dw/dt$ versus $w$ for the von Bertalanffy growth model.](figures/Solutions/vonBertalanffy_growth.png){#fig-vonBertalanffy-growth width=50%}
+
+
+ii) For the time derivative of $u=w^{1/3}$ we find by the chain rule that
+$$
+\frac{du}{dt} = \frac13 w^{-2/3} \frac{dw}{dt} = \frac{1}{3u^2}\left( \alpha w^{2/3}-\beta w \right).
+$$
+Hence
+$$
+3\frac{du}{dt} = \frac{1}{u^2}\left( \alpha u^2-\beta u^3 \right) = \alpha-\beta u.
+$$
+So this change of variables has yielded a first-order ODE with linear coefficients, which is easy for us to solve:
+$$
+u(t) = \frac{1}{\beta} \left( \alpha  - Ae^{-\beta t/3}\right)
+$$
+for some integration constant $A$. If $u(0)=u_0$ then $A=\alpha -\beta u_0$.
+
+iii) Translating back to $w$ with $w_0=u_0^3$ we finally have
+$$
+w(t) = u(t)^3 = \frac{1}{\beta^3}\left( \alpha - \left( \alpha - \beta w_0^{1/3} \right) e^{-\beta t/3}  \right)^3.
+$$
+
+### @exr-logistic_solution {.unnumbered}
+*Solving logistic equation*
+
+We separate the variables by dividing both sides of the ODE by $N(1-N/K)$ and multiplying by $dt$, and then integrate to get
+$$
+\int_{N_0}^{N(t)}\frac{dN}{N\left(1-\frac{N}{K}\right)}=\int_0^t r\,dt.$$
+The right hand side is trivial to integrate, but for the integral on the left-hand side we need to employ the
+method of partial fractions, using that
+$$\frac{dN}{N\left(1-\frac{N}{K}\right)}=\frac{1}{N}+\frac{1}{K-N}.$$
+The left-hand side then gives
+$$
+\int_{N_0}^{N(t)}\left(\frac{1}{N}+\frac{1}{K-N(t)}\right)dN=\log N(t)-\log N_0-\log(K-N(t))+\log(K-N_0).$$
+We exponentiate both sides to get
+$$\frac{N(t)}{N_0}\frac{K-N_0}{K-N(t)}=e^{rt}.$$
+Now we just need to solve for $N(t)$:
+$$N(t)=\frac{N_0Ke^{rt}}{K+N_0(e^{rt}-1)}.$$
+
+<!---
+### @exr-harvest_effort {.unnumbered}
+*Harvesting with fixed effort*
+
+See solution sheet on Moodle.
+--->
+
+### @exr-harvest_quota {.unnumbered}
+*Harvesting with fixed quota*
+
+If we harvest with a fixed quota $Q$, the population is described by the equation
+$$
+\frac{dN}{dt} = \alpha N \log\frac{K}{N} - Q.
+$$
+The subtraction of $Q$ shifts the graph of the right-hand side down by a distance $Q$. This brings the non-zero fixed points closer together until $Q$ is equal to the maximum of the growth rate of the unfished population. If $Q$ is increased beyond this value the non-zero fixed points disappear and the population will go extinct. is because we are removing $Q$ individuals from the population at a constant rate. Thus the maximum sustainable
+yield occurs when $Q$ equals the maximum replenishment rate of the unfished population. To find that
+maximum we first solve
+$$
+0=\frac{d}{dN}\left(\alpha N \log\frac{K}{N}\right)=\alpha\left(\log\frac{K}{N}-1\right).
+$$
+This tells us that the maximum is at
+$$
+N_{max} = K\,e^{-1}.
+$$
+Hence the value at the maximum is
+$$MSY=Q_{max}=\alpha N_{max} \log\frac{K}{N_{max}}=\alpha\,K\,e^{-1}.$$
+Fishing at this quota is not wise, as this reduces the population to the threshold level below which the population will go extinct. 
+
+
+### @exr-Hornet {.unnumbered}
+*Wasps*
+
+For $0\leq t\leq t_c$ the number of workers satisfies
+$$
+\frac{dn}{dt}=r\,n.
+$$
+Therefore
+$$
+n(t)=n_0e^{r\,t}.
+$$
+
+For $t_c\leq t\leq T$ the number of reproducers satisfies
+$$
+\frac{dN}{dt}=Rn(t_c)=R\,n_0\,e^{r\,t_c},
+$$
+so that
+$$
+N(T)=(T-t_c)R\,e^{r\,t_c}.
+$$
+
+To find the value of $t_c$ that maximises $N(T)$ we set the derivative of $N(T)$ with respect to $t_c$ to zero:
+$$
+0=\frac{d}{dt_c}N(T)=\frac{d}{dt_c}(T-t_c)R\,e^{r\,t_c}=-R\,e^{r\,t_c}+(T-t_c)R\,r\,e^{r\,t_c}
+=R\,e^{r\,t_c}(r\,T-r\,t_c-1).
+$$
+This implies that
+$$
+t_c=T-\frac{1}{r}.
+$$
+
+
+### @exr-wasp_death {.unnumbered}
+*Wasp with death*
+
+For $0\leq t\leq t_c$ the number of workers satisfies
+$$\frac{dn}{dt}=(r-d)n.$$
+Therefore
+$$n(t)=e^{(r-d)t}.$$
+For $t_c\leq t\leq T$ we have
+$$\frac{dn}{dt}=-dn$$
+so that
+$$n(t)=n(t_c)e^{-d(t-t_c)}=e^{(r-d)t}e^{-d(t-t_c)}=e^{r\,t_c}e^{-d\,t}.$$
+Also for $t_c\leq t\leq T$ the number of reproducers satisfies
+$$\frac{dN}{dt}=Rn(t)=Re^{r\,t_c}e^{-d\,t},$$
+so that
+$$N(T)=\int_{t_c}^TRe^{r\,t_c}e^{-d\,t}dt = \frac{R}{d}e^{r\,t_c}\left(e^{-d\,t_c}-e^{-d\,T}\right).$$
+To find the value of $t_c$ that maximises $N(T)$ we set the derivative of $N(T)$ with respect to $t_c$ to zero:
+$$0=\frac{d}{dt_c}N(T)=\frac{d}{dt_c}\left( \frac{R}{d}e^{r\,t_c}\left(e^{-d\,t_c}-e^{-d\,T}\right)\right)
+=Re^{r\,t_c}\left(\left(\frac{r}{d}-1\right)e^{-d\,t_c}-\frac{r}{d}e^{-d\,T}\right)$$
+This is equivalent to 
+$$e^{-d\,t_c}=\frac{1}{1-d/r}e^{-d\,T}$$
+and thus
+$$t_c=T+\frac{1}{d}\ln\left(1-\frac{d}{r}\right).$$
+
+## Discrete-time population models
+
+### @exr-discrete_logistic {.unnumbered}
+*Verhulst model*
+
+Let's write the equation as $N_{t+1}=f(N_t)$ with
+$$
+f(N)=rN\left(1-\frac{N}{K}\right).
+$$
+
+Because $f(N)$ is positive for all $N<K$, the only way for $N_{t+1}$ to be negative
+is for $N_t$ to be greater than $K$. This in turn is only possible if $f(N_{t-1})>K$. So the function $f$ at its maximum needs to be larger than $K$. Because the function describes an upside-down parabola with
+zeros at $0$ and $K$, its maximum is in the middle at $N=K/2$, where $f(K/2)=rK/4$. Thus the population can get negative iff $rK/4>K$, which is equivalent to $r>4$.
+
+
+
+## Age-structured population models
+
+### @exr-age_harvesting {.unnumbered}
+*Harvestings an age-structured population*
+
+We can start from @eq-a14 that gives the expected number of offspring produced by an individual within their lifetime:
+$$
+\phi(0) = \int_0^\infty b(a) \exp\left(-\int_0^a \mu(a') \, da'\right)\, da.
+$$
+This will now simplify when we use the given expressions @eq-age_harvesting_1 and @eq-age_harvesting_2 for the rates. Because $b(a)$ is non-zero only for $a>a_m$, the outer integral only has to run from $a_m$ to $\infty$. The inner integral from $0$ to $a$ we need to split into two integrals because of the piece-wise nature of $\mu(a)$. Hence
+$$
+\phi(0) = \int_{a_m}^\infty b(a) \exp\left(-\int_0^{a_m} \mu(a') \, da'
+-\int_{a_m}^a \mu(a') \, da'\right)\, da.
+$$
+We can now substitute the appropriate constants for the rates:
+$$
+\begin{split}
+\phi(0) &= \int_{a_m}^\infty b\, \exp\left(-\int_0^{a_m} \mu_0 \, da'
+-\int_{a_m}^a (\mu_0+\mu_F) \, da'\right)\, da\\
+&= \int_{a_m}^\infty b\, \exp\left(-\mu_0 a_m - (\mu_0+\mu_F)(a-a_m)\right)\, da\\
+&= b\,\exp(-\mu_F a_m) \int_{a_m}^\infty \, \exp\left(- (\mu_0+\mu_F)a\right)\, da\\
+&= b\,\exp(-\mu_F a_m) \left[-\frac{1}{\mu_0+\mu_F}\exp\left(- (\mu_0+\mu_F)a\right)\right]_{a_m}^\infty\\
+&= b\,\exp(-\mu_F a_m)  \frac{1}{\mu_0+\mu_F}\exp\left(- (\mu_0+\mu_F)a_m\right)\\
+&= \frac{b}{\mu_0+\mu_F}\exp\left(-\mu_0a_m\right).
+\end{split}
+$$
+This expected number of offspring produced by an individual within their lifetime must be greater or equal to $1$ for the population to sustain itself. Hence the upper limit on the harvesting rate $\mu_F$ is given by
+$$
+\mu_F \leq b\exp\left(-\mu_0a_m\right) - \mu_0.
+$$

@@ -39,6 +39,8 @@ book:
     - discrete_time.qmd
     - sex_structured.qmd
     - age_structured.qmd
+  appendices:
+    - solutions.qmd
 
 bibliography: references.bib
 
@@ -47,15 +49,14 @@ format:
     theme: cosmo
     code-fold: true
     link-external-newwindow: true
-    toc-depth: 4
-    number-sections: true
-    number-depth: 3
+    fig-width: 6
+    fig-height: 4
   pdf:
     documentclass: scrreport
-    toc_depth: 3
-    number-sections: true
-    number-depth: 2
 
 toc: true
+toc-depth: 4
+number-depth: 3
+number-sections: true
 crossref:
   eq-prefix: Eq.
