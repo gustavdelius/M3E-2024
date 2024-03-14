@@ -39,6 +39,7 @@ book:
     - discrete_time.qmd
     - sex_structured.qmd
     - age_structured.qmd
+    - interacting.qmd
   appendices:
     - solutions.qmd
 
