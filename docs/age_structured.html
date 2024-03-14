@@ -223,6 +223,9 @@ window.Quarto = {
   <ul>
   <li><a href="#age-independent-rates" id="toc-age-independent-rates" class="nav-link" data-scroll-target="#age-independent-rates">* Age-independent rates</a></li>
   <li><a href="#o-harvestings-an-age-structured-population" id="toc-o-harvestings-an-age-structured-population" class="nav-link" data-scroll-target="#o-harvestings-an-age-structured-population">o Harvestings an age-structured population</a></li>
+  <li><a href="#fibonacci-population" id="toc-fibonacci-population" class="nav-link" data-scroll-target="#fibonacci-population">* Fibonacci population</a></li>
+  <li><a href="#semelparous-population" id="toc-semelparous-population" class="nav-link" data-scroll-target="#semelparous-population">Semelparous population</a></li>
+  <li><a href="#eastern-screech-owl" id="toc-eastern-screech-owl" class="nav-link" data-scroll-target="#eastern-screech-owl">Eastern Screech Owl</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/gustavdelius/M3E-2024/edit/main/age_structured.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
@@ -567,83 +570,167 @@ b &amp; \text{if } a \geq a_m.
 \end{cases}
 \tag{4.47}\]</span></span> By calculating the expected number of offspring per individual, determine the limit on the harvesting rate <span class="math inline">\(\mu_F\)</span> that allows the population to be sustainable.</p>
 </div>
-<!----
-#### o Leslie matrix
-::: {#exr-leslie}
-Consider the Leslie matrix
-$$
-L = \begin{pmatrix}
-0 & 2 & 0 \\
-0.5 & 0 & 0 \\
-0 & 0.5 & 0
-\end{pmatrix}.
-$$ {#eq-leslie}
-
-1. Calculate the stable age distribution of the population.
-2. Calculate the growth rate of the population.
-:::
-
-#### o Leslie matrix with harvesting
-::: {#exr-leslie_harvesting}
-Consider the Leslie matrix
-$$
-L = \begin{pmatrix}
-0 & 2 & 0 \\
-0.5 & 0 & 0 \\
-0 & 0.5 & 0
-\end{pmatrix}.
-$$ {#eq-leslie_harvesting}
-Now assume that the population is harvested at a constant rate $\mu_F$ at all ages. The harvesting rate is such that
-$$
-\mu(a) = \begin{cases}
-\mu_0 & \text{if } a < a_m, \\
-\mu_0 + \mu_F & \text{if } a \geq a_m.
-\end{cases}
-$$ {#eq-leslie_harvesting_2}
-Calculate the stable age distribution of the population and the growth rate of the population.
-:::
-
-#### o Leslie matrix with age-independent rates
-::: {#exr-leslie_age_independent}
-Consider the Leslie matrix
-$$
-L = \begin{pmatrix}
-0 & 2 & 0 \\
-0.5 & 0 & 0 \\
-0 & 0.5 & 0
-\end{pmatrix}.
-$$ {#eq-leslie_age_independent}
-Now assume that the birth and death rates are constant, so that
-$$
-b(a) = b, \quad \mu(a) = \mu.
-$$ {#eq-leslie_age_independent_2}
-Calculate the stable age distribution of the population and the growth rate of the population.
-:::
-
-#### Eastern Screech Owl
-::: {#exr-owl}
-The Eastern Screech Owl is a small owl that is found in the eastern United States and Canada. It is a cavity-nesting bird, which means that it nests in holes in trees. The Eastern Screech Owl has a lifespan of about 10 years. It reaches maturity at 1 year and has a clutch size of 3-5 eggs. The Eastern Screech Owl is a nocturnal bird and feeds on small mammals, birds, and insects. It is a common bird in its range and is not considered to be threatened.
-
-| Age | Suburban     |           | Rural        |           |
-| --- | ------------ | --------- | ------------ | --------- |
-| $a$ |   $l_a$      |   $m_a$   |   $l_a$      |   $m_a$   |
-| 0   | 1.00         | 0.0       | 1.00         | 0.0       |
-| 1   | 0.49         | 0.8       | 0.30         | 0.8       |
-| 2   | 0.18         | 1.3       | 0.11         | 1.1       |
-| 3   | 0.10         | 1.5       | 0.06         | 1.6       |
-| 4   | 0.06         | 1.6       | 0.04         | 1.0       |
-| 5   | 0.04         | 1.3       | 0.02         | 1.0       |
-| 6   | 0.03         | 1.3       |              |           |
-| 7   | 0.02         | 1.3       |              |           |
-| 8   | 0.02         | 1.3       |              |           |
-| 9   | 0.01         | 1.3       |              |           |
-| 10  | 0.01         | 1.3       |              |           |
-
-1. Use the Leslie matrix model to calculate the stable age distribution of the Eastern Screech Owl population.
-2. Calculate the growth rate of the Eastern Screech Owl population.
-:::
-
----->
+</section>
+<section id="fibonacci-population" class="level4">
+<h4 class="anchored" data-anchor-id="fibonacci-population">* Fibonacci population</h4>
+<div id="exr-leslie" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4.3</strong></span> Consider a population in which individuals on average produce one offspring when they turn 1 year old and another offspring when they turn 2 years old. After that they die. Assume that there is no mortality before they turn 2 year old.</p>
+<ol type="1">
+<li>Formulate the above information in terms of values for the reproduction numbers <span class="math inline">\(b_a\)</span> and the survival probabilities <span class="math inline">\(S_a\)</span>.</li>
+<li>Write down the Leslie matrix for this population.</li>
+<li>Assume that at <span class="math inline">\(t=0\)</span> we start with 1 individual of age 0. By hand, calculate the numbers of individuals at each age at time <span class="math inline">\(t=1,2,3,4\)</span> and <span class="math inline">\(5\)</span>.</li>
+<li>Using the Leslie matrix, calculate the stable age distribution and the long-term growth factor (the factor by which the total population changes from one year to the next).</li>
+</ol>
+</div>
+</section>
+<section id="semelparous-population" class="level4">
+<h4 class="anchored" data-anchor-id="semelparous-population">Semelparous population</h4>
+<div id="exr-semelparous" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4.4</strong></span> Consider a population in which individuals live for 2 years and produce all their offspring at the end of their life. The life history parameters are given by the following table:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(a\)</span></th>
+<th><span class="math inline">\(b_a\)</span></th>
+<th><span class="math inline">\(S_a\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>0</td>
+<td>1/2</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>6</td>
+<td>1/3</td>
+</tr>
+</tbody>
+</table>
+<ol type="1">
+<li><p>Calculate the Leslie matrix for this population.</p></li>
+<li><p>Assume that at <span class="math inline">\(t=0\)</span> we start with 10 individual, all of age 0. Use the Leslie matrix to calculate the numbers of individuals of ages <span class="math inline">\(0,1,2\)</span> at times <span class="math inline">\(t=1,2,3\)</span>. What will happen in the long run? Will the population evolve towards a stable age distribution?</p></li>
+<li><p>Draw the graph associated with the Leslie matrix and determine whether the Leslie matrix is irreducible and primitive.</p></li>
+</ol>
+</div>
+</section>
+<section id="eastern-screech-owl" class="level4">
+<h4 class="anchored" data-anchor-id="eastern-screech-owl">Eastern Screech Owl</h4>
+<div id="exr-owl" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 4.5</strong></span> This exercise is most suitable for you if you are willing to use a computer to find eigenvalues and eigenvectors of matrices.</p>
+<p>The Eastern Screech Owl is a small owl that is found in the eastern United States and Canada. It is a cavity-nesting bird, which means that it nests in holes in trees. It is able to adapt to diverse habitats, including wooded residential neighbourhoods and parks in suburban areas. In suburban areas, these owls find a variety of nesting opportunities, such as tree cavities, nest boxes, and even abandoned buildings, which may be less available in intensively farmed rural areas or dense forests. Additionally, the suburban settings can offer a rich supply of prey, including insects, small mammals, and other small creatures, partly due to the lower prevalence of large predators.</p>
+<p>Below is a life table collected for two different habitats, suburban and rural, in Texas.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Age</th>
+<th>Suburban</th>
+<th></th>
+<th>Rural</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(a\)</span></td>
+<td><span class="math inline">\(l_a\)</span></td>
+<td><span class="math inline">\(b_a\)</span></td>
+<td><span class="math inline">\(l_a\)</span></td>
+<td><span class="math inline">\(b_a\)</span></td>
+</tr>
+<tr class="even">
+<td>0</td>
+<td>1.00</td>
+<td>0.0</td>
+<td>1.00</td>
+<td>0.0</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>0.49</td>
+<td>0.8</td>
+<td>0.30</td>
+<td>0.8</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>0.18</td>
+<td>1.3</td>
+<td>0.11</td>
+<td>1.1</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>0.10</td>
+<td>1.5</td>
+<td>0.06</td>
+<td>1.6</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>0.06</td>
+<td>1.6</td>
+<td>0.04</td>
+<td>1.0</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>0.04</td>
+<td>1.3</td>
+<td>0.02</td>
+<td>1.0</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>0.03</td>
+<td>1.3</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>0.02</td>
+<td>1.3</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>0.02</td>
+<td>1.3</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>0.01</td>
+<td>1.3</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>0.01</td>
+<td>1.3</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>For each of the two populations do the following:</p>
+<ol type="1">
+<li>Calculate the reproductive number, i.e., the expected number of offspring produced by a single individual during its lifetime.</li>
+<li>Calculate the Leslie matrix. Note that the table gives the survival probabilities <span class="math inline">\(l_a\)</span> from birth to age <span class="math inline">\(a\)</span> instead of the yearly survival probabilities <span class="math inline">\(S_a\)</span>. The yearly survival probabilities can be calculated from the life table by <span class="math inline">\(S_a = l_a/l_{a-1}\)</span>.</li>
+<li>Use the Leslie matrix to calculate the stable age distribution and the long-term growth factor (the factor by which the total population changes from one year to the next).</li>
+<li>Calculate the average age in the stable age distribution as well as the average age of parents of newborns.</li>
+</ol>
+</div>
 
 
 </section>

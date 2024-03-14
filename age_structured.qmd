@@ -414,66 +414,46 @@ $$ {#eq-age_harvesting_2}
 By calculating the expected number of offspring per individual, determine the limit on the harvesting rate $\mu_F$ that allows the population to be sustainable.
 :::
 
-<!----
-#### o Leslie matrix
+
+#### * Fibonacci population
 ::: {#exr-leslie}
-Consider the Leslie matrix
-$$
-L = \begin{pmatrix}
-0 & 2 & 0 \\
-0.5 & 0 & 0 \\
-0 & 0.5 & 0
-\end{pmatrix}.
-$$ {#eq-leslie}
+Consider a population in which individuals on average produce one offspring when they turn 1 year old and another offspring when they turn 2 years old. After that they die. Assume that there is no mortality before they turn 2 year old.
 
-1. Calculate the stable age distribution of the population.
-2. Calculate the growth rate of the population.
+1. Formulate the above information in terms of values for the reproduction numbers $b_a$ and the survival probabilities $S_a$.
+1. Write down the Leslie matrix for this population.
+2. Assume that at $t=0$ we start with 1 individual of age 0. By hand, calculate the numbers of individuals at each age at time $t=1,2,3,4$ and $5$. 
+3. Using the Leslie matrix, calculate the stable age distribution and the long-term growth factor (the factor by which the total population changes from one year to the next).
+
 :::
 
-#### o Leslie matrix with harvesting
-::: {#exr-leslie_harvesting}
-Consider the Leslie matrix
-$$
-L = \begin{pmatrix}
-0 & 2 & 0 \\
-0.5 & 0 & 0 \\
-0 & 0.5 & 0
-\end{pmatrix}.
-$$ {#eq-leslie_harvesting}
-Now assume that the population is harvested at a constant rate $\mu_F$ at all ages. The harvesting rate is such that
-$$
-\mu(a) = \begin{cases}
-\mu_0 & \text{if } a < a_m, \\
-\mu_0 + \mu_F & \text{if } a \geq a_m.
-\end{cases}
-$$ {#eq-leslie_harvesting_2}
-Calculate the stable age distribution of the population and the growth rate of the population.
-:::
+#### Semelparous population
+::: {#exr-semelparous}
+Consider a population in which individuals live for 2 years and produce all their offspring at the end of their life. The life history parameters are given by the following table:
 
-#### o Leslie matrix with age-independent rates
-::: {#exr-leslie_age_independent}
-Consider the Leslie matrix
-$$
-L = \begin{pmatrix}
-0 & 2 & 0 \\
-0.5 & 0 & 0 \\
-0 & 0.5 & 0
-\end{pmatrix}.
-$$ {#eq-leslie_age_independent}
-Now assume that the birth and death rates are constant, so that
-$$
-b(a) = b, \quad \mu(a) = \mu.
-$$ {#eq-leslie_age_independent_2}
-Calculate the stable age distribution of the population and the growth rate of the population.
+| $a$ | $b_a$ | $S_a$ |
+| --- | ----- | ----- |
+| 1   | 0     |  1    |
+| 2   | 0     |  1/2  |
+| 3   | 6     |  1/3  |
+
+1. Calculate the Leslie matrix for this population.
+
+2. Assume that at $t=0$ we start with 10 individual, all of age 0. Use the Leslie matrix to calculate the numbers of individuals of ages $0,1,2$ at times $t=1,2,3$. What will happen in the long run? Will the population evolve towards a stable age distribution?
+
+3. Draw the graph associated with the Leslie matrix and determine whether the Leslie matrix is irreducible and primitive. 
 :::
 
 #### Eastern Screech Owl
 ::: {#exr-owl}
-The Eastern Screech Owl is a small owl that is found in the eastern United States and Canada. It is a cavity-nesting bird, which means that it nests in holes in trees. The Eastern Screech Owl has a lifespan of about 10 years. It reaches maturity at 1 year and has a clutch size of 3-5 eggs. The Eastern Screech Owl is a nocturnal bird and feeds on small mammals, birds, and insects. It is a common bird in its range and is not considered to be threatened.
+This exercise is most suitable for you if you are willing to use a computer to find eigenvalues and eigenvectors of matrices. 
+
+The Eastern Screech Owl is a small owl that is found in the eastern United States and Canada. It is a cavity-nesting bird, which means that it nests in holes in trees. It is able to adapt to diverse habitats, including wooded residential neighbourhoods and parks in suburban areas. In suburban areas, these owls find a variety of nesting opportunities, such as tree cavities, nest boxes, and even abandoned buildings, which may be less available in intensively farmed rural areas or dense forests. Additionally, the suburban settings can offer a rich supply of prey, including insects, small mammals, and other small creatures, partly due to the lower prevalence of large predators.
+
+Below is a life table collected for two different habitats, suburban and rural, in Texas. 
 
 | Age | Suburban     |           | Rural        |           |
 | --- | ------------ | --------- | ------------ | --------- |
-| $a$ |   $l_a$      |   $m_a$   |   $l_a$      |   $m_a$   |
+| $a$ |   $l_a$      |   $b_a$   |   $l_a$      |   $b_a$   |
 | 0   | 1.00         | 0.0       | 1.00         | 0.0       |
 | 1   | 0.49         | 0.8       | 0.30         | 0.8       |
 | 2   | 0.18         | 1.3       | 0.11         | 1.1       |
@@ -486,8 +466,12 @@ The Eastern Screech Owl is a small owl that is found in the eastern United State
 | 9   | 0.01         | 1.3       |              |           |
 | 10  | 0.01         | 1.3       |              |           |
 
-1. Use the Leslie matrix model to calculate the stable age distribution of the Eastern Screech Owl population.
-2. Calculate the growth rate of the Eastern Screech Owl population.
-:::
 
----->
+For each of the two populations do the following:
+
+1. Calculate the reproductive number, i.e., the expected number of offspring produced by a single individual during its lifetime.
+2. Calculate the Leslie matrix. Note that the table gives the survival probabilities $l_a$ from birth to age $a$ instead of the yearly survival probabilities $S_a$. The yearly survival probabilities can be calculated from the life table by $S_a = l_a/l_{a-1}$.
+3. Use the Leslie matrix to calculate the stable age distribution and the long-term growth factor (the factor by which the total population changes from one year to the next).
+4. Calculate the average age in the stable age distribution as well as the average age of parents of newborns.
+
+:::
