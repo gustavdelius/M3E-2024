@@ -29,7 +29,7 @@ The Lotka-Volterra model, developed independently by Alfred Lotka in 1925 and Vi
 
 **Model Formulation**
 
-The prey population, in the absence of predators, grows exponentially with a per capita growth rate $a > 0$. However, the prey die due to being eaten by predators, and we assume that the per-capita mortality rate grows in proportion to the abundance of predators, with some proportionality constant $b \geq 0$. This leads to the equation
+The model assumes that the prey population, in the absence of predators, grows exponentially with a per capita growth rate $a > 0$. However, the prey die due to being eaten by predators, and we assume that the per-capita mortality rate grows in proportion to the abundance of predators, with some proportionality constant $b \geq 0$. This leads to the equation
 $$
 \frac{dN}{dt} = N(a - bP).
 $$
@@ -180,10 +180,30 @@ The stability of the fixed point is determined by the sign of the real parts of 
 
 This analysis is pivotal for understanding how small deviations from equilibrium evolve over time, providing insights into the system's long-term behavior near the fixed points. For instance, in the context of the predator-prey dynamics, such analysis helps elucidate under what conditions the populations will return to equilibrium after a disturbance or potentially diverge away from it.
 
+We can reformulate the stability conditions of a fixed point in terms of the determinant and trace of the Jacobian matrix. We need to recall how these two characteristics of the Jacobian relate to the eigenvalues. For a 2x2 matrix $A$ with eigenvalues $\lambda_1$ and $\lambda_2$, the trace $\text{Tr}(A)$ is the sum of the eigenvalues, and the determinant $\text{Det}(A)$ is the product of the eigenvalues:
+
+- $\text{Tr}(A) = \lambda_1 + \lambda_2$
+- $\text{Det}(A) = \lambda_1 \lambda_2$
+
+Using these relationships, we can express the conditions for the stability of fixed points as follows:
+
+1. **Stable (Attracting) Fixed Point:** If both eigenvalues have negative real parts, their sum (the trace) is negative, and their product (the determinant) is positive because the product of two negative numbers is positive. Therefore, for stability, $\text{Tr}(A) < 0$ and $\text{Det}(A) > 0$. Additionally, to ensure that both eigenvalues are real and negative, we require that $\text{Tr}(A)^2 - 4\text{Det}(A) \geq 0$ to avoid complex eigenvalues.
+
+2. **Unstable (Repelling) Fixed Point:** If both eigenvalues have positive real parts, the trace is positive, and the determinant is positive (the product of two positive numbers is positive). Thus, for instability, $\text{Tr}(A) > 0$ and $\text{Det}(A) > 0$.
+
+3. **Saddle Point (Unstable):** If the eigenvalues have real parts of opposite signs, the determinant (the product of the eigenvalues) is negative. So, for a saddle point, $\text{Det}(A) < 0$, regardless of the trace.
+
+4. **Spiral Points:** For a complex conjugate pair of eigenvalues, the determinant will be positive (since the product of complex conjugates is positive), but the stability depends on the sign of the real part of the eigenvalues, which is represented by the trace. Here, we also need to ensure that $\text{Tr}(A)^2 - 4\text{Det}(A) < 0$ to confirm that the eigenvalues are complex.
+
+   - **Unstable Spiral:** If the real part is positive, $\text{Tr}(A) > 0$ and $\text{Det}(A) > 0$.
+   - **Stable Spiral:** If the real part is negative, $\text{Tr}(A) < 0$ and $\text{Det}(A) > 0$. 
+
+These conditions provide a concise way to determine the stability of fixed points using only the determinant and trace of the Jacobian matrix, without explicitly computing the eigenvalues.
+
 ::: {#exm-lsa} 
 ### Linear Stability Analysis of the Lotka-Volterra Model
 
-To explore the stability of steady states in the Lotka-Volterra model, we analyze the system near its equilibrium points using the Jacobian matrix $\mathbf{A}$. For the non-dimensionalized Lotka-Volterra system, the Jacobian matrix is given by
+To explore the stability of steady states in the Lotka-Volterra model, we analyze the system near its fixed points using the Jacobian matrix $\mathbf{A}$. For the non-dimensionalized Lotka-Volterra system, the Jacobian matrix is given by
 $$
 \mathbf{A} = 
 \begin{pmatrix}
@@ -194,7 +214,7 @@ $$
 
 **Steady State at $(u, v) = (0, 0)$**
 
-For the equilibrium point $(u, v) = (0, 0)$, we substitute these values into the Jacobian matrix and find the eigenvalues:
+For the fixed point $(u, v) = (0, 0)$, we substitute these values into the Jacobian matrix and find the eigenvalues:
 
 $$
 \mathbf{A} = 
@@ -204,11 +224,11 @@ $$
 \end{pmatrix}.
 $$
 
-The eigenvalues are $\lambda_1 = 1$ and $\lambda_2 = -\alpha$, indicating that this equilibrium point is a saddle point due to the eigenvalues having opposite signs. This configuration is inherently unstable as trajectories near the point will diverge away along the direction associated with the positive eigenvalue.
+The eigenvalues are $\lambda_1 = 1$ and $\lambda_2 = -\alpha$, indicating that this fixed point is a saddle point due to the eigenvalues having opposite signs. This configuration is inherently unstable as trajectories near the point will diverge away along the direction associated with the positive eigenvalue.
 
 **Steady State at $(u, v) = (1, 1)$**
 
-At the equilibrium point $(u, v) = (1, 1)$, the Jacobian matrix becomes:
+At the fixed point $(u, v) = (1, 1)$, the Jacobian matrix becomes:
 
 $$
 \mathbf{A} = 
@@ -224,4 +244,326 @@ The period $T$ of the oscillations can be determined from the imaginary part of 
 
 :::
 
+## More Realistic Predator-Prey Models
 
+While the basic Lotka-Volterra model provides a fundamental understanding of predator-prey interactions, more nuanced models incorporate additional biological realism. These models may account for factors like limited resources, satiation, prey switching, predator avoidance, and many others.
+
+### Generalized Predator-Prey Model
+
+The generalized model introduces a function $F(N, P)$ representing the prey population's per-capita growth and a function $G(N, P)$ for the predator's per-capita growth rate, so that the dynamics are:
+
+$$
+\frac{dN}{dt} = NF(N, P), \quad \frac{dP}{dt} = PG(N, P).
+$$
+
+The prey might exhibit logistic growth in the absence of predators. To model this we could choose
+
+$$
+F(N, P) = r\left(1 - \frac{N}{K}\right) - R(N)P,
+$$
+
+where $R(N)$ models how the predation rate of a predator change with the prey population size. $NR(N)$ is the rate at which each individual predator consumes prey. The dependence of this rate on the prey population size $N$ is often referred to as "functional response" in the ecological literature. Holling introduced three types of functional responses, which are widely used in predator-prey models:
+
+#### Holling Type functional responses
+
+1. **Type I** $NR(N) = bN$, which corresponds to the standard Lotka-Volterra model. This simplification lacks realism as it assumes an unlimited predator appetite regardless of prey population size.
+
+2. **Type II** $NR(N) = \frac{AN}{N + B}$, with $A$ and $B$ being positive constants. In this model, the rate approaches a saturation level $A$ for large $N$, reflecting a limit to the predator's consumption rate. This model is more realistic as it accounts for the predator's limited appetite, which might be because there is a minimum handling time, the time the predator needs to consume a prey item.
+
+3. **Type III** $R(N) = \frac{AN^2}{N^2 + B^2}$. This response includes a saturation effect like the previous example but also models that if the prey is rare the predator may not be able to find it. This model is more complex and captures the idea that predators may switch to alternative prey when the primary prey is scarce. It may also encode a learning effect, where the predator's efficiency in capturing prey increases with experience so that initially the predator's consumption rate increases with prey density.
+
+### Example
+
+Consider a model where the prey growth rate follows logistic dynamics in the absence of prey and predation mortality is described by a Holling type II function encoding satiation effects. The predator's growth rate goes down as the prey population decreases. The model equations are:
+
+$$
+\frac{dN}{dt} = N\left[r\left(1 - \frac{N}{K}\right) - \frac{A}{N + B}P\right], \quad \frac{dP}{dt} = Ps\left(1 - \frac{hP}{N}\right),
+$$
+
+where $r$, $K$, $A$, $B$, $s$, and $h$ are positive constants.
+
+**Nondimensionalization**
+
+To reduce the complexity, we nondimensionalize the system with $\tau = tr$, $u = \frac{N}{K}$, $v = \frac{hP}{K}$, $a = \frac{A}{hr}$, $b = \frac{B}{K}$, and $c = \frac{s}{r}$, leading to:
+
+$$
+\frac{du}{d\tau} = u(1 - u) - a\frac{uv}{u + b}, \quad \frac{dv}{d\tau} = cv\left(1 - \frac{v}{u}\right).
+$$
+
+**Stability Analysis of Steady States**
+
+The steady states $(u^*, v^*)$ include $(1, 0)$ and a coexistence steady state $(u^*_+, u^*_+)$, where 
+$$u^*_+ = \frac{1-a-b+\sqrt{(1-a-b)^2+4b}}{2}.$$
+The community matrix $\mathbf{A}(u, v)$ at these points helps determine their stability.
+For the fixed point  $(1, 0)$, where the prey population is at carrying capacity and there are no predators, we have find
+$$\mathbf{A}(1, 0) = \begin{pmatrix} -1 & -\frac{a}{1 + b} \\ 0 & c \end{pmatrix}.$$
+The eigenvalues $-1$ and $c$ have opposite sign, indicating that the fixed point is a saddle point.
+
+At the coexistence fixed point $(u^*_+, u^*_+)$ the Jacobian is more complex and we will skip the analysis here.
+
+
+## Competition Models
+
+In ecological systems, species often compete for limited resources, such as food or territory. This competition influences their growth rates and can determine their survival and dominance within an ecosystem. The Lotka-Volterra competition model provides a framework to study these dynamics, extending the principles of logistic growth to account for interspecies interactions.
+
+### Lotka-Volterra Competition Dynamics
+
+The model is formulated as follows for two competing species $N_1$ and $N_2$:
+
+$$
+\begin{split}
+\frac{dN_1}{dt} &= r_1N_1 \left(1 - \frac{N_1 + b_{12}N_2}{K_1}\right),\\
+\frac{dN_2}{dt} &= r_2N_2 \left(1 - \frac{N_2 + b_{21}N_1}{K_2}\right),
+\end{split}
+$$
+
+where $r_i$ is the intrinsic growth rate and $K_i$ is the carrying capacity of species $i$. The coefficients $b_{ij}$ represent the competitive effect of species $j$ on species $i$, effectively reducing the carrying capacity for species $i$ due to the presence of species $j$.
+
+### Nondimensionalization of the Model
+
+To simplify the analysis, we nondimensionalize the system using:
+
+$$
+u_i = \frac{N_i}{K_i}, \quad a_{ij} = \frac{b_{ij}K_j}{K_i}, \quad \tau = r_1 t, \quad \rho = \frac{r_2}{r_1},
+$$
+
+leading to:
+
+$$
+\frac{du_1}{d\tau} = u_1(1 - u_1 - a_{12}u_2), ~~~~~ \frac{du_2}{d\tau} = \rho u_2(1 - u_2 - a_{21}u_1).
+$$
+
+### Analysis of Steady States
+
+The system has four potential steady states: $(0, 0)$, $(0, 1)$, $(1, 0)$, and a coexistence steady state $\left(\frac{1-a_{12}}{1-a_{12}a_{21}}, \frac{1-a_{21}}{1-a_{12}a_{21}}\right)$.
+
+To determine the stability of these points, we evaluate the Jacobian matrix $\mathbf{A}(u_1, u_2)$ at each steady state and analyze its eigenvalues:
+
+1. **At $(0, 0)$:** The eigenvalues are $1$ and $\rho$, indicating an unstable node as both are positive.
+  
+2. **At $(1, 0)$:** The eigenvalues are $-1$ and $\rho(1 - a_{21})$. This point is a saddle if $a_{21} < 1$ and a stable node if $a_{21} > 1$.
+  
+3. **At $(0, 1)$:** By symmetry, this point behaves like $(1, 0)$ with roles reversed between species.
+  
+4. **Coexistence point $\left(\frac{1-a_{12}}{1-a_{12}a_{21}}, \frac{1-a_{21}}{1-a_{12}a_{21}}\right)$:** The stability is determined by the sign of the trace and the determinant of $\mathbf{A}$. The system's behavior at this point depends on the specific values of $a_{12}$ and $a_{21}$, indicating potential scenarios where both species can coexist or one outcompetes the other.
+
+### Nullclines and Phase Portraits
+
+Nullclines, where the growth rate of one of the species are zero, are a very useful aid when drawing phase plane diagrams, also known as phase portraits. The nullclines for the Lotka-Volterra competition model are:
+
+- $u_1$ nullclines: $du_1/d\tau = 0$ when $u_1 = 0$ or $u_2 = \frac{1-u_1}{a_{12}}$.
+
+- $u_2$ nullclines: $du_2/d\tau = 0$ when $u_2 = 0$ or $u_2 = 1 - a_{21}u_1$.
+
+Along the $u_1$ nullclines the flow is purely vertical and along the $u_2$ nullclines the flow is purely horizontal. The intersection of the nullclines gives the steady states of the system. We can now draw the phase portrait to visualize the dynamics of the system. Very rough sketches are enough to understand the dynamics.
+
+![Phase portrait of competition model when $a_{12}<1$ and $a_{21}<1$.](figures/Interacting/phase1.png){#fig-competition-phase1}
+
+@fig-competition-phase1 shows the phase portrait of the competition model when $a_{12}<1$ and $a_{21}<1$. The nullclines are shown in grey and red, the flow lines in blue, with the arrows indicating the direction of the flow. The system exhibits a stable coexistence steady state, where both species persist in the ecosystem.
+
+![Phase portrait of competition model when $a_{12}>1$ and $a_{21}>1$.](figures/Interacting/phase2.png){#fig-competition-phase2}
+
+@fig-competition-phase2 illustrates the phase portrait of the competition model when $a_{12}>1$ and $a_{21}>1$. In this scenario, the coexistence steady state is a saddle, leading to the exclusion of one species. Which species dominates depends on the initial conditions. If the initial condition is below the separatrix, species 1 will dominate, and if it is above, species 2 will dominate.
+
+![Phase portrait of competition model when $a_{12}<1$ and $a_{21}>1$.](figures/Interacting/phase3.png){#fig-competition-phase3}
+
+@fig-competition-phase3 depicts the phase portrait of the competition model when $a_{12}<1$ and $a_{21}>1$. In this case, the coexistence steady state has disappeared (it has moved into a region with negative population numbers that is not ecologically relevant). Irrespective of initial conditions, the system will evolve towards the state where only species 1 exists. Species 2 is driven to extinction.
+
+We are not drawing the case $a_{12}>1$ and $a_{21}<1$ as it is similar to the case $a_{12}<1$ and $a_{21}>1$ just with the role of species 1 and 2 reversed. In this case species 2 will dominate and species 1 will go extinct.
+
+### Competitive Exclusion Principle
+
+The competitive exclusion principle, proposed by Gause in the 1930s, states that two species competing for the same resources cannot coexist indefinitely, with one species eventually outcompeting the other. 
+
+In the model we studied the two species shared resources but each also had its own resources, hence we observed a weaker form of the competitive exclusion principle. The coexistence steady state was stable when the competition was weak enough, allowing both species to persist in the ecosystem. This highlights the delicate balance between competition and coexistence in ecological systems, where the strength of interspecies interactions plays a crucial role in determining the long-term dynamics of species populations.
+
+
+## Mutualism Models
+
+In ecological systems, mutualism refers to interactions where all participating species benefit, leading to increased growth rates. An example is the relationship between plants and their seed dispersers, such as insects, where both parties gain advantages from their association.
+
+### Example
+
+This model incorporates logistic growth, akin to the competition model, but with a twist to account for the mutualistic interaction:
+
+$$
+\frac{dN_1}{dt} = r_1N_1 \left[ 1 - \frac{N_1}{K_1} + b_{12}\frac{N_2}{K_1} \right], ~~~~~ \frac{dN_2}{dt} = r_2N_2 \left[ 1 - \frac{N_2}{K_2} + b_{21}\frac{N_1}{K_2} \right],
+$$
+
+where $r_i$, $K_i$, and $b_{ij}$ are all positive constants, with $b_{ij}$ representing the mutualistic benefit to species $i$ from species $j$. Notice that we simply changed the sign of the competition terms in the competition model to turn them into mutualistic terms
+
+### Nondimensionalization of the Model
+
+Using nondimensional variables $u_i = N_i/K_i$, $a_{ij} = b_{ij}K_j/K_i$, $\tau = r_1t$, and $\rho = r_2/r_1$, the equations transform to:
+
+$$
+\frac{du_1}{d\tau} = u_1(1 - u_1 + a_{12}u_2), ~~~~~ \frac{du_2}{d\tau} = \rho u_2(1 - u_2 + a_{21}u_1).
+$$
+This is as in the competition model but with the signs in front of $a_{12}$ and $a_{21}$ reversed.
+
+### Steady States and Stability
+
+The system has the steady states $(0, 0)$, $(0, 1)$, $(1, 0)$, and $\left(\frac{1 + a_{12}}{\delta}, \frac{1 + a_{21}}{\delta}\right)$, where $\delta = 1 - a_{12}a_{21}$. The coexistence steady state is ecologically relevant only if $\delta > 0$.
+
+- **At $(0, 0)$:** The eigenvalues are $1$ and $\rho$, indicating an unstable node.
+
+- **At $(0, 1)$ and $(1, 0)$:** These points are saddles, with eigenvalues showing a mix of positive and negative signs.
+
+- **At the mutualistic steady state:** The trace and determinant of the community matrix $\mathbf{A}$ suggest that this point is stable if $\delta > 0$.
+
+### Nullclines and Phase Portraits
+
+The equations for the nullclines for this model are similar to those in the competition model, but now with positive slope rather than negative slope.
+
+- $u_1$ nullclines: $du_1/d\tau = 0$ when $u_1 = 0$ or $u_2 = \frac{u_1-1}{a_{12}}$.
+
+- $u_2$ nullclines: $du_2/d\tau = 0$ when $u_2 = 0$ or $u_2 = 1 + a_{21}u_1$.
+
+![Phase portrait of mutualistic model when $a_{12}a_{21}<1$.](figures/Interacting/phase4.png){#fig-mutualistic-phase}
+
+@fig-mutualistic-phase illustrates the phase portrait of the mutualism model when $a_{12}a_{21}<1$. The nullclines are shown in grey and red, with the flow lines in blue. The system exhibits a stable coexistence steady state, where both species benefit from the mutualistic interaction.
+
+### Limitations and Unbounded Growth
+
+A cautionary note is that if the mutualistic coefficients $a_{12}a_{21}$ are too large, leading to $\delta < 0$, the model predicts unbounded growth, which is unrealistic. This phenomenon, known as May's "orgy of mutual benefaction," highlights the need for constraints in mutualism models to avoid predicting ecological impossibilities.
+
+Through this mutualism model, we gain insights into how species interactions can foster increased growth and stability, contrasting with competitive dynamics. It underscores the diversity of ecological interactions and their varying implications for species survival and community structure.
+
+<!---
+## Discussion on Modeling Interacting Populations
+
+- **Complexity of Real Ecosystems:** Natural ecosystems are intricate networks of numerous interacting species, forming a complex food web or ecological network. These interactions span various trophic levels and include diverse relationships such as predation, competition, and mutualism.
+
+- **Generic Models for Population Dynamics:** A general way to represent the dynamics of interacting populations in an ecosystem is through a system of differential equations, where $\frac{dN_i}{dt} = f_i(\underline{N})$ for $i = 1, \dots, n$, and $\underline{N}$ represents the vector of all population sizes. These models aim to capture the essence of biological interactions and their impact on population changes over time.
+
+- **Generalized Lotka-Volterra Model:** This model extends the basic Lotka-Volterra framework to multiple species, where $f_i(\underline{N}) = N_i(\underline{r} + A\underline{N})_i$ or more explicitly, $f_i = N_i(r_i + \sum_{j=1}^n A_{ij}N_j)$. Here, $A$, the community matrix, encapsulates the interaction strengths between species, and $\underline{r}$ represents intrinsic growth rates. The model can predict a coexistence fixed point where populations stabilize, given by $\underline{N} = -A^{-1}\underline{r}$.
+
+- **Mass Action Dynamics:** This concept implies that the rate of interaction between two species is proportional to the product of their abundances, modeled as $A_{ij}N_iN_j$, reflecting a direct dependency on population sizes.
+
+- **Functional Response and Density-Dependent Rates:** The term $N_iF(N_j)$ introduces a functional response, where the impact of one species on another is a function of the population size, incorporating behaviors like prey switching, mutual protection, satiation, and others, which introduce nonlinearities and more realistic dynamics into the models.
+
+- **Challenges in Applying Models to Reality:**
+    - **Phenomenological Models:** These models use mathematical functions to fit observed data, prioritizing predictions and descriptions over understanding the underlying mechanisms.
+    - **Mechanistic Models:** They are grounded in biological principles, aiming to capture the underlying processes with parameters that have real-world interpretations.
+
+- **Competitive Exclusion Principle:** This principle suggests that in a stable environment, competing species cannot coexist indefinitely; however, various ecological theories like niche theory, the intermediate disturbance hypothesis, and the paradox of the plankton offer explanations for the maintenance of biodiversity.
+
+- **Complexity-Stability Debate:** Robert May's work challenges the intuition that greater biodiversity enhances ecosystem stability. Mathematical models often show that increased complexity can lead to decreased stability, sparking ongoing debate and research in this area.
+
+- **Evolutionary Perspectives:** Ecosystems are not static; they are shaped by evolutionary processes, including adaptation and coevolution, which influence species interactions and ecosystem dynamics over time.
+
+- **Influence on Environmental Policy:** Models play a crucial role in informing policies, such as determining sustainable fishing quotas, by predicting the outcomes of different management strategies.
+
+- **Role of Modeling in Ecology:** The primary purpose of modeling in ecology is to enhance our understanding of complex systems. While models are powerful tools, they are means to an end, not the end themselves. They help in hypothesis testing, generating predictions, and offering insights that guide empirical research and conservation efforts.
+
+--->
+
+## Exercises
+
+::: {#exr-interacting-populations}
+<!--- From sheet 3 --->
+Consider a model for the interaction of two species with populations $N_1$ and $N_2$
+$$ \frac{dN_1}{dt} = r_1 N_1 \left( 1 - \frac{N_1}{K_1} - b_{12}\frac{ N_2}{K_1} \right), $$
+$$  \frac{N_2}{dt} = r_2 N_2 \left( 1  - b_{21}\frac{ N_1}{K_2} \right), $$
+where all the parameters are positive.
+
+a)  What type of interaction exists between $N_1$ and $N_2$? 
+
+b) Non-dimensionalize the system by introducing $u=N_1/K_1$ and $v=N_2/K_2$ as well as a 
+non-dimensional time variable. What are the resulting non-dimensional parameters? Give the
+equations of motion for $u$ and $v$ in terms of these parameters.
+
+c) Determine the steady states in the non-dimensionalised system.  Investigate their stability. At what values of the parameters do bifurcations take place?
+
+d)  Determine the nullclines and use these to make rough phase-plane sketches (You will need two sketches).
+
+e)  Describe under what ecological circumstances $N_2$ becomes extinct.  
+Do the same for $N_1$. Show that the principle of competitive exclusion 
+holds irrespective of the size of the parameters.
+
+:::
+
+-------------------------------------------------------------
+
+::: {#exr-interacting-populations-2}
+<!--- From Surrey exam 1999 --->
+A model for the interaction between two species with populations $N_1$ and $N_2$ is determined to be
+$$
+\begin{split}
+\frac{dN_1}{dt} &= rN_1\left(1 - \frac{N_1}{K}\right) - aN_1N_2\left(1 - \exp(-bN_1)\right),\\
+\frac{dN_2}{dt} &= -dN_2 + cN_2\left(1 - \exp(-bN_1)\right),
+\end{split}
+$$
+where $a, b, c, d, r$ and $K$ are positive constants. 
+
+a) Introducing the dimensionless variables and parameters
+$$
+u = \frac{N_1}{K}, \quad v = \frac{aN_2}{r}, \quad \tau = rt, \quad \beta = bK,
+$$
+show that
+$$
+\begin{split}
+\frac{du}{d\tau} &= u(1 - u) - uv\left(1 - e^{-\beta u}\right),\\
+\frac{dv}{d\tau} &= -\delta v + \alpha v\left(1 - e^{-\beta u}\right),
+\end{split}
+$$
+giving the positive constants $\alpha$ and $\delta$ in terms of $c, d$ and $r$. 
+
+b) Describe the relevance of each term and, hence, determine the type of interaction between the two populations.
+
+c) Show that the non-negative fixed points are given by $(u^*, v^*) = (0, 0), (1,0)$ and $(u_1, (1 - u_1)\alpha/\delta)$, where $u_1 = -\ln(1 - \delta/\alpha)/\beta$, and that the steady state where $u^*$ and $v^*$ are both non-zero can only exist if $\alpha > \delta$ and $\beta > \beta_c = -\ln(1 - \delta/\alpha)$. 
+
+d) Show that the community matrix, $A$, is given by
+$$
+A = \begin{pmatrix}
+1 - 2u - v(1 - e^{-\beta u}) - \beta uve^{-\beta u} & -u\left(1 - e^{-\beta u}\right) \\
+\alpha v\beta e^{-\beta u} & -\delta + \alpha(1 - e^{-\beta u})
+\end{pmatrix}.
+$$
+
+e) Assuming henceforth that $\delta/\alpha < 1$, determine the linear stability of each of the fixed points.
+
+f) Sketch the $(u, v)$ phase portrait to indicate the stability of each steady state for the two cases $\beta > \beta_c$ and $0 < \beta < \beta_c$ (remember $\alpha > \delta$).
+:::
+
+-------------------------------------------------------------
+
+::: {#exr-interacting-populations-3}
+<!--- From 2017 exam --->
+Consider the predator-prey model with Allee effect in the prey:
+$$
+\begin{split}
+\frac{dN}{dT} &= rN\left(\frac{N}{K_0} - 1\right)\left(1 - \frac{N}{K}\right) - cNP,\\
+\frac{dP}{dT} &= bNP - mP,
+\end{split}
+$$
+where $N(T)$ is the number of prey and $P(T)$ is the number of predators at time $T$, and $r, K, c, b, m$ are positive constants with $0 < K_0 < K$. The populations $N(T), P(T)$ are non-negative quantities.
+
+(a) Provide brief biological interpretations for $r, K, K_0, c, b, m$ for the above predator-prey model. What is the biological role of $K_0$ in the modified prey growth rate?
+
+(b) Introduce the dimensionless variables $\frac{N}{K} = x, \frac{cP}{r} = y, rT = t$ and show that the above system can be reduced to
+
+$$\begin{split}
+\frac{dx}{dt} &= x\left(\frac{x}{y} - 1\right)(1 - x) - y = x[g(x) - y],\\
+\frac{dy}{dt} &= \beta(x - \alpha y).
+\end{split}$$
+How are the new dimensionless constants $\alpha, \beta$ expressed in terms of the original parameters?
+
+(c) For the dimensionless system:
+
+    i) Calculate the nullclines, clearly stating any conditions for their existence.
+   
+    ii) Use your answer from (i) to sketch nullclines, depicting their intersections     and the vector field direction along each isocline in the phase plane.
+   
+    iii) Find the fixed points.
+
+(d) For the non-trivial fixed point, where both predators and preys may coexist:
+
+    i) Calculate the Jacobian at this point in terms of the function $g(x), g'(x)$, where $'$      denotes derivative in respect with $x$.
+   
+    ii) Evaluate the characteristic equation and study the stability of this fixed point as the parameter α varies within the range γ < α < 1, classifying the
+    non-trivial fixed point accordingly (i.e. node, spiral, centre or saddle point).
+   
+    iii) Calculate the critical point where the Hopf bifurcation occurs and give an estimate
+    for the period of oscillation.
+:::

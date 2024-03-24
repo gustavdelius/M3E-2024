@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./solutions.html" rel="next">
+<link href="./epidemics.html" rel="next">
 <link href="./age_structured.html" rel="prev">
 <link href="./virus.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -185,6 +185,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Interacting populations</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./epidemics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Epidemics</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
@@ -214,6 +220,31 @@ window.Quarto = {
   <ul>
   <li><a href="#lotka-volterra-model" id="toc-lotka-volterra-model" class="nav-link active" data-scroll-target="#lotka-volterra-model"><span class="header-section-number">5.1</span> Lotka-Volterra Model</a></li>
   <li><a href="#linear-stability-analysis" id="toc-linear-stability-analysis" class="nav-link" data-scroll-target="#linear-stability-analysis"><span class="header-section-number">5.2</span> Linear Stability Analysis</a></li>
+  <li><a href="#more-realistic-predator-prey-models" id="toc-more-realistic-predator-prey-models" class="nav-link" data-scroll-target="#more-realistic-predator-prey-models"><span class="header-section-number">5.3</span> More Realistic Predator-Prey Models</a>
+  <ul>
+  <li><a href="#generalized-predator-prey-model" id="toc-generalized-predator-prey-model" class="nav-link" data-scroll-target="#generalized-predator-prey-model"><span class="header-section-number">5.3.1</span> Generalized Predator-Prey Model</a>
+  <ul class="collapse">
+  <li><a href="#holling-type-functional-responses" id="toc-holling-type-functional-responses" class="nav-link" data-scroll-target="#holling-type-functional-responses">Holling Type functional responses</a></li>
+  </ul></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">5.3.2</span> Example</a></li>
+  </ul></li>
+  <li><a href="#competition-models" id="toc-competition-models" class="nav-link" data-scroll-target="#competition-models"><span class="header-section-number">5.4</span> Competition Models</a>
+  <ul>
+  <li><a href="#lotka-volterra-competition-dynamics" id="toc-lotka-volterra-competition-dynamics" class="nav-link" data-scroll-target="#lotka-volterra-competition-dynamics"><span class="header-section-number">5.4.1</span> Lotka-Volterra Competition Dynamics</a></li>
+  <li><a href="#nondimensionalization-of-the-model" id="toc-nondimensionalization-of-the-model" class="nav-link" data-scroll-target="#nondimensionalization-of-the-model"><span class="header-section-number">5.4.2</span> Nondimensionalization of the Model</a></li>
+  <li><a href="#analysis-of-steady-states" id="toc-analysis-of-steady-states" class="nav-link" data-scroll-target="#analysis-of-steady-states"><span class="header-section-number">5.4.3</span> Analysis of Steady States</a></li>
+  <li><a href="#nullclines-and-phase-portraits" id="toc-nullclines-and-phase-portraits" class="nav-link" data-scroll-target="#nullclines-and-phase-portraits"><span class="header-section-number">5.4.4</span> Nullclines and Phase Portraits</a></li>
+  <li><a href="#competitive-exclusion-principle" id="toc-competitive-exclusion-principle" class="nav-link" data-scroll-target="#competitive-exclusion-principle"><span class="header-section-number">5.4.5</span> Competitive Exclusion Principle</a></li>
+  </ul></li>
+  <li><a href="#mutualism-models" id="toc-mutualism-models" class="nav-link" data-scroll-target="#mutualism-models"><span class="header-section-number">5.5</span> Mutualism Models</a>
+  <ul>
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1"><span class="header-section-number">5.5.1</span> Example</a></li>
+  <li><a href="#nondimensionalization-of-the-model-1" id="toc-nondimensionalization-of-the-model-1" class="nav-link" data-scroll-target="#nondimensionalization-of-the-model-1"><span class="header-section-number">5.5.2</span> Nondimensionalization of the Model</a></li>
+  <li><a href="#steady-states-and-stability" id="toc-steady-states-and-stability" class="nav-link" data-scroll-target="#steady-states-and-stability"><span class="header-section-number">5.5.3</span> Steady States and Stability</a></li>
+  <li><a href="#nullclines-and-phase-portraits-1" id="toc-nullclines-and-phase-portraits-1" class="nav-link" data-scroll-target="#nullclines-and-phase-portraits-1"><span class="header-section-number">5.5.4</span> Nullclines and Phase Portraits</a></li>
+  <li><a href="#limitations-and-unbounded-growth" id="toc-limitations-and-unbounded-growth" class="nav-link" data-scroll-target="#limitations-and-unbounded-growth"><span class="header-section-number">5.5.5</span> Limitations and Unbounded Growth</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">5.6</span> Exercises</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/gustavdelius/M3E-2024/edit/main/interacting.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -256,7 +287,7 @@ window.Quarto = {
 <h2 data-number="5.1" class="anchored" data-anchor-id="lotka-volterra-model"><span class="header-section-number">5.1</span> Lotka-Volterra Model</h2>
 <p>The Lotka-Volterra model, developed independently by Alfred Lotka in 1925 and Vito Volterra in 1926, serves as a foundational mathematical model for understanding the dynamic interplay between a prey population (denoted by <span class="math inline">\(N\)</span>) and a predator population (denoted by <span class="math inline">\(P\)</span>).</p>
 <p><strong>Model Formulation</strong></p>
-<p>The prey population, in the absence of predators, grows exponentially with a per capita growth rate <span class="math inline">\(a &gt; 0\)</span>. However, the prey die due to being eaten by predators, and we assume that the per-capita mortality rate grows in proportion to the abundance of predators, with some proportionality constant <span class="math inline">\(b \geq 0\)</span>. This leads to the equation <span class="math display">\[
+<p>The model assumes that the prey population, in the absence of predators, grows exponentially with a per capita growth rate <span class="math inline">\(a &gt; 0\)</span>. However, the prey die due to being eaten by predators, and we assume that the per-capita mortality rate grows in proportion to the abundance of predators, with some proportionality constant <span class="math inline">\(b \geq 0\)</span>. This leads to the equation <span class="math display">\[
 \frac{dN}{dt} = N(a - bP).
 \]</span></p>
 <p>Conversely, the predators benefit from the abundance of prey and we encode that by giving them a per-capita growth <span class="math inline">\(cN\)</span>, where <span class="math inline">\(c \geq 0\)</span>. We assume that the per capita mortality rate is a constant <span class="math inline">\(d\)</span>. This yields the following equation for the predator dynamics: <span class="math display">\[
@@ -328,8 +359,25 @@ H(q,p)= v- \log v + \alpha (u - \log u) = e^q - q + \alpha(e^p - p).
 <li>For a complex conjugate pair of eigenvalues, if the real part is positive, the system exhibits an unstable spiral; if the real part is negative, the system exhibits a stable spiral.</li>
 </ul>
 <p>This analysis is pivotal for understanding how small deviations from equilibrium evolve over time, providing insights into the system’s long-term behavior near the fixed points. For instance, in the context of the predator-prey dynamics, such analysis helps elucidate under what conditions the populations will return to equilibrium after a disturbance or potentially diverge away from it.</p>
+<p>We can reformulate the stability conditions of a fixed point in terms of the determinant and trace of the Jacobian matrix. We need to recall how these two characteristics of the Jacobian relate to the eigenvalues. For a 2x2 matrix <span class="math inline">\(A\)</span> with eigenvalues <span class="math inline">\(\lambda_1\)</span> and <span class="math inline">\(\lambda_2\)</span>, the trace <span class="math inline">\(\text{Tr}(A)\)</span> is the sum of the eigenvalues, and the determinant <span class="math inline">\(\text{Det}(A)\)</span> is the product of the eigenvalues:</p>
+<ul>
+<li><span class="math inline">\(\text{Tr}(A) = \lambda_1 + \lambda_2\)</span></li>
+<li><span class="math inline">\(\text{Det}(A) = \lambda_1 \lambda_2\)</span></li>
+</ul>
+<p>Using these relationships, we can express the conditions for the stability of fixed points as follows:</p>
+<ol type="1">
+<li><p><strong>Stable (Attracting) Fixed Point:</strong> If both eigenvalues have negative real parts, their sum (the trace) is negative, and their product (the determinant) is positive because the product of two negative numbers is positive. Therefore, for stability, <span class="math inline">\(\text{Tr}(A) &lt; 0\)</span> and <span class="math inline">\(\text{Det}(A) &gt; 0\)</span>. Additionally, to ensure that both eigenvalues are real and negative, we require that <span class="math inline">\(\text{Tr}(A)^2 - 4\text{Det}(A) \geq 0\)</span> to avoid complex eigenvalues.</p></li>
+<li><p><strong>Unstable (Repelling) Fixed Point:</strong> If both eigenvalues have positive real parts, the trace is positive, and the determinant is positive (the product of two positive numbers is positive). Thus, for instability, <span class="math inline">\(\text{Tr}(A) &gt; 0\)</span> and <span class="math inline">\(\text{Det}(A) &gt; 0\)</span>.</p></li>
+<li><p><strong>Saddle Point (Unstable):</strong> If the eigenvalues have real parts of opposite signs, the determinant (the product of the eigenvalues) is negative. So, for a saddle point, <span class="math inline">\(\text{Det}(A) &lt; 0\)</span>, regardless of the trace.</p></li>
+<li><p><strong>Spiral Points:</strong> For a complex conjugate pair of eigenvalues, the determinant will be positive (since the product of complex conjugates is positive), but the stability depends on the sign of the real part of the eigenvalues, which is represented by the trace. Here, we also need to ensure that <span class="math inline">\(\text{Tr}(A)^2 - 4\text{Det}(A) &lt; 0\)</span> to confirm that the eigenvalues are complex.</p>
+<ul>
+<li><strong>Unstable Spiral:</strong> If the real part is positive, <span class="math inline">\(\text{Tr}(A) &gt; 0\)</span> and <span class="math inline">\(\text{Det}(A) &gt; 0\)</span>.</li>
+<li><strong>Stable Spiral:</strong> If the real part is negative, <span class="math inline">\(\text{Tr}(A) &lt; 0\)</span> and <span class="math inline">\(\text{Det}(A) &gt; 0\)</span>.</li>
+</ul></li>
+</ol>
+<p>These conditions provide a concise way to determine the stability of fixed points using only the determinant and trace of the Jacobian matrix, without explicitly computing the eigenvalues.</p>
 <div id="exm-lsa" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5.1 (Linear Stability Analysis of the Lotka-Volterra Model)</strong></span> To explore the stability of steady states in the Lotka-Volterra model, we analyze the system near its equilibrium points using the Jacobian matrix <span class="math inline">\(\mathbf{A}\)</span>. For the non-dimensionalized Lotka-Volterra system, the Jacobian matrix is given by <span class="math display">\[
+<p><span class="theorem-title"><strong>Example 5.1 (Linear Stability Analysis of the Lotka-Volterra Model)</strong></span> To explore the stability of steady states in the Lotka-Volterra model, we analyze the system near its fixed points using the Jacobian matrix <span class="math inline">\(\mathbf{A}\)</span>. For the non-dimensionalized Lotka-Volterra system, the Jacobian matrix is given by <span class="math display">\[
 \mathbf{A} =
 \begin{pmatrix}
 1 - v &amp; -u \\
@@ -337,7 +385,7 @@ H(q,p)= v- \log v + \alpha (u - \log u) = e^q - q + \alpha(e^p - p).
 \end{pmatrix}.
 \]</span></p>
 <p><strong>Steady State at <span class="math inline">\((u, v) = (0, 0)\)</span></strong></p>
-<p>For the equilibrium point <span class="math inline">\((u, v) = (0, 0)\)</span>, we substitute these values into the Jacobian matrix and find the eigenvalues:</p>
+<p>For the fixed point <span class="math inline">\((u, v) = (0, 0)\)</span>, we substitute these values into the Jacobian matrix and find the eigenvalues:</p>
 <p><span class="math display">\[
 \mathbf{A} =
 \begin{pmatrix}
@@ -345,9 +393,9 @@ H(q,p)= v- \log v + \alpha (u - \log u) = e^q - q + \alpha(e^p - p).
 0 &amp; -\alpha
 \end{pmatrix}.
 \]</span></p>
-<p>The eigenvalues are <span class="math inline">\(\lambda_1 = 1\)</span> and <span class="math inline">\(\lambda_2 = -\alpha\)</span>, indicating that this equilibrium point is a saddle point due to the eigenvalues having opposite signs. This configuration is inherently unstable as trajectories near the point will diverge away along the direction associated with the positive eigenvalue.</p>
+<p>The eigenvalues are <span class="math inline">\(\lambda_1 = 1\)</span> and <span class="math inline">\(\lambda_2 = -\alpha\)</span>, indicating that this fixed point is a saddle point due to the eigenvalues having opposite signs. This configuration is inherently unstable as trajectories near the point will diverge away along the direction associated with the positive eigenvalue.</p>
 <p><strong>Steady State at <span class="math inline">\((u, v) = (1, 1)\)</span></strong></p>
-<p>At the equilibrium point <span class="math inline">\((u, v) = (1, 1)\)</span>, the Jacobian matrix becomes:</p>
+<p>At the fixed point <span class="math inline">\((u, v) = (1, 1)\)</span>, the Jacobian matrix becomes:</p>
 <p><span class="math display">\[
 \mathbf{A} =
 \begin{pmatrix}
@@ -357,6 +405,291 @@ H(q,p)= v- \log v + \alpha (u - \log u) = e^q - q + \alpha(e^p - p).
 \]</span></p>
 <p>The characteristic equation for the eigenvalues <span class="math inline">\(\lambda\)</span> is <span class="math inline">\(\lambda^2 + \alpha = 0\)</span>, leading to complex eigenvalues <span class="math inline">\(\lambda = \pm i\sqrt{\alpha}\)</span>. The real part of these eigenvalues is zero, indicating that this fixed point is a center. Trajectories around this point are closed loops, implying that the system exhibits neutrally stable periodic behavior around the <span class="math inline">\((1, 1)\)</span> steady state.</p>
 <p>The period <span class="math inline">\(T\)</span> of the oscillations can be determined from the imaginary part of the eigenvalues, which is <span class="math inline">\(\sqrt{\alpha}\)</span>, so the period <span class="math inline">\(T = \frac{2\pi}{\sqrt{\alpha}}\)</span>.</p>
+</div>
+</section>
+<section id="more-realistic-predator-prey-models" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="more-realistic-predator-prey-models"><span class="header-section-number">5.3</span> More Realistic Predator-Prey Models</h2>
+<p>While the basic Lotka-Volterra model provides a fundamental understanding of predator-prey interactions, more nuanced models incorporate additional biological realism. These models may account for factors like limited resources, satiation, prey switching, predator avoidance, and many others.</p>
+<section id="generalized-predator-prey-model" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="generalized-predator-prey-model"><span class="header-section-number">5.3.1</span> Generalized Predator-Prey Model</h3>
+<p>The generalized model introduces a function <span class="math inline">\(F(N, P)\)</span> representing the prey population’s per-capita growth and a function <span class="math inline">\(G(N, P)\)</span> for the predator’s per-capita growth rate, so that the dynamics are:</p>
+<p><span class="math display">\[
+\frac{dN}{dt} = NF(N, P), \quad \frac{dP}{dt} = PG(N, P).
+\]</span></p>
+<p>The prey might exhibit logistic growth in the absence of predators. To model this we could choose</p>
+<p><span class="math display">\[
+F(N, P) = r\left(1 - \frac{N}{K}\right) - R(N)P,
+\]</span></p>
+<p>where <span class="math inline">\(R(N)\)</span> models how the predation rate of a predator change with the prey population size. <span class="math inline">\(NR(N)\)</span> is the rate at which each individual predator consumes prey. The dependence of this rate on the prey population size <span class="math inline">\(N\)</span> is often referred to as “functional response” in the ecological literature. Holling introduced three types of functional responses, which are widely used in predator-prey models:</p>
+<section id="holling-type-functional-responses" class="level4">
+<h4 class="anchored" data-anchor-id="holling-type-functional-responses">Holling Type functional responses</h4>
+<ol type="1">
+<li><p><strong>Type I</strong> <span class="math inline">\(NR(N) = bN\)</span>, which corresponds to the standard Lotka-Volterra model. This simplification lacks realism as it assumes an unlimited predator appetite regardless of prey population size.</p></li>
+<li><p><strong>Type II</strong> <span class="math inline">\(NR(N) = \frac{AN}{N + B}\)</span>, with <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> being positive constants. In this model, the rate approaches a saturation level <span class="math inline">\(A\)</span> for large <span class="math inline">\(N\)</span>, reflecting a limit to the predator’s consumption rate. This model is more realistic as it accounts for the predator’s limited appetite, which might be because there is a minimum handling time, the time the predator needs to consume a prey item.</p></li>
+<li><p><strong>Type III</strong> <span class="math inline">\(R(N) = \frac{AN^2}{N^2 + B^2}\)</span>. This response includes a saturation effect like the previous example but also models that if the prey is rare the predator may not be able to find it. This model is more complex and captures the idea that predators may switch to alternative prey when the primary prey is scarce. It may also encode a learning effect, where the predator’s efficiency in capturing prey increases with experience so that initially the predator’s consumption rate increases with prey density.</p></li>
+</ol>
+</section>
+</section>
+<section id="example" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="example"><span class="header-section-number">5.3.2</span> Example</h3>
+<p>Consider a model where the prey growth rate follows logistic dynamics in the absence of prey and predation mortality is described by a Holling type II function encoding satiation effects. The predator’s growth rate goes down as the prey population decreases. The model equations are:</p>
+<p><span class="math display">\[
+\frac{dN}{dt} = N\left[r\left(1 - \frac{N}{K}\right) - \frac{A}{N + B}P\right], \quad \frac{dP}{dt} = Ps\left(1 - \frac{hP}{N}\right),
+\]</span></p>
+<p>where <span class="math inline">\(r\)</span>, <span class="math inline">\(K\)</span>, <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, <span class="math inline">\(s\)</span>, and <span class="math inline">\(h\)</span> are positive constants.</p>
+<p><strong>Nondimensionalization</strong></p>
+<p>To reduce the complexity, we nondimensionalize the system with <span class="math inline">\(\tau = tr\)</span>, <span class="math inline">\(u = \frac{N}{K}\)</span>, <span class="math inline">\(v = \frac{hP}{K}\)</span>, <span class="math inline">\(a = \frac{A}{hr}\)</span>, <span class="math inline">\(b = \frac{B}{K}\)</span>, and <span class="math inline">\(c = \frac{s}{r}\)</span>, leading to:</p>
+<p><span class="math display">\[
+\frac{du}{d\tau} = u(1 - u) - a\frac{uv}{u + b}, \quad \frac{dv}{d\tau} = cv\left(1 - \frac{v}{u}\right).
+\]</span></p>
+<p><strong>Stability Analysis of Steady States</strong></p>
+<p>The steady states <span class="math inline">\((u^*, v^*)\)</span> include <span class="math inline">\((1, 0)\)</span> and a coexistence steady state <span class="math inline">\((u^*_+, u^*_+)\)</span>, where <span class="math display">\[u^*_+ = \frac{1-a-b+\sqrt{(1-a-b)^2+4b}}{2}.\]</span> The community matrix <span class="math inline">\(\mathbf{A}(u, v)\)</span> at these points helps determine their stability. For the fixed point <span class="math inline">\((1, 0)\)</span>, where the prey population is at carrying capacity and there are no predators, we have find <span class="math display">\[\mathbf{A}(1, 0) = \begin{pmatrix} -1 &amp; -\frac{a}{1 + b} \\ 0 &amp; c \end{pmatrix}.\]</span> The eigenvalues <span class="math inline">\(-1\)</span> and <span class="math inline">\(c\)</span> have opposite sign, indicating that the fixed point is a saddle point.</p>
+<p>At the coexistence fixed point <span class="math inline">\((u^*_+, u^*_+)\)</span> the Jacobian is more complex and we will skip the analysis here.</p>
+</section>
+</section>
+<section id="competition-models" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="competition-models"><span class="header-section-number">5.4</span> Competition Models</h2>
+<p>In ecological systems, species often compete for limited resources, such as food or territory. This competition influences their growth rates and can determine their survival and dominance within an ecosystem. The Lotka-Volterra competition model provides a framework to study these dynamics, extending the principles of logistic growth to account for interspecies interactions.</p>
+<section id="lotka-volterra-competition-dynamics" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="lotka-volterra-competition-dynamics"><span class="header-section-number">5.4.1</span> Lotka-Volterra Competition Dynamics</h3>
+<p>The model is formulated as follows for two competing species <span class="math inline">\(N_1\)</span> and <span class="math inline">\(N_2\)</span>:</p>
+<p><span class="math display">\[
+\begin{split}
+\frac{dN_1}{dt} &amp;= r_1N_1 \left(1 - \frac{N_1 + b_{12}N_2}{K_1}\right),\\
+\frac{dN_2}{dt} &amp;= r_2N_2 \left(1 - \frac{N_2 + b_{21}N_1}{K_2}\right),
+\end{split}
+\]</span></p>
+<p>where <span class="math inline">\(r_i\)</span> is the intrinsic growth rate and <span class="math inline">\(K_i\)</span> is the carrying capacity of species <span class="math inline">\(i\)</span>. The coefficients <span class="math inline">\(b_{ij}\)</span> represent the competitive effect of species <span class="math inline">\(j\)</span> on species <span class="math inline">\(i\)</span>, effectively reducing the carrying capacity for species <span class="math inline">\(i\)</span> due to the presence of species <span class="math inline">\(j\)</span>.</p>
+</section>
+<section id="nondimensionalization-of-the-model" class="level3" data-number="5.4.2">
+<h3 data-number="5.4.2" class="anchored" data-anchor-id="nondimensionalization-of-the-model"><span class="header-section-number">5.4.2</span> Nondimensionalization of the Model</h3>
+<p>To simplify the analysis, we nondimensionalize the system using:</p>
+<p><span class="math display">\[
+u_i = \frac{N_i}{K_i}, \quad a_{ij} = \frac{b_{ij}K_j}{K_i}, \quad \tau = r_1 t, \quad \rho = \frac{r_2}{r_1},
+\]</span></p>
+<p>leading to:</p>
+<p><span class="math display">\[
+\frac{du_1}{d\tau} = u_1(1 - u_1 - a_{12}u_2), ~~~~~ \frac{du_2}{d\tau} = \rho u_2(1 - u_2 - a_{21}u_1).
+\]</span></p>
+</section>
+<section id="analysis-of-steady-states" class="level3" data-number="5.4.3">
+<h3 data-number="5.4.3" class="anchored" data-anchor-id="analysis-of-steady-states"><span class="header-section-number">5.4.3</span> Analysis of Steady States</h3>
+<p>The system has four potential steady states: <span class="math inline">\((0, 0)\)</span>, <span class="math inline">\((0, 1)\)</span>, <span class="math inline">\((1, 0)\)</span>, and a coexistence steady state <span class="math inline">\(\left(\frac{1-a_{12}}{1-a_{12}a_{21}}, \frac{1-a_{21}}{1-a_{12}a_{21}}\right)\)</span>.</p>
+<p>To determine the stability of these points, we evaluate the Jacobian matrix <span class="math inline">\(\mathbf{A}(u_1, u_2)\)</span> at each steady state and analyze its eigenvalues:</p>
+<ol type="1">
+<li><p><strong>At <span class="math inline">\((0, 0)\)</span>:</strong> The eigenvalues are <span class="math inline">\(1\)</span> and <span class="math inline">\(\rho\)</span>, indicating an unstable node as both are positive.</p></li>
+<li><p><strong>At <span class="math inline">\((1, 0)\)</span>:</strong> The eigenvalues are <span class="math inline">\(-1\)</span> and <span class="math inline">\(\rho(1 - a_{21})\)</span>. This point is a saddle if <span class="math inline">\(a_{21} &lt; 1\)</span> and a stable node if <span class="math inline">\(a_{21} &gt; 1\)</span>.</p></li>
+<li><p><strong>At <span class="math inline">\((0, 1)\)</span>:</strong> By symmetry, this point behaves like <span class="math inline">\((1, 0)\)</span> with roles reversed between species.</p></li>
+<li><p><strong>Coexistence point <span class="math inline">\(\left(\frac{1-a_{12}}{1-a_{12}a_{21}}, \frac{1-a_{21}}{1-a_{12}a_{21}}\right)\)</span>:</strong> The stability is determined by the sign of the trace and the determinant of <span class="math inline">\(\mathbf{A}\)</span>. The system’s behavior at this point depends on the specific values of <span class="math inline">\(a_{12}\)</span> and <span class="math inline">\(a_{21}\)</span>, indicating potential scenarios where both species can coexist or one outcompetes the other.</p></li>
+</ol>
+</section>
+<section id="nullclines-and-phase-portraits" class="level3" data-number="5.4.4">
+<h3 data-number="5.4.4" class="anchored" data-anchor-id="nullclines-and-phase-portraits"><span class="header-section-number">5.4.4</span> Nullclines and Phase Portraits</h3>
+<p>Nullclines, where the growth rate of one of the species are zero, are a very useful aid when drawing phase plane diagrams, also known as phase portraits. The nullclines for the Lotka-Volterra competition model are:</p>
+<ul>
+<li><p><span class="math inline">\(u_1\)</span> nullclines: <span class="math inline">\(du_1/d\tau = 0\)</span> when <span class="math inline">\(u_1 = 0\)</span> or <span class="math inline">\(u_2 = \frac{1-u_1}{a_{12}}\)</span>.</p></li>
+<li><p><span class="math inline">\(u_2\)</span> nullclines: <span class="math inline">\(du_2/d\tau = 0\)</span> when <span class="math inline">\(u_2 = 0\)</span> or <span class="math inline">\(u_2 = 1 - a_{21}u_1\)</span>.</p></li>
+</ul>
+<p>Along the <span class="math inline">\(u_1\)</span> nullclines the flow is purely vertical and along the <span class="math inline">\(u_2\)</span> nullclines the flow is purely horizontal. The intersection of the nullclines gives the steady states of the system. We can now draw the phase portrait to visualize the dynamics of the system. Very rough sketches are enough to understand the dynamics.</p>
+<div id="fig-competition-phase1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-competition-phase1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/Interacting/phase1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-competition-phase1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.2: Phase portrait of competition model when <span class="math inline">\(a_{12}&lt;1\)</span> and <span class="math inline">\(a_{21}&lt;1\)</span>.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-competition-phase1" class="quarto-xref">Figure&nbsp;<span>5.2</span></a> shows the phase portrait of the competition model when <span class="math inline">\(a_{12}&lt;1\)</span> and <span class="math inline">\(a_{21}&lt;1\)</span>. The nullclines are shown in grey and red, the flow lines in blue, with the arrows indicating the direction of the flow. The system exhibits a stable coexistence steady state, where both species persist in the ecosystem.</p>
+<div id="fig-competition-phase2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-competition-phase2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/Interacting/phase2.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-competition-phase2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.3: Phase portrait of competition model when <span class="math inline">\(a_{12}&gt;1\)</span> and <span class="math inline">\(a_{21}&gt;1\)</span>.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-competition-phase2" class="quarto-xref">Figure&nbsp;<span>5.3</span></a> illustrates the phase portrait of the competition model when <span class="math inline">\(a_{12}&gt;1\)</span> and <span class="math inline">\(a_{21}&gt;1\)</span>. In this scenario, the coexistence steady state is a saddle, leading to the exclusion of one species. Which species dominates depends on the initial conditions. If the initial condition is below the separatrix, species 1 will dominate, and if it is above, species 2 will dominate.</p>
+<div id="fig-competition-phase3" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-competition-phase3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/Interacting/phase3.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-competition-phase3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.4: Phase portrait of competition model when <span class="math inline">\(a_{12}&lt;1\)</span> and <span class="math inline">\(a_{21}&gt;1\)</span>.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-competition-phase3" class="quarto-xref">Figure&nbsp;<span>5.4</span></a> depicts the phase portrait of the competition model when <span class="math inline">\(a_{12}&lt;1\)</span> and <span class="math inline">\(a_{21}&gt;1\)</span>. In this case, the coexistence steady state has disappeared (it has moved into a region with negative population numbers that is not ecologically relevant). Irrespective of initial conditions, the system will evolve towards the state where only species 1 exists. Species 2 is driven to extinction.</p>
+<p>We are not drawing the case <span class="math inline">\(a_{12}&gt;1\)</span> and <span class="math inline">\(a_{21}&lt;1\)</span> as it is similar to the case <span class="math inline">\(a_{12}&lt;1\)</span> and <span class="math inline">\(a_{21}&gt;1\)</span> just with the role of species 1 and 2 reversed. In this case species 2 will dominate and species 1 will go extinct.</p>
+</section>
+<section id="competitive-exclusion-principle" class="level3" data-number="5.4.5">
+<h3 data-number="5.4.5" class="anchored" data-anchor-id="competitive-exclusion-principle"><span class="header-section-number">5.4.5</span> Competitive Exclusion Principle</h3>
+<p>The competitive exclusion principle, proposed by Gause in the 1930s, states that two species competing for the same resources cannot coexist indefinitely, with one species eventually outcompeting the other.</p>
+<p>In the model we studied the two species shared resources but each also had its own resources, hence we observed a weaker form of the competitive exclusion principle. The coexistence steady state was stable when the competition was weak enough, allowing both species to persist in the ecosystem. This highlights the delicate balance between competition and coexistence in ecological systems, where the strength of interspecies interactions plays a crucial role in determining the long-term dynamics of species populations.</p>
+</section>
+</section>
+<section id="mutualism-models" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="mutualism-models"><span class="header-section-number">5.5</span> Mutualism Models</h2>
+<p>In ecological systems, mutualism refers to interactions where all participating species benefit, leading to increased growth rates. An example is the relationship between plants and their seed dispersers, such as insects, where both parties gain advantages from their association.</p>
+<section id="example-1" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1" class="anchored" data-anchor-id="example-1"><span class="header-section-number">5.5.1</span> Example</h3>
+<p>This model incorporates logistic growth, akin to the competition model, but with a twist to account for the mutualistic interaction:</p>
+<p><span class="math display">\[
+\frac{dN_1}{dt} = r_1N_1 \left[ 1 - \frac{N_1}{K_1} + b_{12}\frac{N_2}{K_1} \right], ~~~~~ \frac{dN_2}{dt} = r_2N_2 \left[ 1 - \frac{N_2}{K_2} + b_{21}\frac{N_1}{K_2} \right],
+\]</span></p>
+<p>where <span class="math inline">\(r_i\)</span>, <span class="math inline">\(K_i\)</span>, and <span class="math inline">\(b_{ij}\)</span> are all positive constants, with <span class="math inline">\(b_{ij}\)</span> representing the mutualistic benefit to species <span class="math inline">\(i\)</span> from species <span class="math inline">\(j\)</span>. Notice that we simply changed the sign of the competition terms in the competition model to turn them into mutualistic terms</p>
+</section>
+<section id="nondimensionalization-of-the-model-1" class="level3" data-number="5.5.2">
+<h3 data-number="5.5.2" class="anchored" data-anchor-id="nondimensionalization-of-the-model-1"><span class="header-section-number">5.5.2</span> Nondimensionalization of the Model</h3>
+<p>Using nondimensional variables <span class="math inline">\(u_i = N_i/K_i\)</span>, <span class="math inline">\(a_{ij} = b_{ij}K_j/K_i\)</span>, <span class="math inline">\(\tau = r_1t\)</span>, and <span class="math inline">\(\rho = r_2/r_1\)</span>, the equations transform to:</p>
+<p><span class="math display">\[
+\frac{du_1}{d\tau} = u_1(1 - u_1 + a_{12}u_2), ~~~~~ \frac{du_2}{d\tau} = \rho u_2(1 - u_2 + a_{21}u_1).
+\]</span> This is as in the competition model but with the signs in front of <span class="math inline">\(a_{12}\)</span> and <span class="math inline">\(a_{21}\)</span> reversed.</p>
+</section>
+<section id="steady-states-and-stability" class="level3" data-number="5.5.3">
+<h3 data-number="5.5.3" class="anchored" data-anchor-id="steady-states-and-stability"><span class="header-section-number">5.5.3</span> Steady States and Stability</h3>
+<p>The system has the steady states <span class="math inline">\((0, 0)\)</span>, <span class="math inline">\((0, 1)\)</span>, <span class="math inline">\((1, 0)\)</span>, and <span class="math inline">\(\left(\frac{1 + a_{12}}{\delta}, \frac{1 + a_{21}}{\delta}\right)\)</span>, where <span class="math inline">\(\delta = 1 - a_{12}a_{21}\)</span>. The coexistence steady state is ecologically relevant only if <span class="math inline">\(\delta &gt; 0\)</span>.</p>
+<ul>
+<li><p><strong>At <span class="math inline">\((0, 0)\)</span>:</strong> The eigenvalues are <span class="math inline">\(1\)</span> and <span class="math inline">\(\rho\)</span>, indicating an unstable node.</p></li>
+<li><p><strong>At <span class="math inline">\((0, 1)\)</span> and <span class="math inline">\((1, 0)\)</span>:</strong> These points are saddles, with eigenvalues showing a mix of positive and negative signs.</p></li>
+<li><p><strong>At the mutualistic steady state:</strong> The trace and determinant of the community matrix <span class="math inline">\(\mathbf{A}\)</span> suggest that this point is stable if <span class="math inline">\(\delta &gt; 0\)</span>.</p></li>
+</ul>
+</section>
+<section id="nullclines-and-phase-portraits-1" class="level3" data-number="5.5.4">
+<h3 data-number="5.5.4" class="anchored" data-anchor-id="nullclines-and-phase-portraits-1"><span class="header-section-number">5.5.4</span> Nullclines and Phase Portraits</h3>
+<p>The equations for the nullclines for this model are similar to those in the competition model, but now with positive slope rather than negative slope.</p>
+<ul>
+<li><p><span class="math inline">\(u_1\)</span> nullclines: <span class="math inline">\(du_1/d\tau = 0\)</span> when <span class="math inline">\(u_1 = 0\)</span> or <span class="math inline">\(u_2 = \frac{u_1-1}{a_{12}}\)</span>.</p></li>
+<li><p><span class="math inline">\(u_2\)</span> nullclines: <span class="math inline">\(du_2/d\tau = 0\)</span> when <span class="math inline">\(u_2 = 0\)</span> or <span class="math inline">\(u_2 = 1 + a_{21}u_1\)</span>.</p></li>
+</ul>
+<div id="fig-mutualistic-phase" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mutualistic-phase-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/Interacting/phase4.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mutualistic-phase-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.5: Phase portrait of mutualistic model when <span class="math inline">\(a_{12}a_{21}&lt;1\)</span>.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-mutualistic-phase" class="quarto-xref">Figure&nbsp;<span>5.5</span></a> illustrates the phase portrait of the mutualism model when <span class="math inline">\(a_{12}a_{21}&lt;1\)</span>. The nullclines are shown in grey and red, with the flow lines in blue. The system exhibits a stable coexistence steady state, where both species benefit from the mutualistic interaction.</p>
+</section>
+<section id="limitations-and-unbounded-growth" class="level3" data-number="5.5.5">
+<h3 data-number="5.5.5" class="anchored" data-anchor-id="limitations-and-unbounded-growth"><span class="header-section-number">5.5.5</span> Limitations and Unbounded Growth</h3>
+<p>A cautionary note is that if the mutualistic coefficients <span class="math inline">\(a_{12}a_{21}\)</span> are too large, leading to <span class="math inline">\(\delta &lt; 0\)</span>, the model predicts unbounded growth, which is unrealistic. This phenomenon, known as May’s “orgy of mutual benefaction,” highlights the need for constraints in mutualism models to avoid predicting ecological impossibilities.</p>
+<p>Through this mutualism model, we gain insights into how species interactions can foster increased growth and stability, contrasting with competitive dynamics. It underscores the diversity of ecological interactions and their varying implications for species survival and community structure.</p>
+<!---
+## Discussion on Modeling Interacting Populations
+
+- **Complexity of Real Ecosystems:** Natural ecosystems are intricate networks of numerous interacting species, forming a complex food web or ecological network. These interactions span various trophic levels and include diverse relationships such as predation, competition, and mutualism.
+
+- **Generic Models for Population Dynamics:** A general way to represent the dynamics of interacting populations in an ecosystem is through a system of differential equations, where $\frac{dN_i}{dt} = f_i(\underline{N})$ for $i = 1, \dots, n$, and $\underline{N}$ represents the vector of all population sizes. These models aim to capture the essence of biological interactions and their impact on population changes over time.
+
+- **Generalized Lotka-Volterra Model:** This model extends the basic Lotka-Volterra framework to multiple species, where $f_i(\underline{N}) = N_i(\underline{r} + A\underline{N})_i$ or more explicitly, $f_i = N_i(r_i + \sum_{j=1}^n A_{ij}N_j)$. Here, $A$, the community matrix, encapsulates the interaction strengths between species, and $\underline{r}$ represents intrinsic growth rates. The model can predict a coexistence fixed point where populations stabilize, given by $\underline{N} = -A^{-1}\underline{r}$.
+
+- **Mass Action Dynamics:** This concept implies that the rate of interaction between two species is proportional to the product of their abundances, modeled as $A_{ij}N_iN_j$, reflecting a direct dependency on population sizes.
+
+- **Functional Response and Density-Dependent Rates:** The term $N_iF(N_j)$ introduces a functional response, where the impact of one species on another is a function of the population size, incorporating behaviors like prey switching, mutual protection, satiation, and others, which introduce nonlinearities and more realistic dynamics into the models.
+
+- **Challenges in Applying Models to Reality:**
+    - **Phenomenological Models:** These models use mathematical functions to fit observed data, prioritizing predictions and descriptions over understanding the underlying mechanisms.
+    - **Mechanistic Models:** They are grounded in biological principles, aiming to capture the underlying processes with parameters that have real-world interpretations.
+
+- **Competitive Exclusion Principle:** This principle suggests that in a stable environment, competing species cannot coexist indefinitely; however, various ecological theories like niche theory, the intermediate disturbance hypothesis, and the paradox of the plankton offer explanations for the maintenance of biodiversity.
+
+- **Complexity-Stability Debate:** Robert May's work challenges the intuition that greater biodiversity enhances ecosystem stability. Mathematical models often show that increased complexity can lead to decreased stability, sparking ongoing debate and research in this area.
+
+- **Evolutionary Perspectives:** Ecosystems are not static; they are shaped by evolutionary processes, including adaptation and coevolution, which influence species interactions and ecosystem dynamics over time.
+
+- **Influence on Environmental Policy:** Models play a crucial role in informing policies, such as determining sustainable fishing quotas, by predicting the outcomes of different management strategies.
+
+- **Role of Modeling in Ecology:** The primary purpose of modeling in ecology is to enhance our understanding of complex systems. While models are powerful tools, they are means to an end, not the end themselves. They help in hypothesis testing, generating predictions, and offering insights that guide empirical research and conservation efforts.
+
+--->
+</section>
+</section>
+<section id="exercises" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">5.6</span> Exercises</h2>
+<div id="exr-interacting-populations" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 5.1</strong></span> &nbsp;</p>
+<!--- From sheet 3 --->
+<p>Consider a model for the interaction of two species with populations <span class="math inline">\(N_1\)</span> and <span class="math inline">\(N_2\)</span> <span class="math display">\[ \frac{dN_1}{dt} = r_1 N_1 \left( 1 - \frac{N_1}{K_1} - b_{12}\frac{ N_2}{K_1} \right), \]</span> <span class="math display">\[  \frac{N_2}{dt} = r_2 N_2 \left( 1  - b_{21}\frac{ N_1}{K_2} \right), \]</span> where all the parameters are positive.</p>
+<ol type="a">
+<li><p>What type of interaction exists between <span class="math inline">\(N_1\)</span> and <span class="math inline">\(N_2\)</span>?</p></li>
+<li><p>Non-dimensionalize the system by introducing <span class="math inline">\(u=N_1/K_1\)</span> and <span class="math inline">\(v=N_2/K_2\)</span> as well as a non-dimensional time variable. What are the resulting non-dimensional parameters? Give the equations of motion for <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> in terms of these parameters.</p></li>
+<li><p>Determine the steady states in the non-dimensionalised system. Investigate their stability. At what values of the parameters do bifurcations take place?</p></li>
+<li><p>Determine the nullclines and use these to make rough phase-plane sketches (You will need two sketches).</p></li>
+<li><p>Describe under what ecological circumstances <span class="math inline">\(N_2\)</span> becomes extinct.<br>
+Do the same for <span class="math inline">\(N_1\)</span>. Show that the principle of competitive exclusion holds irrespective of the size of the parameters.</p></li>
+</ol>
+</div>
+<hr>
+<div id="exr-interacting-populations-2" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 5.2</strong></span> &nbsp;</p>
+<!--- From Surrey exam 1999 --->
+<p>A model for the interaction between two species with populations <span class="math inline">\(N_1\)</span> and <span class="math inline">\(N_2\)</span> is determined to be <span class="math display">\[
+\begin{split}
+\frac{dN_1}{dt} &amp;= rN_1\left(1 - \frac{N_1}{K}\right) - aN_1N_2\left(1 - \exp(-bN_1)\right),\\
+\frac{dN_2}{dt} &amp;= -dN_2 + cN_2\left(1 - \exp(-bN_1)\right),
+\end{split}
+\]</span> where <span class="math inline">\(a, b, c, d, r\)</span> and <span class="math inline">\(K\)</span> are positive constants.</p>
+<ol type="a">
+<li><p>Introducing the dimensionless variables and parameters <span class="math display">\[
+u = \frac{N_1}{K}, \quad v = \frac{aN_2}{r}, \quad \tau = rt, \quad \beta = bK,
+\]</span> show that <span class="math display">\[
+\begin{split}
+\frac{du}{d\tau} &amp;= u(1 - u) - uv\left(1 - e^{-\beta u}\right),\\
+\frac{dv}{d\tau} &amp;= -\delta v + \alpha v\left(1 - e^{-\beta u}\right),
+\end{split}
+\]</span> giving the positive constants <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\delta\)</span> in terms of <span class="math inline">\(c, d\)</span> and <span class="math inline">\(r\)</span>.</p></li>
+<li><p>Describe the relevance of each term and, hence, determine the type of interaction between the two populations.</p></li>
+<li><p>Show that the non-negative fixed points are given by <span class="math inline">\((u^*, v^*) = (0, 0), (1,0)\)</span> and <span class="math inline">\((u_1, (1 - u_1)\alpha/\delta)\)</span>, where <span class="math inline">\(u_1 = -\ln(1 - \delta/\alpha)/\beta\)</span>, and that the steady state where <span class="math inline">\(u^*\)</span> and <span class="math inline">\(v^*\)</span> are both non-zero can only exist if <span class="math inline">\(\alpha &gt; \delta\)</span> and <span class="math inline">\(\beta &gt; \beta_c = -\ln(1 - \delta/\alpha)\)</span>.</p></li>
+<li><p>Show that the community matrix, <span class="math inline">\(A\)</span>, is given by <span class="math display">\[
+A = \begin{pmatrix}
+1 - 2u - v(1 - e^{-\beta u}) - \beta uve^{-\beta u} &amp; -u\left(1 - e^{-\beta u}\right) \\
+\alpha v\beta e^{-\beta u} &amp; -\delta + \alpha(1 - e^{-\beta u})
+\end{pmatrix}.
+\]</span></p></li>
+<li><p>Assuming henceforth that <span class="math inline">\(\delta/\alpha &lt; 1\)</span>, determine the linear stability of each of the fixed points.</p></li>
+<li><p>Sketch the <span class="math inline">\((u, v)\)</span> phase portrait to indicate the stability of each steady state for the two cases <span class="math inline">\(\beta &gt; \beta_c\)</span> and <span class="math inline">\(0 &lt; \beta &lt; \beta_c\)</span> (remember <span class="math inline">\(\alpha &gt; \delta\)</span>).</p></li>
+</ol>
+</div>
+<hr>
+<div id="exr-interacting-populations-3" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 5.3</strong></span> &nbsp;</p>
+<!--- From 2017 exam --->
+<p>Consider the predator-prey model with Allee effect in the prey: <span class="math display">\[
+\begin{split}
+\frac{dN}{dT} &amp;= rN\left(\frac{N}{K_0} - 1\right)\left(1 - \frac{N}{K}\right) - cNP,\\
+\frac{dP}{dT} &amp;= bNP - mP,
+\end{split}
+\]</span> where <span class="math inline">\(N(T)\)</span> is the number of prey and <span class="math inline">\(P(T)\)</span> is the number of predators at time <span class="math inline">\(T\)</span>, and <span class="math inline">\(r, K, c, b, m\)</span> are positive constants with <span class="math inline">\(0 &lt; K_0 &lt; K\)</span>. The populations <span class="math inline">\(N(T), P(T)\)</span> are non-negative quantities.</p>
+<ol type="a">
+<li><p>Provide brief biological interpretations for <span class="math inline">\(r, K, K_0, c, b, m\)</span> for the above predator-prey model. What is the biological role of <span class="math inline">\(K_0\)</span> in the modified prey growth rate?</p></li>
+<li><p>Introduce the dimensionless variables <span class="math inline">\(\frac{N}{K} = x, \frac{cP}{r} = y, rT = t\)</span> and show that the above system can be reduced to</p></li>
+</ol>
+<p><span class="math display">\[\begin{split}
+\frac{dx}{dt} &amp;= x\left(\frac{x}{y} - 1\right)(1 - x) - y = x[g(x) - y],\\
+\frac{dy}{dt} &amp;= \beta(x - \alpha y).
+\end{split}\]</span> How are the new dimensionless constants <span class="math inline">\(\alpha, \beta\)</span> expressed in terms of the original parameters?</p>
+<ol start="3" type="a">
+<li><p>For the dimensionless system:</p>
+<ol type="i">
+<li><p>Calculate the nullclines, clearly stating any conditions for their existence.</p></li>
+<li><p>Use your answer from (i) to sketch nullclines, depicting their intersections and the vector field direction along each isocline in the phase plane.</p></li>
+<li><p>Find the fixed points.</p></li>
+</ol></li>
+<li><p>For the non-trivial fixed point, where both predators and preys may coexist:</p>
+<ol type="i">
+<li><p>Calculate the Jacobian at this point in terms of the function <span class="math inline">\(g(x), g'(x)\)</span>, where <span class="math inline">\('\)</span> denotes derivative in respect with <span class="math inline">\(x\)</span>.</p></li>
+<li><p>Evaluate the characteristic equation and study the stability of this fixed point as the parameter α varies within the range γ &lt; α &lt; 1, classifying the non-trivial fixed point accordingly (i.e.&nbsp;node, spiral, centre or saddle point).</p></li>
+<li><p>Calculate the critical point where the Hopf bifurcation occurs and give an estimate for the period of oscillation.</p></li>
+</ol></li>
+</ol>
 </div>
 
 
@@ -775,8 +1108,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./solutions.html" class="pagination-link" aria-label="<span class='chapter-number'>A</span>&nbsp; <span class='chapter-title'>Solutions</span>">
-        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Solutions</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./epidemics.html" class="pagination-link" aria-label="<span class='chapter-number'>6</span>&nbsp; <span class='chapter-title'>Epidemics</span>">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Epidemics</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

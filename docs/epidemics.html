@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.549">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Work in progress">
+
+<title>Mathematical Ecology and Epidemiology - 6&nbsp; Epidemics</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./solutions.html" rel="next">
+<link href="./interacting.html" rel="prev">
+<link href="./virus.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="Mathematical Ecology and Epidemiology - 6&nbsp; Epidemics">
+<meta property="og:description" content="Work in progress">
+<meta property="og:site_name" content="Mathematical Ecology and Epidemiology">
+<meta name="twitter:title" content="Mathematical Ecology and Epidemiology - 6&nbsp; Epidemics">
+<meta name="twitter:description" content="Work in progress">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./epidemics.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Epidemics</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Mathematical Ecology and Epidemiology</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://maths.york.ac.uk/moodle/course/view.php?id=2656" title="Moodle page" class="quarto-navigation-tool px-1" aria-label="Moodle page"><i class="bi bi-mortarboard-fill"></i></a>
+    <a href="https://forms.gle/naVqtYVGNqWmVDgRA" title="Submit a correction" class="quarto-navigation-tool px-1" aria-label="Submit a correction"><i class="bi bi-bug-fill"></i></a>
+    <a href="https://github.com/gustavdelius/M3E-2024/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./Mathematical-Ecology-and-Epidemiology.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./continuous_time.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Continuous-time population models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./discrete_time.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Discrete-time population models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sex_structured.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Sex-structured population models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./age_structured.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Age-structured population model</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./interacting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Interacting populations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./epidemics.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Epidemics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Solutions</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sir-model" id="toc-sir-model" class="nav-link active" data-scroll-target="#sir-model"><span class="header-section-number">6.1</span> SIR model</a>
+  <ul>
+  <li><a href="#three-compartment-model" id="toc-three-compartment-model" class="nav-link" data-scroll-target="#three-compartment-model"><span class="header-section-number">6.1.1</span> Three-compartment model</a></li>
+  <li><a href="#assumptions-made-by-sir-model" id="toc-assumptions-made-by-sir-model" class="nav-link" data-scroll-target="#assumptions-made-by-sir-model"><span class="header-section-number">6.1.2</span> Assumptions made by SIR model</a></li>
+  <li><a href="#condition-for-an-epidemic" id="toc-condition-for-an-epidemic" class="nav-link" data-scroll-target="#condition-for-an-epidemic"><span class="header-section-number">6.1.3</span> Condition for an epidemic</a></li>
+  </ul></li>
+  <li><a href="#how-an-epidemic-unfolds" id="toc-how-an-epidemic-unfolds" class="nav-link" data-scroll-target="#how-an-epidemic-unfolds"><span class="header-section-number">6.2</span> How an epidemic unfolds</a>
+  <ul>
+  <li><a href="#trajectory-in-s-i-plane" id="toc-trajectory-in-s-i-plane" class="nav-link" data-scroll-target="#trajectory-in-s-i-plane"><span class="header-section-number">6.2.1</span> Trajectory in S-I plane</a></li>
+  <li><a href="#peak-of-an-epidemic" id="toc-peak-of-an-epidemic" class="nav-link" data-scroll-target="#peak-of-an-epidemic"><span class="header-section-number">6.2.2</span> Peak of an epidemic</a></li>
+  <li><a href="#trajectory-in-r-s-plane" id="toc-trajectory-in-r-s-plane" class="nav-link" data-scroll-target="#trajectory-in-r-s-plane"><span class="header-section-number">6.2.3</span> Trajectory in R-S plane</a></li>
+  <li><a href="#size-of-an-epidemic" id="toc-size-of-an-epidemic" class="nav-link" data-scroll-target="#size-of-an-epidemic"><span class="header-section-number">6.2.4</span> Size of an epidemic</a></li>
+  <li><a href="#sec-doubling" id="toc-sec-doubling" class="nav-link" data-scroll-target="#sec-doubling"><span class="header-section-number">6.2.5</span> Initial exponential growth</a></li>
+  <li><a href="#doubling-time" id="toc-doubling-time" class="nav-link" data-scroll-target="#doubling-time"><span class="header-section-number">6.2.6</span> Doubling time</a></li>
+  </ul></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">6.3</span> Exercises</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/gustavdelius/M3E-2024/edit/main/epidemics.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Epidemics</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<blockquote class="blockquote">
+<p>“As a matter of fact, all epidemiology, concerned as it is with the variation of disease from time to time or from place to place, must be considered mathematically, however many variables are implicated, if it is to be considered scientifically at all.” – <cite><a href="https://en.wikipedia.org/wiki/Ronald_Ross">Sir Ronald Ross</a></cite></p>
+</blockquote>
+<p>Mathematical epidemiology applies mathematical modelling and statistical analysis to understand the spread of infectious diseases within populations. This is an important topic for several reasons:</p>
+<ol type="1">
+<li><p><em>Control and prevention of diseases</em>: Mathematical models can be used to predict the spread of infectious diseases, estimate the effectiveness of control measures, and inform public health policy. By studying mathematical epidemiology, researchers and public health officials can develop strategies to prevent and control the spread of diseases, which can save lives and reduce healthcare costs.</p></li>
+<li><p><em>Improved disease surveillance</em>: Mathematical models can also be used to estimate disease incidence, prevalence, and mortality rates, which can help to improve disease surveillance systems. By accurately tracking disease outbreaks, public health officials can respond quickly to control and prevent further spread of the disease.</p></li>
+<li><p><em>Understanding disease transmission dynamics</em>: Mathematical models can provide insight into the transmission dynamics of infectious diseases, such as how they spread within populations, how they interact with different populations, and how they evolve over time. This understanding is critical for developing effective disease control measures and for predicting the potential impact of emerging diseases.</p></li>
+<li><p><em>Development of vaccines and treatments</em>: Mathematical modelling can aid in the development of new vaccines and treatments for infectious diseases. By understanding the transmission dynamics and the immune response to diseases, researchers can develop more effective vaccines and treatments that can prevent or reduce the severity of infections.</p></li>
+</ol>
+<p>Before we get started, let us explain some terms used to describe different levels of disease prevalence and spread:</p>
+<ol type="1">
+<li><p><em>Epidemic</em>: An epidemic refers to the sudden increase in the number of cases of a disease above what is normally expected in a given population and geographic area. The outbreak is usually limited to a specific community or region and can be caused by a new or re-emerging infectious agent. The epidemic may last for several weeks or months before it is brought under control.</p></li>
+<li><p><em>Pandemic</em>: A pandemic is an epidemic that has spread over a larger geographic area, often spanning multiple countries or continents. A pandemic is usually caused by a new strain of an existing virus or by a completely new virus that can spread quickly and easily from person to person. Pandemics can have a significant impact on public health and can cause widespread illness and death.</p></li>
+<li><p><em>Endemic</em>: An endemic disease is one that is regularly found in a population or geographic area at a consistent and predictable rate. Endemic diseases may cause illness and death but are typically well-controlled by routine public health measures, such as vaccination and surveillance. For example, malaria is endemic in many parts of the world, and measures such as mosquito control and antimalarial medications are used to prevent and treat the disease.</p></li>
+</ol>
+<section id="sir-model" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="sir-model"><span class="header-section-number">6.1</span> SIR model</h2>
+<p>The SIR model is a very idealised mathematical model that is commonly used to describe the spread of infectious diseases in a population. The acronym SIR stands for Susceptible, Infected, and Recovered, which are the three main compartments of the model.</p>
+<p>The SIR model was first introduced in 1927 by Kermack and McKendrick in their landmark paper “A Contribution to the Mathematical Theory of Epidemics”. The model was developed in response to the major epidemics of the early 20th century, such as the Spanish flu pandemic of 1918-1919, which highlighted the need for a quantitative understanding of the spread of infectious diseases.</p>
+<p>The SIR model was one of the first mathematical models to be developed for the study of infectious disease dynamics, and it remains one of the most widely used and influential models in the field of mathematical epidemiology. The model has been used to study a wide range of infectious diseases, including measles, tuberculosis, HIV/AIDS, and COVID-19, and has been extended and adapted to address new challenges and incorporate new data sources.</p>
+<p>The SIR model and its variants have played a key role in informing public health policy and practice, by providing insights into the impact of different intervention strategies, such as vaccination, quarantine, and social distancing. The model has also helped to guide the design of clinical trials and the development of new drugs and vaccines, and has contributed to our understanding of the fundamental principles of infectious disease transmission.</p>
+<section id="three-compartment-model" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="three-compartment-model"><span class="header-section-number">6.1.1</span> Three-compartment model</h3>
+<p>In the SIR model, individuals in a population are divided into three groups: those who are susceptible to the disease (<span class="math inline">\(S\)</span>), those who are infected with the disease (<span class="math inline">\(I\)</span>), and those who have recovered from the disease and are now immune (<span class="math inline">\(R\)</span>). The model assumes that individuals can move between these compartments over time as the disease spreads through the population.</p>
+<p>The <span class="math inline">\(R\)</span> component is also sometimes referred to as the “Removed” component in case where it also contains individuals that have been removed from being affected by the illness by other causes. For example in the case of a fatal disease they might have died.</p>
+<p>The SIR model is based on a set of ordinary differential equations, which describe the rate of change of each compartment over time. The equations are</p>
+<p><span id="eq-SIR"><span class="math display">\[\begin{split}
+\frac{dS}{dt} &amp;= -\beta IS/N,\\
+\frac{dI}{dt} &amp;= \beta IS/N -\gamma I,\\
+\frac{dR}{dt} &amp;= \gamma I,
+\end{split}
+\tag{6.1}\]</span></span></p>
+<p>where:</p>
+<ul>
+<li><p><span class="math inline">\(S\)</span> is the number of susceptible individuals in the population</p></li>
+<li><p><span class="math inline">\(I\)</span> is the number of infected individuals in the population</p></li>
+<li><p><span class="math inline">\(R\)</span> is the number of recovered (and immune) individuals in the population</p></li>
+<li><p><span class="math inline">\(N=S+I+R\)</span> is the total population size</p></li>
+<li><p><span class="math inline">\(\beta\)</span> is the transmission rate of the disease, which describes how easily the disease is transmitted from an infected individual to a susceptible individual</p></li>
+<li><p><span class="math inline">\(\gamma\)</span> is the recovery rate of the disease, which describes how quickly infected individuals recover and become immune to the disease</p></li>
+</ul>
+<p>The first equation describes the rate of change of the susceptible compartment over time. It states that the number of susceptible individuals decreases over time as they become infected with the disease at a rate proportional to the proportion <span class="math inline">\(I/N\)</span> of infected individuals and the transmission rate <span class="math inline">\(\beta\)</span>. The minus sign indicates that the number of susceptible individuals is decreasing over time.</p>
+<p>The second equation describes the rate of change of the infected compartment over time. It states that the number of infected individuals increases over time at the same rate at which the susceptibles become infected, and decreases over time as infected individuals recover at a rate <span class="math inline">\(\gamma\)</span>.</p>
+<p>The third equation describes the rate of change of the recovered compartment over time. It states that the number of recovered individuals increases over time as infected individuals recover and become immune at the recovery rate <span class="math inline">\(\gamma\)</span>.</p>
+</section>
+<section id="assumptions-made-by-sir-model" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="assumptions-made-by-sir-model"><span class="header-section-number">6.1.2</span> Assumptions made by SIR model</h3>
+<p>Like all models, the SIR model makes a number of simplifying assumptions to make the calculations tractable and the results interpretable. it is important to note that therefore an SIR model will not capture all of the nuances of disease transmission in a real population. The assumptions made by the SIR model include:</p>
+<ol type="1">
+<li><p>Fixed population: The SIR model assumes that the total population size <span class="math inline">\(N=S+I+R\)</span> is fixed and does not change over time. We can see that by observing that <span class="math display">\[
+\frac{dN}{dt}=\frac{dS}{dt}+\frac{dI}{dt}+\frac{dR}{dt}=0.
+\]</span> So there is no population dynamics such as birth or natural death (death from the illness itself can be included by viewing the <span class="math inline">\(R\)</span> component as the “removed” component) or immigration or emigration. Neglecting population dynamics is fine if the spread of the disease happens much faster than the population dynamics.</p></li>
+<li><p>Well-mixed population: The SIR model assumes that the population is well-mixed, meaning that all individuals have the same probability of coming into contact with one another, regardless of their location or social network. That is why the total rate of infection is simply proportional to both <span class="math inline">\(S\)</span> and <span class="math inline">\(I\)</span>, which is also known as the <em>mass-action dynamics</em>, a concept taken over from the modelling of chemical reactions.</p></li>
+<li><p>No vaccinations: The SIR model assumes that there are no vaccinations available for the disease, and that individuals can only become immune to the disease by recovering from the infection.</p></li>
+<li><p>No incubation period: The SIR model assumes that there is no incubation period, which means that individuals move directly from the susceptible compartment to the infectious compartment once they become infected. This assumption is often referred to as the “instantaneous transmission” assumption.</p>
+<p>However, in reality, many infectious diseases have an <em>incubation period</em>, during which the person is infected but not yet infectious to others. We will later discuss an extension of the SIR model called the SEIR model in which a new compartment is added, called the exposed (E) compartment. The exposed compartment represents individuals who have been infected but are not yet infectious.</p></li>
+<li><p>Constant transmission and recovery rates: The SIR model assumes that the transmission rate <span class="math inline">\(\beta\)</span> and the recovery rate <span class="math inline">\(\gamma\)</span> remain constant over time. Constant <span class="math inline">\(\beta\)</span> means that the probability of an infected individual transmitting the disease to a susceptible individual is the same at any point during the epidemic as well as at any point during an individual’s illness. Similarly, constant <span class="math inline">\(\gamma\)</span> means that the probability of and infected individual recovering from the illness is the same at any time.</p>
+<p>In reality, the transmission rate and recovery rate of an infectious disease can vary over time due to factors such as changes in behavior and public health interventions, or evolution of the virus.</p></li>
+<li><p>No loss of immunity: The SIR model assumes that individuals who recover from the disease become permanently immune to the disease and do not lose their immunity over time. This means that individuals who have recovered from the disease cannot become re-infected. We will however later make modifications of the model that allow for loss of immunity.</p></li>
+<li><p>No age structure: The SIR model assumes that the population is homogeneous, meaning that all individuals have the same susceptibility, infectiousness, and recovery rates. This means that the model does not take into account the age structure of the population, which can affect disease transmission.</p></li>
+<li><p>No spatial structure: The SIR model does not model how the disease spreads spatially. We will however later introduce spatial structure and model the movement of infected individuals so that we can study how the disease spreads through space.</p></li>
+</ol>
+<p>Even though the assumptions made by the SIR model may not be true in the real world, the model still provides a useful framework for understanding the spread of infectious diseases and how different interventions can affect the course of an outbreak.</p>
+</section>
+<section id="condition-for-an-epidemic" class="level3" data-number="6.1.3">
+<h3 data-number="6.1.3" class="anchored" data-anchor-id="condition-for-an-epidemic"><span class="header-section-number">6.1.3</span> Condition for an epidemic</h3>
+<p>Let us investigate the possibility of an epidemic. So we start with initial conditions where the number of infecteds is small and the number of susceptibles is high. There are no recovereds yet. We’ll write the initial conditions as</p>
+<p><span class="math display">\[
+S(0)=S_0, ~~~ I(0)=I_0, ~~~R(0)=0,
+\]</span> with <span class="math inline">\(S_0\approx N\)</span> and <span class="math inline">\(I_0 &lt;&lt; N\)</span>.</p>
+<p>In order for an epidemic to start we need a positive rate of increase in the number of infecteds. Thus we need <span class="math display">\[
+\left.\frac{dI}{dt}\right|_{t=0} = \beta I_0S_0/N -\gamma I_0&gt;0.
+\]</span> This happens when <span class="math display">\[
+R_0 :=\frac{\beta S_0}{\gamma N} &gt; 1.
+\]</span></p>
+<p>We have introduced the <strong>basic reproduction ratio</strong> <span class="math inline">\(R_0\)</span>. It is a key parameter in infectious disease epidemiology that measures the average number of secondary infections that a single infectious individual will produce. It is a useful metric for understanding the potential for an infectious disease to spread through a population, because if <span class="math inline">\(R_0\)</span> is greater than <span class="math inline">\(1\)</span>, then an epidemic can occur, as each infectious individual will produce more than one secondary infection on average, leading to a sustained increase in the number of infected individuals. If<span class="math inline">\(R_0\)</span> is less than <span class="math inline">\(1\)</span>, then an epidemic can not occur, as each infectious individual will produce less than one secondary infection on average, leading to a decline in the number of infected individuals over time.</p>
+<p>The basic reproduction ratio is also sometimes referred to as the <em>basic reproductive number</em>. Do not call it the <em>basic reproductive rate</em> because it is not a rate. There is also potential confusion due to the notation between <span class="math inline">\(R_0\)</span> and <span class="math inline">\(R(0)\)</span>.</p>
+<p>It is interesting to observe there are three ways an epidemic can start:</p>
+<ol type="1">
+<li><p>The infectiousness of the illness can increases until <span class="math inline">\(\beta &gt; \gamma \frac{N}{S_0}\)</span>.</p></li>
+<li><p>The recovery rate drops until <span class="math inline">\(\gamma &lt; \beta \frac{S_0}{N}\)</span></p></li>
+<li><p>The number of infecteds rises until <span class="math inline">\(S_0&gt;\frac{\gamma}{\beta}N\)</span>.</p></li>
+</ol>
+</section>
+</section>
+<section id="how-an-epidemic-unfolds" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="how-an-epidemic-unfolds"><span class="header-section-number">6.2</span> How an epidemic unfolds</h2>
+<p>Let us think about how an epidemic unfolds, once started. The epidemic begins with an initial number of infectious individuals, and as these individuals come into contact with susceptible individuals, the number of infectious individuals increases, and the number of susceptible individuals decreases. The number of individuals in the recovered compartment also increases as more individuals recover from the infection and become immune to the disease.</p>
+<p>The epidemic reaches its peak when the number of infectious individuals in the population is at its maximum. After this point, the number of infectious individuals begins to decrease, and the number of recovered individuals continues to increase. The epidemic ends when the number of infectious individuals reaches zero and the disease is no longer spreading in the population.</p>
+<p>As is usual with non-linear models, a direct solution of the set of differential equations in <a href="#eq-SIR" class="quarto-xref">Eq.&nbsp;<span>6.1</span></a> is only possible numerically. Such a numerical solution is displayed in <a href="#fig-sir" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>.</p>
+<div id="cell-fig-sir" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.integrate <span class="im">import</span> odeint</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Total population, N.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial number of infected and recovered individuals, I0 and R0.</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>I0, R0 <span class="op">=</span> <span class="dv">1</span>, <span class="dv">0</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Everyone else, S0, is susceptible to infection initially.</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>S0 <span class="op">=</span> N <span class="op">-</span> I0 <span class="op">-</span> R0</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Contact rate, beta, and mean recovery rate, gamma, (in 1/days).</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>beta, gamma <span class="op">=</span> <span class="fl">0.3</span>, <span class="fl">0.1</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># A grid of time points (in days)</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">160</span>, <span class="dv">160</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># The SIR model differential equations.</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> deriv(y, t, N, beta, gamma):</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    S, I, R <span class="op">=</span> y</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    dSdt <span class="op">=</span> <span class="op">-</span>beta <span class="op">*</span> S <span class="op">*</span> I <span class="op">/</span> N</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    dIdt <span class="op">=</span> beta <span class="op">*</span> S <span class="op">*</span> I <span class="op">/</span> N <span class="op">-</span> gamma <span class="op">*</span> I</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    dRdt <span class="op">=</span> gamma <span class="op">*</span> I</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dSdt, dIdt, dRdt</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial conditions vector</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>y0 <span class="op">=</span> S0, I0, R0</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Integrate the SIR equations over the time grid, t.</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>ret <span class="op">=</span> odeint(deriv, y0, t, args<span class="op">=</span>(N, beta, gamma))</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>S, I, R <span class="op">=</span> ret.T</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the data on three separate curves for S(t), I(t), and R(t)</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(facecolor<span class="op">=</span><span class="st">'w'</span>)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, facecolor<span class="op">=</span><span class="st">'#dddddd'</span>, axisbelow<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>ax.plot(t, S<span class="op">/</span>N, <span class="st">'b'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'Susceptible'</span>)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>ax.plot(t, I<span class="op">/</span>N, <span class="st">'r'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'Infected'</span>)</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>ax.plot(t, R<span class="op">/</span>N, <span class="st">'g'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'Recovered'</span>)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Time [days]'</span>)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Proportion of Population'</span>)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>,<span class="fl">1.1</span>)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>ax.yaxis.set_tick_params(length<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>ax.xaxis.set_tick_params(length<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>, which<span class="op">=</span><span class="st">'major'</span>, c<span class="op">=</span><span class="st">'w'</span>, lw<span class="op">=</span><span class="dv">2</span>, ls<span class="op">=</span><span class="st">'-'</span>)</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>legend <span class="op">=</span> ax.legend()</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>legend.get_frame().set_alpha(<span class="fl">0.5</span>)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> spine <span class="kw">in</span> (<span class="st">'top'</span>, <span class="st">'right'</span>, <span class="st">'bottom'</span>, <span class="st">'left'</span>):</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    ax.spines[spine].set_visible(<span class="va">False</span>)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"SIR Model Evolution"</span>)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-sir" class="quarto-figure quarto-figure-center quarto-float anchored" alt="Example of an epidemic in an SIR model">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sir-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="epidemics_files/figure-html/fig-sir-output-1.png" alt="Example of an epidemic in an SIR model" width="510" height="371" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sir-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.1: Evolution of an epidemic as described by the SIR model. The graph shows the dynamics of the susceptible <span class="math inline">\(S\)</span>, infected <span class="math inline">\(I\)</span>, and recovered <span class="math inline">\(R\)</span> population fractions over time. In this scenario, we start with a single infected individual in a population of 1000, with a contact rate of <span class="math inline">\(\beta=0.3\)</span> and a recovery rate of <span class="math inline">\(\gamma=0.1\)</span>. The plot demonstrates how the infection spreads through the population, peaks, and eventually declines as individuals recover and gain immunity.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We however are interested in analytic insights. It turns out that it is easy to determine the shape of the trajectories in the SIR phase space.</p>
+<section id="trajectory-in-s-i-plane" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="trajectory-in-s-i-plane"><span class="header-section-number">6.2.1</span> Trajectory in S-I plane</h3>
+<p>First we will determine how the number of infecteds changes with the number of susceptibles. This is described by the differential equation</p>
+<p><span id="eq-dids"><span class="math display">\[
+\frac{dI}{dS}=\frac{dI/dt}{dS/dt}=\frac{\beta IS-\gamma IN}{-\beta IS}=-1+\frac{\gamma}{\beta}\frac{N}{S}
+\tag{6.2}\]</span></span> We can easily integrate this equation: <span class="math display">\[
+\int_{I_0}^{I(S)} d\tilde{I}=\int_{S_0}^S\left(-1+\frac{\gamma N}{\beta \tilde{S}}\right)d\tilde{S}
+\]</span> gives <span class="math display">\[
+I(S)-I_0 = -S+S_0+\frac{\gamma N}{\beta}\log\left( \frac{S}{S_0}\right),
+\]</span> which we can rewrite as <span id="eq-is"><span class="math display">\[
+I(S) = N-S + \frac{\gamma N}{\beta}\log \frac{S}{S_0},
+\tag{6.3}\]</span></span> where we used that <span class="math inline">\(N=S_0+I_0\)</span>.</p>
+<div id="cell-fig-si" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> I(S, S0, N, beta, gamma):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> N <span class="op">-</span> S <span class="op">+</span> gamma <span class="op">*</span> N <span class="op">/</span> beta <span class="op">*</span> np.log(S <span class="op">/</span> S0)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># S values</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>Sv <span class="op">=</span> np.linspace(<span class="dv">1</span>, N, <span class="dv">100</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute I(S)</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>Iv <span class="op">=</span> I(Sv, S0, N, beta, gamma)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>Iv[Iv <span class="op">&lt;</span> <span class="dv">0</span>] <span class="op">=</span> <span class="dv">0</span>  <span class="co"># Ensure I(S) is non-negative</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>S_threshold <span class="op">=</span> gamma <span class="op">/</span> beta <span class="op">*</span> N</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>Imax <span class="op">=</span> I(S_threshold, S0, N, beta, gamma)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot setup with style similar to the SIR model plot</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="fl">5.5</span>, <span class="dv">4</span>), facecolor<span class="op">=</span><span class="st">'w'</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.subplot(<span class="dv">111</span>, facecolor<span class="op">=</span><span class="st">'#dddddd'</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting I(S) and initial conditions</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>ax.plot(Sv, Iv, <span class="st">'b-'</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'$I(S)$'</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>ax.plot(S0, I0, <span class="st">'ro'</span>, label<span class="op">=</span><span class="st">'Initial condition $(S_0, I_0)$'</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding horizontal and vertical lines for Imax and S=gamma N/beta</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>ax.axhline(y<span class="op">=</span>Imax, color<span class="op">=</span><span class="st">'k'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, lw<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="vs">r'$I_</span><span class="sc">{max}</span><span class="vs">$'</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>ax.axvline(x<span class="op">=</span>S_threshold, color<span class="op">=</span><span class="st">'k'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, lw<span class="op">=</span><span class="fl">1.5</span>, label<span class="op">=</span><span class="vs">r'$S=\gamma N/\beta$'</span>)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding grid, labels, title, and legend</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Number of Susceptible Individuals (S)'</span>)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Number of Infected Individuals (I)'</span>)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Trajectory of the Epidemic in the S-I Plane'</span>)</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>, which<span class="op">=</span><span class="st">'major'</span>, c<span class="op">=</span><span class="st">'w'</span>, lw<span class="op">=</span><span class="dv">2</span>, ls<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>legend <span class="op">=</span> ax.legend(loc<span class="op">=</span><span class="st">'lower center'</span>)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>legend.get_frame().set_alpha(<span class="fl">0.5</span>)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjusting spines to match the SIR model plot style</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> spine <span class="kw">in</span> (<span class="st">'top'</span>, <span class="st">'right'</span>, <span class="st">'bottom'</span>, <span class="st">'left'</span>):</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    ax.spines[spine].set_visible(<span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-si" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-si-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="epidemics_files/figure-html/fig-si-output-1.png" width="482" height="376" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-si-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.2: Shape of epidemic in S-I plane
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This is depicted in <a href="#fig-si" class="quarto-xref">Figure&nbsp;<span>6.2</span></a>. It agrees with our earlier intuitive description of how an epidemic unfolds. The number of infecteds increases with the number of susceptibles until the number of susceptibles is low enough that the number of infecteds reaches its maximum. After this point, the number of infecteds begins to decrease as the number of susceptibles decreases further.</p>
+<p>We can use this result to determine the number <span class="math inline">\(I_{max}\)</span> of infected individuals at the peak of the epidemic.</p>
+</section>
+<section id="peak-of-an-epidemic" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="peak-of-an-epidemic"><span class="header-section-number">6.2.2</span> Peak of an epidemic</h3>
+<p>Knowing the maximum number of infected individuals can help public health officials plan for the allocation of resources such as hospital beds, medical staff, and equipment. This information can be used to anticipate the surge in demand for healthcare services and to prepare for the management of large numbers of patients. It can also be used to guide the planning of interventions such as vaccinations in order to avoid overstretching the health system at the peak of the epidemic. We will discuss that in <span class="quarto-unresolved-ref">?sec-vaccinations</span>.</p>
+<p>The peak is where <span class="math inline">\(dI/dS=0\)</span>, which according to <a href="#eq-dids" class="quarto-xref">Eq.&nbsp;<span>6.2</span></a> happens at <span class="math inline">\(S=\gamma N/\beta\)</span>. Thus according to <a href="#eq-is" class="quarto-xref">Eq.&nbsp;<span>6.3</span></a> <span class="math display">\[
+I_{max}=I\left(\frac{\gamma}{\beta}N\right)
+=N-\frac{\gamma}{\beta}N\left(1-\log\frac{\gamma N}{\beta S_0}\right)
+\]</span> We can express this in terms of the basic reproduction ratio <span class="math inline">\(R_0\)</span> as <span class="math display">\[
+I_{max}= N-\frac{S_0}{R_0}(1+\log R_0)
+\]</span></p>
+</section>
+<section id="trajectory-in-r-s-plane" class="level3" data-number="6.2.3">
+<h3 data-number="6.2.3" class="anchored" data-anchor-id="trajectory-in-r-s-plane"><span class="header-section-number">6.2.3</span> Trajectory in R-S plane</h3>
+<p>Next we will determine the relationship between the number of susceptibles and the number of recovereds, by using <span class="math display">\[
+\frac{dS}{dR}=\frac{dS/dt}{dR/dt}= -\frac{\beta}{\gamma}\frac{S}{N}.
+\]</span> This is solved by <span class="math display">\[
+S(R) = S_0 \exp\left(-\frac{\beta}{\gamma}\frac{R}{N}\right)
+\]</span> This is depicted in <a href="#fig-rs" class="quarto-xref">Figure&nbsp;<span>6.3</span></a>. We see in particular that the number of susceptibles decreases exponentially with the number of recovereds but never reaches zero. This means that at the time where the last infected individual recovers and the epidemic ends, there are still individuals that never caught the disease.</p>
+<div id="cell-fig-rs" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> S(R, S0, N, beta, gamma):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> S0 <span class="op">*</span> np.exp(<span class="op">-</span>beta <span class="op">/</span> gamma <span class="op">*</span> R <span class="op">/</span> N)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># R values</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>Rv <span class="op">=</span> np.linspace(<span class="dv">1</span>, N, <span class="dv">100</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute S(R)</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>Sv <span class="op">=</span> S(Rv, S0, N, beta, gamma)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot setup with style similar to the SIR model plot</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="fl">5.5</span>, <span class="dv">4</span>), facecolor<span class="op">=</span><span class="st">'w'</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.subplot(<span class="dv">111</span>, facecolor<span class="op">=</span><span class="st">'#dddddd'</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting S(R) and initial conditions</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>ax.plot(Rv, Sv, <span class="st">'b-'</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'$S(R)$'</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>ax.plot(R0, S0, <span class="st">'ro'</span>, label<span class="op">=</span><span class="st">'Initial condition $(R_0, S_0)$'</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Adding grid, labels, title, and legend</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Number of Recovered Individuals (R)'</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Number of Susceptible Individuals (S)'</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Trajectory of the Epidemic in the R-S Plane'</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>, which<span class="op">=</span><span class="st">'major'</span>, c<span class="op">=</span><span class="st">'w'</span>, lw<span class="op">=</span><span class="dv">2</span>, ls<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>legend <span class="op">=</span> ax.legend(loc<span class="op">=</span><span class="st">'upper right'</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>legend.get_frame().set_alpha(<span class="fl">0.5</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjusting spines to match the SIR model plot style</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> spine <span class="kw">in</span> (<span class="st">'top'</span>, <span class="st">'right'</span>, <span class="st">'bottom'</span>, <span class="st">'left'</span>):</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    ax.spines[spine].set_visible(<span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-rs" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-rs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="epidemics_files/figure-html/fig-rs-output-1.png" width="490" height="376" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.3: Shape of epidemic in R-S plane
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="size-of-an-epidemic" class="level3" data-number="6.2.4">
+<h3 data-number="6.2.4" class="anchored" data-anchor-id="size-of-an-epidemic"><span class="header-section-number">6.2.4</span> Size of an epidemic</h3>
+<p>By the size of an epidemic we mean the total number of individuals that catches the disease in the course of the epidemic. As we saw above, this will be less than the total population number. Let us denote the numbers at the end of the epidemic by a subscript <span class="math inline">\(\infty\)</span>. We have that <span class="math inline">\(I(\infty)=0\)</span> and <span class="math inline">\(S(\infty)\)</span> is the solution to the equation <span class="math display">\[
+\begin{split}
+S_\infty&amp;=S(R_\infty)=S_0\exp\left(-\frac{\beta}{\gamma N}R_\infty\right)\\
+&amp;=S_0\exp\left(-\frac{\beta}{\gamma N}(N-S_\infty)\right)\\
+&amp;=S_0\exp\left(-\frac{\beta}{\gamma}\right)\exp\left(\frac{\beta}{\gamma N}S_\infty\right).
+\end{split}
+\]</span> This equation can be solved numerically. We can also get an approximate analytic solution in the case where the epidemic is large so that the fraction of the population that never gets infected is small compared to <span class="math inline">\(\gamma/\beta\)</span>, <span class="math inline">\(S_\infty/N&lt;&lt;\gamma/\beta\)</span>. In this case we can expand the last exponential in the equation above to first order in <span class="math inline">\(S_\infty/N\)</span> to get the approximate equation <span class="math display">\[
+S_\infty\approx S_0\exp\left(-\frac{\beta}{\gamma}\right)\left(1+\frac{\beta}{\gamma N}S_\infty\right)
+\]</span> This we can now easily solve for <span class="math inline">\(S_\infty\)</span> to get <span class="math display">\[
+S_\infty\approx \frac{S_0e^{-\beta/\gamma}}{1-\frac{\beta}{\gamma}\frac{S_0}{N}e^{-\beta/\gamma}}.
+\]</span> We can express this in terms of the basic reproduction ratio <span class="math inline">\(R_0\)</span> as <span class="math display">\[
+\frac{S_\infty}{S_0}\approx \frac{1}{e^{\beta/\gamma}-R_0}.
+\]</span></p>
+</section>
+<section id="sec-doubling" class="level3" data-number="6.2.5">
+<h3 data-number="6.2.5" class="anchored" data-anchor-id="sec-doubling"><span class="header-section-number">6.2.5</span> Initial exponential growth</h3>
+<p>At the start of the epidemic when the number of infecteds is small and hence the number of susceptibles is close to <span class="math inline">\(N\)</span>, we can approximate <span class="math display">\[
+\frac{dI}{dt}=\beta I\frac{S}{N}-\gamma I\approx (\beta -\gamma)I
+\]</span> and hence <span id="eq-Ii"><span class="math display">\[
+I(t)\approx I_0e^{(\beta -\gamma)t}.
+\tag{6.4}\]</span></span></p>
+<p>We can also get an equation for <span class="math inline">\(R(t)\)</span> by using the equation for <span class="math inline">\(S(R)\)</span> as follows: <span class="math display">\[
+\begin{split}
+\frac{dR}{dt}&amp;=\gamma I=\gamma \left(N-R-S\right)\\
+&amp;=\gamma \left(N-R-S_0\exp\left(-\frac{\beta}{\gamma}\frac{R}{N}\right)\right)
+\end{split}
+\]</span></p>
+<p>At the initial stages of the epidemic while the number of recovereds is small we can expand the exponential and keep only the first-order term to get <span class="math display">\[
+\begin{split}
+\frac{dR}{dt}&amp;
+\approx \gamma \left(N-R-S_0\left(1-\frac{\beta}{\gamma}\frac{R}{N}\right)\right)\\
+&amp;=\gamma I_0 - \gamma (1 + R_0)R
+\end{split}
+\]</span> where we used that <span class="math inline">\(N-S_0=I_0\)</span>. Again we must not be confused by the notation: <span class="math inline">\(R_0\)</span> is the basic reproduction number, not the number of recovered at time <span class="math inline">\(0\)</span>. We have a linear differential equation for <span class="math inline">\(R(t)\)</span> that can be solved to give <span id="eq-Ri"><span class="math display">\[
+R(t) = \frac{I_0}{1+R_0} \left(1-e^{-(1+R_0)\gamma t}\right).
+\tag{6.5}\]</span></span></p>
+<div id="cell-fig-initial-sir" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.integrate <span class="im">import</span> odeint</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Total population, N.</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>N <span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial number of infected and recovered individuals, I0 and R0.</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>I0, R0 <span class="op">=</span> <span class="dv">1</span>, <span class="dv">0</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Everyone else, S0, is susceptible to infection initially.</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>S0 <span class="op">=</span> N <span class="op">-</span> I0 <span class="op">-</span> R0</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Contact rate, beta, and mean recovery rate, gamma, (in 1/days).</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>beta, gamma <span class="op">=</span> <span class="fl">0.3</span>, <span class="fl">0.1</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic reproduction number</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>brn <span class="op">=</span> beta<span class="op">*</span>S0<span class="op">/</span>gamma<span class="op">/</span>N</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># A grid of time points (in days)</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>t <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">40</span>, <span class="dv">160</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co"># The SIR model differential equations.</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> deriv(y, t, N, beta, gamma):</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    S, I, R <span class="op">=</span> y</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    dSdt <span class="op">=</span> <span class="op">-</span>beta <span class="op">*</span> S <span class="op">*</span> I <span class="op">/</span> N</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    dIdt <span class="op">=</span> beta <span class="op">*</span> S <span class="op">*</span> I <span class="op">/</span> N <span class="op">-</span> gamma <span class="op">*</span> I</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    dRdt <span class="op">=</span> gamma <span class="op">*</span> I</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> dSdt, dIdt, dRdt</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial conditions vector</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>y0 <span class="op">=</span> S0, I0, R0</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Integrate the SIR equations over the time grid, t.</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>ret <span class="op">=</span> odeint(deriv, y0, t, args<span class="op">=</span>(N, beta, gamma))</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>S, I, R <span class="op">=</span> ret.T</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the data on three separate curves for S(t), I(t), and R(t)</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(facecolor<span class="op">=</span><span class="st">'w'</span>)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> fig.add_subplot(<span class="dv">111</span>, facecolor<span class="op">=</span><span class="st">'#dddddd'</span>, axisbelow<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>ax.plot(t, I<span class="op">/</span>N, <span class="st">'r'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'Infected'</span>)</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>ax.plot(t, R<span class="op">/</span>N, <span class="st">'g'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, lw<span class="op">=</span><span class="dv">2</span>, label<span class="op">=</span><span class="st">'Recovered'</span>)</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Time [days]'</span>)</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Proportion of Population'</span>)</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>ax.set_ylim(<span class="dv">0</span>,<span class="fl">0.4</span>)</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>ax.yaxis.set_tick_params(length<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>ax.xaxis.set_tick_params(length<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>, which<span class="op">=</span><span class="st">'major'</span>, c<span class="op">=</span><span class="st">'w'</span>, lw<span class="op">=</span><span class="dv">2</span>, ls<span class="op">=</span><span class="st">'-'</span>)</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>legend <span class="op">=</span> ax.legend()</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>legend.get_frame().set_alpha(<span class="fl">0.5</span>)</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> spine <span class="kw">in</span> (<span class="st">'top'</span>, <span class="st">'right'</span>, <span class="st">'bottom'</span>, <span class="st">'left'</span>):</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    ax.spines[spine].set_visible(<span class="va">False</span>)</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"SIR Model Evolution"</span>)</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Now add approximate results for beginning of epidemic</span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>Ii <span class="op">=</span> I0<span class="op">*</span>np.exp((beta <span class="op">-</span> gamma)<span class="op">*</span>t)</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>ax.plot(t, Ii<span class="op">/</span>N, <span class="st">'r:'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, lw<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>Ri <span class="op">=</span> I0<span class="op">/</span>(brn<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span>(np.exp((brn<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span>gamma<span class="op">*</span>t)<span class="op">-</span><span class="dv">1</span>)</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>ax.plot(t, Ri<span class="op">/</span>N, <span class="st">'g:'</span>, alpha<span class="op">=</span><span class="fl">0.5</span>, lw<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-initial-sir" class="quarto-figure quarto-figure-center quarto-float anchored" alt="Exponential approximation of initial growth of an epidemic.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-initial-sir-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="epidemics_files/figure-html/fig-initial-sir-output-1.png" alt="Exponential approximation of initial growth of an epidemic." width="518" height="371" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-initial-sir-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.4: Exponential approximation of initial growth of an epidemic. The solid lines are the numeric solutions and the dotted lines are the exponential approximations.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><a href="#fig-initial-sir" class="quarto-xref">Figure&nbsp;<span>6.4</span></a> compares the approximate expressions <a href="#eq-Ii" class="quarto-xref">Eq.&nbsp;<span>6.4</span></a> and <a href="#eq-Ri" class="quarto-xref">Eq.&nbsp;<span>6.5</span></a> that we have derived above with the numerical solution of the SIR model for the choice of parameters from <a href="#fig-sir" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>. We see that the exponential approximation is very good for the initial stages of the epidemic.</p>
+</section>
+<section id="doubling-time" class="level3" data-number="6.2.6">
+<h3 data-number="6.2.6" class="anchored" data-anchor-id="doubling-time"><span class="header-section-number">6.2.6</span> Doubling time</h3>
+<p>The doubling time of an epidemic is the time it takes for the number of infected individuals to double. It is an important metric for understanding the rate of spread of an infectious disease and can help public health officials anticipate the growth of an epidemic and plan for the allocation of resources such as hospital beds, medical staff, and equipment.</p>
+<p>From our initial exponential approximation for <span class="math inline">\(I(t)\)</span> in <a href="#eq-Ii" class="quarto-xref">Eq.&nbsp;<span>6.4</span></a>, we see that the number of infecteds doubles in a time <span class="math inline">\(t_d\)</span> when <span class="math display">\[
+2I_0 = I_0 e^{(\beta -\gamma)t_d},
+\]</span> which gives the doubling time <span class="math display">\[
+t_d = \frac{\log 2}{\beta-\gamma}.
+\]</span></p>
+</section>
+</section>
+<section id="exercises" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="exercises"><span class="header-section-number">6.3</span> Exercises</h2>
+<div id="exr-sir1" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 6.1</strong></span> &nbsp;</p>
+<!--- From sheet 4 --->
+<p>In a mathematical model for a certain venereal disease the male population is divided into susceptibles <span class="math inline">\(S\)</span>, infectives <span class="math inline">\(I\)</span> and removeds <span class="math inline">\(R\)</span>. The female population is similarly divided; the three groups being denoted <span class="math inline">\(S'\)</span>, <span class="math inline">\(I'\)</span> and <span class="math inline">\(R'\)</span> (note that we use the prime to distinguish between male and female, not to indicate differentiation). The equations are <span class="math display">\[\begin{split}
+\frac{dS}{dt}&amp;=-rSI',\hspace{.2in}\frac{dI}{dt}=rSI'-aI,\hspace{.2in}
+\frac{dR}{dt}=aI,\\
+\frac{dS'}{dt}&amp;=-r'S'I,\hspace{.2in}\frac{dI'}{dt}=r'S'I-a'I',\hspace{.2in}
+\frac{dR'}{dt}=a'I'
+\end{split}\]</span> where <span class="math inline">\(r\)</span>, <span class="math inline">\(r'\)</span> and <span class="math inline">\(a\)</span>, <span class="math inline">\(a'\)</span> are positive constants. The equations are with initial conditions <span class="math inline">\(S(0)=S_0\)</span>, <span class="math inline">\(I(0)=I_0\)</span>, <span class="math inline">\(S'(0)=S'_0\)</span>, <span class="math inline">\(I'(0)=I'_0\)</span>, <span class="math inline">\(R(0)=R'(0)=0\)</span>. The total male population is <span class="math inline">\(N=S+I+R\)</span> and the total female population <span class="math inline">\(N'=S'+I'+R'\)</span>.</p>
+<ol type="a">
+<li><p>Show that <span class="math inline">\(N\)</span> and <span class="math inline">\(N'\)</span> are both constant.</p></li>
+<li><p>Show that <span class="math inline">\(S(t)=S_0\exp\left(-\frac{r}{a'}R'(t)\right)\)</span> and obtain another similar equation.</p></li>
+<li><p>Assuming that <span class="math inline">\(I(\infty)=I'(\infty)=0\)</span> show that <span class="math inline">\(S(\infty)\)</span> and <span class="math inline">\(S'(\infty)\)</span> are found by solving simultaneously the equations <span class="math display">\[
+\begin{split}
+S(\infty)&amp;=S_0\exp\left(-\frac{r}{a'}(N'-S'(\infty))\right),\\
+S'(\infty)&amp;=S'_0\exp\left(-\frac{r'}{a}(N-S(\infty))\right).
+\end{split}
+\]</span></p></li>
+</ol>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./interacting.html" class="pagination-link  aria-label=" &lt;span="" populations&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Interacting populations</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./solutions.html" class="pagination-link" aria-label="<span class='chapter-number'>A</span>&nbsp; <span class='chapter-title'>Solutions</span>">
+        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Solutions</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gustavdelius/M3E-2024/edit/main/epidemics.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>

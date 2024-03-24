@@ -1,0 +1,495 @@
+# Epidemics
+
+> "As a matter of fact, all epidemiology, concerned as it is with the variation
+> of disease from time to time or from place to place, must be considered
+> mathematically, however many variables are implicated, if it is to be
+> considered scientifically at all.” 
+> -- <cite>[Sir Ronald Ross](https://en.wikipedia.org/wiki/Ronald_Ross)</cite>
+
+Mathematical epidemiology applies mathematical modelling and statistical analysis to understand the spread of infectious diseases within populations. This is an important topic for several reasons:
+
+1. _Control and prevention of diseases_: Mathematical models can be used to predict the spread of infectious diseases, estimate the effectiveness of control measures, and inform public health policy. By studying mathematical epidemiology, researchers and public health officials can develop strategies to prevent and control the spread of diseases, which can save lives and reduce healthcare costs.
+
+2. _Improved disease surveillance_: Mathematical models can also be used to estimate disease incidence, prevalence, and mortality rates, which can help to improve disease surveillance systems. By accurately tracking disease outbreaks, public health officials can respond quickly to control and prevent further spread of the disease.
+
+3. _Understanding disease transmission dynamics_: Mathematical models can provide insight into the transmission dynamics of infectious diseases, such as how they spread within populations, how they interact with different populations, and how they evolve over time. This understanding is critical for developing effective disease control measures and for predicting the potential impact of emerging diseases.
+
+4. _Development of vaccines and treatments_: Mathematical modelling can aid in the development of new vaccines and treatments for infectious diseases. By understanding the transmission dynamics and the immune response to diseases, researchers can develop more effective vaccines and treatments that can prevent or reduce the severity of infections.
+
+Before we get started, let us explain some terms used to describe different levels of disease prevalence and spread:
+
+1. _Epidemic_: An epidemic refers to the sudden increase in the number of cases of a disease above what is normally expected in a given population and geographic area. The outbreak is usually limited to a specific community or region and can be caused by a new or re-emerging infectious agent. The epidemic may last for several weeks or months before it is brought under control.
+
+2. _Pandemic_: A pandemic is an epidemic that has spread over a larger geographic area, often spanning multiple countries or continents. A pandemic is usually caused by a new strain of an existing virus or by a completely new virus that can spread quickly and easily from person to person. Pandemics can have a significant impact on public health and can cause widespread illness and death.
+
+3. _Endemic_: An endemic disease is one that is regularly found in a population or geographic area at a consistent and predictable rate. Endemic diseases may cause illness and death but are typically well-controlled by routine public health measures, such as vaccination and surveillance. For example, malaria is endemic in many parts of the world, and measures such as mosquito control and antimalarial medications are used to prevent and treat the disease.
+
+## SIR model
+
+The SIR model is a very idealised mathematical model that is commonly used to describe the spread of infectious diseases in a population. The acronym SIR stands for Susceptible, Infected, and Recovered, which are the three main compartments of the model.
+
+The SIR model was first introduced in 1927 by Kermack and McKendrick in their landmark paper "A Contribution to the Mathematical Theory of Epidemics". The model was developed in response to the major epidemics of the early 20th century, such as the Spanish flu pandemic of 1918-1919, which highlighted the need for a quantitative understanding of the spread of infectious diseases.
+
+The SIR model was one of the first mathematical models to be developed for the study of infectious disease dynamics, and it remains one of the most widely used and influential models in the field of mathematical epidemiology. The model has been used to study a wide range of infectious diseases, including measles, tuberculosis, HIV/AIDS, and COVID-19, and has been extended and adapted to address new challenges and incorporate new data sources.
+
+The SIR model and its variants have played a key role in informing public health policy and practice, by providing insights into the impact of different intervention strategies, such as vaccination, quarantine, and social distancing. The model has also helped to guide the design of clinical trials and the development of new drugs and vaccines, and has contributed to our understanding of the fundamental principles of infectious disease transmission.
+
+### Three-compartment model
+
+In the SIR model, individuals in a population are divided into three groups: those who are susceptible to the disease ($S$), those who are infected with the disease ($I$), and those who have recovered from the disease and are now immune ($R$). The model assumes that individuals can move between these compartments over time as the disease spreads through the population.
+
+The $R$ component is also sometimes referred to as the "Removed" component in case where it also contains individuals that have been removed from being affected by the illness by other causes. For example in the case of a fatal disease they might have died.
+
+The SIR model is based on a set of ordinary differential equations, which describe the rate of change of each compartment over time. The equations are
+
+$$\begin{split}
+\frac{dS}{dt} &= -\beta IS/N,\\
+\frac{dI}{dt} &= \beta IS/N -\gamma I,\\
+\frac{dR}{dt} &= \gamma I,
+\end{split}
+$$ {#eq-SIR}
+
+where:
+
+- $S$ is the number of susceptible individuals in the population
+
+- $I$ is the number of infected individuals in the population
+
+- $R$ is the number of recovered (and immune) individuals in the population
+
+- $N=S+I+R$ is the total population size
+
+- $\beta$ is the transmission rate of the disease, which describes how easily the disease is transmitted from an infected individual to a susceptible individual
+
+- $\gamma$ is the recovery rate of the disease, which describes how quickly infected individuals recover and become immune to the disease
+
+The first equation describes the rate of change of the susceptible compartment over time. It states that the number of susceptible individuals decreases over time as they become infected with the disease at a rate proportional to the proportion $I/N$ of infected individuals and the transmission rate $\beta$. The minus sign indicates that the number of susceptible individuals is decreasing over time.
+
+The second equation describes the rate of change of the infected compartment over time. It states that the number of infected individuals increases over time at the same rate at which the susceptibles become infected, and decreases over time as infected individuals recover at a rate $\gamma$.
+
+The third equation describes the rate of change of the recovered compartment over time. It states that the number of recovered individuals increases over time as infected individuals recover and become immune at the recovery rate $\gamma$.
+
+### Assumptions made by SIR model
+
+Like all models, the SIR model makes a number of simplifying assumptions to make the calculations tractable and the results interpretable. it is important to note that therefore an SIR model will not capture all of the nuances of disease transmission in a real population. The assumptions made by the SIR model include:
+
+1. Fixed population: The SIR model assumes that the total population size $N=S+I+R$ is fixed and does not change over time. We can see that by observing that
+$$
+\frac{dN}{dt}=\frac{dS}{dt}+\frac{dI}{dt}+\frac{dR}{dt}=0.
+$$
+So there is no population dynamics such as birth or natural death (death from the illness itself can be included by viewing the $R$ component as the "removed" component) or immigration or emigration. Neglecting population dynamics is fine if the spread of the disease happens much faster than the population dynamics.
+
+2. Well-mixed population: The SIR model assumes that the population is well-mixed, meaning that all individuals have the same probability of coming into contact with one another, regardless of their location or social network. That is why the total rate of infection is simply proportional to both $S$ and $I$, which is also known as the _mass-action dynamics_, a concept taken over from the modelling of chemical reactions.
+
+3. No vaccinations: The SIR model assumes that there are no vaccinations available for the disease, and that individuals can only become immune to the disease by recovering from the infection.
+
+4. No incubation period: The SIR model assumes that there is no incubation period, which means that individuals move directly from the susceptible compartment to the infectious compartment once they become infected. This assumption is often referred to as the "instantaneous transmission" assumption. 
+
+    However, in reality, many infectious diseases have an _incubation period_, during which the person is infected but not yet infectious to others. We will later discuss an extension of the SIR model called the SEIR model in which a new compartment is added, called the exposed (E) compartment. The exposed compartment represents individuals who have been infected but are not yet infectious. 
+
+3. Constant transmission and recovery rates: The SIR model assumes that the transmission rate $\beta$ and the recovery rate $\gamma$ remain constant over time. Constant $\beta$ means that the probability of an infected individual transmitting the disease to a susceptible individual is the same at any point during the epidemic as well as at any point during an individual's illness. Similarly, constant $\gamma$ means that the probability of and infected individual recovering from the illness is the same at any time. 
+
+    In reality, the transmission rate and recovery rate of an infectious disease can vary over time due to factors such as changes in behavior and public health interventions, or evolution of the virus.
+
+4. No loss of immunity: The SIR model assumes that individuals who recover from the disease become permanently immune to the disease and do not lose their immunity over time. This means that individuals who have recovered from the disease cannot become re-infected. We will however later make modifications of the model that allow for loss of immunity.
+
+5. No age structure: The SIR model assumes that the population is homogeneous, meaning that all individuals have the same susceptibility, infectiousness, and recovery rates. This means that the model does not take into account the age structure of the population, which can affect disease transmission.
+
+6. No spatial structure: The SIR model does not model how the disease spreads spatially. We will however later introduce spatial structure and model the movement of infected individuals so that we can study how the disease spreads through space.
+
+Even though the assumptions made by the SIR model may not be true in the real world, the model still provides a useful framework for understanding the spread of infectious diseases and how different interventions can affect the course of an outbreak.
+
+### Condition for an epidemic
+
+Let us investigate the possibility of an epidemic. So we start with initial conditions where the number of infecteds is small and the number of susceptibles is high. There are no recovereds yet. We'll write the initial conditions as
+
+$$
+S(0)=S_0, ~~~ I(0)=I_0, ~~~R(0)=0,
+$$
+with $S_0\approx N$ and $I_0 << N$.
+
+In order for an epidemic to start we need a positive rate of increase in the number of infecteds. Thus we need
+$$
+\left.\frac{dI}{dt}\right|_{t=0} = \beta I_0S_0/N -\gamma I_0>0.
+$$
+This happens when
+$$
+R_0 :=\frac{\beta S_0}{\gamma N} > 1.
+$$
+
+We have introduced the __basic reproduction ratio__ $R_0$. It is a key parameter in infectious disease epidemiology that measures the average number of secondary infections that a single infectious individual will produce. It is a useful metric for understanding the potential for an infectious disease to spread through a population, because if $R_0$ is greater than $1$, then an epidemic can occur, as each infectious individual will produce more than one secondary infection on average, leading to a sustained increase in the number of infected individuals. If$R_0$ is less than $1$, then an epidemic can not occur, as each infectious individual will produce less than one secondary infection on average, leading to a decline in the number of infected individuals over time. 
+
+The basic reproduction ratio is also sometimes referred to as the _basic reproductive number_. Do not call it the _basic reproductive rate_ because it is not a rate. There is also potential confusion due to the notation 
+between $R_0$ and $R(0)$.
+
+It is interesting to observe there are three ways an epidemic can start:
+
+1) The infectiousness of the illness can increases until $\beta > \gamma \frac{N}{S_0}$.
+
+2) The recovery rate drops until $\gamma < \beta \frac{S_0}{N}$
+
+3) The number of infecteds rises until $S_0>\frac{\gamma}{\beta}N$.
+
+
+## How an epidemic unfolds
+
+Let us think about how an epidemic unfolds, once started. The epidemic begins with an initial number of infectious individuals, and as these individuals come into contact with susceptible individuals, the number of infectious individuals increases, and the number of susceptible individuals decreases. The number of individuals in the recovered compartment also increases as more individuals recover from the infection and become immune to the disease.
+
+The epidemic reaches its peak when the number of infectious individuals in the population is at its maximum. After this point, the number of infectious individuals begins to decrease, and the number of recovered individuals continues to increase. The epidemic ends when the number of infectious individuals reaches zero and the disease is no longer spreading in the population.
+
+As is usual with non-linear models, a direct solution of the set of differential equations in @eq-SIR is only possible numerically. Such a numerical solution is displayed in @fig-sir.
+
+```{python}
+#| label: fig-sir
+#| fig-cap: Evolution of an epidemic as described by the SIR model. The graph shows the dynamics of the susceptible $S$, infected $I$, and recovered $R$ population fractions over time. In this scenario, we start with a single infected individual in a population of 1000, with a contact rate of $\beta=0.3$ and a recovery rate of $\gamma=0.1$. The plot demonstrates how the infection spreads through the population, peaks, and eventually declines as individuals recover and gain immunity. 
+#| fig-alt: Example of an epidemic in an SIR model
+import numpy as np
+from scipy.integrate import odeint
+import matplotlib.pyplot as plt
+
+# Total population, N.
+N = 1000
+# Initial number of infected and recovered individuals, I0 and R0.
+I0, R0 = 1, 0
+# Everyone else, S0, is susceptible to infection initially.
+S0 = N - I0 - R0
+# Contact rate, beta, and mean recovery rate, gamma, (in 1/days).
+beta, gamma = 0.3, 0.1
+
+# A grid of time points (in days)
+t = np.linspace(0, 160, 160)
+
+# The SIR model differential equations.
+def deriv(y, t, N, beta, gamma):
+    S, I, R = y
+    dSdt = -beta * S * I / N
+    dIdt = beta * S * I / N - gamma * I
+    dRdt = gamma * I
+    return dSdt, dIdt, dRdt
+
+# Initial conditions vector
+y0 = S0, I0, R0
+# Integrate the SIR equations over the time grid, t.
+ret = odeint(deriv, y0, t, args=(N, beta, gamma))
+S, I, R = ret.T
+
+# Plot the data on three separate curves for S(t), I(t), and R(t)
+fig = plt.figure(facecolor='w')
+ax = fig.add_subplot(111, facecolor='#dddddd', axisbelow=True)
+ax.plot(t, S/N, 'b', alpha=0.5, lw=2, label='Susceptible')
+ax.plot(t, I/N, 'r', alpha=0.5, lw=2, label='Infected')
+ax.plot(t, R/N, 'g', alpha=0.5, lw=2, label='Recovered')
+ax.set_xlabel('Time [days]')
+ax.set_ylabel('Proportion of Population')
+ax.set_ylim(0,1.1)
+ax.yaxis.set_tick_params(length=0)
+ax.xaxis.set_tick_params(length=0)
+ax.grid(True, which='major', c='w', lw=2, ls='-')
+legend = ax.legend()
+legend.get_frame().set_alpha(0.5)
+for spine in ('top', 'right', 'bottom', 'left'):
+    ax.spines[spine].set_visible(False)
+plt.title("SIR Model Evolution")
+plt.show()
+```
+
+We however are interested in analytic insights. It turns out that it is easy to determine the shape of the trajectories in the SIR phase space. 
+
+### Trajectory in S-I plane
+
+First we will determine how the number of infecteds changes with the number of susceptibles. This is described by the differential equation
+
+
+$$
+\frac{dI}{dS}=\frac{dI/dt}{dS/dt}=\frac{\beta IS-\gamma IN}{-\beta IS}=-1+\frac{\gamma}{\beta}\frac{N}{S}
+$$ {#eq-dids}
+We can easily integrate this equation:
+$$
+\int_{I_0}^{I(S)} d\tilde{I}=\int_{S_0}^S\left(-1+\frac{\gamma N}{\beta \tilde{S}}\right)d\tilde{S}
+$$
+gives
+$$
+I(S)-I_0 = -S+S_0+\frac{\gamma N}{\beta}\log\left( \frac{S}{S_0}\right),
+$$
+which we can rewrite as
+$$
+I(S) = N-S + \frac{\gamma N}{\beta}\log \frac{S}{S_0},
+$$ {#eq-is}
+where we used that $N=S_0+I_0$.
+
+```{python}
+#| label: fig-si
+#| fig-cap: Shape of epidemic in S-I plane
+def I(S, S0, N, beta, gamma):
+    return N - S + gamma * N / beta * np.log(S / S0)
+
+# S values
+Sv = np.linspace(1, N, 100)
+
+# Compute I(S)
+Iv = I(Sv, S0, N, beta, gamma)
+Iv[Iv < 0] = 0  # Ensure I(S) is non-negative
+S_threshold = gamma / beta * N
+Imax = I(S_threshold, S0, N, beta, gamma)
+
+# Plot setup with style similar to the SIR model plot
+plt.figure(figsize=(5.5, 4), facecolor='w')
+ax = plt.subplot(111, facecolor='#dddddd')
+
+# Plotting I(S) and initial conditions
+ax.plot(Sv, Iv, 'b-', lw=2, label='$I(S)$')
+ax.plot(S0, I0, 'ro', label='Initial condition $(S_0, I_0)$')
+
+# Adding horizontal and vertical lines for Imax and S=gamma N/beta
+ax.axhline(y=Imax, color='k', linestyle='--', lw=1.5, label=r'$I_{max}$')
+ax.axvline(x=S_threshold, color='k', linestyle='--', lw=1.5, label=r'$S=\gamma N/\beta$')
+
+# Adding grid, labels, title, and legend
+ax.set_xlabel('Number of Susceptible Individuals (S)')
+ax.set_ylabel('Number of Infected Individuals (I)')
+ax.set_title('Trajectory of the Epidemic in the S-I Plane')
+ax.grid(True, which='major', c='w', lw=2, ls='--')
+legend = ax.legend(loc='lower center')
+legend.get_frame().set_alpha(0.5)
+
+# Adjusting spines to match the SIR model plot style
+for spine in ('top', 'right', 'bottom', 'left'):
+    ax.spines[spine].set_visible(False)
+```
+
+This is depicted in @fig-si. It agrees with our earlier intuitive description of how an epidemic unfolds. The number of infecteds increases with the number of susceptibles until the number of susceptibles is low enough that the number of infecteds reaches its maximum. After this point, the number of infecteds begins to decrease as the number of susceptibles decreases further.
+
+We can use this result to determine the number $I_{max}$ of infected individuals at the peak of the epidemic. 
+
+### Peak of an epidemic
+
+Knowing the maximum number of infected individuals can help public health officials plan for the allocation of resources such as hospital beds, medical staff, and equipment. This information can be used to anticipate the surge in demand for healthcare services and to prepare for the management of large numbers of patients. It can also be used to guide the planning of interventions such as vaccinations in order to avoid overstretching the health system at the peak of the epidemic. We will discuss that in @sec-vaccinations.
+
+The peak is where $dI/dS=0$, which according to @eq-dids happens at $S=\gamma N/\beta$. Thus according to @eq-is
+$$
+I_{max}=I\left(\frac{\gamma}{\beta}N\right)
+=N-\frac{\gamma}{\beta}N\left(1-\log\frac{\gamma N}{\beta S_0}\right)
+$$
+We can express this in terms of the basic reproduction ratio $R_0$ as
+$$
+I_{max}= N-\frac{S_0}{R_0}(1+\log R_0)
+$$
+
+### Trajectory in R-S plane
+
+Next we will determine the relationship between the number of susceptibles and the number of recovereds, by using
+$$
+\frac{dS}{dR}=\frac{dS/dt}{dR/dt}= -\frac{\beta}{\gamma}\frac{S}{N}.
+$$
+This is solved by
+$$
+S(R) = S_0 \exp\left(-\frac{\beta}{\gamma}\frac{R}{N}\right)
+$$
+This is depicted in @fig-rs. We see in particular that the number of susceptibles decreases exponentially with the number of recovereds but never reaches zero. This means that at the time where the last infected individual recovers and the epidemic ends, there are still individuals that never caught the disease.
+
+```{python}
+#| label: fig-rs
+#| fig-cap: Shape of epidemic in R-S plane
+#| code-fold: true
+def S(R, S0, N, beta, gamma):
+    return S0 * np.exp(-beta / gamma * R / N)
+
+# R values
+Rv = np.linspace(1, N, 100)
+
+# Compute S(R)
+Sv = S(Rv, S0, N, beta, gamma)
+
+# Plot setup with style similar to the SIR model plot
+plt.figure(figsize=(5.5, 4), facecolor='w')
+ax = plt.subplot(111, facecolor='#dddddd')
+
+# Plotting S(R) and initial conditions
+ax.plot(Rv, Sv, 'b-', lw=2, label='$S(R)$')
+ax.plot(R0, S0, 'ro', label='Initial condition $(R_0, S_0)$')
+
+# Adding grid, labels, title, and legend
+ax.set_xlabel('Number of Recovered Individuals (R)')
+ax.set_ylabel('Number of Susceptible Individuals (S)')
+ax.set_title('Trajectory of the Epidemic in the R-S Plane')
+ax.grid(True, which='major', c='w', lw=2, ls='--')
+legend = ax.legend(loc='upper right')
+legend.get_frame().set_alpha(0.5)
+
+# Adjusting spines to match the SIR model plot style
+for spine in ('top', 'right', 'bottom', 'left'):
+    ax.spines[spine].set_visible(False)
+```
+
+### Size of an epidemic
+
+By the size of an epidemic we mean the total number of individuals that catches the disease in the course of the epidemic. As we saw above, this will be less than the total population number. Let us denote the numbers at the end of the epidemic by a subscript $\infty$. We have that $I(\infty)=0$ and $S(\infty)$ is the solution to the equation
+$$
+\begin{split}
+S_\infty&=S(R_\infty)=S_0\exp\left(-\frac{\beta}{\gamma N}R_\infty\right)\\
+&=S_0\exp\left(-\frac{\beta}{\gamma N}(N-S_\infty)\right)\\
+&=S_0\exp\left(-\frac{\beta}{\gamma}\right)\exp\left(\frac{\beta}{\gamma N}S_\infty\right).
+\end{split}
+$$
+This equation can be solved numerically. We can also get an approximate analytic solution in the case where the epidemic is large so that the fraction of the population that never gets infected is small compared to $\gamma/\beta$, $S_\infty/N<<\gamma/\beta$. In this case we can expand the last exponential in the equation above to first order in $S_\infty/N$ to get the approximate equation
+$$
+S_\infty\approx S_0\exp\left(-\frac{\beta}{\gamma}\right)\left(1+\frac{\beta}{\gamma N}S_\infty\right) 
+$$
+This we can now easily solve for $S_\infty$ to get
+$$
+S_\infty\approx \frac{S_0e^{-\beta/\gamma}}{1-\frac{\beta}{\gamma}\frac{S_0}{N}e^{-\beta/\gamma}}.
+$$
+We can express this in terms of the basic reproduction ratio $R_0$ as
+$$
+\frac{S_\infty}{S_0}\approx \frac{1}{e^{\beta/\gamma}-R_0}.
+$$
+
+
+### Initial exponential growth {#sec-doubling}
+
+At the start of the epidemic when the number of infecteds is small and hence the number of susceptibles is close to $N$, we can approximate 
+$$
+\frac{dI}{dt}=\beta I\frac{S}{N}-\gamma I\approx (\beta -\gamma)I
+$$
+and hence
+$$
+I(t)\approx I_0e^{(\beta -\gamma)t}.
+$$ {#eq-Ii}
+
+
+We can also get an equation for $R(t)$ by using the equation for $S(R)$ as follows:
+$$
+\begin{split}
+\frac{dR}{dt}&=\gamma I=\gamma \left(N-R-S\right)\\
+&=\gamma \left(N-R-S_0\exp\left(-\frac{\beta}{\gamma}\frac{R}{N}\right)\right)
+\end{split}
+$$
+
+At the initial stages of the epidemic while the number of recovereds is small we can expand the exponential and keep only the first-order term to get
+$$
+\begin{split}
+\frac{dR}{dt}&
+\approx \gamma \left(N-R-S_0\left(1-\frac{\beta}{\gamma}\frac{R}{N}\right)\right)\\
+&=\gamma I_0 - \gamma (1 + R_0)R 
+\end{split}
+$$
+where we used that $N-S_0=I_0$. Again we must not be confused by the notation: $R_0$ is the basic reproduction number, not the number of recovered at time $0$. We have a linear differential equation for $R(t)$ that can be solved to give
+$$
+R(t) = \frac{I_0}{1+R_0} \left(1-e^{-(1+R_0)\gamma t}\right).
+$$ {#eq-Ri}
+
+```{python}
+#| label: fig-initial-sir
+#| fig-cap: Exponential approximation of initial growth of an epidemic. The solid lines are the numeric solutions and the dotted lines are the exponential approximations.
+#| fig-alt: Exponential approximation of initial growth of an epidemic.   
+#| code-fold: true
+import numpy as np
+from scipy.integrate import odeint
+import matplotlib.pyplot as plt
+
+# Total population, N.
+N = 1000
+# Initial number of infected and recovered individuals, I0 and R0.
+I0, R0 = 1, 0
+# Everyone else, S0, is susceptible to infection initially.
+S0 = N - I0 - R0
+# Contact rate, beta, and mean recovery rate, gamma, (in 1/days).
+beta, gamma = 0.3, 0.1
+# Basic reproduction number
+brn = beta*S0/gamma/N
+
+# A grid of time points (in days)
+t = np.linspace(0, 40, 160)
+
+# The SIR model differential equations.
+def deriv(y, t, N, beta, gamma):
+    S, I, R = y
+    dSdt = -beta * S * I / N
+    dIdt = beta * S * I / N - gamma * I
+    dRdt = gamma * I
+    return dSdt, dIdt, dRdt
+
+# Initial conditions vector
+y0 = S0, I0, R0
+# Integrate the SIR equations over the time grid, t.
+ret = odeint(deriv, y0, t, args=(N, beta, gamma))
+S, I, R = ret.T
+
+# Plot the data on three separate curves for S(t), I(t), and R(t)
+fig = plt.figure(facecolor='w')
+ax = fig.add_subplot(111, facecolor='#dddddd', axisbelow=True)
+ax.plot(t, I/N, 'r', alpha=0.5, lw=2, label='Infected')
+ax.plot(t, R/N, 'g', alpha=0.5, lw=2, label='Recovered')
+ax.set_xlabel('Time [days]')
+ax.set_ylabel('Proportion of Population')
+ax.set_ylim(0,0.4)
+ax.yaxis.set_tick_params(length=0)
+ax.xaxis.set_tick_params(length=0)
+ax.grid(True, which='major', c='w', lw=2, ls='-')
+legend = ax.legend()
+legend.get_frame().set_alpha(0.5)
+for spine in ('top', 'right', 'bottom', 'left'):
+    ax.spines[spine].set_visible(False)
+plt.title("SIR Model Evolution")
+
+# Now add approximate results for beginning of epidemic
+Ii = I0*np.exp((beta - gamma)*t)
+ax.plot(t, Ii/N, 'r:', alpha=0.5, lw=4)
+Ri = I0/(brn-1)*(np.exp((brn-1)*gamma*t)-1)
+ax.plot(t, Ri/N, 'g:', alpha=0.5, lw=4)
+
+plt.show()
+```
+
+@fig-initial-sir compares the approximate expressions @eq-Ii and @eq-Ri that we have derived above with the numerical solution of the SIR model for the choice of parameters from @fig-sir. We see that the exponential approximation is very good for the initial stages of the epidemic.
+
+### Doubling time
+
+The doubling time of an epidemic is the time it takes for the number of infected individuals to double. It is an important metric for understanding the rate of spread of an infectious disease and can help public health officials anticipate the growth of an epidemic and plan for the allocation of resources such as hospital beds, medical staff, and equipment.
+
+From our initial exponential approximation for $I(t)$ in @eq-Ii, we see that the number of infecteds doubles in a time $t_d$ when
+$$
+2I_0 = I_0 e^{(\beta -\gamma)t_d},
+$$
+which gives the doubling time
+$$
+t_d = \frac{\log 2}{\beta-\gamma}.
+$$
+
+
+## Exercises
+
+::: {#exr-sir1}
+<!--- From sheet 4 --->
+In a mathematical model for a certain venereal disease the
+male population is divided into susceptibles $S$, infectives $I$ and
+removeds $R$. The female population is similarly divided; the three
+groups being denoted $S'$, $I'$ and $R'$ (note that we use the prime to
+distinguish between male and female, not to indicate differentiation). The equations are
+$$\begin{split}
+\frac{dS}{dt}&=-rSI',\hspace{.2in}\frac{dI}{dt}=rSI'-aI,\hspace{.2in}
+\frac{dR}{dt}=aI,\\
+\frac{dS'}{dt}&=-r'S'I,\hspace{.2in}\frac{dI'}{dt}=r'S'I-a'I',\hspace{.2in}
+\frac{dR'}{dt}=a'I'
+\end{split}$$
+where $r$, $r'$ and $a$, $a'$ are positive constants. The equations are
+with initial conditions $S(0)=S_0$, $I(0)=I_0$, $S'(0)=S'_0$,
+$I'(0)=I'_0$, $R(0)=R'(0)=0$.
+The total male population is $N=S+I+R$ and the total female population
+$N'=S'+I'+R'$. 
+
+a) Show that $N$ and $N'$ are both constant. 
+
+b) Show that
+$S(t)=S_0\exp\left(-\frac{r}{a'}R'(t)\right)$ and obtain another similar
+equation. 
+
+c) Assuming that $I(\infty)=I'(\infty)=0$ show that $S(\infty)$
+and $S'(\infty)$ are found by solving simultaneously the equations
+$$
+\begin{split}
+S(\infty)&=S_0\exp\left(-\frac{r}{a'}(N'-S'(\infty))\right),\\
+S'(\infty)&=S'_0\exp\left(-\frac{r'}{a}(N-S(\infty))\right).
+\end{split}
+$$
+:::

@@ -40,6 +40,7 @@ book:
     - sex_structured.qmd
     - age_structured.qmd
     - interacting.qmd
+    - epidemics.qmd
   appendices:
     - solutions.qmd
 
