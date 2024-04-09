@@ -384,6 +384,8 @@ This is a special case of the Perron-Frobenius theorem, which is a general theor
 
 ## Exercises
 
+### Continuous time
+
 #### * Age-independent rates
 ::: {#exr-age_structured}
 In the continuous-time age-structured population model consider the case where $b(a)=b$
@@ -414,6 +416,42 @@ $$ {#eq-age_harvesting_2}
 By calculating the expected number of offspring per individual, determine the limit on the harvesting rate $\mu_F$ that allows the population to be sustainable.
 :::
 
+
+#### Seasonal mortality
+::: {#exr-seasonal_mortality}
+Consider an age-structured population model in which, in addition to an
+age-dependent mortality, there is also a seasonal mortality. The population
+is described by a function $n(t,a)$ giving the density of individuals of age
+$a$ at time $t$ which satisfies  the equations
+$$
+\partial_t n(t,a)+\partial_a n(t,a)=-(\mu(a)+m(t))\,n(t,a),
+$$ {#eq-sma1}
+$$
+n(t,0) = \int_0^\infty b(a) n(t,a) da.
+$$ {#eq-sma2}
+The birth rate $b(a)$ and the mortality rates $\mu(a)$ and $m(t)$ are
+all positive.
+
+(a) By substituting the ansatz
+$n(t,a)=p(t)r(a)$ into equation @eq-sma1 and separating variables
+with a separation constant $\gamma$, derive solutions for
+$p(t)$ and $r(a)$ and hence for $n(t,a)$, involving $\gamma$.
+
+(b) By substituting your solution from part (a) into equation @eq-sma2,
+derive an equation for $\gamma$. Write this in the form $\phi(\gamma)=1$ for
+some function $\phi$. Show that this $\phi$ is a monotonic function.
+
+(c) Assume that the seasonal mortality rate $m(t)$ is periodic  with period $1$
+and denote by $F$ the averaged seasonal mortality. By considering the
+population at the end of each season, show that the population
+will go extinct if $\gamma <F$.
+
+(d) Explain how you can use a property of the function $\phi$ to eliminate
+$\gamma$ from the condition for extinction. Thus finally give the
+condition for extinction in terms of $b(a), \mu(a)$ and $F$.
+:::
+
+### Discrete time
 
 #### * Fibonacci population
 ::: {#exr-leslie}
@@ -475,3 +513,4 @@ For each of the two populations do the following:
 4. Calculate the average age in the stable age distribution as well as the average age of parents of newborns.
 
 :::
+
