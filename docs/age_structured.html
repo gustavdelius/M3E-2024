@@ -317,8 +317,8 @@ N_{0,t} = \sum_{a=1}^\infty b_a N_{a,t}.
 \tag{4.17}\]</span></span> This is a boundary condition for the discrete-time model. It says that the number of individuals at age <span class="math inline">\(0\)</span> at time <span class="math inline">\(t\)</span> is given by the total number of offspring produced by the individuals of all ages at time <span class="math inline">\(t\)</span>. This is the discrete-time analogue of the boundary condition <a href="#eq-a4" class="quarto-xref">Eq.&nbsp;<span>4.4</span></a> for the continuous-time model.</p>
 <p>Note that in <a href="#eq-a17" class="quarto-xref">Eq.&nbsp;<span>4.17</span></a> both sides of the equation are at time <span class="math inline">\(t\)</span>. That is because reproduction is taken to happen instantaneously at time <span class="math inline">\(t\)</span>. It is conventional to use <a href="#eq-a16" class="quarto-xref">Eq.&nbsp;<span>4.16</span></a> to rewrite the boundary condition <a href="#eq-a17" class="quarto-xref">Eq.&nbsp;<span>4.17</span></a> as an equation for <span class="math inline">\(N_{0,t+1}\)</span>: <span id="eq-a18"><span class="math display">\[
 N_{0,t+1} = \sum_{a=1}^\infty b_a N_{a,t+1}= \sum_{a=1}^\infty b_a S_{a} N_{a-1,t}
-= \sum_{a=1}^\infty F_a N_{a-1,t},
-\tag{4.18}\]</span></span> where we have introduced the fecundity <span class="math inline">\(F_a:=b_a S_a\)</span>.</p>
+= \sum_{a=1}^\infty F_{a-1} N_{a-1,t},
+\tag{4.18}\]</span></span> where we have introduced the fecundity <span class="math inline">\(F_a:=b_{a+1} S_{a+1}\)</span>.</p>
 <p><a href="#eq-a16" class="quarto-xref">Eq.&nbsp;<span>4.16</span></a> and <a href="#eq-a18" class="quarto-xref">Eq.&nbsp;<span>4.18</span></a> are the equations for the discrete-time age-structured population model. They are a system of coupled difference equations, one equation for each age class. We would like to solve them to determine the numbers <span class="math inline">\(N_{a,t}\)</span> of individuals at each age at each time. Notice that <a href="#eq-a16" class="quarto-xref">Eq.&nbsp;<span>4.16</span></a> looks very simple and we could use it to determine <span class="math inline">\(N_{a,t}\)</span> for <span class="math inline">\(a=1,2,3,\ldots\)</span> in terms of <span class="math inline">\(N_{0,t}\)</span>, <span id="eq-ac18"><span class="math display">\[
 \begin{split}
 N_{a,t} &amp;= S_{a} N_{a-1,t} = S_{a} S_{a-1} N_{a-2,t} = \cdots \\
@@ -341,10 +341,10 @@ N_{2,t} = \frac{S_2}{\lambda} N_{1,t} = \frac{S_1 S_2}{\lambda^2} N_{0,t}.
 N_{a,t} = \frac{S_1 S_2 \cdots S_{a}}{\lambda^a} N_{0,t}= \frac{l_{a}}{\lambda^a} N_{0,t}.
 \tag{4.24}\]</span></span></p>
 <p>Finally, for the newborns we have <span id="eq-a27"><span class="math display">\[
-N_{0,t+1} = \lambda N_{0,t} = \sum_{a=1}^M F_a N_{a-1,t} = \sum_{a=1}^M F_a \frac{l_{a-1}}{\lambda^{a-1}} N_{0,t}.
+N_{0,t+1} = \lambda N_{0,t} = \sum_{a=1}^M F_{a-1} N_{a-1,t} = \sum_{a=1}^M F_{a-1} \frac{l_{a-1}}{\lambda^{a-1}} N_{0,t}.
 \tag{4.25}\]</span></span> Dividing the equation by <span class="math inline">\(\lambda N_{0,t}\)</span> gives <span id="eq-a28"><span class="math display">\[
-1 = \sum_{a=1}^M F_a\frac{l_{a-1}}{\lambda^a}.
-\tag{4.26}\]</span></span> Using that <span class="math inline">\(F_a = b_a S_a\)</span> and <span class="math inline">\(S_al_{a-1}=l_a\)</span> we can rewrite this equation as <span id="eq-a29"><span class="math display">\[
+1 = \sum_{a=1}^M F_{a-1}\frac{l_{a-1}}{\lambda^a}.
+\tag{4.26}\]</span></span> Using that <span class="math inline">\(F_{a-1} = b_{a} S_{a}\)</span> and <span class="math inline">\(S_al_{a-1}=l_a\)</span> we can rewrite this equation as <span id="eq-a29"><span class="math display">\[
 1 = \sum_{a=1}^M b_a \,l_a\,\lambda^{-a} =:\psi(\lambda).
 \tag{4.27}\]</span></span> This is the Euler-Lotka equation for the stable age distribution. Compare it to the corresponding equation for the continuous-time model <a href="#eq-a13" class="quarto-xref">Eq.&nbsp;<span>4.13</span></a> with <span class="math inline">\(e^{\gamma}=\lambda\)</span>. The only difference is that the continuous-time model has an integral over age, while the discrete-time model has a sum over age.</p>
 <p>By the same argument as in the continuous case we can see that if the expected number of offspring produced by an individual during its lifetime, <span class="math inline">\(\sum_{a=1}^M b_a \,l_a=\psi(1)\)</span>, is greater than <span class="math inline">\(1\)</span> then the population grows exponentially. If it is less than <span class="math inline">\(1\)</span>, then the population goes extinct.</p>
@@ -592,7 +592,7 @@ b &amp; \text{if } a \geq a_m.
 <section id="semelparous-population" class="level4">
 <h4 class="anchored" data-anchor-id="semelparous-population">Semelparous population</h4>
 <div id="exr-semelparous" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 4.4</strong></span> Consider a population in which individuals live for 2 years and produce all their offspring at the end of their life. The life history parameters are given by the following table:</p>
+<p><span class="theorem-title"><strong>Exercise 4.4</strong></span> Consider a population in which individuals die after having given birth for the first time at age 3. The life history parameters are given by the following table:</p>
 <table class="table">
 <thead>
 <tr class="header">

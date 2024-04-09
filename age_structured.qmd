@@ -103,9 +103,9 @@ This is a boundary condition for the discrete-time model. It says that the numbe
 Note that in @eq-a17 both sides of the equation are at time $t$. That is because reproduction is taken to happen instantaneously at time $t$. It is conventional to use @eq-a16 to rewrite the boundary condition @eq-a17 as an equation for $N_{0,t+1}$:
 $$
 N_{0,t+1} = \sum_{a=1}^\infty b_a N_{a,t+1}= \sum_{a=1}^\infty b_a S_{a} N_{a-1,t}
-= \sum_{a=1}^\infty F_a N_{a-1,t},
+= \sum_{a=1}^\infty F_{a-1} N_{a-1,t},
 $$ {#eq-a18}
-where we have introduced the fecundity $F_a:=b_a S_a$.
+where we have introduced the fecundity $F_a:=b_{a+1} S_{a+1}$.
 
 @eq-a16 and @eq-a18 are the equations for the discrete-time age-structured population model. They are a system of coupled difference equations, one equation for each age class. We would like to solve them to determine the numbers $N_{a,t}$ of individuals at each age at each time. Notice that @eq-a16 looks very simple and we could use it to determine $N_{a,t}$ for $a=1,2,3,\ldots$ in terms of $N_{0,t}$,
 $$
@@ -143,13 +143,13 @@ $$ {#eq-a26}
 
 Finally, for the newborns we have
 $$
-N_{0,t+1} = \lambda N_{0,t} = \sum_{a=1}^M F_a N_{a-1,t} = \sum_{a=1}^M F_a \frac{l_{a-1}}{\lambda^{a-1}} N_{0,t}.
+N_{0,t+1} = \lambda N_{0,t} = \sum_{a=1}^M F_{a-1} N_{a-1,t} = \sum_{a=1}^M F_{a-1} \frac{l_{a-1}}{\lambda^{a-1}} N_{0,t}.
 $$ {#eq-a27}
 Dividing the equation by $\lambda N_{0,t}$ gives
 $$
-1 = \sum_{a=1}^M F_a\frac{l_{a-1}}{\lambda^a}.
+1 = \sum_{a=1}^M F_{a-1}\frac{l_{a-1}}{\lambda^a}.
 $$ {#eq-a28}
-Using that $F_a = b_a S_a$ and $S_al_{a-1}=l_a$ we can rewrite this equation as
+Using that $F_{a-1} = b_{a} S_{a}$ and $S_al_{a-1}=l_a$ we can rewrite this equation as
 $$
 1 = \sum_{a=1}^M b_a \,l_a\,\lambda^{-a} =:\psi(\lambda).
 $$ {#eq-a29}
@@ -428,7 +428,7 @@ Consider a population in which individuals on average produce one offspring when
 
 #### Semelparous population
 ::: {#exr-semelparous}
-Consider a population in which individuals live for 2 years and produce all their offspring at the end of their life. The life history parameters are given by the following table:
+Consider a population in which individuals die after having given birth for the first time at age 3. The life history parameters are given by the following table:
 
 | $a$ | $b_a$ | $S_a$ |
 | --- | ----- | ----- |
