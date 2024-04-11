@@ -228,7 +228,7 @@ N_{m-1}
 \end{pmatrix}_{t+1}
 =
 \begin{pmatrix}
-F_0 & F_2 & \cdots & F_{m-2} & F_{m-1} \\
+F_0 & F_1 & \cdots & F_{m-2} & F_{m-1} \\
 S_1 & 0 & \cdots & 0 & 0 \\
 0 & S_2 & \cdots & 0 & 0 \\
 \vdots & \vdots & \ddots & \vdots & \vdots \\
