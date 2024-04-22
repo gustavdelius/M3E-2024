@@ -69,9 +69,13 @@ The second equation describes the rate of change of the infected compartment ove
 
 The third equation describes the rate of change of the recovered compartment over time. It states that the number of recovered individuals increases over time as infected individuals recover and become immune at the recovery rate $\gamma$.
 
+We can represent the SIR model graphically by a directed graph with one node for each component and directed edges between the nodes to represent the flow of individuals between the compartments. This is illustrated in @fig-sir. We have labeled the edges by the per-capita rates.
+
+![Graphical representation of the SIR model.](figures/Epidemics/SIR.png){#fig-sir}
+
 ### Assumptions made by SIR model
 
-Like all models, the SIR model makes a number of simplifying assumptions to make the calculations tractable and the results interpretable. it is important to note that therefore an SIR model will not capture all of the nuances of disease transmission in a real population. The assumptions made by the SIR model include:
+Like all models, the SIR model makes a number of simplifying assumptions to make the calculations tractable and the results interpretable. It is important to note that therefore an SIR model will not capture all of the nuances of disease transmission in a real population. The assumptions made by the SIR model include:
 
 1. Fixed population: The SIR model assumes that the total population size $N=S+I+R$ is fixed and does not change over time. We can see that by observing that
 $$
@@ -195,7 +199,7 @@ plt.show()
 
 We however are interested in analytic insights. It turns out that it is easy to determine the shape of the trajectories in the SIR phase space. 
 
-### Trajectory in S-I plane
+### Trajectory in S-I plane {#sec-si}
 
 First we will determine how the number of infecteds changes with the number of susceptibles. This is described by the differential equation
 
@@ -261,7 +265,7 @@ This is depicted in @fig-si. It agrees with our earlier intuitive description of
 
 We can use this result to determine the number $I_{max}$ of infected individuals at the peak of the epidemic. 
 
-### Peak of an epidemic
+### Peak of an epidemic {#sec-peak}
 
 Knowing the maximum number of infected individuals can help public health officials plan for the allocation of resources such as hospital beds, medical staff, and equipment. This information can be used to anticipate the surge in demand for healthcare services and to prepare for the management of large numbers of patients. It can also be used to guide the planning of interventions such as vaccinations in order to avoid overstretching the health system at the peak of the epidemic. We will discuss that in @sec-vaccinations.
 
@@ -456,6 +460,56 @@ $$
 t_d = \frac{\log 2}{\beta-\gamma}.
 $$
 
+## Effect of vaccination
+
+Vaccination is a way to move individuals directly from the S component to the R component. This is illustrated in @fig-vaccination.
+
+![Graphical representation of the SIR model with vaccination.](figures/Epidemics/vaccination.png){#fig-vaccination}
+The extra flow from S to R adds a negative term to the equation for $dS/dt$ and a positive term to the equation for $dR/dt$. The equations become
+$$\begin{split}
+\frac{dS}{dt} &= -\beta IS/N - \nu S,\\
+\frac{dI}{dt} &= \beta IS/N -\gamma I,\\
+\frac{dR}{dt} &= \gamma I + \nu S,
+\end{split}
+$$ {#eq-SIRV}
+
+where $\nu$ is the per-capita vaccination rate.
+
+The modified model still has the feature that the total population size is constant, $dN/dt=0$. This is because the vaccinated individuals simply move from the S compartment to the R compartment and stay part of the total population.
+
+
+Also the expression for the basic reproduction number $R_0$ is the same as before: $R_0=\beta S_0/\gamma N$. The condition for an epidemic to start is also the same: $R_0>1$. However, if a vaccination program has already been in place before the start of an epidemic, the number $S_0$ of susceptibles is reduced and hence the basic reproduction number is reduced. If the proportion of unvaccinated individuals in the population $S_0/N$ is less than $\gamma/\beta$, then the basic reproduction number is below 1 and the epidemic will not start. Said differently, one needs to only vaccinate a proportion $1-\gamma/\beta$ of the population to prevent an epidemic from starting.
+
+But even a vaccination program that does not prevent an epidemic from starting can have a large effect on the size of the epidemic. This is because the number of susceptibles is reduced and hence the number of infecteds at the peak of the epidemic is reduced. To understand this in detail we will repeat the analysis from sections @sec-si and @sec-peak but with the modified equations @eq-SIRV.
+
+We now have
+$$
+\frac{dI}{dS}=\frac{\beta IS-\gamma IN}{-\beta IS-\nu S}
+=\frac{\beta-\gamma N/S}{-\beta-\nu N/I}.
+$$
+This is easily solved by separation of variables:
+$$
+\begin{split}
+\int_{I_0}^{I(S)}\left(-\beta-\frac{\nu N}{\tilde{I}}\right) d\tilde{I}&=\int_{S_0}^S\left(\beta-\frac{\gamma N}{\tilde{S}}\right)d\tilde{S}.
+\end{split}
+$$
+These integrals are easy to perform, and we get
+$$
+I(S)+ \frac{\nu N}{\beta}\log \frac{I(S)}{I_0} = N - S + \frac{\gamma N}{\beta}\log \frac{S}{S_0} .
+$$ {#eq-ISV}
+
+As before, the peak of the epidemic is where $dI/dS=0$, which still happens at $S=\gamma N/\beta$, as in the case without vaccination, because vaccination did not affect the equation for $dI/dt$. Thus we again get the number of infecteds at the peak of the epidemic as $I(\gamma N/\beta)$. Thus
+$$
+I_{max}+ \frac{\nu N}{\beta}\log \frac{I_{max}}{I_0} = N - \frac{\gamma N}{\beta}\left(1-\log \frac{\gamma N}{\beta S_0}\right)=I_{max}(\nu=0),
+$$
+where we have recognised the right-hand side as the expression for the peak of the epdidemic in the absence of vaccinations.
+We can see that the number of infecteds at the peak of the epidemic is reduced by the vaccination rate $\nu$.
+
+
+
+## Effect of loss of immunity
+
+![Graphical representation of the SIR model with loss of immunity.](figures/Epidemics/loss_of_immunity.png){#fig-loi}
 
 ## Exercises
 
