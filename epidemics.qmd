@@ -673,7 +673,7 @@ a) Show that $N$ and $N'$ are both constant.
 
 b) Show that
 $S(t)=S_0\exp\left(-\frac{r}{a'}R'(t)\right)$ and obtain another similar
-equation. 
+equation for $S'$. 
 
 c) Assuming that $I(\infty)=I'(\infty)=0$ show that $S(\infty)$
 and $S'(\infty)$ are found by solving simultaneously the equations

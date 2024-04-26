@@ -18,7 +18,7 @@ i) Seeking a steady state we find $\alpha w^{2/3}-\beta w = 0$  $\implies$  $w^{
 With the graphical approach in @fig-vonBertalanffy-growth we see that the non-zero steady state is stable. Hence, 
 $$
 \lim_{t \rightarrow \infty} w(t) = \left( \frac{\alpha}{\beta} \right)^{3}.
-$$
+$$ {#eq-ex_vonBertalanffy_growth}
 
 ![$dw/dt$ versus $w$ for the von Bertalanffy growth model.](figures/Solutions/vonBertalanffy_growth.png){#fig-vonBertalanffy-growth width=50%}
 
@@ -26,21 +26,21 @@ $$
 ii) For the time derivative of $u=w^{1/3}$ we find by the chain rule that
 $$
 \frac{du}{dt} = \frac13 w^{-2/3} \frac{dw}{dt} = \frac{1}{3u^2}\left( \alpha w^{2/3}-\beta w \right).
-$$
+$$ {#eq-ex_vonBertalanffy_growth2}
 Hence
 $$
 3\frac{du}{dt} = \frac{1}{u^2}\left( \alpha u^2-\beta u^3 \right) = \alpha-\beta u.
-$$
+$$ {#eq-ex_vonBertalanffy_growth3}
 So this change of variables has yielded a first-order ODE with linear coefficients, which is easy for us to solve:
 $$
 u(t) = \frac{1}{\beta} \left( \alpha  - Ae^{-\beta t/3}\right)
-$$
+$$ {#eq-ex_vonBertalanffy_growth4}
 for some integration constant $A$. If $u(0)=u_0$ then $A=\alpha -\beta u_0$.
 
 iii) Translating back to $w$ with $w_0=u_0^3$ we finally have
 $$
 w(t) = u(t)^3 = \frac{1}{\beta^3}\left( \alpha - \left( \alpha - \beta w_0^{1/3} \right) e^{-\beta t/3}  \right)^3.
-$$
+$$ {#eq-ex_vonBertalanffy_growth5}
 
 ----------------------------------------------------
 
@@ -48,17 +48,28 @@ $$
 @exr-logistic_solution:
 We separate the variables by dividing both sides of the ODE by $N(1-N/K)$ and multiplying by $dt$, and then integrate to get
 $$
-\int_{N_0}^{N(t)}\frac{dN}{N\left(1-\frac{N}{K}\right)}=\int_0^t r\,dt.$$
+\int_{N_0}^{N(t)}\frac{dN}{N\left(1-\frac{N}{K}\right)}=\int_0^t r\,dt.
+$$ {#eq-ex_logistic_solution}
 The right hand side is trivial to integrate, but for the integral on the left-hand side we need to employ the
 method of partial fractions, using that
-$$\frac{dN}{N\left(1-\frac{N}{K}\right)}=\frac{1}{N}+\frac{1}{K-N}.$$
+$$
+\frac{dN}{N\left(1-\frac{N}{K}\right)}=\frac{1}{N}+\frac{1}{K-N}.
+$$ {#eq-ex_logistic_solution2}
 The left-hand side then gives
 $$
-\int_{N_0}^{N(t)}\left(\frac{1}{N}+\frac{1}{K-N(t)}\right)dN=\log N(t)-\log N_0-\log(K-N(t))+\log(K-N_0).$$
+\begin{split}
+\int_{N_0}^{N(t)}&\left(\frac{1}{N}+\frac{1}{K-N(t)}\right)dN\\
+&=\log N(t)-\log N_0-\log(K-N(t))+\log(K-N_0).
+\end{split}
+$$ {#eq-ex_logistic_solution3}
 We exponentiate both sides to get
-$$\frac{N(t)}{N_0}\frac{K-N_0}{K-N(t)}=e^{rt}.$$
+$$
+\frac{N(t)}{N_0}\frac{K-N_0}{K-N(t)}=e^{rt}.
+$$ {#eq-ex_logistic_solution4}
 Now we just need to solve for $N(t)$:
-$$N(t)=\frac{N_0Ke^{rt}}{K+N_0(e^{rt}-1)}.$$
+$$
+N(t)=\frac{N_0Ke^{rt}}{K+N_0(e^{rt}-1)}.
+$$ {#eq-ex_logistic_solution5}
 
 <!---
 ### @exr-harvest_effort {.unnumbered}
@@ -74,19 +85,21 @@ See solution sheet on Moodle.
 If we harvest with a fixed quota $Q$, the population is described by the equation
 $$
 \frac{dN}{dt} = \alpha N \log\frac{K}{N} - Q.
-$$
+$$ {#eq-ex_harvest_quota}
 The subtraction of $Q$ shifts the graph of the right-hand side down by a distance $Q$. This brings the non-zero fixed points closer together until $Q$ is equal to the maximum of the growth rate of the unfished population. If $Q$ is increased beyond this value the non-zero fixed points disappear and the population will go extinct. is because we are removing $Q$ individuals from the population at a constant rate. Thus the maximum sustainable
 yield occurs when $Q$ equals the maximum replenishment rate of the unfished population. To find that
 maximum we first solve
 $$
 0=\frac{d}{dN}\left(\alpha N \log\frac{K}{N}\right)=\alpha\left(\log\frac{K}{N}-1\right).
-$$
+$$ {#eq-ex_harvest_quota2}
 This tells us that the maximum is at
 $$
 N_{max} = K\,e^{-1}.
-$$
+$$ {#eq-ex_harvest_quota3}
 Hence the value at the maximum is
-$$MSY=Q_{max}=\alpha N_{max} \log\frac{K}{N_{max}}=\alpha\,K\,e^{-1}.$$
+$$
+MSY=Q_{max}=\alpha N_{max} \log\frac{K}{N_{max}}=\alpha\,K\,e^{-1}.
+$$ {#eq-ex_harvest_quota4}
 Fishing at this quota is not wise, as this reduces the population to the threshold level below which the population will go extinct. 
 
 
@@ -97,30 +110,33 @@ Fishing at this quota is not wise, as this reduces the population to the thresho
 For $0\leq t\leq t_c$ the number of workers satisfies
 $$
 \frac{dn}{dt}=r\,n.
-$$
+$$ {#eq-ex-wasp}
 Therefore
 $$
 n(t)=n_0e^{r\,t}.
-$$
+$$ {#eq-ex-wasp2}
 
 For $t_c\leq t\leq T$ the number of reproducers satisfies
 $$
 \frac{dN}{dt}=Rn(t_c)=R\,n_0\,e^{r\,t_c},
-$$
+$$ {#eq-ex-wasp3}
 so that
 $$
 N(T)=(T-t_c)R\,e^{r\,t_c}.
-$$
+$$ {#eq-ex-wasp4}
 
 To find the value of $t_c$ that maximises $N(T)$ we set the derivative of $N(T)$ with respect to $t_c$ to zero:
 $$
-0=\frac{d}{dt_c}N(T)=\frac{d}{dt_c}(T-t_c)R\,e^{r\,t_c}=-R\,e^{r\,t_c}+(T-t_c)R\,r\,e^{r\,t_c}
-=R\,e^{r\,t_c}(r\,T-r\,t_c-1).
-$$
+\begin{split}
+0&=\frac{d}{dt_c}N(T)=\frac{d}{dt_c}(T-t_c)R\,e^{r\,t_c}\\
+&=-R\,e^{r\,t_c}+(T-t_c)R\,r\,e^{r\,t_c}\\
+&=R\,e^{r\,t_c}(r\,T-r\,t_c-1).
+\end{split}
+$$ {#eq-ex-wasp5}
 This implies that
 $$
 t_c=T-\frac{1}{r}.
-$$
+$$ {#eq-ex-wasp6}
 
 
 ----------------------------------------------------
@@ -128,28 +144,44 @@ $$
 ### Wasp model with death {.unnumbered}
 @exr-wasp_death:
 For $0\leq t\leq t_c$ the number of workers satisfies
-$$\frac{dn}{dt}=(r-d)n.$$
+$$
+\frac{dn}{dt}=(r-d)n.
+$$ {#eq-wasp_death}
 Therefore
-$$n(t)=e^{(r-d)t}.$$
+$$
+n(t)=e^{(r-d)t}.
+$$ {#eq-wasp_death2}
 For $t_c\leq t\leq T$ we have
-$$\frac{dn}{dt}=-dn$$
+$$
+\frac{dn}{dt}=-dn
+$$ {#eq-wasp_death3}
 so that
-$$n(t)=n(t_c)e^{-d(t-t_c)}=e^{(r-d)t}e^{-d(t-t_c)}=e^{r\,t_c}e^{-d\,t}.$$
+$$
+n(t)=n(t_c)e^{-d(t-t_c)}=e^{(r-d)t}e^{-d(t-t_c)}=e^{r\,t_c}e^{-d\,t}.
+$$ {#eq-wasp_death4}
 Also for $t_c\leq t\leq T$ the number of reproducers satisfies
-$$\frac{dN}{dt}=Rn(t)=Re^{r\,t_c}e^{-d\,t},$$
+$$
+\frac{dN}{dt}=Rn(t)=Re^{r\,t_c}e^{-d\,t},
+$$ {#eq-wasp_death5}
 so that
-$$N(T)=\int_{t_c}^TRe^{r\,t_c}e^{-d\,t}dt = \frac{R}{d}e^{r\,t_c}\left(e^{-d\,t_c}-e^{-d\,T}\right).$$
+$$
+N(T)=\int_{t_c}^TRe^{r\,t_c}e^{-d\,t}dt = \frac{R}{d}e^{r\,t_c}\left(e^{-d\,t_c}-e^{-d\,T}\right).
+$$ {#eq-wasp_death6}
 To find the value of $t_c$ that maximises $N(T)$ we set the derivative of $N(T)$ with respect to $t_c$ to zero:
 $$
 \begin{split}
 0&=\frac{d}{dt_c}N(T)=\frac{d}{dt_c}\left( \frac{R}{d}e^{r\,t_c}\left(e^{-d\,t_c}-e^{-d\,T}\right)\right)\\
 &=Re^{r\,t_c}\left(\left(\frac{r}{d}-1\right)e^{-d\,t_c}-\frac{r}{d}e^{-d\,T}\right).
 \end{split}
-$$
+$$ {#eq-wasp_death7}
 This is equivalent to 
-$$e^{-d\,t_c}=\frac{1}{1-d/r}e^{-d\,T}$$
+$$
+e^{-d\,t_c}=\frac{1}{1-d/r}e^{-d\,T}
+$$ {#eq-wasp_death8}
 and thus
-$$t_c=T+\frac{1}{d}\ln\left(1-\frac{d}{r}\right).$$
+$$
+t_c=T+\frac{1}{d}\ln\left(1-\frac{d}{r}\right).
+$$ {#eq-wasp_death9}
 
 ----------------------------------------------------
 
@@ -160,7 +192,7 @@ $$t_c=T+\frac{1}{d}\ln\left(1-\frac{d}{r}\right).$$
 Let's write the equation as $N_{t+1}=f(N_t)$ with
 $$
 f(N)=rN\left(1-\frac{N}{K}\right).
-$$
+$$ {#eq-ex-discrete_logistic}
 
 Because $f(N)$ is positive for all $N<K$, the only way for $N_{t+1}$ to be negative
 is for $N_t$ to be greater than $K$. This in turn is only possible if $f(N_{t-1})>K$. So the function $f$ at its maximum needs to be larger than $K$. Because the function describes an upside-down parabola with
@@ -185,7 +217,7 @@ $$\begin{split}
 &=
 \frac{(b_F-\mu_F F/Q )F Q-F(b_Q F-\mu_Q  Q )}{Q ^2}\\
 &=(b_F+\mu_Q )\frac{F}{Q }\left(1-\frac{b_Q +\mu_F}{b_F+\mu_Q }\frac{F}{Q }\right).
-\end{split}$$
+\end{split}$$ {#eq-ex_ss2}
 Ideally you identify this as the logistic equation with initial growth rate $r$ and carrying capacity $K$ given by
 $$
 r=b_F+\mu_Q ,~~~K=\frac{b_F+\mu_Q }{b_Q +\mu_F}.
@@ -193,7 +225,7 @@ $$ {#eq-rK}
 You can then look up the solution in the lecture notes:
 $$
 \frac{F}{Q }(t)=\frac{\frac{F_0}{Q_0}Ke^{rt}}{K+\frac{F_0}{Q_0}\left(e^{rt}-1\right)}.
-$$
+$$ {#eq-ex_ss2sol}
 Otherwise you have to work a bit harder.
 
 (c) Because we have identified $F/Q (t)$ as the solution of a logistic equation
@@ -205,26 +237,26 @@ $$\begin{split}
 &=
 \frac{(b_F-\mu_F F/Q )FM-F(b_MF-\mu_M M)}{M^2}\\
 &=\frac{F}{M}\left(b_F+\mu_M-\mu_F\frac{F}{Q }-b_M\frac{F}{M}\right).
-\end{split}$$
+\end{split}$$ {#eq-ex_ss2b}
 We are only interested in the limit of $F/M$ as $t\to\infty$. Let us denote
 this limit by $R$. We already know that the limit of $F/Q$ as $t\to\infty$ is $K$.
 The limit of the previous equation gives
 $$
 0=\frac{d}{dt}R=R\left(b_F+\mu_M-\mu_FK-b_MR\right)
-$$
+$$ {#eq-ex_ss2c}
 and hence
 $$
 R=\frac{b_F+\mu_M-\mu_FK}{b_M}.
-$$
+$$ {#eq-ex_ss2d}
 Substituting the expression for $K$ and bringing everything on a common
 denominator gives
 $$
 R=\frac{(b_F+\mu_M)(b_Q +\mu_F)-\mu_F(b_F+\mu_Q )}{b_M(b_Q +\mu_F)}
-$$
+$$ {#eq-ex_ss2e}
 To see that this is always positive we multiply out the numerator:
 $$
 R=\frac{b_Fb_Q +\mu_Mb_Q +\mu_M\mu_F-\mu_F\mu_Q }{b_M(b_Q +\mu_F)}
-$$
+$$ {#eq-ex_ss2f}
 This is positive because $b_Fb_Q >\mu_F\mu_Q$
 
 (e) The birth rates are linear in the number of alpha females and independent
@@ -247,12 +279,12 @@ subordinate monkey can keep well fed. There are many other possible improvements
 We can start from @eq-a14 that gives the expected number of offspring produced by an individual within their lifetime:
 $$
 \phi(0) = \int_0^\infty b(a) \exp\left(-\int_0^a \mu(a') \, da'\right)\, da.
-$$
+$$ {#eq-ex_age_harvesting}
 This will now simplify when we use the given expressions @eq-age_harvesting_1 and @eq-age_harvesting_2 for the rates. Because $b(a)$ is non-zero only for $a>a_m$, the outer integral only has to run from $a_m$ to $\infty$. The inner integral from $0$ to $a$ we need to split into two integrals because of the piece-wise nature of $\mu(a)$. Hence
 $$
 \phi(0) = \int_{a_m}^\infty b(a) \exp\left(-\int_0^{a_m} \mu(a') \, da'
 -\int_{a_m}^a \mu(a') \, da'\right)\, da.
-$$
+$$ {#eq-ex_age_harvesting2}
 We can now substitute the appropriate constants for the rates:
 $$
 \begin{split}
@@ -264,11 +296,11 @@ $$
 &= b\,\exp(-\mu_F a_m)  \frac{1}{\mu_0+\mu_F}\exp\left(- (\mu_0+\mu_F)a_m\right)\\
 &= \frac{b}{\mu_0+\mu_F}\exp\left(-\mu_0a_m\right).
 \end{split}
-$$
+$$ {#eq-ex_age_harvesting3}
 This expected number of offspring produced by an individual within their lifetime must be greater or equal to $1$ for the population to sustain itself. Hence the upper limit on the harvesting rate $\mu_F$ is given by
 $$
 \mu_F \leq b\exp\left(-\mu_0a_m\right) - \mu_0.
-$$
+$$ {#eq-ex_age_harvesting4}
 
 ----------------------------------------------------
 
@@ -276,68 +308,72 @@ $$
 ### Seasonal mortality {.unnumbered}
 @exr-seasonal_mortality:
 
-(a) Substituting $n(t,a)=p(t)r(a)$ into \eqref{a1} and dividing by $n(t,a)$ gives
+(a) Substituting $n(t,a)=p(t)r(a)$ into @eq-a3 and dividing by $n(t,a)$ gives
 $$
 \frac{p'(t)}{p(t)}+\frac{r'(a)}{r(a)}=-\mu(a)-f(t).
-$$
+$$ {#eq-ex_seasonal_mortality}
 Separating variables gives
 $$
 \frac{p'(t)}{p(t)}+f(t)=-\frac{r'(a)}{r(a)}-\mu(a).
-$$
+$$ {#eq-ex_seasonal_mortality2}
 As the left-hand side is independent of $a$ and the right-hand side
 is independent of $t$, both sides must be equal to some constant $\gamma$.
 This gives us the two ODEs
 $$
 \frac{d}{dt}\log(p(t))=\gamma-f(t),~~~\frac{d}{da}\log(r(a))=-\gamma-\mu(t).
-$$
+$$ {#eq-ex_seasonal_mortality3}
 These have the solutions
 $$
-p(t)=p(0)\exp\left(\int_0^t\gamma-f(s)\,ds\right),~~~
-r(a)=r(0)\exp\left(-\int_0^a\gamma+\mu(s)\,ds\right)
-$$
+\begin{split}
+p(t)&=p(0)\exp\left(\int_0^t\gamma-f(s)\,ds\right),\\
+r(a)&=r(0)\exp\left(-\int_0^a\gamma+\mu(s)\,ds\right)
+\end{split}
+$$ {#eq-ex_seasonal_mortality4}
 Thus the solution for $n$ is
 $$
 n(t,a)=n(0,0)\exp\left(\int_0^t\gamma-f(s)\,ds\right)
 \exp\left(-\int_0^a\gamma+\mu(s)\,ds\right).
-$$
+$$ {#eq-ex_seasonal_mortality5}
 
-(b) Substituting the solution into \eqref{a2} gives
+(b) Substituting the solution into @eq-a4 gives
 $$
 p(t)r(0)=\int_0^\infty b(a)p(t)r(a)\,da.
-$$
+$$ {#eq-ex_seasonal_mortality6}
 After dividing by $p(t)r(0)$ and using our expression for $r(a)$
 from the previous part,
 $$
 1=\int_0^\infty b(a) \exp\left(-\int_0^a\gamma+\mu(s)ds\right)da
 =\phi(\gamma).
-$$
+$$ {#eq-ex_seasonal_mortality7}
 The factor $\exp(-\gamma a)$ in the integrand decreases monotonically with increasing
 $\gamma$ and therefore so does the integral. Hence the function
 $\phi(\gamma)$ is a monotonically decreasing function.
 
-(c) The end of a season occurs at any $t\in\mathbb(Z)$. At those integer times we can
+(c) The end of a season occurs at any $t\in\mathbb{Z}$. At those integer times we can
 write the integral in the expression for $p(t)$ as
 $$
-\int_0^t\gamma-f(s)\,ds=\sum_{i=1}^t\int_{i-1}^{i}\gamma-f(s)\,ds
-=\sum_{i=1}^t(\gamma - F)=t(\gamma - F).
-$$
+\begin{split}
+\int_0^t\gamma-f(s)\,ds&=\sum_{i=1}^t\int_{i-1}^{i}\gamma-f(s)\,ds\\
+&=\sum_{i=1}^t(\gamma - F)=t(\gamma - F).
+\end{split}
+$$ {#eq-ex_seasonal_mortality8}
 Hence for the population at the end of the season $t$ we have
 $$
 n(t,a)=n(0,0)\exp(t(\gamma - F))r(a).
-$$ 
+$$  {#eq-ex_seasonal_mortality9}
 This will go to zero in the limit $t\to\infty$ if $\gamma - F<0$.
 Thus the criterion for extinction is $\gamma < F$.
 
 (d) Because $\phi(\gamma)$ decreases with $\gamma$,
 $$
 \gamma < F \Leftrightarrow \phi(\gamma) > \phi(F).
-$$
+$$ {#eq-ex_seasonal_mortality10}
 Because $\phi(\gamma)=1$, this is equivalent to the condition
 $1>\phi(F)$. Thus the condition for extinction is
 $$
 \int_0^\infty b(a) \exp\left(-\int_0^a F+\mu(s)\,ds\right)da
 <1.
-$$
+$$ {#eq-ex_seasonal_mortality11}
 
 ----------------------------------------------------
 
@@ -354,13 +390,13 @@ $$
 \frac{dI}{dt} &= \beta S I/N - \gamma I + \delta R,\\
 \frac{dR}{dt} &= \gamma I - \delta R.
 \end{split}
-$$
+$$ {#eq-ex_sir2}
 
 1. At the steady state all these derivatives have to vanish. From the first equation we find
 $S^*=0$ or $I^*=0$. We are not interested in $I^*=0$ because we are interested in the endemic state which by definition has $I^*>0$, so we have $S^*=0$. The third equation gives $R^*=\gamma/\delta I^*$. Then $I^*$ is found from the fact that $N=S^*+I^*+R^*$ which gives $I^*=N-\gamma/\delta I^*$. Soving for $I^*$ gives
 $$
 I^*=\frac{N\delta}{\delta+\gamma}.
-$$
+$$ {#eq-ex_Istar}
 
 2. For the stability analysis we reduce the problem to a two-dimensional system by eliminating $S$ from the last two equations. This gives
 $$
@@ -368,28 +404,28 @@ $$
 \frac{dI}{dt} &= \frac{\beta I}{N} \left(N-I-R\right) - \gamma I + \delta R,\\
 \frac{dR}{dt} &= \gamma I - \delta R.
 \end{split}
-$$
+$$ {#eq-ex_sir2b}
 The Jacobian matrix is
 $$
 A = \begin{pmatrix}
 \frac{\beta}{N} \left(N-2I-R\right) -\gamma & \delta\\
 \gamma & -\delta
 \end{pmatrix}.
-$$
+$$ {#eq-ex_sir2c}
 Evaluated at the endemic state this gives
 $$
 A = \begin{pmatrix}
 -\frac{\beta}{N}I^* -\gamma & \delta\\
 \gamma & -\delta
 \end{pmatrix}.
-$$
+$$ {#eq-ex_sir2d}
 This has determinant and trace given by
 $$
 \begin{split}
 \det(A) &= \frac{\delta\beta}{N}I^*>0,\\
 \text{tr}(A) &= -\frac{\beta}{N}I^* -\gamma -\delta <0.
 \end{split}
-$$
+$$ {#eq-ex_sir2e}
 so the endemic state is stable for all positive values of the parameters.
 
 ----------------------------------------------------
@@ -403,14 +439,51 @@ $$
 \frac{dI}{dt} &= \beta S I/N - \gamma I +\beta\mu R I/N,\\
 \frac{dR}{dt} &= \gamma I-\beta\mu R I/N.
 \end{split}
-$$
+$$ {#eq-ex_sir3}
 At the steady state all these derivatives have to vanish. From the first equation we find
 $S^*=0$ or $I^*=0$. We are not interested in $I^*=0$ because we are interested in the endemic state which by definition has $I^*>0$, so we have $S^*=0$. The third equation gives
 $R^*=\gamma N/(\beta\mu)$. Then $I^*$ is found from the fact that $N=S^*+I^*+R^*$ which gives
 $$
 I^*=N-R^*=N\left(1-\frac{\gamma}{\beta\mu}\right).
-$$
+$$ {#eq-ex_sir3_Istar}
 This is not the same as the number of infecteds in the endemic state of the model with loss of immunity given in @eq-Istar.
+
+----------------------------------------------------
+
+### Sex-structured SIR model {.unnumbered}
+@exr-sir4:
+
+a. As $N=S+I+R$ we have 
+$$
+\frac{dN}{dt} = \frac{dS}{dt}+\frac{dI}{dt}+\frac{dR}{dt} = -rSI'+rSI'-aI+aI=0.
+$$ {#eq-sir4N}
+Hence, $N$ is a constant.  Similarly, $N'$ is a constant.
+
+b. We start by deriving an ODE for $S$ as a function of $R'$:
+$$
+\frac{dS}{dR'}=\frac{dS}{dt}/ \frac{dR'}{dt} = \frac{-rSI'}{a'I'}=-\frac{r}{a'}S. 
+$$ {#eq-sir4S}
+This is easy to solve: 
+$$
+S(t)=S_0e^{-\frac{r}{a'}R'(t)}.
+$$ {#eq-sir4Ssol}
+Similarly, 
+$$
+S'(t)=S'_0e^{-\frac{r'}{a}R(t)}.
+$$ {#eq-sir4Ssolprime}
+
+c. At $t=\infty$ we have
+$$
+S(\infty)=S_0 e^{-\frac{r}{a'}R'(\infty)}.
+$$ {#eq-sir4Ssolinf}
+But at $t=\infty$, $I'=0$ and $N'=S'+I'+R'$ and so
+$$
+S(\infty)=S_0 e^{-\frac{r}{a'}(N'-S'(\infty))}.
+$$ {#eq-sir4Ssolinf2}
+Similarly, 
+$$
+S'(\infty)=S'_0 e^{-\frac{r'}{a}(N-S(\infty))}.
+$$ {#eq-sir4Ssolprimeinf}
 
 ----------------------------------------------------
 
@@ -429,29 +502,29 @@ $$\begin{split}
 \tau/K\left(rKu(1-u)-\beta K^2uv\right)\\
 &=
 \tau r u(1-u)-\tau \beta K uv
-\end{split}$$
+\end{split}$$ {#eq-spatial3ut}
 By comparing this with equation for $u$ in the problem statement, we can 
 read off that
 $$
 \tau = \frac{1}{\beta K}, ~~~b=\frac{r}{\beta K}.
-$$
+$$ {#eq-spatial3tau}
 Then
 $$\begin{split}
 \partial_{\tilde{t}}v&=\tau/K\partial_tI=
 \tau/K\left(\beta K^2uv-\gamma Kv\right)\\
 &=uv-\frac{\gamma}{\beta K}v.
-\end{split}$$
+\end{split}$$ {#eq-spatial3vt}
 By comparing this with the equation for $v$ in the problem statement we read off
 that
 $$
 m=\frac{\gamma}{\beta K}.
-$$
+$$ {#eq-spatial3m}
 
 
 b. By inspection we see that one steady state is $(u(x,t),v(x,t))=(0,0)$ and that another is
 $$
 (u(x,t),v(x,t))=(1,0).
-$$
+$$ {#eq-spatial3ss}
 The first describes a situation where the foxes are extinct, the second  the situation where in the absence of the disease the fox population sits at its
 carrying capacity.
 We look for another steady state $(u(x,t),v(x,t))=(u^*,v^*)$
@@ -462,10 +535,14 @@ This tells us that the existence of the endemic state is independent of the
 intrinsic growth rate $r$ of the fox population but does depend on its carrying capacity.
 
 c. We want $D_1\partial_x^2S=\partial_{\tilde{x}}^2u$, where $u=S/K$. Hence
-$$\tilde{x}=\sqrt{\frac{K\beta}{D_1}}x.$$
+$$
+\tilde{x}=\sqrt{\frac{K\beta}{D_1}}x.
+$$ {#eq-spatial3x}
 Then $d\,\partial_{\tilde{x}}^2v =d\,D_1\partial_x^2I$ but we want 
 $D_2\partial_x^2I$ so we need
-$$d=\frac{D_2}{D_1}.$$
+$$
+d=\frac{D_2}{D_1}.
+$$ {#eq-spatial3d}
 
 d. Substituting the wave Ansatz into the PDEs for $u$ and $v$ gives
 $$
@@ -493,27 +570,36 @@ they are negligible when $\epsilon$ and $B$ are both small.
 Substituting this Ansatz into the equation gives the characteristic equation for $\lambda$:
 $$
 d\lambda^2+c\lambda+1-m=0,
-$$
+$$ {#eq-spatial3lambda}
 and thus
 $$
 \lambda=\frac{-c\pm\sqrt{c^2-4d(1-m)}}{2d}.
-$$
+$$ {#eq-spatial3lambda2}
 We do not want the solution to oscillate, so we want $\lambda$ to
 be real, hence
 $$
 c\geq 2\sqrt{d(1-m)}.
-$$
+$$ {#eq-spatial3c}
 
 
 
 ### Derive Turing instability {.unnumbered}
 @exr-spatial4:
-Here, $f(u,v)=a-u + u^2v$ and $g(u,v)=b-u^2v$.
+
+Here, 
+$$
+f(u,v)=a-u + u^2v, ~~~~ g(u,v)=b-u^2v.
+$$ {#eq-spatial4fg}
 
 **Step 1.  Uniform steady state**
 
-$a-u^* + {u^*}^2 v^*=0$ and $b-{u^*}^2 v^*=0$
-$\implies (u^*,~v^*)=(a+b,~b/(a+b)^2)$.
+$$
+a-u^* + {u^*}^2 v^*=0~\text{ and }~b-{u^*}^2 v^*=0
+$$ {#eq-spatial4ss}
+implies
+$$
+(u^*,~v^*)=(a+b,~b/(a+b)^2).
+$$ {#eq-spatial4ss2}
 
 **Step 2.  Linearize**
 
@@ -533,16 +619,18 @@ a_{11} & a_{12} \\a_{21} & a_{22}
 \begin{pmatrix}
 D_1 \frac{\partial^2 \xi}{\partial x^2} \\ D_2\frac{\partial^2 \eta}{\partial x^2}
 \end{pmatrix},
-$$
+$$ {#eq-spatial4lin}
 where
 $$
 \begin{split}
-a_{11} &= \frac{\partial f}{\partial u}(u^*,v^*) = -1+2u^*v^* = -1+2(a+b)b/(a+b)^2 =(b-a)/(a+b)\\
-a_{12} &= \frac{\partial f}{\partial v}(u^*,v^*) = {u^*}^2 =(a+b)^2\\
-a_{21} &= \frac{\partial g}{\partial u}(u^*,v^*) = -2 u^* v^* =-2b/(a+b)\\
-a_{22} &= \frac{\partial g}{\partial v}(u^*,v^*) = -{u^*}^2 =-(a+b)^2
+a_{11} = \frac{\partial f}{\partial u}(u^*,v^*) &= -1+2u^*v^* \\
+&= -1+2(a+b)b/(a+b)^2 \\
+&=(b-a)/(a+b)\\
+a_{12} = \frac{\partial f}{\partial v}(u^*,v^*) &= {u^*}^2 =(a+b)^2\\
+a_{21} = \frac{\partial g}{\partial u}(u^*,v^*) &= -2 u^* v^* =-2b/(a+b)\\
+a_{22} = \frac{\partial g}{\partial v}(u^*,v^*) &= -{u^*}^2 =-(a+b)^2
 \end{split}
-$$
+$$ {#eq-spatial4lin2}
 
 **Step 3.  Solutions**
 
@@ -557,20 +645,20 @@ $$
 A_1 \\ A_2
 \end{pmatrix}= 
 {\mathbf 0}
-$$
+$$ {#eq-spatial4sol}
 For a non-trivial solution we require the determinant of this matrix to be zero (otherwise we would be able to find an inverse, etc.).  Hence,
 $$
 \sigma^2 + \left[ (a+b)^2 - \frac{b-a}{a+b} + (D_1+D_2)k^2  \right] \sigma + h(k^2) = 0,
-$$
+$$ {#eq-spatial4sol2}
 where
 $$
 h(k^2)= D_1D_2k^4 - \left[ D_2\frac{b-a}{a+b} - D_1(a+b)^2  \right] k^2 +(a+b)^2.
-$$
+$$ {#eq-spatial4sol3}
 
 **Step 4.  In the absence of diffusion** (Put $D_1=0=D_2$.)
 $$
 \sigma^2 + \left[ (a+b)^2 - \frac{b-a}{a+b} \right] \sigma + (a+b)^2 = 0.
-$$
+$$ {#eq-spatial4sol4}
 For $\sigma$ to have roots in the left half of the complex plane (giving us a stable steady state) we need $(a+b)^2-\frac{b-a}{a+b}>0 ~\implies ~ b-a<(a+b)^3$ and $(a+b)^2>0$ (which it is).
 
 **Step 5.  With diffusion** ($D_1\neq 0\neq D_2$.)
@@ -579,7 +667,7 @@ We want steady state to be unstable in this case.
 The coefficient of $\sigma$ is 
 $$
 (a+b)^2 - \frac{b-a}{a+b} + (D_1+D_2)k^2 > (D_1+D_2)k^2>0 ~~~~\mbox{from Step 4}
-$$
+$$ {#eq-spatial4sol5}
 Therefore, we require $h(k^2)<0$ for some $k^2$ for there to be an instability.
 
 As $h(0)>0$ we must have two positive real roots of $h(k^2)=0$ for there to be an instability.
@@ -587,11 +675,11 @@ As $h(0)>0$ we must have two positive real roots of $h(k^2)=0$ for there to be a
 Real distinct roots ($\implies ~~B^2-4AC>0$)
 $$
 \implies \left[ D_2\frac{b-a}{a+b} - D_1(a+b)^2  \right]^2> 4D_1D_2 (a+b)^2.
-$$
+$$ {#eq-spatial4sol6}
 Both positive ($\implies B<0$)
 $$
 \implies D_2\frac{b-a}{a+b} - D_1(a+b)^2 > 0.
-$$
+$$ {#eq-spatial4sol7}
 
 
 ----------------------------------------------------
@@ -600,14 +688,14 @@ $$
 @exr-spatial5
 $$ 
 \frac{\partial a}{\partial t} = \frac{\partial}{\partial x} \left( \mu \frac{\partial a}{\partial x} - \chi a \frac{\partial \rho}{\partial x}   \right), ~~~\mbox{and} ~~~ \frac{\partial \rho}{\partial t} = fa -k\rho + D\frac{\partial^2 \rho}{\partial x^2}.
-$$
+$$ {#eq-spatial5}
 Steady states are $fa^*=k\rho^*$. 
 
 Consider a perturbation $a=a^*+\xi$ and $\rho = \rho^* +\eta$, where $\xi$ and $\eta$ are small.  Substitute and linearize to give
 $$
 \frac{\partial \xi}{\partial t} = \mu \frac{\partial^2 \xi}{\partial x^2} - \chi a^* \frac{\partial^2 \eta}{\partial x^2}, ~~~\mbox{and} ~~~ 
 \frac{\partial \eta}{\partial t} = f\xi -k\eta + D\frac{\partial^2 \eta}{\partial x^2}.
-$$
+$$ {#eq-spatial5lin}
 Put $\xi = A_1 e^{\sigma t + iqx}$ and $\eta = A_2 e^{\sigma t + iqx}$.  Hence,
 $$
 \begin{pmatrix}
@@ -618,12 +706,12 @@ $$
 A_1 \\ A_2
 \end{pmatrix}= 
 {\mathbf 0}
-$$
+$$ {#eq-spatial5sol}
 
 A non-trivial solution requires the determinant of the matrix to be zero
 $$
 \implies ~\sigma^2 +g(q^2)\sigma + h(q^2) = 0,
-$$
+$$ {#eq-spatial5sol2}
 where
 $g(q^2) = k+(D+\mu)q^2>0$ and 
 $h(q^2) = \mu Dq^4+(k\mu -\chi a^*f)q^2>0$.
@@ -639,11 +727,11 @@ At $x=L$ we have $\sin qL = 0$ for a non-trivial solution $~\implies q=q_n:= n\p
 Aggregation will not occur if $h(q_1^2)>0$, which implies 
 $$
 L<\pi\sqrt{\frac{D\mu}{\chi a^*f-k\mu}}.
-$$
+$$ {#eq-spatial5L}
 
 Aggregation will occur if 
 $$
 k\mu<\chi a^*f  ~~~\mbox{and}~~~ 
 L>\pi\sqrt{\frac{D\mu}{\chi a^*f-k\mu}}.
-$$
+$$ {#eq-spatial5L2}
 
