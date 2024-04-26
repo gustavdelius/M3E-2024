@@ -80,7 +80,7 @@ Like all models, the SIR model makes a number of simplifying assumptions to make
 1. Fixed population: The SIR model assumes that the total population size $N=S+I+R$ is fixed and does not change over time. We can see that by observing that
 $$
 \frac{dN}{dt}=\frac{dS}{dt}+\frac{dI}{dt}+\frac{dR}{dt}=0.
-$$
+$$ {#eq-dN}
 So there is no population dynamics such as birth or natural death (death from the illness itself can be included by viewing the $R$ component as the "removed" component) or immigration or emigration. Neglecting population dynamics is fine if the spread of the disease happens much faster than the population dynamics.
 
 2. Well-mixed population: The SIR model assumes that the population is well-mixed, meaning that all individuals have the same probability of coming into contact with one another, regardless of their location or social network. That is why the total rate of infection is simply proportional to both $S$ and $I$, which is also known as the _mass-action dynamics_, a concept taken over from the modelling of chemical reactions.
@@ -109,17 +109,17 @@ Let us investigate the possibility of an epidemic. So we start with initial cond
 
 $$
 S(0)=S_0, ~~~ I(0)=I_0, ~~~R(0)=0,
-$$
+$$ {#eq-IC}
 with $S_0\approx N$ and $I_0 << N$.
 
 In order for an epidemic to start we need a positive rate of increase in the number of infecteds. Thus we need
 $$
 \left.\frac{dI}{dt}\right|_{t=0} = \beta I_0S_0/N -\gamma I_0>0.
-$$
+$$ {#eq-epidemic}
 This happens when
 $$
 R_0 :=\frac{\beta S_0}{\gamma N} > 1.
-$$
+$$ {#eq-R0}
 
 We have introduced the __basic reproduction ratio__ $R_0$. It is a key parameter in infectious disease epidemiology that measures the average number of secondary infections that a single infectious individual will produce. It is a useful metric for understanding the potential for an infectious disease to spread through a population, because if $R_0$ is greater than $1$, then an epidemic can occur, as each infectious individual will produce more than one secondary infection on average, leading to a sustained increase in the number of infected individuals. If$R_0$ is less than $1$, then an epidemic can not occur, as each infectious individual will produce less than one secondary infection on average, leading to a decline in the number of infected individuals over time. 
 
@@ -210,11 +210,11 @@ $$ {#eq-dids}
 We can easily integrate this equation:
 $$
 \int_{I_0}^{I(S)} d\tilde{I}=\int_{S_0}^S\left(-1+\frac{\gamma N}{\beta \tilde{S}}\right)d\tilde{S}
-$$
+$$ {#eq-int}
 gives
 $$
 I(S)-I_0 = -S+S_0+\frac{\gamma N}{\beta}\log\left( \frac{S}{S_0}\right),
-$$
+$$ {#eq-I}
 which we can rewrite as
 $$
 I(S) = N-S + \frac{\gamma N}{\beta}\log \frac{S}{S_0},
@@ -273,22 +273,22 @@ The peak is where $dI/dS=0$, which according to @eq-dids happens at $S=\gamma N/
 $$
 I_{max}=I\left(\frac{\gamma}{\beta}N\right)
 =N-\frac{\gamma}{\beta}N\left(1-\log\frac{\gamma N}{\beta S_0}\right)
-$$
+$$ {#eq-Imax}
 We can express this in terms of the basic reproduction ratio $R_0$ as
 $$
 I_{max}= N-\frac{S_0}{R_0}(1+\log R_0)
-$$
+$$ {#eq-ImaxR0}
 
 ### Trajectory in R-S plane
 
 Next we will determine the relationship between the number of susceptibles and the number of recovereds, by using
 $$
 \frac{dS}{dR}=\frac{dS/dt}{dR/dt}= -\frac{\beta}{\gamma}\frac{S}{N}.
-$$
+$$ {#eq-dsdr}
 This is solved by
 $$
 S(R) = S_0 \exp\left(-\frac{\beta}{\gamma}\frac{R}{N}\right)
-$$
+$$ {#eq-SR}
 This is depicted in @fig-rs. We see in particular that the number of susceptibles decreases exponentially with the number of recovereds but never reaches zero. This means that at the time where the last infected individual recovers and the epidemic ends, there are still individuals that never caught the disease.
 
 ```{python}
@@ -334,19 +334,19 @@ S_\infty&=S(R_\infty)=S_0\exp\left(-\frac{\beta}{\gamma N}R_\infty\right)\\
 &=S_0\exp\left(-\frac{\beta}{\gamma N}(N-S_\infty)\right)\\
 &=S_0\exp\left(-\frac{\beta}{\gamma}\right)\exp\left(\frac{\beta}{\gamma N}S_\infty\right).
 \end{split}
-$$
+$$ {#eq-Sinf}
 This equation can be solved numerically. We can also get an approximate analytic solution in the case where the epidemic is large so that the fraction of the population that never gets infected is small compared to $\gamma/\beta$, $S_\infty/N<<\gamma/\beta$. In this case we can expand the last exponential in the equation above to first order in $S_\infty/N$ to get the approximate equation
 $$
 S_\infty\approx S_0\exp\left(-\frac{\beta}{\gamma}\right)\left(1+\frac{\beta}{\gamma N}S_\infty\right) 
-$$
+$$ {#eq-Sinfapp}
 This we can now easily solve for $S_\infty$ to get
 $$
 S_\infty\approx \frac{S_0e^{-\beta/\gamma}}{1-\frac{\beta}{\gamma}\frac{S_0}{N}e^{-\beta/\gamma}}.
-$$
+$$ {#eq-Sinfapp2}
 We can express this in terms of the basic reproduction ratio $R_0$ as
 $$
 \frac{S_\infty}{S_0}\approx \frac{1}{e^{\beta/\gamma}-R_0}.
-$$
+$$ {#eq-Sinfapp3}
 
 
 ### Initial exponential growth {#sec-doubling}
@@ -354,7 +354,7 @@ $$
 At the start of the epidemic when the number of infecteds is small and hence the number of susceptibles is close to $N$, we can approximate 
 $$
 \frac{dI}{dt}=\beta I\frac{S}{N}-\gamma I\approx (\beta -\gamma)I
-$$
+$$ {#eq-dIdt}
 and hence
 $$
 I(t)\approx I_0e^{(\beta -\gamma)t}.
@@ -367,7 +367,7 @@ $$
 \frac{dR}{dt}&=\gamma I=\gamma \left(N-R-S\right)\\
 &=\gamma \left(N-R-S_0\exp\left(-\frac{\beta}{\gamma}\frac{R}{N}\right)\right)
 \end{split}
-$$
+$$ {#eq-dRdt}
 
 At the initial stages of the epidemic while the number of recovereds is small we can expand the exponential and keep only the first-order term to get
 $$
@@ -376,7 +376,7 @@ $$
 \approx \gamma \left(N-R-S_0\left(1-\frac{\beta}{\gamma}\frac{R}{N}\right)\right)\\
 &=\gamma I_0 - \gamma (1 + R_0)R 
 \end{split}
-$$
+$$ {#eq-dRdt2}
 where we used that $N-S_0=I_0$. Again we must not be confused by the notation: $R_0$ is the basic reproduction number, not the number of recovered at time $0$. We have a linear differential equation for $R(t)$ that can be solved to give
 $$
 R(t) = \frac{I_0}{1+R_0} \left(1-e^{-(1+R_0)\gamma t}\right).
@@ -454,17 +454,18 @@ The doubling time of an epidemic is the time it takes for the number of infected
 From our initial exponential approximation for $I(t)$ in @eq-Ii, we see that the number of infecteds doubles in a time $t_d$ when
 $$
 2I_0 = I_0 e^{(\beta -\gamma)t_d},
-$$
+$$ {#eq-doubling}
 which gives the doubling time
 $$
 t_d = \frac{\log 2}{\beta-\gamma}.
-$$
+$$ {#eq-doublingtime}
 
-## Effect of vaccination
+## Effect of vaccination {#sec-vaccinations}
 
-Vaccination is a way to move individuals directly from the S component to the R component. This is illustrated in @fig-vaccination.
+Vaccination is a way to move individuals directly from the S component to the R component. This is illustrated in @fig-vaccination .
 
 ![Graphical representation of the SIR model with vaccination.](figures/Epidemics/vaccination.png){#fig-vaccination}
+
 The extra flow from S to R adds a negative term to the equation for $dS/dt$ and a positive term to the equation for $dR/dt$. The equations become
 $$\begin{split}
 \frac{dS}{dt} &= -\beta IS/N - \nu S,\\
@@ -486,13 +487,13 @@ We now have
 $$
 \frac{dI}{dS}=\frac{\beta IS-\gamma IN}{-\beta IS-\nu S}
 =\frac{\beta-\gamma N/S}{-\beta-\nu N/I}.
-$$
+$$ {#eq-didsV}
 This is easily solved by separation of variables:
 $$
 \begin{split}
 \int_{I_0}^{I(S)}\left(-\beta-\frac{\nu N}{\tilde{I}}\right) d\tilde{I}&=\int_{S_0}^S\left(\beta-\frac{\gamma N}{\tilde{S}}\right)d\tilde{S}.
 \end{split}
-$$
+$$ {#eq-intV}
 These integrals are easy to perform, and we get
 $$
 I(S)+ \frac{\nu N}{\beta}\log \frac{I(S)}{I_0} = N - S + \frac{\gamma N}{\beta}\log \frac{S}{S_0} .
@@ -501,19 +502,155 @@ $$ {#eq-ISV}
 As before, the peak of the epidemic is where $dI/dS=0$, which still happens at $S=\gamma N/\beta$, as in the case without vaccination, because vaccination did not affect the equation for $dI/dt$. Thus we again get the number of infecteds at the peak of the epidemic as $I(\gamma N/\beta)$. Thus
 $$
 I_{max}+ \frac{\nu N}{\beta}\log \frac{I_{max}}{I_0} = N - \frac{\gamma N}{\beta}\left(1-\log \frac{\gamma N}{\beta S_0}\right)=I_{max}(\nu=0),
-$$
+$$ {#eq-ImaxV}
 where we have recognised the right-hand side as the expression for the peak of the epdidemic in the absence of vaccinations.
 We can see that the number of infecteds at the peak of the epidemic is reduced by the vaccination rate $\nu$.
 
 
+## Effect of loss of immunity {#sec-loi}
 
-## Effect of loss of immunity
+Unfortunately, immunity to many infectious diseases is not permanent, and individuals who have recovered from the disease can lose their immunity over time. This means that individuals who have recovered from the disease can become susceptible to the disease again and can be re-infected. This is illustrated in @fig-loi where we have added a flow from the R compartment back to the S compartment with a per-capita rate of $\mu$. 
 
 ![Graphical representation of the SIR model with loss of immunity.](figures/Epidemics/loss_of_immunity.png){#fig-loi}
 
+The equations for the SIR model with loss of immunity are
+$$\begin{split}
+\frac{dS}{dt} &= -\beta IS/N + \mu R,\\
+\frac{dI}{dt} &= \beta IS/N -\gamma I,\\
+\frac{dR}{dt} &= \gamma I - \mu R.
+\end{split}
+$$ {#eq-SIRL}
+
+We will now look at the steady states of the SIR model with loss of immunity. There is of course the disease-free state where the number of infecteds is $I^*=0$ and everyone has lost their immunity, so $R^*=0$ and $S^*=N$. But now there is also a new steady state where the number of infecteds is non-zero and the number of recovereds is non-zero. We can find this steady state by setting the time derivatives in @eq-SIRL to zero. From $dR/dt=0$ we get
+$$
+R^* = \frac{\gamma}{\mu}I^*.
+$$ {#eq-Rstar}
+From $dI/dt=0$ we get
+$$
+S^* = \frac{\gamma}{\beta}N.
+$$ {#eq-Sstar}
+From $N=S^*+I^*+R^*$ we get
+$$
+I^* = N\frac{1-\frac{\gamma}{\beta}}{1+\frac{\gamma}{\mu}}.
+$$ {#eq-Istar}
+This is the endemic steady state of the SIR model with loss of immunity. We see that the number of infecteds at the endemic steady state is reduced by the loss of immunity rate $\mu$.
+
+We now want to determine whether this endemic state is stable or not. We will do this by linearising the equations @eq-SIRL around the endemic steady state. We will then determine the eigenvalues of the Jacobian matrix at the endemic steady state. If all eigenvalues have negative real parts, the endemic steady state is stable. If at least one eigenvalue has a positive real part, the endemic steady state is unstable.
+
+We choose to view the SIR model with loss of immunity as a two-dimensional model for the variables $I$ and $R$. We can then write the equations @eq-SIRL as
+$$\begin{split}
+\frac{dI}{dt}&=\beta \frac{I(N-I-R)}{N}-\gamma I,\\
+\frac{dR}{dt}&=\gamma I-\mu R.
+\end{split}
+$$ {#eq-SIRL2}
+We now write $I(t)=I^*+i(t)$ and $R(t)=R^*+r(t)$ where $i(t)$ and $r(t)$ are small perturbations around the endemic steady state. We then linearise the equations @eq-SIRL2 around the endemic steady state by keeping only terms linear in $i(t)$ and $r(t)$. We get
+$$\begin{split}
+\frac{di(t)}{dt}&=\frac{\beta}{N} \left(N-2I^*-R^*\right)i(t)-\gamma\, i(t)
+-\frac{\beta I^*}{N}r(t),\\
+\frac{dr(t)}{dt}&=\gamma\, i(t)-\mu\, r(t).
+\end{split}
+$$ {#eq-SIRL3}
+We solve this by making the Ansatz $i(t)=v_1e^{\lambda t}$ and $r(t)=v_2e^{\lambda t}$. Substituting this into @eq-SIRL3 and dividing by $e^{\lambda t}$ gives
+$$
+\begin{split}
+\lambda v_1&=\frac{\beta}{N} \left(N-2I^*-R^*\right)v_1-\gamma v_1
+-\frac{\beta I^*}{N}v_2,\\
+\lambda v_2&=\gamma v_1-\mu v_2.
+\end{split}
+$$ {#eq-SIRL4}
+We can write this as a matrix equation
+$$
+\lambda\begin{pmatrix}v_1\\v_2\end{pmatrix} = A\begin{pmatrix}v_1\\v_2\end{pmatrix},
+$$ {#eq-SIRL4}
+where
+$$
+A=\begin{pmatrix}
+\frac{\beta}{N} \left(N-2I^*-R^*\right)-\gamma & -\frac{\beta I^*}{N}\\
+\gamma & -\mu
+\end{pmatrix}.
+$$ {#eq-A}
+
+When we evaluate this Jacobian matrix $A$ at the disease-free state we get
+$$
+A(0,0)=\begin{pmatrix}
+\beta-\gamma & 0\\
+\gamma & -\mu
+\end{pmatrix}.
+$$ {#eq-A0}
+The eigenvalues of this matrix are $\lambda_1=\beta-\gamma$ and $\lambda_2=-\mu$. If $\beta>\gamma$ then one of the eigenvalues is positive and one negative, meaning that the disease-free steady state is unstable. If $\beta<\gamma$ then both eigenvalues are negative, meaning that the disease-free steady state is stable.
+
+When we evaluate the Jacobian matrix $A$ at the endemic steady state we can use the relation $\beta(N-I^*-R^*)/N-\gamma=0$ to get
+$$
+A(I^*,R^*)=\begin{pmatrix}
+-\frac{\beta I^*}{N} & -\frac{\beta I^*}{N}\\
+\gamma & -\mu
+\end{pmatrix}.
+$$ {#eq-Astar}
+This time we can not easily read off the eigenvalues, so we calculate the trace and the determinant:
+$$
+\begin{split}
+\text{Tr}(A)&=-\frac{\beta I^*}{N}-\mu,\\
+\text{Det}(A)&=\frac{\beta I^*}{N}(\mu+\gamma).
+\end{split}
+$$ {#eq-ADstar}
+We see that the trace is negative and the determinant is positive, meaning that both eigenvalues have negative real parts and the endemic steady state is stable.
+
+
+
 ## Exercises
 
+#### * SIR with vaccination and loss of immunity {#sec-sir1}
 ::: {#exr-sir1}
+<!--- From sheet 4 --->
+In the lectures we studied the SIR model with vaccination rate $\nu$ and the SIR
+model with loss of immunity at a rate $\mu$. Now consider the SIR model with both vaccination
+and loss of immunity. For simplicity assume that the minimum immunity time is $T=0$.
+
+1. Write down the differential equations for the numbers of susceptibles $S$,
+infecteds $I$ and recovereds $R$.
+
+2. Find the disease-free steady state.
+
+3. Find the endemic steady state and give the condition on the parameters 
+needed for its existence.
+
+4. Now view this model as a two-dimensional model for the variables $I$ and $R$.
+Determine the Jacobian matrix $A$ for this model.
+
+5. Evaluate $A$ at the disease-free steady state and use this to classify
+this fixed point.
+
+6. Evaluate $A$ at the endemic steady state and use this to classify
+this fixed point.
+
+You will want to compare your results to the results from the lecture and make sure that they make sense.
+
+:::
+
+----------------------------------------------------
+
+#### SIR with recrudescence  {#sec-sir2}
+::: {#exr-sir2}
+Imagine a disease that, even after an individual has recovered from it, stays in the body in a dormant state and can be reactivated. Model this as a modification of the SIR model where recovereds can become infected again at a per-capita rate $\delta$. 
+
+1. Determine the number of infecteds in the endemic state. 
+
+2. Is the endemic state stable for all positive values of the parameters?
+
+:::
+
+----------------------------------------------------
+
+#### SIR model with reinfections {#sec-sir3}
+::: {#exr-sir3}
+In @sec-loi we studied the SIR model where recovered individuals lose their immunity at a per-capita rate $\mu$ so that they can then become infected again at a per-capita rate $\beta I/N$. The question was raised whether the same effect could be achieved by direct reinfections, i.e., a flow from the $R$ component directly into the $I$ component at a per-capita rate $\mu\beta I/N$. Settle this question by determining the number of infecteds in the steady state for the SIR model with direct reinfections and compare it to the corresponding result from @eq-Istar.
+
+:::
+
+----------------------------------------------------
+
+#### Sex-structured SIR model {#sec-sir4}
+::: {#exr-sir4}
 <!--- From sheet 4 --->
 In a mathematical model for a certain venereal disease the
 male population is divided into susceptibles $S$, infectives $I$ and
@@ -525,7 +662,7 @@ $$\begin{split}
 \frac{dR}{dt}=aI,\\
 \frac{dS'}{dt}&=-r'S'I,\hspace{.2in}\frac{dI'}{dt}=r'S'I-a'I',\hspace{.2in}
 \frac{dR'}{dt}=a'I'
-\end{split}$$
+\end{split}$$ {#eq-exSIR}
 where $r$, $r'$ and $a$, $a'$ are positive constants. The equations are
 with initial conditions $S(0)=S_0$, $I(0)=I_0$, $S'(0)=S'_0$,
 $I'(0)=I'_0$, $R(0)=R'(0)=0$.
@@ -545,5 +682,8 @@ $$
 S(\infty)&=S_0\exp\left(-\frac{r}{a'}(N'-S'(\infty))\right),\\
 S'(\infty)&=S'_0\exp\left(-\frac{r'}{a}(N-S(\infty))\right).
 \end{split}
-$$
+$$ {#eq-exSinf}
 :::
+
+
+

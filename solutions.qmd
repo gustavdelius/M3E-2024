@@ -11,8 +11,8 @@ This appendix holds the solutions to selected exercises in the book. Please look
 See solution sheet published on Moodle.
 --->
 
-### @exr-vonBertalanffy-growth {.unnumbered}
-*Von Bertalanffy growth*
+### Von Bertalanffy growth {.unnumbered}
+@exr-vonBertalanffy-growth:
 
 i) Seeking a steady state we find $\alpha w^{2/3}-\beta w = 0$  $\implies$  $w^{2/3}(\alpha-\beta w^{1/3})=0$ $\implies$ $w=0$ or $w^{1/3} = \alpha/\beta$.
 With the graphical approach in @fig-vonBertalanffy-growth we see that the non-zero steady state is stable. Hence, 
@@ -42,9 +42,10 @@ $$
 w(t) = u(t)^3 = \frac{1}{\beta^3}\left( \alpha - \left( \alpha - \beta w_0^{1/3} \right) e^{-\beta t/3}  \right)^3.
 $$
 
-### @exr-logistic_solution {.unnumbered}
-*Solving logistic equation*
+----------------------------------------------------
 
+### Solving logistic equation {.unnumbered}
+@exr-logistic_solution:
 We separate the variables by dividing both sides of the ODE by $N(1-N/K)$ and multiplying by $dt$, and then integrate to get
 $$
 \int_{N_0}^{N(t)}\frac{dN}{N\left(1-\frac{N}{K}\right)}=\int_0^t r\,dt.$$
@@ -66,9 +67,10 @@ $$N(t)=\frac{N_0Ke^{rt}}{K+N_0(e^{rt}-1)}.$$
 See solution sheet on Moodle.
 --->
 
-### @exr-harvest_quota {.unnumbered}
-*Harvesting with fixed quota*
+----------------------------------------------------
 
+### Harvesting with fixed quota {.unnumbered}
+**@exr-harvest_quota:
 If we harvest with a fixed quota $Q$, the population is described by the equation
 $$
 \frac{dN}{dt} = \alpha N \log\frac{K}{N} - Q.
@@ -88,9 +90,10 @@ $$MSY=Q_{max}=\alpha N_{max} \log\frac{K}{N_{max}}=\alpha\,K\,e^{-1}.$$
 Fishing at this quota is not wise, as this reduces the population to the threshold level below which the population will go extinct. 
 
 
-### @exr-Hornet {.unnumbered}
-*Wasps*
+----------------------------------------------------
 
+### Wasp model {.unnumbered}
+@exr-Hornet:
 For $0\leq t\leq t_c$ the number of workers satisfies
 $$
 \frac{dn}{dt}=r\,n.
@@ -120,9 +123,10 @@ t_c=T-\frac{1}{r}.
 $$
 
 
-### @exr-wasp_death {.unnumbered}
-*Wasp with death*
+----------------------------------------------------
 
+### Wasp model with death {.unnumbered}
+@exr-wasp_death:
 For $0\leq t\leq t_c$ the number of workers satisfies
 $$\frac{dn}{dt}=(r-d)n.$$
 Therefore
@@ -136,18 +140,23 @@ $$\frac{dN}{dt}=Rn(t)=Re^{r\,t_c}e^{-d\,t},$$
 so that
 $$N(T)=\int_{t_c}^TRe^{r\,t_c}e^{-d\,t}dt = \frac{R}{d}e^{r\,t_c}\left(e^{-d\,t_c}-e^{-d\,T}\right).$$
 To find the value of $t_c$ that maximises $N(T)$ we set the derivative of $N(T)$ with respect to $t_c$ to zero:
-$$0=\frac{d}{dt_c}N(T)=\frac{d}{dt_c}\left( \frac{R}{d}e^{r\,t_c}\left(e^{-d\,t_c}-e^{-d\,T}\right)\right)
-=Re^{r\,t_c}\left(\left(\frac{r}{d}-1\right)e^{-d\,t_c}-\frac{r}{d}e^{-d\,T}\right)$$
+$$
+\begin{split}
+0&=\frac{d}{dt_c}N(T)=\frac{d}{dt_c}\left( \frac{R}{d}e^{r\,t_c}\left(e^{-d\,t_c}-e^{-d\,T}\right)\right)\\
+&=Re^{r\,t_c}\left(\left(\frac{r}{d}-1\right)e^{-d\,t_c}-\frac{r}{d}e^{-d\,T}\right).
+\end{split}
+$$
 This is equivalent to 
 $$e^{-d\,t_c}=\frac{1}{1-d/r}e^{-d\,T}$$
 and thus
 $$t_c=T+\frac{1}{d}\ln\left(1-\frac{d}{r}\right).$$
 
+----------------------------------------------------
+
 ## Discrete-time population models
 
-### @exr-discrete_logistic {.unnumbered}
-*Verhulst model*
-
+### Verhulst model {.unnumbered}
+@exr-discrete_logistic:
 Let's write the equation as $N_{t+1}=f(N_t)$ with
 $$
 f(N)=rN\left(1-\frac{N}{K}\right).
@@ -157,13 +166,84 @@ Because $f(N)$ is positive for all $N<K$, the only way for $N_{t+1}$ to be negat
 is for $N_t$ to be greater than $K$. This in turn is only possible if $f(N_{t-1})>K$. So the function $f$ at its maximum needs to be larger than $K$. Because the function describes an upside-down parabola with
 zeros at $0$ and $K$, its maximum is in the middle at $N=K/2$, where $f(K/2)=rK/4$. Thus the population can get negative iff $rK/4>K$, which is equivalent to $r>4$.
 
+----------------------------------------------------
 
+## Sex-structured population models
+
+### Dominance structure {.unnumbered}
+@exr-ss2:
+
+a) The ratio $F/Q$ in the negative term in the equation for the alpha females
+represents the fact that if the ratio between the subordinate individuals who gather
+the food and the alpha females who rely on that food is too small, then
+the alpha females don't get enough food and hence are less fit, leading to 
+either a decreased birth rate or an increased mortality rate.
+
+(b) We derive the ODE:
+$$\begin{split}
+\frac{d}{dt}\frac{F}{Q }&=\frac{F'Q -FQ'}{Q ^2}\\
+&=
+\frac{(b_F-\mu_F F/Q )F Q-F(b_Q F-\mu_Q  Q )}{Q ^2}\\
+&=(b_F+\mu_Q )\frac{F}{Q }\left(1-\frac{b_Q +\mu_F}{b_F+\mu_Q }\frac{F}{Q }\right).
+\end{split}$$
+Ideally you identify this as the logistic equation with initial growth rate $r$ and carrying capacity $K$ given by
+$$
+r=b_F+\mu_Q ,~~~K=\frac{b_F+\mu_Q }{b_Q +\mu_F}.
+$$ {#eq-rK}
+You can then look up the solution in the lecture notes:
+$$
+\frac{F}{Q }(t)=\frac{\frac{F_0}{Q_0}Ke^{rt}}{K+\frac{F_0}{Q_0}\left(e^{rt}-1\right)}.
+$$
+Otherwise you have to work a bit harder.
+
+(c) Because we have identified $F/Q (t)$ as the solution of a logistic equation
+it is easy to see that as $t\to\infty$, $F/Q \to K$ with $K$ as in @eq-rK.
+
+(d) We derive the ODE:
+$$\begin{split}
+\frac{d}{dt}\frac{F}{M}&=\frac{F'M-FM'}{M^2}\\
+&=
+\frac{(b_F-\mu_F F/Q )FM-F(b_MF-\mu_M M)}{M^2}\\
+&=\frac{F}{M}\left(b_F+\mu_M-\mu_F\frac{F}{Q }-b_M\frac{F}{M}\right).
+\end{split}$$
+We are only interested in the limit of $F/M$ as $t\to\infty$. Let us denote
+this limit by $R$. We already know that the limit of $F/Q$ as $t\to\infty$ is $K$.
+The limit of the previous equation gives
+$$
+0=\frac{d}{dt}R=R\left(b_F+\mu_M-\mu_FK-b_MR\right)
+$$
+and hence
+$$
+R=\frac{b_F+\mu_M-\mu_FK}{b_M}.
+$$
+Substituting the expression for $K$ and bringing everything on a common
+denominator gives
+$$
+R=\frac{(b_F+\mu_M)(b_Q +\mu_F)-\mu_F(b_F+\mu_Q )}{b_M(b_Q +\mu_F)}
+$$
+To see that this is always positive we multiply out the numerator:
+$$
+R=\frac{b_Fb_Q +\mu_Mb_Q +\mu_M\mu_F-\mu_F\mu_Q }{b_M(b_Q +\mu_F)}
+$$
+This is positive because $b_Fb_Q >\mu_F\mu_Q$
+
+(e) The birth rates are linear in the number of alpha females and independent
+of $M$ and $Q$. Independence of $M$ is realistic only if $M$ is large.
+Using a weighted mean might be better, i.e., birth rates given by
+$b_i FM/(F/n+M)$, where $n$ is the number of females a male can 
+mate with per mating season. Or we could take into account that the alpha females
+will reproduce less if there are fewer subordinate individuals gathering food
+for them, for example by choosing birth rates to be given by
+$b_i F Q/(F/n+Q )$, where $n$ is the number of pregnant females that a
+subordinate monkey can keep well fed. There are many other possible improvements.
+
+
+----------------------------------------------------
 
 ## Age-structured population models
 
-### @exr-age_harvesting {.unnumbered}
-*Harvestings an age-structured population*
-
+### Harvestings an age-structured population {.unnumbered}
+@exr-age_harvesting:
 We can start from @eq-a14 that gives the expected number of offspring produced by an individual within their lifetime:
 $$
 \phi(0) = \int_0^\infty b(a) \exp\left(-\int_0^a \mu(a') \, da'\right)\, da.
@@ -189,3 +269,292 @@ This expected number of offspring produced by an individual within their lifetim
 $$
 \mu_F \leq b\exp\left(-\mu_0a_m\right) - \mu_0.
 $$
+
+----------------------------------------------------
+
+
+### Seasonal mortality {.unnumbered}
+@exr-seasonal_mortality:
+
+(a) Substituting $n(t,a)=p(t)r(a)$ into \eqref{a1} and dividing by $n(t,a)$ gives
+$$
+\frac{p'(t)}{p(t)}+\frac{r'(a)}{r(a)}=-\mu(a)-f(t).
+$$
+Separating variables gives
+$$
+\frac{p'(t)}{p(t)}+f(t)=-\frac{r'(a)}{r(a)}-\mu(a).
+$$
+As the left-hand side is independent of $a$ and the right-hand side
+is independent of $t$, both sides must be equal to some constant $\gamma$.
+This gives us the two ODEs
+$$
+\frac{d}{dt}\log(p(t))=\gamma-f(t),~~~\frac{d}{da}\log(r(a))=-\gamma-\mu(t).
+$$
+These have the solutions
+$$
+p(t)=p(0)\exp\left(\int_0^t\gamma-f(s)\,ds\right),~~~
+r(a)=r(0)\exp\left(-\int_0^a\gamma+\mu(s)\,ds\right)
+$$
+Thus the solution for $n$ is
+$$
+n(t,a)=n(0,0)\exp\left(\int_0^t\gamma-f(s)\,ds\right)
+\exp\left(-\int_0^a\gamma+\mu(s)\,ds\right).
+$$
+
+(b) Substituting the solution into \eqref{a2} gives
+$$
+p(t)r(0)=\int_0^\infty b(a)p(t)r(a)\,da.
+$$
+After dividing by $p(t)r(0)$ and using our expression for $r(a)$
+from the previous part,
+$$
+1=\int_0^\infty b(a) \exp\left(-\int_0^a\gamma+\mu(s)ds\right)da
+=\phi(\gamma).
+$$
+The factor $\exp(-\gamma a)$ in the integrand decreases monotonically with increasing
+$\gamma$ and therefore so does the integral. Hence the function
+$\phi(\gamma)$ is a monotonically decreasing function.
+
+(c) The end of a season occurs at any $t\in\mathbb(Z)$. At those integer times we can
+write the integral in the expression for $p(t)$ as
+$$
+\int_0^t\gamma-f(s)\,ds=\sum_{i=1}^t\int_{i-1}^{i}\gamma-f(s)\,ds
+=\sum_{i=1}^t(\gamma - F)=t(\gamma - F).
+$$
+Hence for the population at the end of the season $t$ we have
+$$
+n(t,a)=n(0,0)\exp(t(\gamma - F))r(a).
+$$ 
+This will go to zero in the limit $t\to\infty$ if $\gamma - F<0$.
+Thus the criterion for extinction is $\gamma < F$.
+
+(d) Because $\phi(\gamma)$ decreases with $\gamma$,
+$$
+\gamma < F \Leftrightarrow \phi(\gamma) > \phi(F).
+$$
+Because $\phi(\gamma)=1$, this is equivalent to the condition
+$1>\phi(F)$. Thus the condition for extinction is
+$$
+\int_0^\infty b(a) \exp\left(-\int_0^a F+\mu(s)\,ds\right)da
+<1.
+$$
+
+----------------------------------------------------
+
+## Interacting populations
+
+## Epidemics
+
+#### SIR with recrudescence {.unnumbered}
+@exr-sir2:
+The modified equations are
+$$
+\begin{split}
+\frac{dS}{dt} &= -\beta S I/N,\\
+\frac{dI}{dt} &= \beta S I/N - \gamma I + \delta R,\\
+\frac{dR}{dt} &= \gamma I - \delta R.
+\end{split}
+$$
+
+1. At the steady state all these derivatives have to vanish. From the first equation we find
+$S^*=0$ or $I^*=0$. We are not interested in $I^*=0$ because we are interested in the endemic state which by definition has $I^*>0$, so we have $S^*=0$. The third equation gives $R^*=\gamma/\delta I^*$. Then $I^*$ is found from the fact that $N=S^*+I^*+R^*$ which gives $I^*=N-\gamma/\delta I^*$. Soving for $I^*$ gives
+$$
+I^*=\frac{N\delta}{\delta+\gamma}.
+$$
+
+2. For the stability analysis we reduce the problem to a two-dimensional system by eliminating $S$ from the last two equations. This gives
+$$
+\begin{split}
+\frac{dI}{dt} &= \frac{\beta I}{N} \left(N-I-R\right) - \gamma I + \delta R,\\
+\frac{dR}{dt} &= \gamma I - \delta R.
+\end{split}
+$$
+The Jacobian matrix is
+$$
+A = \begin{pmatrix}
+\frac{\beta}{N} \left(N-2I-R\right) -\gamma & \delta\\
+\gamma & -\delta
+\end{pmatrix}.
+$$
+Evaluated at the endemic state this gives
+$$
+A = \begin{pmatrix}
+-\frac{\beta}{N}I^* -\gamma & \delta\\
+\gamma & -\delta
+\end{pmatrix}.
+$$
+This has determinant and trace given by
+$$
+\begin{split}
+\det(A) &= \frac{\delta\beta}{N}I^*>0,\\
+\text{tr}(A) &= -\frac{\beta}{N}I^* -\gamma -\delta <0.
+\end{split}
+$$
+so the endemic state is stable for all positive values of the parameters.
+
+----------------------------------------------------
+
+#### SIR model with reinfections {.unnumbered}
+@exr-sir3:
+The modified equations are
+$$
+\begin{split}
+\frac{dS}{dt} &= -\beta S I/N,\\
+\frac{dI}{dt} &= \beta S I/N - \gamma I +\beta\mu R I/N,\\
+\frac{dR}{dt} &= \gamma I-\beta\mu R I/N.
+\end{split}
+$$
+At the steady state all these derivatives have to vanish. From the first equation we find
+$S^*=0$ or $I^*=0$. We are not interested in $I^*=0$ because we are interested in the endemic state which by definition has $I^*>0$, so we have $S^*=0$. The third equation gives
+$R^*=\gamma N/(\beta\mu)$. Then $I^*$ is found from the fact that $N=S^*+I^*+R^*$ which gives
+$$
+I^*=N-R^*=N\left(1-\frac{\gamma}{\beta\mu}\right).
+$$
+This is not the same as the number of infecteds in the endemic state of the model with loss of immunity given in @eq-Istar.
+
+----------------------------------------------------
+
+## Spatially-structured population models
+
+### Turing instabilities 1 {.unnumbered}
+@exr-spatial4:
+Here, $f(u,v)=a-u + u^2v$ and $g(u,v)=b-u^2v$.
+
+**Step 1.  Uniform steady state**
+
+$a-u^* + {u^*}^2 v^*=0$ and $b-{u^*}^2 v^*=0$
+$\implies (u^*,~v^*)=(a+b,~b/(a+b)^2)$.
+
+**Step 2.  Linearize**
+
+Set $u=u^*+\xi$ and $v=v^*+\eta$ with $\xi$ and $\eta$ small. Substitute and Taylor expand to get
+$$
+\begin{pmatrix}
+\frac{\partial \xi}{\partial t} \\ \frac{\partial \eta}{\partial t}
+\end{pmatrix}
+=
+\begin{pmatrix}
+a_{11} & a_{12} \\a_{21} & a_{22}
+\end{pmatrix}
+\begin{pmatrix}
+\xi \\ \eta
+\end{pmatrix}
++ 
+\begin{pmatrix}
+D_1 \frac{\partial^2 \xi}{\partial x^2} \\ D_2\frac{\partial^2 \eta}{\partial x^2}
+\end{pmatrix},
+$$
+where
+$$
+\begin{split}
+a_{11} &= \frac{\partial f}{\partial u}(u^*,v^*) = -1+2u^*v^* = -1+2(a+b)b/(a+b)^2 =(b-a)/(a+b)\\
+a_{12} &= \frac{\partial f}{\partial v}(u^*,v^*) = {u^*}^2 =(a+b)^2\\
+a_{21} &= \frac{\partial g}{\partial u}(u^*,v^*) = -2 u^* v^* =-2b/(a+b)\\
+a_{22} &= \frac{\partial g}{\partial v}(u^*,v^*) = -{u^*}^2 =-(a+b)^2
+\end{split}
+$$
+
+**Step 3.  Solutions**
+
+Make the Ansatz $\xi = A_1 e^{\sigma t} \sin( kx+\alpha)$ and $\eta = A_2 e^{\sigma t} \sin( kx+\alpha)$.
+Substitute to get
+$$
+\begin{pmatrix}
+\sigma - \frac{b-a}{a+b} +D_1k^2 & -(a+b)^2 \\  
+\frac{2b}{a+b} & \sigma + (a+b)^2 +D_2k^2
+\end{pmatrix}
+\begin{pmatrix}
+A_1 \\ A_2
+\end{pmatrix}= 
+{\mathbf 0}
+$$
+For a non-trivial solution we require the determinant of this matrix to be zero (otherwise we would be able to find an inverse, etc.).  Hence,
+$$
+\sigma^2 + \left[ (a+b)^2 - \frac{b-a}{a+b} + (D_1+D_2)k^2  \right] \sigma + h(k^2) = 0,
+$$
+where
+$$
+h(k^2)= D_1D_2k^4 - \left[ D_2\frac{b-a}{a+b} - D_1(a+b)^2  \right] k^2 +(a+b)^2.
+$$
+
+**Step 4.  In the absence of diffusion** (Put $D_1=0=D_2$.)
+$$
+\sigma^2 + \left[ (a+b)^2 - \frac{b-a}{a+b} \right] \sigma + (a+b)^2 = 0.
+$$
+For $\sigma$ to have roots in the left half of the complex plane (giving us a stable steady state) we need $(a+b)^2-\frac{b-a}{a+b}>0 ~\implies ~ b-a<(a+b)^3$ and $(a+b)^2>0$ (which it is).
+
+**Step 5.  With diffusion** ($D_1\neq 0\neq D_2$.)
+
+We want steady state to be unstable in this case.
+The coefficient of $\sigma$ is 
+$$
+(a+b)^2 - \frac{b-a}{a+b} + (D_1+D_2)k^2 > (D_1+D_2)k^2>0 ~~~~\mbox{from Step 4}
+$$
+Therefore, we require $h(k^2)<0$ for some $k^2$ for there to be an instability.
+
+As $h(0)>0$ we must have two positive real roots of $h(k^2)=0$ for there to be an instability.
+
+Real distinct roots ($\implies ~~B^2-4AC>0$)
+$$
+\implies \left[ D_2\frac{b-a}{a+b} - D_1(a+b)^2  \right]^2> 4D_1D_2 (a+b)^2.
+$$
+Both positive ($\implies B<0$)
+$$
+\implies D_2\frac{b-a}{a+b} - D_1(a+b)^2 > 0.
+$$
+
+
+----------------------------------------------------
+
+### Slime mould with boundary {.unnumbered}
+@exr-spatial5
+$$ 
+\frac{\partial a}{\partial t} = \frac{\partial}{\partial x} \left( \mu \frac{\partial a}{\partial x} - \chi a \frac{\partial \rho}{\partial x}   \right), ~~~\mbox{and} ~~~ \frac{\partial \rho}{\partial t} = fa -k\rho + D\frac{\partial^2 \rho}{\partial x^2}.
+$$
+Steady states are $fa^*=k\rho^*$. 
+
+Consider a perturbation $a=a^*+\xi$ and $\rho = \rho^* +\eta$, where $\xi$ and $\eta$ are small.  Substitute and linearize to give
+$$
+\frac{\partial \xi}{\partial t} = \mu \frac{\partial^2 \xi}{\partial x^2} - \chi a^* \frac{\partial^2 \eta}{\partial x^2}, ~~~\mbox{and} ~~~ 
+\frac{\partial \eta}{\partial t} = f\xi -k\eta + D\frac{\partial^2 \eta}{\partial x^2}.
+$$
+Put $\xi = A_1 e^{\sigma t + iqx}$ and $\eta = A_2 e^{\sigma t + iqx}$.  Hence,
+$$
+\begin{pmatrix}
+\sigma +\mu q^2 & -\chi a^*q^2 \\  
+-f & \sigma + k+Dq^2
+\end{pmatrix}
+\begin{pmatrix}
+A_1 \\ A_2
+\end{pmatrix}= 
+{\mathbf 0}
+$$
+
+A non-trivial solution requires the determinant of the matrix to be zero
+$$
+\implies ~\sigma^2 +g(q^2)\sigma + h(q^2) = 0,
+$$
+where
+$g(q^2) = k+(D+\mu)q^2>0$ and 
+$h(q^2) = \mu Dq^4+(k\mu -\chi a^*f)q^2>0$.
+
+We need $(k\mu -\chi a^*f)<0$ for there to be a positive root of $h(q^2)=0$ and so instability.
+
+If $0\leq x \leq L$ we need boundary conditions.  Assume no flux at $x=0,~L$: $\frac{\partial a}{\partial x}=0=\frac{\partial \rho}{\partial x}$ at $x=0,~L$. 
+
+Try $\xi = A_1 e^{\sigma t}\cos qx$ and $\eta = A_2 e^{\sigma t}\cos qx$ to satisfy BCs at $x=0$. 
+
+At $x=L$ we have $\sin qL = 0$ for a non-trivial solution $~\implies q=q_n:= n\pi/L$, $n=0,1,2,...$
+
+Aggregation will not occur if $h(q_1^2)>0$, which implies 
+$$
+L<\pi\sqrt{\frac{D\mu}{\chi a^*f-k\mu}}.
+$$
+
+
+Aggregation will occur if 
+$$
+k\mu<\chi a^*f  ~~~\mbox{and}~~~ 
+L>\pi\sqrt{\frac{D\mu}{\chi a^*f-k\mu}}.
+$$
+

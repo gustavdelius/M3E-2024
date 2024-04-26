@@ -32,12 +32,12 @@ The Lotka-Volterra model, developed independently by Alfred Lotka in 1925 and Vi
 The model assumes that the prey population, in the absence of predators, grows exponentially with a per capita growth rate $a > 0$. However, the prey die due to being eaten by predators, and we assume that the per-capita mortality rate grows in proportion to the abundance of predators, with some proportionality constant $b \geq 0$. This leads to the equation
 $$
 \frac{dN}{dt} = N(a - bP).
-$$
+$$ {#eq-lv1}
 
 Conversely, the predators benefit from the abundance of prey and we encode that by giving them a per-capita growth $cN$, where $c \geq 0$. We assume that the per capita mortality rate is a constant $d$. This yields the following equation for the predator dynamics:
 $$
 \frac{dP}{dt} = P(cN - d).
-$$
+$$ {#eq-lv2}
 
 The two plots in @fig-lotka-volterra generated from the Lotka-Volterra model provide a visual representation of the dynamics between a predator and prey population over time. The phase plane plot illustrates the cyclic nature of the interaction between the prey (N) and predator (P) populations, depicting a closed trajectory that indicates the continuous oscillation of both populations in relation to each other: as the prey population increases, it provides more food for the predators, which then also increase in number. However, as the predator population grows, it puts more pressure on the prey, leading to a decline in the prey population, which eventually causes the predator population to decrease due to lack of food.
 
@@ -107,28 +107,28 @@ Non-dimensionalization is a crucial step to reduce the complexity of the model b
 
 $$
 \frac{du}{d\tau} = u(1 - v), \quad \frac{dv}{d\tau} = \alpha v(u - 1).
-$$
+$$ {#eq-lv3}
 
 **Phase plane paths**
 
 To determine the phase plane paths we consider $v$ as a function of $u$ which satisfies the equation 
 $$
 \frac{dv}{du} = \frac{\frac{dv}{d\tau}}{\frac{du}{d\tau}} = \frac{\alpha v(u - 1)}{u(1 - v)}.
-$$
+$$ {#eq-lv4}
 We rewrite this by separating the variable and integrate:
 $$
 \int\frac{1-v}{v}dv = \alpha \int\frac{u-1}{u}du.
-$$
+$$ {#eq-lv5}
 This gives
 $$
 \log v - v = \alpha (u - \log u) + \text{constant}.
-$$
+$$ {#eq-lv6}
 So even though $u$ and $v$ are changing with time, this particular combination stays constant. This is a conserved quantity. Let us suggestively call the constant of the motion $H$ for Hamiltonian and write it in terms of new variables $p = \log u$ and $q = \log v$:
 $$
 H(q,p)= v- \log v + \alpha (u - \log u) = e^q - q + \alpha(e^p - p).
-$$
+$$ {#eq-lv7}
 Hamilton's equations 
-$$\dot{q} = \frac{dH}{dp},~~~~\dot{p} = -\frac{dH}{dq}$$
+$$\dot{q} = \frac{dH}{dp},~~~~\dot{p} = -\frac{dH}{dq}$$ {#eq-lv8}
 then reproduce our equations of motion.
 
 This formulation underscores the conservative nature of the model, where the energy-like quantity $H$ is conserved, leading to neutrally stable periodic orbits. This Hamiltonian nature is a rather special feature of the Lotka-Volterra model. Any slight modification of the model will destroy the conserved quantity and the periodic orbits. Thus we should not expect to see such perfect periodic predator-prey cycles in nature. We will discuss more realistic predator-prey models later. 
@@ -139,7 +139,7 @@ Before we study more realistic models, we revisit the concept of linear stabilit
 
 $$
 \frac{dX}{dt} = f(X,Y), \quad \frac{dY}{dt} = g(X,Y).
-$$
+$$ {#eq-lsa1}
 
 Let us denote the fixed points (stable states) of the system as $(x^*, y^*)$. They satisfy $f(x^*, y^*) = 0$ and $g(x^*, y^*) = 0$. 
 
@@ -149,13 +149,11 @@ To analyze the stability of these fixed points, we introduce small perturbations
 
 $$
 \frac{d}{dt}\begin{pmatrix} x \\ y \end{pmatrix} = \mathbf{A}(x^*, y^*) \begin{pmatrix} x \\ y \end{pmatrix},
-$$
-
+$$ {#eq-lsa2}
 where the Jacobian matrix $\mathbf{A}$ is defined as:
-
 $$
 \mathbf{A} = \begin{pmatrix} f_X & f_Y \\ g_X & g_Y \end{pmatrix}_{(x^*, y^*)}.
-$$
+$$ {#eq-lsa3}
 
 **Eigenvalue Analysis for Stability**
 
@@ -163,13 +161,11 @@ The solution to the linearized system takes the form $(x, y) = \mathbf{v} e^{\la
 
 $$
 \det(\mathbf{A} - \lambda \mathbf{I}) = \begin{vmatrix} f_X - \lambda & f_Y \\ g_X & g_Y - \lambda \end{vmatrix}_{(x^*, y^*)} = 0,
-$$
-
+$$ {#eq-lsa4}
 which leads to the eigenvalues:
-
 $$
 \lambda = \frac{\text{Tr} \mathbf{A} \pm \sqrt{(\text{Tr} \mathbf{A})^2 - 4\det \mathbf{A}}}{2}.
-$$
+$$ {#eq-lsa5}
 
 The stability of the fixed point is determined by the sign of the real parts of the eigenvalues:
 
@@ -210,7 +206,7 @@ $$
 1 - v & -u \\
 \alpha v & \alpha (u - 1)
 \end{pmatrix}.
-$$
+$$ {#eq-lsa6}
 
 **Steady State at $(u, v) = (0, 0)$**
 
@@ -222,7 +218,7 @@ $$
 1 & 0 \\
 0 & -\alpha
 \end{pmatrix}.
-$$
+$$ {#eq-lsa7}
 
 The eigenvalues are $\lambda_1 = 1$ and $\lambda_2 = -\alpha$, indicating that this fixed point is a saddle point due to the eigenvalues having opposite signs. This configuration is inherently unstable as trajectories near the point will diverge away along the direction associated with the positive eigenvalue.
 
@@ -236,7 +232,7 @@ $$
 0 & -1 \\
 \alpha & 0
 \end{pmatrix}.
-$$
+$$ {#eq-lsa8}
 
 The characteristic equation for the eigenvalues $\lambda$ is $\lambda^2 + \alpha = 0$, leading to complex eigenvalues $\lambda = \pm i\sqrt{\alpha}$. The real part of these eigenvalues is zero, indicating that this fixed point is a center. Trajectories around this point are closed loops, implying that the system exhibits neutrally stable periodic behavior around the $(1, 1)$ steady state.
 
@@ -254,15 +250,14 @@ The generalized model introduces a function $F(N, P)$ representing the prey popu
 
 $$
 \frac{dN}{dt} = NF(N, P), \quad \frac{dP}{dt} = PG(N, P).
-$$
+$$ {#eq-gpp1}
 
 The prey might exhibit logistic growth in the absence of predators. To model this we could choose
-
 $$
 F(N, P) = r\left(1 - \frac{N}{K}\right) - R(N)P,
-$$
+$$ {#eq-gpp2}
 
-where $R(N)$ models how the predation rate of a predator change with the prey population size. $NR(N)$ is the rate at which each individual predator consumes prey. The dependence of this rate on the prey population size $N$ is often referred to as "functional response" in the ecological literature. Holling introduced three types of functional responses, which are widely used in predator-prey models:
+where $r$ is the intrinsic growth rate, $K$ is the carrying capacity, and $R(N)$ models how the predation rate of a predator changes with the prey population size. $NR(N)$ is the rate at which each individual predator consumes prey. The dependence of this rate on the prey population size $N$ is often referred to as "functional response" in the ecological literature. Holling introduced three types of functional responses, which are widely used in predator-prey models:
 
 #### Holling Type functional responses
 
@@ -275,11 +270,9 @@ where $R(N)$ models how the predation rate of a predator change with the prey po
 ### Example
 
 Consider a model where the prey growth rate follows logistic dynamics in the absence of prey and predation mortality is described by a Holling type II function encoding satiation effects. The predator's growth rate goes down as the prey population decreases. The model equations are:
-
 $$
 \frac{dN}{dt} = N\left[r\left(1 - \frac{N}{K}\right) - \frac{A}{N + B}P\right], \quad \frac{dP}{dt} = Ps\left(1 - \frac{hP}{N}\right),
-$$
-
+$$ {#eq-gpp3}
 where $r$, $K$, $A$, $B$, $s$, and $h$ are positive constants.
 
 **Nondimensionalization**
@@ -288,15 +281,19 @@ To reduce the complexity, we nondimensionalize the system with $\tau = tr$, $u =
 
 $$
 \frac{du}{d\tau} = u(1 - u) - a\frac{uv}{u + b}, \quad \frac{dv}{d\tau} = cv\left(1 - \frac{v}{u}\right).
-$$
+$$ {#eq-gpp4}
 
 **Stability Analysis of Steady States**
 
 The steady states $(u^*, v^*)$ include $(1, 0)$ and a coexistence steady state $(u^*_+, u^*_+)$, where 
-$$u^*_+ = \frac{1-a-b+\sqrt{(1-a-b)^2+4b}}{2}.$$
+$$
+u^*_+ = \frac{1-a-b+\sqrt{(1-a-b)^2+4b}}{2}.
+$$ {#eq-gpp5}
 The community matrix $\mathbf{A}(u, v)$ at these points helps determine their stability.
 For the fixed point  $(1, 0)$, where the prey population is at carrying capacity and there are no predators, we have find
-$$\mathbf{A}(1, 0) = \begin{pmatrix} -1 & -\frac{a}{1 + b} \\ 0 & c \end{pmatrix}.$$
+$$
+\mathbf{A}(1, 0) = \begin{pmatrix} -1 & -\frac{a}{1 + b} \\ 0 & c \end{pmatrix}.
+$$ {#eq-gpp6}
 The eigenvalues $-1$ and $c$ have opposite sign, indicating that the fixed point is a saddle point.
 
 At the coexistence fixed point $(u^*_+, u^*_+)$ the Jacobian is more complex and we will skip the analysis here.
@@ -315,7 +312,7 @@ $$
 \frac{dN_1}{dt} &= r_1N_1 \left(1 - \frac{N_1 + b_{12}N_2}{K_1}\right),\\
 \frac{dN_2}{dt} &= r_2N_2 \left(1 - \frac{N_2 + b_{21}N_1}{K_2}\right),
 \end{split}
-$$
+$$  {#eq-comp1}
 
 where $r_i$ is the intrinsic growth rate and $K_i$ is the carrying capacity of species $i$. The coefficients $b_{ij}$ represent the competitive effect of species $j$ on species $i$, effectively reducing the carrying capacity for species $i$ due to the presence of species $j$.
 
@@ -325,13 +322,11 @@ To simplify the analysis, we nondimensionalize the system using:
 
 $$
 u_i = \frac{N_i}{K_i}, \quad a_{ij} = \frac{b_{ij}K_j}{K_i}, \quad \tau = r_1 t, \quad \rho = \frac{r_2}{r_1},
-$$
-
+$$ {#eq-comp2}
 leading to:
-
 $$
 \frac{du_1}{d\tau} = u_1(1 - u_1 - a_{12}u_2), ~~~~~ \frac{du_2}{d\tau} = \rho u_2(1 - u_2 - a_{21}u_1).
-$$
+$$ {#eq-comp3}
 
 ### Analysis of Steady States
 
@@ -388,7 +383,7 @@ This model incorporates logistic growth, akin to the competition model, but with
 
 $$
 \frac{dN_1}{dt} = r_1N_1 \left[ 1 - \frac{N_1}{K_1} + b_{12}\frac{N_2}{K_1} \right], ~~~~~ \frac{dN_2}{dt} = r_2N_2 \left[ 1 - \frac{N_2}{K_2} + b_{21}\frac{N_1}{K_2} \right],
-$$
+$$ {#eq-mutualistic1}
 
 where $r_i$, $K_i$, and $b_{ij}$ are all positive constants, with $b_{ij}$ representing the mutualistic benefit to species $i$ from species $j$. Notice that we simply changed the sign of the competition terms in the competition model to turn them into mutualistic terms
 
@@ -398,7 +393,7 @@ Using nondimensional variables $u_i = N_i/K_i$, $a_{ij} = b_{ij}K_j/K_i$, $\tau 
 
 $$
 \frac{du_1}{d\tau} = u_1(1 - u_1 + a_{12}u_2), ~~~~~ \frac{du_2}{d\tau} = \rho u_2(1 - u_2 + a_{21}u_1).
-$$
+$$ {#eq-mutualistic2}
 This is as in the competition model but with the signs in front of $a_{12}$ and $a_{21}$ reversed.
 
 ### Steady States and Stability
@@ -460,11 +455,16 @@ Through this mutualism model, we gain insights into how species interactions can
 
 ## Exercises
 
+#### Two-species model 1
 ::: {#exr-interacting-populations}
 <!--- From sheet 3 --->
 Consider a model for the interaction of two species with populations $N_1$ and $N_2$
-$$ \frac{dN_1}{dt} = r_1 N_1 \left( 1 - \frac{N_1}{K_1} - b_{12}\frac{ N_2}{K_1} \right), $$
-$$  \frac{N_2}{dt} = r_2 N_2 \left( 1  - b_{21}\frac{ N_1}{K_2} \right), $$
+$$
+\frac{dN_1}{dt} = r_1 N_1 \left( 1 - \frac{N_1}{K_1} - b_{12}\frac{ N_2}{K_1} \right), 
+$$ {#eq-interacting-populations1}
+$$
+\frac{N_2}{dt} = r_2 N_2 \left( 1  - b_{21}\frac{ N_1}{K_2} \right),
+$$ {#eq-interacting-populations2}
 where all the parameters are positive.
 
 a)  What type of interaction exists between $N_1$ and $N_2$? 
@@ -485,6 +485,7 @@ holds irrespective of the size of the parameters.
 
 -------------------------------------------------------------
 
+#### Two-species model 2
 ::: {#exr-interacting-populations-2}
 <!--- From Surrey exam 1999 --->
 A model for the interaction between two species with populations $N_1$ and $N_2$ is determined to be
@@ -493,20 +494,20 @@ $$
 \frac{dN_1}{dt} &= rN_1\left(1 - \frac{N_1}{K}\right) - aN_1N_2\left(1 - \exp(-bN_1)\right),\\
 \frac{dN_2}{dt} &= -dN_2 + cN_2\left(1 - \exp(-bN_1)\right),
 \end{split}
-$$
+$$ {#eq-interacting-populations3}
 where $a, b, c, d, r$ and $K$ are positive constants. 
 
 a) Introducing the dimensionless variables and parameters
 $$
 u = \frac{N_1}{K}, \quad v = \frac{aN_2}{r}, \quad \tau = rt, \quad \beta = bK,
-$$
+$$ {#eq-interacting-populations4}
 show that
 $$
 \begin{split}
 \frac{du}{d\tau} &= u(1 - u) - uv\left(1 - e^{-\beta u}\right),\\
 \frac{dv}{d\tau} &= -\delta v + \alpha v\left(1 - e^{-\beta u}\right),
 \end{split}
-$$
+$$ {#eq-interacting-populations5}
 giving the positive constants $\alpha$ and $\delta$ in terms of $c, d$ and $r$. 
 
 b) Describe the relevance of each term and, hence, determine the type of interaction between the two populations.
@@ -519,7 +520,7 @@ A = \begin{pmatrix}
 1 - 2u - v(1 - e^{-\beta u}) - \beta uve^{-\beta u} & -u\left(1 - e^{-\beta u}\right) \\
 \alpha v\beta e^{-\beta u} & -\delta + \alpha(1 - e^{-\beta u})
 \end{pmatrix}.
-$$
+$$ {#eq-interacting-populations6}
 
 e) Assuming henceforth that $\delta/\alpha < 1$, determine the linear stability of each of the fixed points.
 
@@ -528,6 +529,7 @@ f) Sketch the $(u, v)$ phase portrait to indicate the stability of each steady s
 
 -------------------------------------------------------------
 
+#### Predator-prey model with Allee effect
 ::: {#exr-interacting-populations-3}
 <!--- From 2017 exam --->
 Consider the predator-prey model with Allee effect in the prey:
@@ -536,7 +538,7 @@ $$
 \frac{dN}{dT} &= rN\left(\frac{N}{K_0} - 1\right)\left(1 - \frac{N}{K}\right) - cNP,\\
 \frac{dP}{dT} &= bNP - mP,
 \end{split}
-$$
+$$ {#eq-interacting-populations7}
 where $N(T)$ is the number of prey and $P(T)$ is the number of predators at time $T$, and $r, K, c, b, m$ are positive constants with $0 < K_0 < K$. The populations $N(T), P(T)$ are non-negative quantities.
 
 (a) Provide brief biological interpretations for $r, K, K_0, c, b, m$ for the above predator-prey model. What is the biological role of $K_0$ in the modified prey growth rate?
@@ -546,7 +548,7 @@ where $N(T)$ is the number of prey and $P(T)$ is the number of predators at time
 $$\begin{split}
 \frac{dx}{dt} &= x\left(\frac{x}{y} - 1\right)(1 - x) - y = x[g(x) - y],\\
 \frac{dy}{dt} &= \beta(x - \alpha y).
-\end{split}$$
+\end{split}$$ {#eq-interacting-populations8}
 How are the new dimensionless constants $\alpha, \beta$ expressed in terms of the original parameters?
 
 (c) For the dimensionless system:

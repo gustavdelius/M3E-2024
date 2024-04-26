@@ -191,6 +191,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Epidemics</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spatial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Spatially-structured populations</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
@@ -234,8 +240,8 @@ window.Quarto = {
   <li><a href="#solving-logistic-equation" id="toc-solving-logistic-equation" class="nav-link" data-scroll-target="#solving-logistic-equation">Solving logistic equation</a></li>
   <li><a href="#harvesting-with-fixed-effort-1" id="toc-harvesting-with-fixed-effort-1" class="nav-link" data-scroll-target="#harvesting-with-fixed-effort-1">* Harvesting with fixed effort</a></li>
   <li><a href="#harvesting-with-fixed-quota" id="toc-harvesting-with-fixed-quota" class="nav-link" data-scroll-target="#harvesting-with-fixed-quota">Harvesting with fixed quota</a></li>
-  <li><a href="#wasps" id="toc-wasps" class="nav-link" data-scroll-target="#wasps">Wasps</a></li>
-  <li><a href="#wasps-with-death" id="toc-wasps-with-death" class="nav-link" data-scroll-target="#wasps-with-death">Wasps with death</a></li>
+  <li><a href="#wasp-model" id="toc-wasp-model" class="nav-link" data-scroll-target="#wasp-model">Wasp model</a></li>
+  <li><a href="#wasp-model-with-death" id="toc-wasp-model-with-death" class="nav-link" data-scroll-target="#wasp-model-with-death">Wasp model with death</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/gustavdelius/M3E-2024/edit/main/continuous_time.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
@@ -449,11 +455,13 @@ Figure&nbsp;1.7: Growth rate when harvesting with fixed quota.
 <section id="exercises" class="level2" data-number="1.6">
 <h2 data-number="1.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">1.6</span> Exercises</h2>
 <p>Exercises marked with a * are essential and are to be handed in. Exercises marked with a + are important and you are urged to complete them. Other exercises are optional but recommended.</p>
+<hr>
 <section id="sketching-solutions" class="level4">
 <h4 class="anchored" data-anchor-id="sketching-solutions">*Sketching solutions</h4>
 <div id="exr-sketch_solutions" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.1</strong></span> Consider the population model with carrying capacity and Allee effect given by the differential equation <span class="math display">\[\frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)\left(\frac{N}{K_0}-1\right).\]</span> Here <span class="math inline">\(r&gt;0\)</span>, <span class="math inline">\(K&gt;K_0&gt;0\)</span> are constants. Simply by considering the shape of the right hand side, sketch a graph with several solutions for different initial conditions. Choose two initial conditions between <span class="math inline">\(0\)</span> and <span class="math inline">\(K_0\)</span>, two initial conditions between <span class="math inline">\(K_0\)</span> and <span class="math inline">\(K\)</span> and one initial condition larger than <span class="math inline">\(K\)</span>. Note that the graph only needs to be qualitatively correct, similar to the rough sketch for the solutions of the logistic model sketched in the first lecture.</p>
 </div>
+<hr>
 </section>
 <section id="von-bertalanffy-growth" class="level4">
 <h4 class="anchored" data-anchor-id="von-bertalanffy-growth">+Von Bertalanffy growth</h4>
@@ -465,12 +473,14 @@ Figure&nbsp;1.7: Growth rate when harvesting with fixed quota.
 <li><p>Use the solution for <span class="math inline">\(u\)</span> to find the solution for <span class="math inline">\(w\)</span>.</p></li>
 </ol>
 </div>
+<hr>
 </section>
 <section id="solving-logistic-equation" class="level4">
 <h4 class="anchored" data-anchor-id="solving-logistic-equation">Solving logistic equation</h4>
 <div id="exr-logistic_solution" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.3</strong></span> By using separation of variables and partial fractions, solve the logistic equation <span class="math display">\[\frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)\]</span> with initial condition <span class="math inline">\(N(0)=N_0\)</span>.</p>
 </div>
+<hr>
 </section>
 <section id="harvesting-with-fixed-effort-1" class="level4">
 <h4 class="anchored" data-anchor-id="harvesting-with-fixed-effort-1">* Harvesting with fixed effort</h4>
@@ -479,23 +489,26 @@ Figure&nbsp;1.7: Growth rate when harvesting with fixed quota.
 \frac{dN}{dt} = \alpha N \log\frac{K}{N},
 \]</span> where <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(K\)</span> are positive constants. You want to harvest this population, for example by hunting or fishing, with some effort <span class="math inline">\(E\)</span>. The rate at which you harvest individuals (which removes them from the population and hence results in an additional source of death) is proportional to the size of the population: <span class="math inline">\(Y = E N\)</span>. This is called the yield. Write down the differential equation for <span class="math inline">\(N(t)\)</span> including this harvesting term. Determine the fixed points and their stability. Find the maximum sustainable yield, i.e., the maximum yield that can be sustained indefinitely.</p>
 </div>
+<hr>
 </section>
 <section id="harvesting-with-fixed-quota" class="level4">
 <h4 class="anchored" data-anchor-id="harvesting-with-fixed-quota">Harvesting with fixed quota</h4>
 <div id="exr-harvest_quota" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.5</strong></span> As in <a href="#exr-harvest_effort" class="quarto-xref">Exercise&nbsp;<span>1.4</span></a>, consider a population <span class="math inline">\(N(t)\)</span> that is described by the Gompertz model. Imagine that this describes a fish population in a lake where fishing is going to be introduced, and that you are tasked with setting the quota that limits the rate at which the fishers are allowed to take fish out of the lake. The fishers demand that you set the quota to the maximum sustainable level. What is the maximum sustainable quota according to the model? Would it be wise to give in to the demand of the fishers and set the quota at this level?</p>
 </div>
+<hr>
 </section>
-<section id="wasps" class="level4">
-<h4 class="anchored" data-anchor-id="wasps">Wasps</h4>
+<section id="wasp-model" class="level4">
+<h4 class="anchored" data-anchor-id="wasp-model">Wasp model</h4>
 <div id="exr-Hornet" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.6</strong></span> In a colony of the European Hornet there is a single queen that produces all the offspring. It produces two kinds of offspring: workers and reproducers. We’ll denote the number of workers alive at time <span class="math inline">\(t\)</span> by <span class="math inline">\(n(t)\)</span> and the number of reproducers by <span class="math inline">\(N(t)\)</span>. The workers are responsible for collecting food. They can’t breed themselves and they die in the winter. However they are necessary to allow the queen to reproduce because without the food that they are collecting the queen would have nothing to eat. So we need workers. But because they die in winter, they don’t help the survival of the colony in the long run. That’s where the reproducers come in. They don’t do any work, but they can, if they survive the winter, breed in the next spring as new queens.</p>
 <p>So the queen now has a strategy of how to proceed: It first of all needs to produce workers, and from time zero to time <span class="math inline">\(t_c\)</span> it only produces workers. We assume that the birth rate is proportional to the number of workers, so that the total birth rate of workers is <span class="math inline">\(r n(t)\)</span> for some constant <span class="math inline">\(r&gt;0\)</span>. The queen then switches to producing only reproducers from time <span class="math inline">\(t_c\)</span> up to the start of winter at time <span class="math inline">\(T\)</span> and we assume that the total birth rate of reproducers is <span class="math inline">\(R n(t)\)</span> for some constant <span class="math inline">\(R&gt;0\)</span>. We also assume that until the start of winter there are no deaths.</p>
 <p>What is the optimal time <span class="math inline">\(t_c\)</span> at which the queen should switch from producing workers to producing reproducers in order to achieve the largest number of producers <span class="math inline">\(N(T)\)</span> at the start of the winter and therefore to the largest number of wasps in the following year.</p>
 </div>
+<hr>
 </section>
-<section id="wasps-with-death" class="level4">
-<h4 class="anchored" data-anchor-id="wasps-with-death">Wasps with death</h4>
+<section id="wasp-model-with-death" class="level4">
+<h4 class="anchored" data-anchor-id="wasp-model-with-death">Wasp model with death</h4>
 <div id="exr-wasp_death" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.7</strong></span> In the wasp example from question 1, assume that the worker wasps die at a constant per-capita rate <span class="math inline">\(d\)</span> but the reproducers do not die. Also assume that at time t=0 there is one worker, n(0)=1. Keep the birth rates as in <a href="#exr-Hornet" class="quarto-xref">Exercise&nbsp;<span>1.6</span></a>. Determine the number of workers <span class="math inline">\(n(t)\)</span> for any time between <span class="math inline">\(t_c\)</span> and <span class="math inline">\(T\)</span>. Determine the number of reproducers at the onset of winter at time <span class="math inline">\(T\)</span>. Derive the optimal time for the switchover time <span class="math inline">\(t_c\)</span>.</p>
 </div>

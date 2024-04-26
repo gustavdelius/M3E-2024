@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./epidemics.html" rel="prev">
+<link href="./spatial.html" rel="prev">
 <link href="./virus.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -190,6 +190,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Epidemics</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spatial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Spatially-structured populations</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
@@ -219,19 +225,35 @@ window.Quarto = {
   <ul>
   <li><a href="#continuous-time-population-models" id="toc-continuous-time-population-models" class="nav-link active" data-scroll-target="#continuous-time-population-models"><span class="header-section-number">A.1</span> Continuous-time population models</a>
   <ul>
-  <li><a href="#exr-vonbertalanffy-growth" id="toc-exr-vonbertalanffy-growth" class="nav-link" data-scroll-target="#exr-vonbertalanffy-growth">Exercise&nbsp;<span>1.2</span></a></li>
-  <li><a href="continuous_time.html#exr-logistic_solution" id="toc-exr-logistic_solution" class="nav-link" data-scroll-target="#exr-logistic_solution">Exercise&nbsp;<span>1.3</span></a></li>
-  <li><a href="continuous_time.html#exr-harvest_quota" id="toc-exr-harvest_quota" class="nav-link" data-scroll-target="#exr-harvest_quota">Exercise&nbsp;<span>1.5</span></a></li>
-  <li><a href="#exr-hornet" id="toc-exr-hornet" class="nav-link" data-scroll-target="#exr-hornet">Exercise&nbsp;<span>1.6</span></a></li>
-  <li><a href="continuous_time.html#exr-wasp_death" id="toc-exr-wasp_death" class="nav-link" data-scroll-target="#exr-wasp_death">Exercise&nbsp;<span>1.7</span></a></li>
+  <li><a href="#von-bertalanffy-growth" id="toc-von-bertalanffy-growth" class="nav-link" data-scroll-target="#von-bertalanffy-growth">Von Bertalanffy growth</a></li>
+  <li><a href="#solving-logistic-equation" id="toc-solving-logistic-equation" class="nav-link" data-scroll-target="#solving-logistic-equation">Solving logistic equation</a></li>
+  <li><a href="#harvesting-with-fixed-quota" id="toc-harvesting-with-fixed-quota" class="nav-link" data-scroll-target="#harvesting-with-fixed-quota">Harvesting with fixed quota</a></li>
+  <li><a href="#wasp-model" id="toc-wasp-model" class="nav-link" data-scroll-target="#wasp-model">Wasp model</a></li>
+  <li><a href="#wasp-model-with-death" id="toc-wasp-model-with-death" class="nav-link" data-scroll-target="#wasp-model-with-death">Wasp model with death</a></li>
   </ul></li>
   <li><a href="#discrete-time-population-models" id="toc-discrete-time-population-models" class="nav-link" data-scroll-target="#discrete-time-population-models"><span class="header-section-number">A.2</span> Discrete-time population models</a>
   <ul>
-  <li><a href="discrete_time.html#exr-discrete_logistic" id="toc-exr-discrete_logistic" class="nav-link" data-scroll-target="#exr-discrete_logistic">Exercise&nbsp;<span>2.1</span></a></li>
+  <li><a href="#verhulst-model" id="toc-verhulst-model" class="nav-link" data-scroll-target="#verhulst-model">Verhulst model</a></li>
   </ul></li>
-  <li><a href="#age-structured-population-models" id="toc-age-structured-population-models" class="nav-link" data-scroll-target="#age-structured-population-models"><span class="header-section-number">A.3</span> Age-structured population models</a>
+  <li><a href="#sex-structured-population-models" id="toc-sex-structured-population-models" class="nav-link" data-scroll-target="#sex-structured-population-models"><span class="header-section-number">A.3</span> Sex-structured population models</a>
   <ul>
-  <li><a href="age_structured.html#exr-age_harvesting" id="toc-exr-age_harvesting" class="nav-link" data-scroll-target="#exr-age_harvesting">Exercise&nbsp;<span>4.2</span></a></li>
+  <li><a href="#dominance-structure" id="toc-dominance-structure" class="nav-link" data-scroll-target="#dominance-structure">Dominance structure</a></li>
+  </ul></li>
+  <li><a href="#age-structured-population-models" id="toc-age-structured-population-models" class="nav-link" data-scroll-target="#age-structured-population-models"><span class="header-section-number">A.4</span> Age-structured population models</a>
+  <ul>
+  <li><a href="#harvestings-an-age-structured-population" id="toc-harvestings-an-age-structured-population" class="nav-link" data-scroll-target="#harvestings-an-age-structured-population">Harvestings an age-structured population</a></li>
+  <li><a href="#seasonal-mortality" id="toc-seasonal-mortality" class="nav-link" data-scroll-target="#seasonal-mortality">Seasonal mortality</a></li>
+  </ul></li>
+  <li><a href="#interacting-populations" id="toc-interacting-populations" class="nav-link" data-scroll-target="#interacting-populations"><span class="header-section-number">A.5</span> Interacting populations</a></li>
+  <li><a href="#epidemics" id="toc-epidemics" class="nav-link" data-scroll-target="#epidemics"><span class="header-section-number">A.6</span> Epidemics</a>
+  <ul>
+  <li><a href="#sir-with-recrudescence" id="toc-sir-with-recrudescence" class="nav-link" data-scroll-target="#sir-with-recrudescence">SIR with recrudescence</a></li>
+  <li><a href="#sir-model-with-reinfections" id="toc-sir-model-with-reinfections" class="nav-link" data-scroll-target="#sir-model-with-reinfections">SIR model with reinfections</a></li>
+  </ul></li>
+  <li><a href="#spatially-structured-population-models" id="toc-spatially-structured-population-models" class="nav-link" data-scroll-target="#spatially-structured-population-models"><span class="header-section-number">A.7</span> Spatially-structured population models</a>
+  <ul>
+  <li><a href="#turing-instabilities-1" id="toc-turing-instabilities-1" class="nav-link" data-scroll-target="#turing-instabilities-1">Turing instabilities 1</a></li>
+  <li><a href="#slime-mould-with-boundary" id="toc-slime-mould-with-boundary" class="nav-link" data-scroll-target="#slime-mould-with-boundary">Slime mould with boundary</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/gustavdelius/M3E-2024/edit/main/solutions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
@@ -267,9 +289,9 @@ window.Quarto = {
 
 See solution sheet published on Moodle.
 --->
-<section id="exr-vonbertalanffy-growth" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="exr-vonbertalanffy-growth"><a href="continuous_time.html#exr-vonBertalanffy-growth" class="quarto-xref">Exercise&nbsp;<span>1.2</span></a></h3>
-<p><em>Von Bertalanffy growth</em></p>
+<section id="von-bertalanffy-growth" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="von-bertalanffy-growth">Von Bertalanffy growth</h3>
+<p><a href="continuous_time.html#exr-vonBertalanffy-growth" class="quarto-xref">Exercise&nbsp;<span>1.2</span></a>:</p>
 <ol type="i">
 <li>Seeking a steady state we find <span class="math inline">\(\alpha w^{2/3}-\beta w = 0\)</span> <span class="math inline">\(\implies\)</span> <span class="math inline">\(w^{2/3}(\alpha-\beta w^{1/3})=0\)</span> <span class="math inline">\(\implies\)</span> <span class="math inline">\(w=0\)</span> or <span class="math inline">\(w^{1/3} = \alpha/\beta\)</span>. With the graphical approach in <a href="#fig-vonBertalanffy-growth" class="quarto-xref">Figure&nbsp;<span>A.1</span></a> we see that the non-zero steady state is stable. Hence, <span class="math display">\[
 \lim_{t \rightarrow \infty} w(t) = \left( \frac{\alpha}{\beta} \right)^{3}.
@@ -297,11 +319,11 @@ u(t) = \frac{1}{\beta} \left( \alpha  - Ae^{-\beta t/3}\right)
 w(t) = u(t)^3 = \frac{1}{\beta^3}\left( \alpha - \left( \alpha - \beta w_0^{1/3} \right) e^{-\beta t/3}  \right)^3.
 \]</span></p></li>
 </ol>
+<hr>
 </section>
-<section id="exr-logistic_solution" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="exr-logistic_solution"><a href="continuous_time.html#exr-logistic_solution" class="quarto-xref">Exercise&nbsp;<span>1.3</span></a></h3>
-<p><em>Solving logistic equation</em></p>
-<p>We separate the variables by dividing both sides of the ODE by <span class="math inline">\(N(1-N/K)\)</span> and multiplying by <span class="math inline">\(dt\)</span>, and then integrate to get <span class="math display">\[
+<section id="solving-logistic-equation" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="solving-logistic-equation">Solving logistic equation</h3>
+<p><a href="continuous_time.html#exr-logistic_solution" class="quarto-xref">Exercise&nbsp;<span>1.3</span></a>: We separate the variables by dividing both sides of the ODE by <span class="math inline">\(N(1-N/K)\)</span> and multiplying by <span class="math inline">\(dt\)</span>, and then integrate to get <span class="math display">\[
 \int_{N_0}^{N(t)}\frac{dN}{N\left(1-\frac{N}{K}\right)}=\int_0^t r\,dt.\]</span> The right hand side is trivial to integrate, but for the integral on the left-hand side we need to employ the method of partial fractions, using that <span class="math display">\[\frac{dN}{N\left(1-\frac{N}{K}\right)}=\frac{1}{N}+\frac{1}{K-N}.\]</span> The left-hand side then gives <span class="math display">\[
 \int_{N_0}^{N(t)}\left(\frac{1}{N}+\frac{1}{K-N(t)}\right)dN=\log N(t)-\log N_0-\log(K-N(t))+\log(K-N_0).\]</span> We exponentiate both sides to get <span class="math display">\[\frac{N(t)}{N_0}\frac{K-N_0}{K-N(t)}=e^{rt}.\]</span> Now we just need to solve for <span class="math inline">\(N(t)\)</span>: <span class="math display">\[N(t)=\frac{N_0Ke^{rt}}{K+N_0(e^{rt}-1)}.\]</span></p>
 <!---
@@ -310,22 +332,22 @@ w(t) = u(t)^3 = \frac{1}{\beta^3}\left( \alpha - \left( \alpha - \beta w_0^{1/3}
 
 See solution sheet on Moodle.
 --->
+<hr>
 </section>
-<section id="exr-harvest_quota" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="exr-harvest_quota"><a href="continuous_time.html#exr-harvest_quota" class="quarto-xref">Exercise&nbsp;<span>1.5</span></a></h3>
-<p><em>Harvesting with fixed quota</em></p>
-<p>If we harvest with a fixed quota <span class="math inline">\(Q\)</span>, the population is described by the equation <span class="math display">\[
+<section id="harvesting-with-fixed-quota" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="harvesting-with-fixed-quota">Harvesting with fixed quota</h3>
+<p>**<a href="continuous_time.html#exr-harvest_quota" class="quarto-xref">Exercise&nbsp;<span>1.5</span></a>: If we harvest with a fixed quota <span class="math inline">\(Q\)</span>, the population is described by the equation <span class="math display">\[
 \frac{dN}{dt} = \alpha N \log\frac{K}{N} - Q.
 \]</span> The subtraction of <span class="math inline">\(Q\)</span> shifts the graph of the right-hand side down by a distance <span class="math inline">\(Q\)</span>. This brings the non-zero fixed points closer together until <span class="math inline">\(Q\)</span> is equal to the maximum of the growth rate of the unfished population. If <span class="math inline">\(Q\)</span> is increased beyond this value the non-zero fixed points disappear and the population will go extinct. is because we are removing <span class="math inline">\(Q\)</span> individuals from the population at a constant rate. Thus the maximum sustainable yield occurs when <span class="math inline">\(Q\)</span> equals the maximum replenishment rate of the unfished population. To find that maximum we first solve <span class="math display">\[
 0=\frac{d}{dN}\left(\alpha N \log\frac{K}{N}\right)=\alpha\left(\log\frac{K}{N}-1\right).
 \]</span> This tells us that the maximum is at <span class="math display">\[
 N_{max} = K\,e^{-1}.
 \]</span> Hence the value at the maximum is <span class="math display">\[MSY=Q_{max}=\alpha N_{max} \log\frac{K}{N_{max}}=\alpha\,K\,e^{-1}.\]</span> Fishing at this quota is not wise, as this reduces the population to the threshold level below which the population will go extinct.</p>
+<hr>
 </section>
-<section id="exr-hornet" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="exr-hornet"><a href="continuous_time.html#exr-Hornet" class="quarto-xref">Exercise&nbsp;<span>1.6</span></a></h3>
-<p><em>Wasps</em></p>
-<p>For <span class="math inline">\(0\leq t\leq t_c\)</span> the number of workers satisfies <span class="math display">\[
+<section id="wasp-model" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="wasp-model">Wasp model</h3>
+<p><a href="continuous_time.html#exr-Hornet" class="quarto-xref">Exercise&nbsp;<span>1.6</span></a>: For <span class="math inline">\(0\leq t\leq t_c\)</span> the number of workers satisfies <span class="math display">\[
 \frac{dn}{dt}=r\,n.
 \]</span> Therefore <span class="math display">\[
 n(t)=n_0e^{r\,t}.
@@ -341,31 +363,74 @@ N(T)=(T-t_c)R\,e^{r\,t_c}.
 \]</span> This implies that <span class="math display">\[
 t_c=T-\frac{1}{r}.
 \]</span></p>
+<hr>
 </section>
-<section id="exr-wasp_death" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="exr-wasp_death"><a href="continuous_time.html#exr-wasp_death" class="quarto-xref">Exercise&nbsp;<span>1.7</span></a></h3>
-<p><em>Wasp with death</em></p>
-<p>For <span class="math inline">\(0\leq t\leq t_c\)</span> the number of workers satisfies <span class="math display">\[\frac{dn}{dt}=(r-d)n.\]</span> Therefore <span class="math display">\[n(t)=e^{(r-d)t}.\]</span> For <span class="math inline">\(t_c\leq t\leq T\)</span> we have <span class="math display">\[\frac{dn}{dt}=-dn\]</span> so that <span class="math display">\[n(t)=n(t_c)e^{-d(t-t_c)}=e^{(r-d)t}e^{-d(t-t_c)}=e^{r\,t_c}e^{-d\,t}.\]</span> Also for <span class="math inline">\(t_c\leq t\leq T\)</span> the number of reproducers satisfies <span class="math display">\[\frac{dN}{dt}=Rn(t)=Re^{r\,t_c}e^{-d\,t},\]</span> so that <span class="math display">\[N(T)=\int_{t_c}^TRe^{r\,t_c}e^{-d\,t}dt = \frac{R}{d}e^{r\,t_c}\left(e^{-d\,t_c}-e^{-d\,T}\right).\]</span> To find the value of <span class="math inline">\(t_c\)</span> that maximises <span class="math inline">\(N(T)\)</span> we set the derivative of <span class="math inline">\(N(T)\)</span> with respect to <span class="math inline">\(t_c\)</span> to zero: <span class="math display">\[0=\frac{d}{dt_c}N(T)=\frac{d}{dt_c}\left( \frac{R}{d}e^{r\,t_c}\left(e^{-d\,t_c}-e^{-d\,T}\right)\right)
-=Re^{r\,t_c}\left(\left(\frac{r}{d}-1\right)e^{-d\,t_c}-\frac{r}{d}e^{-d\,T}\right)\]</span> This is equivalent to <span class="math display">\[e^{-d\,t_c}=\frac{1}{1-d/r}e^{-d\,T}\]</span> and thus <span class="math display">\[t_c=T+\frac{1}{d}\ln\left(1-\frac{d}{r}\right).\]</span></p>
+<section id="wasp-model-with-death" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="wasp-model-with-death">Wasp model with death</h3>
+<p><a href="continuous_time.html#exr-wasp_death" class="quarto-xref">Exercise&nbsp;<span>1.7</span></a>: For <span class="math inline">\(0\leq t\leq t_c\)</span> the number of workers satisfies <span class="math display">\[\frac{dn}{dt}=(r-d)n.\]</span> Therefore <span class="math display">\[n(t)=e^{(r-d)t}.\]</span> For <span class="math inline">\(t_c\leq t\leq T\)</span> we have <span class="math display">\[\frac{dn}{dt}=-dn\]</span> so that <span class="math display">\[n(t)=n(t_c)e^{-d(t-t_c)}=e^{(r-d)t}e^{-d(t-t_c)}=e^{r\,t_c}e^{-d\,t}.\]</span> Also for <span class="math inline">\(t_c\leq t\leq T\)</span> the number of reproducers satisfies <span class="math display">\[\frac{dN}{dt}=Rn(t)=Re^{r\,t_c}e^{-d\,t},\]</span> so that <span class="math display">\[N(T)=\int_{t_c}^TRe^{r\,t_c}e^{-d\,t}dt = \frac{R}{d}e^{r\,t_c}\left(e^{-d\,t_c}-e^{-d\,T}\right).\]</span> To find the value of <span class="math inline">\(t_c\)</span> that maximises <span class="math inline">\(N(T)\)</span> we set the derivative of <span class="math inline">\(N(T)\)</span> with respect to <span class="math inline">\(t_c\)</span> to zero: <span class="math display">\[
+\begin{split}
+0&amp;=\frac{d}{dt_c}N(T)=\frac{d}{dt_c}\left( \frac{R}{d}e^{r\,t_c}\left(e^{-d\,t_c}-e^{-d\,T}\right)\right)\\
+&amp;=Re^{r\,t_c}\left(\left(\frac{r}{d}-1\right)e^{-d\,t_c}-\frac{r}{d}e^{-d\,T}\right).
+\end{split}
+\]</span> This is equivalent to <span class="math display">\[e^{-d\,t_c}=\frac{1}{1-d/r}e^{-d\,T}\]</span> and thus <span class="math display">\[t_c=T+\frac{1}{d}\ln\left(1-\frac{d}{r}\right).\]</span></p>
+<hr>
 </section>
 </section>
 <section id="discrete-time-population-models" class="level2" data-number="A.2">
 <h2 data-number="A.2" class="anchored" data-anchor-id="discrete-time-population-models"><span class="header-section-number">A.2</span> Discrete-time population models</h2>
-<section id="exr-discrete_logistic" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="exr-discrete_logistic"><a href="discrete_time.html#exr-discrete_logistic" class="quarto-xref">Exercise&nbsp;<span>2.1</span></a></h3>
-<p><em>Verhulst model</em></p>
-<p>Let’s write the equation as <span class="math inline">\(N_{t+1}=f(N_t)\)</span> with <span class="math display">\[
+<section id="verhulst-model" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="verhulst-model">Verhulst model</h3>
+<p><a href="discrete_time.html#exr-discrete_logistic" class="quarto-xref">Exercise&nbsp;<span>2.1</span></a>: Let’s write the equation as <span class="math inline">\(N_{t+1}=f(N_t)\)</span> with <span class="math display">\[
 f(N)=rN\left(1-\frac{N}{K}\right).
 \]</span></p>
 <p>Because <span class="math inline">\(f(N)\)</span> is positive for all <span class="math inline">\(N&lt;K\)</span>, the only way for <span class="math inline">\(N_{t+1}\)</span> to be negative is for <span class="math inline">\(N_t\)</span> to be greater than <span class="math inline">\(K\)</span>. This in turn is only possible if <span class="math inline">\(f(N_{t-1})&gt;K\)</span>. So the function <span class="math inline">\(f\)</span> at its maximum needs to be larger than <span class="math inline">\(K\)</span>. Because the function describes an upside-down parabola with zeros at <span class="math inline">\(0\)</span> and <span class="math inline">\(K\)</span>, its maximum is in the middle at <span class="math inline">\(N=K/2\)</span>, where <span class="math inline">\(f(K/2)=rK/4\)</span>. Thus the population can get negative iff <span class="math inline">\(rK/4&gt;K\)</span>, which is equivalent to <span class="math inline">\(r&gt;4\)</span>.</p>
+<hr>
 </section>
 </section>
-<section id="age-structured-population-models" class="level2" data-number="A.3">
-<h2 data-number="A.3" class="anchored" data-anchor-id="age-structured-population-models"><span class="header-section-number">A.3</span> Age-structured population models</h2>
-<section id="exr-age_harvesting" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="exr-age_harvesting"><a href="age_structured.html#exr-age_harvesting" class="quarto-xref">Exercise&nbsp;<span>4.2</span></a></h3>
-<p><em>Harvestings an age-structured population</em></p>
-<p>We can start from <a href="age_structured.html#eq-a14" class="quarto-xref">Eq.&nbsp;<span>4.14</span></a> that gives the expected number of offspring produced by an individual within their lifetime: <span class="math display">\[
+<section id="sex-structured-population-models" class="level2" data-number="A.3">
+<h2 data-number="A.3" class="anchored" data-anchor-id="sex-structured-population-models"><span class="header-section-number">A.3</span> Sex-structured population models</h2>
+<section id="dominance-structure" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="dominance-structure">Dominance structure</h3>
+<p><a href="sex_structured.html#exr-ss2" class="quarto-xref">Exercise&nbsp;<span>3.2</span></a>:</p>
+<ol type="a">
+<li>The ratio <span class="math inline">\(F/Q\)</span> in the negative term in the equation for the alpha females represents the fact that if the ratio between the subordinate individuals who gather the food and the alpha females who rely on that food is too small, then the alpha females don’t get enough food and hence are less fit, leading to either a decreased birth rate or an increased mortality rate.</li>
+</ol>
+<ol start="2" type="a">
+<li><p>We derive the ODE: <span class="math display">\[\begin{split}
+\frac{d}{dt}\frac{F}{Q }&amp;=\frac{F'Q -FQ'}{Q ^2}\\
+&amp;=
+\frac{(b_F-\mu_F F/Q )F Q-F(b_Q F-\mu_Q  Q )}{Q ^2}\\
+&amp;=(b_F+\mu_Q )\frac{F}{Q }\left(1-\frac{b_Q +\mu_F}{b_F+\mu_Q }\frac{F}{Q }\right).
+\end{split}\]</span> Ideally you identify this as the logistic equation with initial growth rate <span class="math inline">\(r\)</span> and carrying capacity <span class="math inline">\(K\)</span> given by <span id="eq-rK"><span class="math display">\[
+r=b_F+\mu_Q ,~~~K=\frac{b_F+\mu_Q }{b_Q +\mu_F}.
+\tag{A.1}\]</span></span> You can then look up the solution in the lecture notes: <span class="math display">\[
+\frac{F}{Q }(t)=\frac{\frac{F_0}{Q_0}Ke^{rt}}{K+\frac{F_0}{Q_0}\left(e^{rt}-1\right)}.
+\]</span> Otherwise you have to work a bit harder.</p></li>
+<li><p>Because we have identified <span class="math inline">\(F/Q (t)\)</span> as the solution of a logistic equation it is easy to see that as <span class="math inline">\(t\to\infty\)</span>, <span class="math inline">\(F/Q \to K\)</span> with <span class="math inline">\(K\)</span> as in <a href="#eq-rK" class="quarto-xref">Eq.&nbsp;<span>A.1</span></a>.</p></li>
+<li><p>We derive the ODE: <span class="math display">\[\begin{split}
+\frac{d}{dt}\frac{F}{M}&amp;=\frac{F'M-FM'}{M^2}\\
+&amp;=
+\frac{(b_F-\mu_F F/Q )FM-F(b_MF-\mu_M M)}{M^2}\\
+&amp;=\frac{F}{M}\left(b_F+\mu_M-\mu_F\frac{F}{Q }-b_M\frac{F}{M}\right).
+\end{split}\]</span> We are only interested in the limit of <span class="math inline">\(F/M\)</span> as <span class="math inline">\(t\to\infty\)</span>. Let us denote this limit by <span class="math inline">\(R\)</span>. We already know that the limit of <span class="math inline">\(F/Q\)</span> as <span class="math inline">\(t\to\infty\)</span> is <span class="math inline">\(K\)</span>. The limit of the previous equation gives <span class="math display">\[
+0=\frac{d}{dt}R=R\left(b_F+\mu_M-\mu_FK-b_MR\right)
+\]</span> and hence <span class="math display">\[
+R=\frac{b_F+\mu_M-\mu_FK}{b_M}.
+\]</span> Substituting the expression for <span class="math inline">\(K\)</span> and bringing everything on a common denominator gives <span class="math display">\[
+R=\frac{(b_F+\mu_M)(b_Q +\mu_F)-\mu_F(b_F+\mu_Q )}{b_M(b_Q +\mu_F)}
+\]</span> To see that this is always positive we multiply out the numerator: <span class="math display">\[
+R=\frac{b_Fb_Q +\mu_Mb_Q +\mu_M\mu_F-\mu_F\mu_Q }{b_M(b_Q +\mu_F)}
+\]</span> This is positive because <span class="math inline">\(b_Fb_Q &gt;\mu_F\mu_Q\)</span></p></li>
+<li><p>The birth rates are linear in the number of alpha females and independent of <span class="math inline">\(M\)</span> and <span class="math inline">\(Q\)</span>. Independence of <span class="math inline">\(M\)</span> is realistic only if <span class="math inline">\(M\)</span> is large. Using a weighted mean might be better, i.e., birth rates given by <span class="math inline">\(b_i FM/(F/n+M)\)</span>, where <span class="math inline">\(n\)</span> is the number of females a male can mate with per mating season. Or we could take into account that the alpha females will reproduce less if there are fewer subordinate individuals gathering food for them, for example by choosing birth rates to be given by <span class="math inline">\(b_i F Q/(F/n+Q )\)</span>, where <span class="math inline">\(n\)</span> is the number of pregnant females that a subordinate monkey can keep well fed. There are many other possible improvements.</p></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="age-structured-population-models" class="level2" data-number="A.4">
+<h2 data-number="A.4" class="anchored" data-anchor-id="age-structured-population-models"><span class="header-section-number">A.4</span> Age-structured population models</h2>
+<section id="harvestings-an-age-structured-population" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="harvestings-an-age-structured-population">Harvestings an age-structured population</h3>
+<p><a href="age_structured.html#exr-age_harvesting" class="quarto-xref">Exercise&nbsp;<span>4.2</span></a>: We can start from <a href="age_structured.html#eq-a14" class="quarto-xref">Eq.&nbsp;<span>4.14</span></a> that gives the expected number of offspring produced by an individual within their lifetime: <span class="math display">\[
 \phi(0) = \int_0^\infty b(a) \exp\left(-\int_0^a \mu(a') \, da'\right)\, da.
 \]</span> This will now simplify when we use the given expressions <a href="age_structured.html#eq-age_harvesting_1" class="quarto-xref">Eq.&nbsp;<span>4.46</span></a> and <a href="age_structured.html#eq-age_harvesting_2" class="quarto-xref">Eq.&nbsp;<span>4.47</span></a> for the rates. Because <span class="math inline">\(b(a)\)</span> is non-zero only for <span class="math inline">\(a&gt;a_m\)</span>, the outer integral only has to run from <span class="math inline">\(a_m\)</span> to <span class="math inline">\(\infty\)</span>. The inner integral from <span class="math inline">\(0\)</span> to <span class="math inline">\(a\)</span> we need to split into two integrals because of the piece-wise nature of <span class="math inline">\(\mu(a)\)</span>. Hence <span class="math display">\[
 \phi(0) = \int_{a_m}^\infty b(a) \exp\left(-\int_0^{a_m} \mu(a') \, da'
@@ -382,6 +447,196 @@ f(N)=rN\left(1-\frac{N}{K}\right).
 \end{split}
 \]</span> This expected number of offspring produced by an individual within their lifetime must be greater or equal to <span class="math inline">\(1\)</span> for the population to sustain itself. Hence the upper limit on the harvesting rate <span class="math inline">\(\mu_F\)</span> is given by <span class="math display">\[
 \mu_F \leq b\exp\left(-\mu_0a_m\right) - \mu_0.
+\]</span></p>
+<hr>
+</section>
+<section id="seasonal-mortality" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="seasonal-mortality">Seasonal mortality</h3>
+<p><a href="age_structured.html#exr-seasonal_mortality" class="quarto-xref">Exercise&nbsp;<span>4.3</span></a>:</p>
+<ol type="a">
+<li><p>Substituting <span class="math inline">\(n(t,a)=p(t)r(a)\)</span> into <span class="math inline">\(\eqref{a1}\)</span> and dividing by <span class="math inline">\(n(t,a)\)</span> gives <span class="math display">\[
+\frac{p'(t)}{p(t)}+\frac{r'(a)}{r(a)}=-\mu(a)-f(t).
+\]</span> Separating variables gives <span class="math display">\[
+\frac{p'(t)}{p(t)}+f(t)=-\frac{r'(a)}{r(a)}-\mu(a).
+\]</span> As the left-hand side is independent of <span class="math inline">\(a\)</span> and the right-hand side is independent of <span class="math inline">\(t\)</span>, both sides must be equal to some constant <span class="math inline">\(\gamma\)</span>. This gives us the two ODEs <span class="math display">\[
+\frac{d}{dt}\log(p(t))=\gamma-f(t),~~~\frac{d}{da}\log(r(a))=-\gamma-\mu(t).
+\]</span> These have the solutions <span class="math display">\[
+p(t)=p(0)\exp\left(\int_0^t\gamma-f(s)\,ds\right),~~~
+r(a)=r(0)\exp\left(-\int_0^a\gamma+\mu(s)\,ds\right)
+\]</span> Thus the solution for <span class="math inline">\(n\)</span> is <span class="math display">\[
+n(t,a)=n(0,0)\exp\left(\int_0^t\gamma-f(s)\,ds\right)
+\exp\left(-\int_0^a\gamma+\mu(s)\,ds\right).
+\]</span></p></li>
+<li><p>Substituting the solution into <span class="math inline">\(\eqref{a2}\)</span> gives <span class="math display">\[
+p(t)r(0)=\int_0^\infty b(a)p(t)r(a)\,da.
+\]</span> After dividing by <span class="math inline">\(p(t)r(0)\)</span> and using our expression for <span class="math inline">\(r(a)\)</span> from the previous part, <span class="math display">\[
+1=\int_0^\infty b(a) \exp\left(-\int_0^a\gamma+\mu(s)ds\right)da
+=\phi(\gamma).
+\]</span> The factor <span class="math inline">\(\exp(-\gamma a)\)</span> in the integrand decreases monotonically with increasing <span class="math inline">\(\gamma\)</span> and therefore so does the integral. Hence the function <span class="math inline">\(\phi(\gamma)\)</span> is a monotonically decreasing function.</p></li>
+<li><p>The end of a season occurs at any <span class="math inline">\(t\in\mathbb(Z)\)</span>. At those integer times we can write the integral in the expression for <span class="math inline">\(p(t)\)</span> as <span class="math display">\[
+\int_0^t\gamma-f(s)\,ds=\sum_{i=1}^t\int_{i-1}^{i}\gamma-f(s)\,ds
+=\sum_{i=1}^t(\gamma - F)=t(\gamma - F).
+\]</span> Hence for the population at the end of the season <span class="math inline">\(t\)</span> we have <span class="math display">\[
+n(t,a)=n(0,0)\exp(t(\gamma - F))r(a).
+\]</span> This will go to zero in the limit <span class="math inline">\(t\to\infty\)</span> if <span class="math inline">\(\gamma - F&lt;0\)</span>. Thus the criterion for extinction is <span class="math inline">\(\gamma &lt; F\)</span>.</p></li>
+<li><p>Because <span class="math inline">\(\phi(\gamma)\)</span> decreases with <span class="math inline">\(\gamma\)</span>, <span class="math display">\[
+\gamma &lt; F \Leftrightarrow \phi(\gamma) &gt; \phi(F).
+\]</span> Because <span class="math inline">\(\phi(\gamma)=1\)</span>, this is equivalent to the condition <span class="math inline">\(1&gt;\phi(F)\)</span>. Thus the condition for extinction is <span class="math display">\[
+\int_0^\infty b(a) \exp\left(-\int_0^a F+\mu(s)\,ds\right)da
+&lt;1.
+\]</span></p></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="interacting-populations" class="level2" data-number="A.5">
+<h2 data-number="A.5" class="anchored" data-anchor-id="interacting-populations"><span class="header-section-number">A.5</span> Interacting populations</h2>
+</section>
+<section id="epidemics" class="level2" data-number="A.6">
+<h2 data-number="A.6" class="anchored" data-anchor-id="epidemics"><span class="header-section-number">A.6</span> Epidemics</h2>
+<section id="sir-with-recrudescence" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="sir-with-recrudescence">SIR with recrudescence</h4>
+<p><a href="epidemics.html#exr-sir2" class="quarto-xref">Exercise&nbsp;<span>6.2</span></a>: The modified equations are <span class="math display">\[
+\begin{split}
+\frac{dS}{dt} &amp;= -\beta S I/N,\\
+\frac{dI}{dt} &amp;= \beta S I/N - \gamma I + \delta R,\\
+\frac{dR}{dt} &amp;= \gamma I - \delta R.
+\end{split}
+\]</span></p>
+<ol type="1">
+<li><p>At the steady state all these derivatives have to vanish. From the first equation we find <span class="math inline">\(S^*=0\)</span> or <span class="math inline">\(I^*=0\)</span>. We are not interested in <span class="math inline">\(I^*=0\)</span> because we are interested in the endemic state which by definition has <span class="math inline">\(I^*&gt;0\)</span>, so we have <span class="math inline">\(S^*=0\)</span>. The third equation gives <span class="math inline">\(R^*=\gamma/\delta I^*\)</span>. Then <span class="math inline">\(I^*\)</span> is found from the fact that <span class="math inline">\(N=S^*+I^*+R^*\)</span> which gives <span class="math inline">\(I^*=N-\gamma/\delta I^*\)</span>. Soving for <span class="math inline">\(I^*\)</span> gives <span class="math display">\[
+I^*=\frac{N\delta}{\delta+\gamma}.
+\]</span></p></li>
+<li><p>For the stability analysis we reduce the problem to a two-dimensional system by eliminating <span class="math inline">\(S\)</span> from the last two equations. This gives <span class="math display">\[
+\begin{split}
+\frac{dI}{dt} &amp;= \frac{\beta I}{N} \left(N-I-R\right) - \gamma I + \delta R,\\
+\frac{dR}{dt} &amp;= \gamma I - \delta R.
+\end{split}
+\]</span> The Jacobian matrix is <span class="math display">\[
+A = \begin{pmatrix}
+\frac{\beta}{N} \left(N-2I-R\right) -\gamma &amp; \delta\\
+\gamma &amp; -\delta
+\end{pmatrix}.
+\]</span> Evaluated at the endemic state this gives <span class="math display">\[
+A = \begin{pmatrix}
+-\frac{\beta}{N}I^* -\gamma &amp; \delta\\
+\gamma &amp; -\delta
+\end{pmatrix}.
+\]</span> This has determinant and trace given by <span class="math display">\[
+\begin{split}
+\det(A) &amp;= \frac{\delta\beta}{N}I^*&gt;0,\\
+\text{tr}(A) &amp;= -\frac{\beta}{N}I^* -\gamma -\delta &lt;0.
+\end{split}
+\]</span> so the endemic state is stable for all positive values of the parameters.</p></li>
+</ol>
+<hr>
+</section>
+<section id="sir-model-with-reinfections" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="sir-model-with-reinfections">SIR model with reinfections</h4>
+<p><a href="epidemics.html#exr-sir3" class="quarto-xref">Exercise&nbsp;<span>6.3</span></a>: The modified equations are <span class="math display">\[
+\begin{split}
+\frac{dS}{dt} &amp;= -\beta S I/N,\\
+\frac{dI}{dt} &amp;= \beta S I/N - \gamma I +\beta\mu R I/N,\\
+\frac{dR}{dt} &amp;= \gamma I-\beta\mu R I/N.
+\end{split}
+\]</span> At the steady state all these derivatives have to vanish. From the first equation we find <span class="math inline">\(S^*=0\)</span> or <span class="math inline">\(I^*=0\)</span>. We are not interested in <span class="math inline">\(I^*=0\)</span> because we are interested in the endemic state which by definition has <span class="math inline">\(I^*&gt;0\)</span>, so we have <span class="math inline">\(S^*=0\)</span>. The third equation gives <span class="math inline">\(R^*=\gamma N/(\beta\mu)\)</span>. Then <span class="math inline">\(I^*\)</span> is found from the fact that <span class="math inline">\(N=S^*+I^*+R^*\)</span> which gives <span class="math display">\[
+I^*=N-R^*=N\left(1-\frac{\gamma}{\beta\mu}\right).
+\]</span> This is not the same as the number of infecteds in the endemic state of the model with loss of immunity given in <a href="epidemics.html#eq-Istar" class="quarto-xref">Eq.&nbsp;<span>6.33</span></a>.</p>
+<hr>
+</section>
+</section>
+<section id="spatially-structured-population-models" class="level2" data-number="A.7">
+<h2 data-number="A.7" class="anchored" data-anchor-id="spatially-structured-population-models"><span class="header-section-number">A.7</span> Spatially-structured population models</h2>
+<section id="turing-instabilities-1" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="turing-instabilities-1">Turing instabilities 1</h3>
+<p><a href="spatial.html#exr-spatial4" class="quarto-xref">Exercise&nbsp;<span>7.4</span></a>: Here, <span class="math inline">\(f(u,v)=a-u + u^2v\)</span> and <span class="math inline">\(g(u,v)=b-u^2v\)</span>.</p>
+<p><strong>Step 1. Uniform steady state</strong></p>
+<p><span class="math inline">\(a-u^* + {u^*}^2 v^*=0\)</span> and <span class="math inline">\(b-{u^*}^2 v^*=0\)</span> <span class="math inline">\(\implies (u^*,~v^*)=(a+b,~b/(a+b)^2)\)</span>.</p>
+<p><strong>Step 2. Linearize</strong></p>
+<p>Set <span class="math inline">\(u=u^*+\xi\)</span> and <span class="math inline">\(v=v^*+\eta\)</span> with <span class="math inline">\(\xi\)</span> and <span class="math inline">\(\eta\)</span> small. Substitute and Taylor expand to get <span class="math display">\[
+\begin{pmatrix}
+\frac{\partial \xi}{\partial t} \\ \frac{\partial \eta}{\partial t}
+\end{pmatrix}
+=
+\begin{pmatrix}
+a_{11} &amp; a_{12} \\a_{21} &amp; a_{22}
+\end{pmatrix}
+\begin{pmatrix}
+\xi \\ \eta
+\end{pmatrix}
++
+\begin{pmatrix}
+D_1 \frac{\partial^2 \xi}{\partial x^2} \\ D_2\frac{\partial^2 \eta}{\partial x^2}
+\end{pmatrix},
+\]</span> where <span class="math display">\[
+\begin{split}
+a_{11} &amp;= \frac{\partial f}{\partial u}(u^*,v^*) = -1+2u^*v^* = -1+2(a+b)b/(a+b)^2 =(b-a)/(a+b)\\
+a_{12} &amp;= \frac{\partial f}{\partial v}(u^*,v^*) = {u^*}^2 =(a+b)^2\\
+a_{21} &amp;= \frac{\partial g}{\partial u}(u^*,v^*) = -2 u^* v^* =-2b/(a+b)\\
+a_{22} &amp;= \frac{\partial g}{\partial v}(u^*,v^*) = -{u^*}^2 =-(a+b)^2
+\end{split}
+\]</span></p>
+<p><strong>Step 3. Solutions</strong></p>
+<p>Make the Ansatz <span class="math inline">\(\xi = A_1 e^{\sigma t} \sin( kx+\alpha)\)</span> and <span class="math inline">\(\eta = A_2 e^{\sigma t} \sin( kx+\alpha)\)</span>. Substitute to get <span class="math display">\[
+\begin{pmatrix}
+\sigma - \frac{b-a}{a+b} +D_1k^2 &amp; -(a+b)^2 \\  
+\frac{2b}{a+b} &amp; \sigma + (a+b)^2 +D_2k^2
+\end{pmatrix}
+\begin{pmatrix}
+A_1 \\ A_2
+\end{pmatrix}=
+{\mathbf 0}
+\]</span> For a non-trivial solution we require the determinant of this matrix to be zero (otherwise we would be able to find an inverse, etc.). Hence, <span class="math display">\[
+\sigma^2 + \left[ (a+b)^2 - \frac{b-a}{a+b} + (D_1+D_2)k^2  \right] \sigma + h(k^2) = 0,
+\]</span> where <span class="math display">\[
+h(k^2)= D_1D_2k^4 - \left[ D_2\frac{b-a}{a+b} - D_1(a+b)^2  \right] k^2 +(a+b)^2.
+\]</span></p>
+<p><strong>Step 4. In the absence of diffusion</strong> (Put <span class="math inline">\(D_1=0=D_2\)</span>.) <span class="math display">\[
+\sigma^2 + \left[ (a+b)^2 - \frac{b-a}{a+b} \right] \sigma + (a+b)^2 = 0.
+\]</span> For <span class="math inline">\(\sigma\)</span> to have roots in the left half of the complex plane (giving us a stable steady state) we need <span class="math inline">\((a+b)^2-\frac{b-a}{a+b}&gt;0 ~\implies ~ b-a&lt;(a+b)^3\)</span> and <span class="math inline">\((a+b)^2&gt;0\)</span> (which it is).</p>
+<p><strong>Step 5. With diffusion</strong> (<span class="math inline">\(D_1\neq 0\neq D_2\)</span>.)</p>
+<p>We want steady state to be unstable in this case. The coefficient of <span class="math inline">\(\sigma\)</span> is <span class="math display">\[
+(a+b)^2 - \frac{b-a}{a+b} + (D_1+D_2)k^2 &gt; (D_1+D_2)k^2&gt;0 ~~~~\mbox{from Step 4}
+\]</span> Therefore, we require <span class="math inline">\(h(k^2)&lt;0\)</span> for some <span class="math inline">\(k^2\)</span> for there to be an instability.</p>
+<p>As <span class="math inline">\(h(0)&gt;0\)</span> we must have two positive real roots of <span class="math inline">\(h(k^2)=0\)</span> for there to be an instability.</p>
+<p>Real distinct roots (<span class="math inline">\(\implies ~~B^2-4AC&gt;0\)</span>) <span class="math display">\[
+\implies \left[ D_2\frac{b-a}{a+b} - D_1(a+b)^2  \right]^2&gt; 4D_1D_2 (a+b)^2.
+\]</span> Both positive (<span class="math inline">\(\implies B&lt;0\)</span>) <span class="math display">\[
+\implies D_2\frac{b-a}{a+b} - D_1(a+b)^2 &gt; 0.
+\]</span></p>
+<hr>
+</section>
+<section id="slime-mould-with-boundary" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="slime-mould-with-boundary">Slime mould with boundary</h3>
+<p><a href="spatial.html#exr-spatial5" class="quarto-xref">Exercise&nbsp;<span>7.5</span></a> <span class="math display">\[
+\frac{\partial a}{\partial t} = \frac{\partial}{\partial x} \left( \mu \frac{\partial a}{\partial x} - \chi a \frac{\partial \rho}{\partial x}   \right), ~~~\mbox{and} ~~~ \frac{\partial \rho}{\partial t} = fa -k\rho + D\frac{\partial^2 \rho}{\partial x^2}.
+\]</span> Steady states are <span class="math inline">\(fa^*=k\rho^*\)</span>.</p>
+<p>Consider a perturbation <span class="math inline">\(a=a^*+\xi\)</span> and <span class="math inline">\(\rho = \rho^* +\eta\)</span>, where <span class="math inline">\(\xi\)</span> and <span class="math inline">\(\eta\)</span> are small. Substitute and linearize to give <span class="math display">\[
+\frac{\partial \xi}{\partial t} = \mu \frac{\partial^2 \xi}{\partial x^2} - \chi a^* \frac{\partial^2 \eta}{\partial x^2}, ~~~\mbox{and} ~~~
+\frac{\partial \eta}{\partial t} = f\xi -k\eta + D\frac{\partial^2 \eta}{\partial x^2}.
+\]</span> Put <span class="math inline">\(\xi = A_1 e^{\sigma t + iqx}\)</span> and <span class="math inline">\(\eta = A_2 e^{\sigma t + iqx}\)</span>. Hence, <span class="math display">\[
+\begin{pmatrix}
+\sigma +\mu q^2 &amp; -\chi a^*q^2 \\  
+-f &amp; \sigma + k+Dq^2
+\end{pmatrix}
+\begin{pmatrix}
+A_1 \\ A_2
+\end{pmatrix}=
+{\mathbf 0}
+\]</span></p>
+<p>A non-trivial solution requires the determinant of the matrix to be zero <span class="math display">\[
+\implies ~\sigma^2 +g(q^2)\sigma + h(q^2) = 0,
+\]</span> where <span class="math inline">\(g(q^2) = k+(D+\mu)q^2&gt;0\)</span> and <span class="math inline">\(h(q^2) = \mu Dq^4+(k\mu -\chi a^*f)q^2&gt;0\)</span>.</p>
+<p>We need <span class="math inline">\((k\mu -\chi a^*f)&lt;0\)</span> for there to be a positive root of <span class="math inline">\(h(q^2)=0\)</span> and so instability.</p>
+<p>If <span class="math inline">\(0\leq x \leq L\)</span> we need boundary conditions. Assume no flux at <span class="math inline">\(x=0,~L\)</span>: <span class="math inline">\(\frac{\partial a}{\partial x}=0=\frac{\partial \rho}{\partial x}\)</span> at <span class="math inline">\(x=0,~L\)</span>.</p>
+<p>Try <span class="math inline">\(\xi = A_1 e^{\sigma t}\cos qx\)</span> and <span class="math inline">\(\eta = A_2 e^{\sigma t}\cos qx\)</span> to satisfy BCs at <span class="math inline">\(x=0\)</span>.</p>
+<p>At <span class="math inline">\(x=L\)</span> we have <span class="math inline">\(\sin qL = 0\)</span> for a non-trivial solution <span class="math inline">\(~\implies q=q_n:= n\pi/L\)</span>, <span class="math inline">\(n=0,1,2,...\)</span></p>
+<p>Aggregation will not occur if <span class="math inline">\(h(q_1^2)&gt;0\)</span>, which implies <span class="math display">\[
+L&lt;\pi\sqrt{\frac{D\mu}{\chi a^*f-k\mu}}.
+\]</span></p>
+<p>Aggregation will occur if <span class="math display">\[
+k\mu&lt;\chi a^*f  ~~~\mbox{and}~~~
+L&gt;\pi\sqrt{\frac{D\mu}{\chi a^*f-k\mu}}.
 \]</span></p>
 
 
@@ -796,8 +1051,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./epidemics.html" class="pagination-link  aria-label=" &lt;span="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Epidemics</span></span>
+      <a href="./spatial.html" class="pagination-link  aria-label=" &lt;span="" populations&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Spatially-structured populations</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

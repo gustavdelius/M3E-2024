@@ -191,6 +191,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Epidemics</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spatial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Spatially-structured populations</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
@@ -224,6 +230,7 @@ window.Quarto = {
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">3.4</span> Exercises</a>
   <ul>
   <li><a href="#geometric-mean-sex-structured-model" id="toc-geometric-mean-sex-structured-model" class="nav-link" data-scroll-target="#geometric-mean-sex-structured-model">* Geometric mean sex-structured model</a></li>
+  <li><a href="#dominance-structure" id="toc-dominance-structure" class="nav-link" data-scroll-target="#dominance-structure">Dominance structure</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/gustavdelius/M3E-2024/edit/main/sex_structured.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
@@ -386,6 +393,33 @@ M(t)=M_0e^{(-\mu_M+\frac{2}{s+1}b_M)t}.
 \]</span> Determine the asymptotic sex ratio <span class="math display">\[
 s=\lim_{t\to\infty}\frac{M(t)}{F(t)}?
 \]</span> What is the numerical value of s when <span class="math inline">\(\mu_F=2,\mu_M=1,b_F=1/2,b_M=3/2\)</span> per year?</p>
+</div>
+<hr>
+</section>
+<section id="dominance-structure" class="level4">
+<h4 class="anchored" data-anchor-id="dominance-structure">Dominance structure</h4>
+<div id="exr-ss2" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 3.2</strong></span> We consider a population of primates and split this into three components:</p>
+<p><span class="math inline">\(M\)</span>: dominant (alpha) males,</p>
+<p><span class="math inline">\(F\)</span>: dominant (alpha) females,</p>
+<p><span class="math inline">\(Q\)</span>: subordinate males or females.</p>
+<p>Only alpha males and alpha females mate to reproduce offspring. The subordinate individuals are prevented from mating. The alpha females are too engaged with looking after their young to gather food and instead rely on the food gathered by the subordinate individuals. We propose to model this with the equations <span class="math display">\[
+\begin{split}
+\frac{dF}{dt}&amp;=b_F F-\frac{\mu_F F}{Q}F,\\
+\frac{dM}{dt}&amp;=b_M F-\mu_M M,\\
+\frac{dQ}{dt}&amp;=b_{Q} F-\mu_{Q} Q ,
+\end{split}
+\]</span> where <span class="math inline">\(b_F&gt;\mu_F,b_M&gt;\mu_M\)</span> and <span class="math inline">\(b_Q &gt;\mu_Q\)</span> are all positive constants.</p>
+<ol type="a">
+<li><p>One of the terms incorporates a ratio of different components. Describe what this might be intended to model.</p></li>
+<li><p>Derive an ODE for the ratio <span class="math inline">\(F/Q\)</span>. Either by recognising the ODE for <span class="math inline">\(F/Q\)</span> as equivalent to one for which the solution was given in the lecture notes, or by integrating the ODE, give the solution for <span class="math inline">\(F/Q\)</span> as a function of time, with initial condition <span class="math inline">\(F(0)=F_0,
+Q (0)=Q_0\)</span>.</p></li>
+<li><p>By using your solution from the previous part or by other means, show that as <span class="math inline">\(t\to\infty\)</span> the ratio between alpha females and subordinate individuals goes to <span class="math display">\[
+\frac{b_F+\mu_Q }{b_Q +\mu_F}.
+\]</span></p></li>
+<li><p>Derive an expression for the long-term alpha female to alpha male ratio <span class="math inline">\(R=\lim_{t\to\infty}F/M\)</span> in terms of the model parameters and show that it is positive.</p></li>
+<li><p>Describe a limitation of the birth terms in the model and suggest improved expressions.</p></li>
+</ol>
 </div>
 
 

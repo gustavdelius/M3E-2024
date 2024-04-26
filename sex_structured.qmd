@@ -253,3 +253,55 @@ s=\lim_{t\to\infty}\frac{M(t)}{F(t)}?
 $$
 What is the numerical value of s when $\mu_F=2,\mu_M=1,b_F=1/2,b_M=3/2$ per year?
 :::
+
+----------------------------------------------------------------------
+
+#### Dominance structure
+::: {#exr-ss2}
+We consider a population of primates and split this into three
+components:
+
+$M$: dominant (alpha) males,
+
+$F$: dominant (alpha) females,
+
+$Q$: subordinate males or females.
+
+Only alpha males and alpha females mate to reproduce offspring. The subordinate
+individuals are prevented from mating.
+The alpha females are too engaged with looking after their young to
+gather food and instead rely on the food gathered by the subordinate individuals.
+We propose to model this with the equations
+$$
+\begin{split}
+\frac{dF}{dt}&=b_F F-\frac{\mu_F F}{Q}F,\\
+\frac{dM}{dt}&=b_M F-\mu_M M,\\
+\frac{dQ}{dt}&=b_{Q} F-\mu_{Q} Q ,
+\end{split}
+$$
+where $b_F>\mu_F,b_M>\mu_M$ and $b_Q >\mu_Q$ are all positive constants.
+
+(a) One of the terms
+incorporates a ratio of different components. Describe what this might be
+intended to model.
+
+(b) Derive an ODE for the ratio $F/Q$. Either by recognising the ODE for $F/Q$ as equivalent to one for which the solution
+was given in the lecture notes, or by integrating the ODE, give the
+solution for $F/Q$ as a function of time, with initial condition $F(0)=F_0,
+Q (0)=Q_0$.
+
+(c) By using your solution from the previous part or by other means, show 
+that as $t\to\infty$ the ratio between alpha females and subordinate individuals
+goes to
+$$
+\frac{b_F+\mu_Q }{b_Q +\mu_F}.
+$$
+
+(d) Derive an expression for the long-term alpha female to alpha male ratio
+$R=\lim_{t\to\infty}F/M$ in terms of the model parameters and show that it
+is positive.
+
+(e) Describe a limitation of the birth terms in the model and suggest
+improved expressions.
+
+:::

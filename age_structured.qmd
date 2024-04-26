@@ -397,6 +397,8 @@ equation of the age-structured model by making the Ansatz $n(t,a)=f(t)r(a)$ and 
 3. Give the condition under which the population goes extinct and compare it to the condition in the exponential model from chapter 1.
 :::
 
+----------------------------------------------------------------------
+
 #### o Harvestings an age-structured population
 ::: {#exr-age_harvesting}
 Consider an age-structured fish population in which all individuals above the maturity age $a_m$ are reproducing, at a fixed rate, so that
@@ -416,6 +418,7 @@ $$ {#eq-age_harvesting_2}
 By calculating the expected number of offspring per individual, determine the limit on the harvesting rate $\mu_F$ that allows the population to be sustainable.
 :::
 
+----------------------------------------------------------------------
 
 #### Seasonal mortality
 ::: {#exr-seasonal_mortality}
@@ -451,6 +454,8 @@ $\gamma$ from the condition for extinction. Thus finally give the
 condition for extinction in terms of $b(a), \mu(a)$ and $F$.
 :::
 
+----------------------------------------------------------------------
+
 ### Discrete time
 
 #### * Fibonacci population
@@ -463,6 +468,8 @@ Consider a population in which individuals on average produce one offspring when
 3. Using the Leslie matrix, calculate the stable age distribution and the long-term growth factor (the factor by which the total population changes from one year to the next).
 
 :::
+
+----------------------------------------------------------------------
 
 #### Semelparous population
 ::: {#exr-semelparous}
@@ -480,6 +487,8 @@ Consider a population in which individuals die after having given birth for the 
 
 3. Draw the graph associated with the Leslie matrix and determine whether the Leslie matrix is irreducible and primitive. 
 :::
+
+----------------------------------------------------------------------
 
 #### Eastern Screech Owl
 ::: {#exr-owl}
@@ -513,4 +522,3 @@ For each of the two populations do the following:
 4. Calculate the average age in the stable age distribution as well as the average age of parents of newborns.
 
 :::
-

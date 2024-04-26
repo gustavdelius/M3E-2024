@@ -191,6 +191,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Epidemics</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spatial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Spatially-structured populations</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
@@ -244,7 +250,12 @@ window.Quarto = {
   <li><a href="#nullclines-and-phase-portraits-1" id="toc-nullclines-and-phase-portraits-1" class="nav-link" data-scroll-target="#nullclines-and-phase-portraits-1"><span class="header-section-number">5.5.4</span> Nullclines and Phase Portraits</a></li>
   <li><a href="#limitations-and-unbounded-growth" id="toc-limitations-and-unbounded-growth" class="nav-link" data-scroll-target="#limitations-and-unbounded-growth"><span class="header-section-number">5.5.5</span> Limitations and Unbounded Growth</a></li>
   </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">5.6</span> Exercises</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">5.6</span> Exercises</a>
+  <ul>
+  <li><a href="#two-species-model-1" id="toc-two-species-model-1" class="nav-link" data-scroll-target="#two-species-model-1">Two-species model 1</a></li>
+  <li><a href="#two-species-model-2" id="toc-two-species-model-2" class="nav-link" data-scroll-target="#two-species-model-2">Two-species model 2</a></li>
+  <li><a href="#predator-prey-model-with-allee-effect" id="toc-predator-prey-model-with-allee-effect" class="nav-link" data-scroll-target="#predator-prey-model-with-allee-effect">Predator-prey model with Allee effect</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/gustavdelius/M3E-2024/edit/main/interacting.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -287,12 +298,12 @@ window.Quarto = {
 <h2 data-number="5.1" class="anchored" data-anchor-id="lotka-volterra-model"><span class="header-section-number">5.1</span> Lotka-Volterra Model</h2>
 <p>The Lotka-Volterra model, developed independently by Alfred Lotka in 1925 and Vito Volterra in 1926, serves as a foundational mathematical model for understanding the dynamic interplay between a prey population (denoted by <span class="math inline">\(N\)</span>) and a predator population (denoted by <span class="math inline">\(P\)</span>).</p>
 <p><strong>Model Formulation</strong></p>
-<p>The model assumes that the prey population, in the absence of predators, grows exponentially with a per capita growth rate <span class="math inline">\(a &gt; 0\)</span>. However, the prey die due to being eaten by predators, and we assume that the per-capita mortality rate grows in proportion to the abundance of predators, with some proportionality constant <span class="math inline">\(b \geq 0\)</span>. This leads to the equation <span class="math display">\[
+<p>The model assumes that the prey population, in the absence of predators, grows exponentially with a per capita growth rate <span class="math inline">\(a &gt; 0\)</span>. However, the prey die due to being eaten by predators, and we assume that the per-capita mortality rate grows in proportion to the abundance of predators, with some proportionality constant <span class="math inline">\(b \geq 0\)</span>. This leads to the equation <span id="eq-lv1"><span class="math display">\[
 \frac{dN}{dt} = N(a - bP).
-\]</span></p>
-<p>Conversely, the predators benefit from the abundance of prey and we encode that by giving them a per-capita growth <span class="math inline">\(cN\)</span>, where <span class="math inline">\(c \geq 0\)</span>. We assume that the per capita mortality rate is a constant <span class="math inline">\(d\)</span>. This yields the following equation for the predator dynamics: <span class="math display">\[
+\tag{5.2}\]</span></span></p>
+<p>Conversely, the predators benefit from the abundance of prey and we encode that by giving them a per-capita growth <span class="math inline">\(cN\)</span>, where <span class="math inline">\(c \geq 0\)</span>. We assume that the per capita mortality rate is a constant <span class="math inline">\(d\)</span>. This yields the following equation for the predator dynamics: <span id="eq-lv2"><span class="math display">\[
 \frac{dP}{dt} = P(cN - d).
-\]</span></p>
+\tag{5.3}\]</span></span></p>
 <p>The two plots in <a href="#fig-lotka-volterra" class="quarto-xref">Figure&nbsp;<span>5.1</span></a> generated from the Lotka-Volterra model provide a visual representation of the dynamics between a predator and prey population over time. The phase plane plot illustrates the cyclic nature of the interaction between the prey (N) and predator (P) populations, depicting a closed trajectory that indicates the continuous oscillation of both populations in relation to each other: as the prey population increases, it provides more food for the predators, which then also increase in number. However, as the predator population grows, it puts more pressure on the prey, leading to a decline in the prey population, which eventually causes the predator population to decrease due to lack of food.</p>
 <p>The plot at the bottom shows the prey and predator populations over time. It highlights the periodic rises and falls of each population, showing how the increase in the prey population precedes the increase in the predator population, followed by a subsequent decline in the prey and then the predator population. The time series plot complements the phase plane by showing how the dynamics unfold over time.</p>
 <div id="cell-fig-lotka-volterra" class="cell" data-execution_count="1">
@@ -311,46 +322,42 @@ Figure&nbsp;5.1: Solutions to the Lotka-Volterra model with parameters <span cla
 </div>
 <p><strong>Non-dimensionalization of the Model</strong></p>
 <p>Non-dimensionalization is a crucial step to reduce the complexity of the model by decreasing the number of parameters, thereby simplifying the analysis. By introducing the non-dimensional variables <span class="math inline">\(u = \frac{cN}{d}\)</span>, <span class="math inline">\(v = \frac{bP}{a}\)</span>, and the non-dimensional time <span class="math inline">\(\tau = at\)</span>, along with the parameter <span class="math inline">\(\alpha = \frac{d}{a}\)</span>, we can transform the Lotka-Volterra equations into a more tractable form:</p>
-<p><span class="math display">\[
+<p><span id="eq-lv3"><span class="math display">\[
 \frac{du}{d\tau} = u(1 - v), \quad \frac{dv}{d\tau} = \alpha v(u - 1).
-\]</span></p>
+\tag{5.4}\]</span></span></p>
 <p><strong>Phase plane paths</strong></p>
-<p>To determine the phase plane paths we consider <span class="math inline">\(v\)</span> as a function of <span class="math inline">\(u\)</span> which satisfies the equation <span class="math display">\[
+<p>To determine the phase plane paths we consider <span class="math inline">\(v\)</span> as a function of <span class="math inline">\(u\)</span> which satisfies the equation <span id="eq-lv4"><span class="math display">\[
 \frac{dv}{du} = \frac{\frac{dv}{d\tau}}{\frac{du}{d\tau}} = \frac{\alpha v(u - 1)}{u(1 - v)}.
-\]</span> We rewrite this by separating the variable and integrate: <span class="math display">\[
+\tag{5.5}\]</span></span> We rewrite this by separating the variable and integrate: <span id="eq-lv5"><span class="math display">\[
 \int\frac{1-v}{v}dv = \alpha \int\frac{u-1}{u}du.
-\]</span> This gives <span class="math display">\[
+\tag{5.6}\]</span></span> This gives <span id="eq-lv6"><span class="math display">\[
 \log v - v = \alpha (u - \log u) + \text{constant}.
-\]</span> So even though <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are changing with time, this particular combination stays constant. This is a conserved quantity. Let us suggestively call the constant of the motion <span class="math inline">\(H\)</span> for Hamiltonian and write it in terms of new variables <span class="math inline">\(p = \log u\)</span> and <span class="math inline">\(q = \log v\)</span>: <span class="math display">\[
+\tag{5.7}\]</span></span> So even though <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are changing with time, this particular combination stays constant. This is a conserved quantity. Let us suggestively call the constant of the motion <span class="math inline">\(H\)</span> for Hamiltonian and write it in terms of new variables <span class="math inline">\(p = \log u\)</span> and <span class="math inline">\(q = \log v\)</span>: <span id="eq-lv7"><span class="math display">\[
 H(q,p)= v- \log v + \alpha (u - \log u) = e^q - q + \alpha(e^p - p).
-\]</span> Hamilton’s equations <span class="math display">\[\dot{q} = \frac{dH}{dp},~~~~\dot{p} = -\frac{dH}{dq}\]</span> then reproduce our equations of motion.</p>
+\tag{5.8}\]</span></span> Hamilton’s equations <span id="eq-lv8"><span class="math display">\[\dot{q} = \frac{dH}{dp},~~~~\dot{p} = -\frac{dH}{dq} \tag{5.9}\]</span></span> then reproduce our equations of motion.</p>
 <p>This formulation underscores the conservative nature of the model, where the energy-like quantity <span class="math inline">\(H\)</span> is conserved, leading to neutrally stable periodic orbits. This Hamiltonian nature is a rather special feature of the Lotka-Volterra model. Any slight modification of the model will destroy the conserved quantity and the periodic orbits. Thus we should not expect to see such perfect periodic predator-prey cycles in nature. We will discuss more realistic predator-prey models later.</p>
 </section>
 <section id="linear-stability-analysis" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="linear-stability-analysis"><span class="header-section-number">5.2</span> Linear Stability Analysis</h2>
 <p>Before we study more realistic models, we revisit the concept of linear stability analysis, an essential tool in understanding the dynamics near the fixed points of systems described by autonomous coupled ordinary differential equations (ODEs) of the form</p>
-<p><span class="math display">\[
+<p><span id="eq-lsa1"><span class="math display">\[
 \frac{dX}{dt} = f(X,Y), \quad \frac{dY}{dt} = g(X,Y).
-\]</span></p>
+\tag{5.10}\]</span></span></p>
 <p>Let us denote the fixed points (stable states) of the system as <span class="math inline">\((x^*, y^*)\)</span>. They satisfy <span class="math inline">\(f(x^*, y^*) = 0\)</span> and <span class="math inline">\(g(x^*, y^*) = 0\)</span>.</p>
 <p><strong>Linearization around the Fixed Points</strong></p>
 <p>To analyze the stability of these fixed points, we introduce small perturbations <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> around them, setting <span class="math inline">\(X = x^* + x\)</span> and <span class="math inline">\(Y = y^* + y\)</span>. By applying a Taylor expansion and retaining only the linear terms, we obtain a linearized system:</p>
-<p><span class="math display">\[
+<p><span id="eq-lsa2"><span class="math display">\[
 \frac{d}{dt}\begin{pmatrix} x \\ y \end{pmatrix} = \mathbf{A}(x^*, y^*) \begin{pmatrix} x \\ y \end{pmatrix},
-\]</span></p>
-<p>where the Jacobian matrix <span class="math inline">\(\mathbf{A}\)</span> is defined as:</p>
-<p><span class="math display">\[
+\tag{5.11}\]</span></span> where the Jacobian matrix <span class="math inline">\(\mathbf{A}\)</span> is defined as: <span id="eq-lsa3"><span class="math display">\[
 \mathbf{A} = \begin{pmatrix} f_X &amp; f_Y \\ g_X &amp; g_Y \end{pmatrix}_{(x^*, y^*)}.
-\]</span></p>
+\tag{5.12}\]</span></span></p>
 <p><strong>Eigenvalue Analysis for Stability</strong></p>
 <p>The solution to the linearized system takes the form <span class="math inline">\((x, y) = \mathbf{v} e^{\lambda t}\)</span>, where <span class="math inline">\(\mathbf{v}\)</span> is an eigenvector of <span class="math inline">\(\mathbf{A}\)</span>, and <span class="math inline">\(\lambda\)</span> is the corresponding eigenvalue. By setting the determinant of <span class="math inline">\(\mathbf{A} - \lambda \mathbf{I}\)</span> to zero, we obtain the characteristic equation:</p>
-<p><span class="math display">\[
+<p><span id="eq-lsa4"><span class="math display">\[
 \det(\mathbf{A} - \lambda \mathbf{I}) = \begin{vmatrix} f_X - \lambda &amp; f_Y \\ g_X &amp; g_Y - \lambda \end{vmatrix}_{(x^*, y^*)} = 0,
-\]</span></p>
-<p>which leads to the eigenvalues:</p>
-<p><span class="math display">\[
+\tag{5.13}\]</span></span> which leads to the eigenvalues: <span id="eq-lsa5"><span class="math display">\[
 \lambda = \frac{\text{Tr} \mathbf{A} \pm \sqrt{(\text{Tr} \mathbf{A})^2 - 4\det \mathbf{A}}}{2}.
-\]</span></p>
+\tag{5.14}\]</span></span></p>
 <p>The stability of the fixed point is determined by the sign of the real parts of the eigenvalues:</p>
 <ul>
 <li>If both eigenvalues have negative real parts, the fixed point is stable (attracting).</li>
@@ -377,32 +384,32 @@ H(q,p)= v- \log v + \alpha (u - \log u) = e^q - q + \alpha(e^p - p).
 </ol>
 <p>These conditions provide a concise way to determine the stability of fixed points using only the determinant and trace of the Jacobian matrix, without explicitly computing the eigenvalues.</p>
 <div id="exm-lsa" class="theorem example">
-<p><span class="theorem-title"><strong>Example 5.1 (Linear Stability Analysis of the Lotka-Volterra Model)</strong></span> To explore the stability of steady states in the Lotka-Volterra model, we analyze the system near its fixed points using the Jacobian matrix <span class="math inline">\(\mathbf{A}\)</span>. For the non-dimensionalized Lotka-Volterra system, the Jacobian matrix is given by <span class="math display">\[
+<p><span class="theorem-title"><strong>Example 5.1 (Linear Stability Analysis of the Lotka-Volterra Model)</strong></span> To explore the stability of steady states in the Lotka-Volterra model, we analyze the system near its fixed points using the Jacobian matrix <span class="math inline">\(\mathbf{A}\)</span>. For the non-dimensionalized Lotka-Volterra system, the Jacobian matrix is given by <span id="eq-lsa6"><span class="math display">\[
 \mathbf{A} =
 \begin{pmatrix}
 1 - v &amp; -u \\
 \alpha v &amp; \alpha (u - 1)
 \end{pmatrix}.
-\]</span></p>
+\tag{5.15}\]</span></span></p>
 <p><strong>Steady State at <span class="math inline">\((u, v) = (0, 0)\)</span></strong></p>
 <p>For the fixed point <span class="math inline">\((u, v) = (0, 0)\)</span>, we substitute these values into the Jacobian matrix and find the eigenvalues:</p>
-<p><span class="math display">\[
+<p><span id="eq-lsa7"><span class="math display">\[
 \mathbf{A} =
 \begin{pmatrix}
 1 &amp; 0 \\
 0 &amp; -\alpha
 \end{pmatrix}.
-\]</span></p>
+\tag{5.16}\]</span></span></p>
 <p>The eigenvalues are <span class="math inline">\(\lambda_1 = 1\)</span> and <span class="math inline">\(\lambda_2 = -\alpha\)</span>, indicating that this fixed point is a saddle point due to the eigenvalues having opposite signs. This configuration is inherently unstable as trajectories near the point will diverge away along the direction associated with the positive eigenvalue.</p>
 <p><strong>Steady State at <span class="math inline">\((u, v) = (1, 1)\)</span></strong></p>
 <p>At the fixed point <span class="math inline">\((u, v) = (1, 1)\)</span>, the Jacobian matrix becomes:</p>
-<p><span class="math display">\[
+<p><span id="eq-lsa8"><span class="math display">\[
 \mathbf{A} =
 \begin{pmatrix}
 0 &amp; -1 \\
 \alpha &amp; 0
 \end{pmatrix}.
-\]</span></p>
+\tag{5.17}\]</span></span></p>
 <p>The characteristic equation for the eigenvalues <span class="math inline">\(\lambda\)</span> is <span class="math inline">\(\lambda^2 + \alpha = 0\)</span>, leading to complex eigenvalues <span class="math inline">\(\lambda = \pm i\sqrt{\alpha}\)</span>. The real part of these eigenvalues is zero, indicating that this fixed point is a center. Trajectories around this point are closed loops, implying that the system exhibits neutrally stable periodic behavior around the <span class="math inline">\((1, 1)\)</span> steady state.</p>
 <p>The period <span class="math inline">\(T\)</span> of the oscillations can be determined from the imaginary part of the eigenvalues, which is <span class="math inline">\(\sqrt{\alpha}\)</span>, so the period <span class="math inline">\(T = \frac{2\pi}{\sqrt{\alpha}}\)</span>.</p>
 </div>
@@ -413,14 +420,13 @@ H(q,p)= v- \log v + \alpha (u - \log u) = e^q - q + \alpha(e^p - p).
 <section id="generalized-predator-prey-model" class="level3" data-number="5.3.1">
 <h3 data-number="5.3.1" class="anchored" data-anchor-id="generalized-predator-prey-model"><span class="header-section-number">5.3.1</span> Generalized Predator-Prey Model</h3>
 <p>The generalized model introduces a function <span class="math inline">\(F(N, P)\)</span> representing the prey population’s per-capita growth and a function <span class="math inline">\(G(N, P)\)</span> for the predator’s per-capita growth rate, so that the dynamics are:</p>
-<p><span class="math display">\[
+<p><span id="eq-gpp1"><span class="math display">\[
 \frac{dN}{dt} = NF(N, P), \quad \frac{dP}{dt} = PG(N, P).
-\]</span></p>
-<p>The prey might exhibit logistic growth in the absence of predators. To model this we could choose</p>
-<p><span class="math display">\[
+\tag{5.18}\]</span></span></p>
+<p>The prey might exhibit logistic growth in the absence of predators. To model this we could choose <span id="eq-gpp2"><span class="math display">\[
 F(N, P) = r\left(1 - \frac{N}{K}\right) - R(N)P,
-\]</span></p>
-<p>where <span class="math inline">\(R(N)\)</span> models how the predation rate of a predator change with the prey population size. <span class="math inline">\(NR(N)\)</span> is the rate at which each individual predator consumes prey. The dependence of this rate on the prey population size <span class="math inline">\(N\)</span> is often referred to as “functional response” in the ecological literature. Holling introduced three types of functional responses, which are widely used in predator-prey models:</p>
+\tag{5.19}\]</span></span></p>
+<p>where <span class="math inline">\(r\)</span> is the intrinsic growth rate, <span class="math inline">\(K\)</span> is the carrying capacity, and <span class="math inline">\(R(N)\)</span> models how the predation rate of a predator changes with the prey population size. <span class="math inline">\(NR(N)\)</span> is the rate at which each individual predator consumes prey. The dependence of this rate on the prey population size <span class="math inline">\(N\)</span> is often referred to as “functional response” in the ecological literature. Holling introduced three types of functional responses, which are widely used in predator-prey models:</p>
 <section id="holling-type-functional-responses" class="level4">
 <h4 class="anchored" data-anchor-id="holling-type-functional-responses">Holling Type functional responses</h4>
 <ol type="1">
@@ -432,18 +438,20 @@ F(N, P) = r\left(1 - \frac{N}{K}\right) - R(N)P,
 </section>
 <section id="example" class="level3" data-number="5.3.2">
 <h3 data-number="5.3.2" class="anchored" data-anchor-id="example"><span class="header-section-number">5.3.2</span> Example</h3>
-<p>Consider a model where the prey growth rate follows logistic dynamics in the absence of prey and predation mortality is described by a Holling type II function encoding satiation effects. The predator’s growth rate goes down as the prey population decreases. The model equations are:</p>
-<p><span class="math display">\[
+<p>Consider a model where the prey growth rate follows logistic dynamics in the absence of prey and predation mortality is described by a Holling type II function encoding satiation effects. The predator’s growth rate goes down as the prey population decreases. The model equations are: <span id="eq-gpp3"><span class="math display">\[
 \frac{dN}{dt} = N\left[r\left(1 - \frac{N}{K}\right) - \frac{A}{N + B}P\right], \quad \frac{dP}{dt} = Ps\left(1 - \frac{hP}{N}\right),
-\]</span></p>
-<p>where <span class="math inline">\(r\)</span>, <span class="math inline">\(K\)</span>, <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, <span class="math inline">\(s\)</span>, and <span class="math inline">\(h\)</span> are positive constants.</p>
+\tag{5.20}\]</span></span> where <span class="math inline">\(r\)</span>, <span class="math inline">\(K\)</span>, <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, <span class="math inline">\(s\)</span>, and <span class="math inline">\(h\)</span> are positive constants.</p>
 <p><strong>Nondimensionalization</strong></p>
 <p>To reduce the complexity, we nondimensionalize the system with <span class="math inline">\(\tau = tr\)</span>, <span class="math inline">\(u = \frac{N}{K}\)</span>, <span class="math inline">\(v = \frac{hP}{K}\)</span>, <span class="math inline">\(a = \frac{A}{hr}\)</span>, <span class="math inline">\(b = \frac{B}{K}\)</span>, and <span class="math inline">\(c = \frac{s}{r}\)</span>, leading to:</p>
-<p><span class="math display">\[
+<p><span id="eq-gpp4"><span class="math display">\[
 \frac{du}{d\tau} = u(1 - u) - a\frac{uv}{u + b}, \quad \frac{dv}{d\tau} = cv\left(1 - \frac{v}{u}\right).
-\]</span></p>
+\tag{5.21}\]</span></span></p>
 <p><strong>Stability Analysis of Steady States</strong></p>
-<p>The steady states <span class="math inline">\((u^*, v^*)\)</span> include <span class="math inline">\((1, 0)\)</span> and a coexistence steady state <span class="math inline">\((u^*_+, u^*_+)\)</span>, where <span class="math display">\[u^*_+ = \frac{1-a-b+\sqrt{(1-a-b)^2+4b}}{2}.\]</span> The community matrix <span class="math inline">\(\mathbf{A}(u, v)\)</span> at these points helps determine their stability. For the fixed point <span class="math inline">\((1, 0)\)</span>, where the prey population is at carrying capacity and there are no predators, we have find <span class="math display">\[\mathbf{A}(1, 0) = \begin{pmatrix} -1 &amp; -\frac{a}{1 + b} \\ 0 &amp; c \end{pmatrix}.\]</span> The eigenvalues <span class="math inline">\(-1\)</span> and <span class="math inline">\(c\)</span> have opposite sign, indicating that the fixed point is a saddle point.</p>
+<p>The steady states <span class="math inline">\((u^*, v^*)\)</span> include <span class="math inline">\((1, 0)\)</span> and a coexistence steady state <span class="math inline">\((u^*_+, u^*_+)\)</span>, where <span id="eq-gpp5"><span class="math display">\[
+u^*_+ = \frac{1-a-b+\sqrt{(1-a-b)^2+4b}}{2}.
+\tag{5.22}\]</span></span> The community matrix <span class="math inline">\(\mathbf{A}(u, v)\)</span> at these points helps determine their stability. For the fixed point <span class="math inline">\((1, 0)\)</span>, where the prey population is at carrying capacity and there are no predators, we have find <span id="eq-gpp6"><span class="math display">\[
+\mathbf{A}(1, 0) = \begin{pmatrix} -1 &amp; -\frac{a}{1 + b} \\ 0 &amp; c \end{pmatrix}.
+\tag{5.23}\]</span></span> The eigenvalues <span class="math inline">\(-1\)</span> and <span class="math inline">\(c\)</span> have opposite sign, indicating that the fixed point is a saddle point.</p>
 <p>At the coexistence fixed point <span class="math inline">\((u^*_+, u^*_+)\)</span> the Jacobian is more complex and we will skip the analysis here.</p>
 </section>
 </section>
@@ -453,24 +461,22 @@ F(N, P) = r\left(1 - \frac{N}{K}\right) - R(N)P,
 <section id="lotka-volterra-competition-dynamics" class="level3" data-number="5.4.1">
 <h3 data-number="5.4.1" class="anchored" data-anchor-id="lotka-volterra-competition-dynamics"><span class="header-section-number">5.4.1</span> Lotka-Volterra Competition Dynamics</h3>
 <p>The model is formulated as follows for two competing species <span class="math inline">\(N_1\)</span> and <span class="math inline">\(N_2\)</span>:</p>
-<p><span class="math display">\[
+<p><span id="eq-comp1"><span class="math display">\[
 \begin{split}
 \frac{dN_1}{dt} &amp;= r_1N_1 \left(1 - \frac{N_1 + b_{12}N_2}{K_1}\right),\\
 \frac{dN_2}{dt} &amp;= r_2N_2 \left(1 - \frac{N_2 + b_{21}N_1}{K_2}\right),
 \end{split}
-\]</span></p>
+\tag{5.24}\]</span></span></p>
 <p>where <span class="math inline">\(r_i\)</span> is the intrinsic growth rate and <span class="math inline">\(K_i\)</span> is the carrying capacity of species <span class="math inline">\(i\)</span>. The coefficients <span class="math inline">\(b_{ij}\)</span> represent the competitive effect of species <span class="math inline">\(j\)</span> on species <span class="math inline">\(i\)</span>, effectively reducing the carrying capacity for species <span class="math inline">\(i\)</span> due to the presence of species <span class="math inline">\(j\)</span>.</p>
 </section>
 <section id="nondimensionalization-of-the-model" class="level3" data-number="5.4.2">
 <h3 data-number="5.4.2" class="anchored" data-anchor-id="nondimensionalization-of-the-model"><span class="header-section-number">5.4.2</span> Nondimensionalization of the Model</h3>
 <p>To simplify the analysis, we nondimensionalize the system using:</p>
-<p><span class="math display">\[
+<p><span id="eq-comp2"><span class="math display">\[
 u_i = \frac{N_i}{K_i}, \quad a_{ij} = \frac{b_{ij}K_j}{K_i}, \quad \tau = r_1 t, \quad \rho = \frac{r_2}{r_1},
-\]</span></p>
-<p>leading to:</p>
-<p><span class="math display">\[
+\tag{5.25}\]</span></span> leading to: <span id="eq-comp3"><span class="math display">\[
 \frac{du_1}{d\tau} = u_1(1 - u_1 - a_{12}u_2), ~~~~~ \frac{du_2}{d\tau} = \rho u_2(1 - u_2 - a_{21}u_1).
-\]</span></p>
+\tag{5.26}\]</span></span></p>
 </section>
 <section id="analysis-of-steady-states" class="level3" data-number="5.4.3">
 <h3 data-number="5.4.3" class="anchored" data-anchor-id="analysis-of-steady-states"><span class="header-section-number">5.4.3</span> Analysis of Steady States</h3>
@@ -538,17 +544,17 @@ Figure&nbsp;5.4: Phase portrait of competition model when <span class="math inli
 <section id="example-1" class="level3" data-number="5.5.1">
 <h3 data-number="5.5.1" class="anchored" data-anchor-id="example-1"><span class="header-section-number">5.5.1</span> Example</h3>
 <p>This model incorporates logistic growth, akin to the competition model, but with a twist to account for the mutualistic interaction:</p>
-<p><span class="math display">\[
+<p><span id="eq-mutualistic1"><span class="math display">\[
 \frac{dN_1}{dt} = r_1N_1 \left[ 1 - \frac{N_1}{K_1} + b_{12}\frac{N_2}{K_1} \right], ~~~~~ \frac{dN_2}{dt} = r_2N_2 \left[ 1 - \frac{N_2}{K_2} + b_{21}\frac{N_1}{K_2} \right],
-\]</span></p>
+\tag{5.27}\]</span></span></p>
 <p>where <span class="math inline">\(r_i\)</span>, <span class="math inline">\(K_i\)</span>, and <span class="math inline">\(b_{ij}\)</span> are all positive constants, with <span class="math inline">\(b_{ij}\)</span> representing the mutualistic benefit to species <span class="math inline">\(i\)</span> from species <span class="math inline">\(j\)</span>. Notice that we simply changed the sign of the competition terms in the competition model to turn them into mutualistic terms</p>
 </section>
 <section id="nondimensionalization-of-the-model-1" class="level3" data-number="5.5.2">
 <h3 data-number="5.5.2" class="anchored" data-anchor-id="nondimensionalization-of-the-model-1"><span class="header-section-number">5.5.2</span> Nondimensionalization of the Model</h3>
 <p>Using nondimensional variables <span class="math inline">\(u_i = N_i/K_i\)</span>, <span class="math inline">\(a_{ij} = b_{ij}K_j/K_i\)</span>, <span class="math inline">\(\tau = r_1t\)</span>, and <span class="math inline">\(\rho = r_2/r_1\)</span>, the equations transform to:</p>
-<p><span class="math display">\[
+<p><span id="eq-mutualistic2"><span class="math display">\[
 \frac{du_1}{d\tau} = u_1(1 - u_1 + a_{12}u_2), ~~~~~ \frac{du_2}{d\tau} = \rho u_2(1 - u_2 + a_{21}u_1).
-\]</span> This is as in the competition model but with the signs in front of <span class="math inline">\(a_{12}\)</span> and <span class="math inline">\(a_{21}\)</span> reversed.</p>
+\tag{5.28}\]</span></span> This is as in the competition model but with the signs in front of <span class="math inline">\(a_{12}\)</span> and <span class="math inline">\(a_{21}\)</span> reversed.</p>
 </section>
 <section id="steady-states-and-stability" class="level3" data-number="5.5.3">
 <h3 data-number="5.5.3" class="anchored" data-anchor-id="steady-states-and-stability"><span class="header-section-number">5.5.3</span> Steady States and Stability</h3>
@@ -614,10 +620,16 @@ Figure&nbsp;5.5: Phase portrait of mutualistic model when <span class="math inli
 </section>
 <section id="exercises" class="level2" data-number="5.6">
 <h2 data-number="5.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">5.6</span> Exercises</h2>
+<section id="two-species-model-1" class="level4">
+<h4 class="anchored" data-anchor-id="two-species-model-1">Two-species model 1</h4>
 <div id="exr-interacting-populations" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 5.1</strong></span> &nbsp;</p>
 <!--- From sheet 3 --->
-<p>Consider a model for the interaction of two species with populations <span class="math inline">\(N_1\)</span> and <span class="math inline">\(N_2\)</span> <span class="math display">\[ \frac{dN_1}{dt} = r_1 N_1 \left( 1 - \frac{N_1}{K_1} - b_{12}\frac{ N_2}{K_1} \right), \]</span> <span class="math display">\[  \frac{N_2}{dt} = r_2 N_2 \left( 1  - b_{21}\frac{ N_1}{K_2} \right), \]</span> where all the parameters are positive.</p>
+<p>Consider a model for the interaction of two species with populations <span class="math inline">\(N_1\)</span> and <span class="math inline">\(N_2\)</span> <span id="eq-interacting-populations1"><span class="math display">\[
+\frac{dN_1}{dt} = r_1 N_1 \left( 1 - \frac{N_1}{K_1} - b_{12}\frac{ N_2}{K_1} \right),
+\tag{5.29}\]</span></span> <span id="eq-interacting-populations2"><span class="math display">\[
+\frac{N_2}{dt} = r_2 N_2 \left( 1  - b_{21}\frac{ N_1}{K_2} \right),
+\tag{5.30}\]</span></span> where all the parameters are positive.</p>
 <ol type="a">
 <li><p>What type of interaction exists between <span class="math inline">\(N_1\)</span> and <span class="math inline">\(N_2\)</span>?</p></li>
 <li><p>Non-dimensionalize the system by introducing <span class="math inline">\(u=N_1/K_1\)</span> and <span class="math inline">\(v=N_2/K_2\)</span> as well as a non-dimensional time variable. What are the resulting non-dimensional parameters? Give the equations of motion for <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> in terms of these parameters.</p></li>
@@ -628,54 +640,60 @@ Do the same for <span class="math inline">\(N_1\)</span>. Show that the principl
 </ol>
 </div>
 <hr>
+</section>
+<section id="two-species-model-2" class="level4">
+<h4 class="anchored" data-anchor-id="two-species-model-2">Two-species model 2</h4>
 <div id="exr-interacting-populations-2" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 5.2</strong></span> &nbsp;</p>
 <!--- From Surrey exam 1999 --->
-<p>A model for the interaction between two species with populations <span class="math inline">\(N_1\)</span> and <span class="math inline">\(N_2\)</span> is determined to be <span class="math display">\[
+<p>A model for the interaction between two species with populations <span class="math inline">\(N_1\)</span> and <span class="math inline">\(N_2\)</span> is determined to be <span id="eq-interacting-populations3"><span class="math display">\[
 \begin{split}
 \frac{dN_1}{dt} &amp;= rN_1\left(1 - \frac{N_1}{K}\right) - aN_1N_2\left(1 - \exp(-bN_1)\right),\\
 \frac{dN_2}{dt} &amp;= -dN_2 + cN_2\left(1 - \exp(-bN_1)\right),
 \end{split}
-\]</span> where <span class="math inline">\(a, b, c, d, r\)</span> and <span class="math inline">\(K\)</span> are positive constants.</p>
+\tag{5.31}\]</span></span> where <span class="math inline">\(a, b, c, d, r\)</span> and <span class="math inline">\(K\)</span> are positive constants.</p>
 <ol type="a">
-<li><p>Introducing the dimensionless variables and parameters <span class="math display">\[
+<li><p>Introducing the dimensionless variables and parameters <span id="eq-interacting-populations4"><span class="math display">\[
 u = \frac{N_1}{K}, \quad v = \frac{aN_2}{r}, \quad \tau = rt, \quad \beta = bK,
-\]</span> show that <span class="math display">\[
+\tag{5.32}\]</span></span> show that <span id="eq-interacting-populations5"><span class="math display">\[
 \begin{split}
 \frac{du}{d\tau} &amp;= u(1 - u) - uv\left(1 - e^{-\beta u}\right),\\
 \frac{dv}{d\tau} &amp;= -\delta v + \alpha v\left(1 - e^{-\beta u}\right),
 \end{split}
-\]</span> giving the positive constants <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\delta\)</span> in terms of <span class="math inline">\(c, d\)</span> and <span class="math inline">\(r\)</span>.</p></li>
+\tag{5.33}\]</span></span> giving the positive constants <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\delta\)</span> in terms of <span class="math inline">\(c, d\)</span> and <span class="math inline">\(r\)</span>.</p></li>
 <li><p>Describe the relevance of each term and, hence, determine the type of interaction between the two populations.</p></li>
 <li><p>Show that the non-negative fixed points are given by <span class="math inline">\((u^*, v^*) = (0, 0), (1,0)\)</span> and <span class="math inline">\((u_1, (1 - u_1)\alpha/\delta)\)</span>, where <span class="math inline">\(u_1 = -\ln(1 - \delta/\alpha)/\beta\)</span>, and that the steady state where <span class="math inline">\(u^*\)</span> and <span class="math inline">\(v^*\)</span> are both non-zero can only exist if <span class="math inline">\(\alpha &gt; \delta\)</span> and <span class="math inline">\(\beta &gt; \beta_c = -\ln(1 - \delta/\alpha)\)</span>.</p></li>
-<li><p>Show that the community matrix, <span class="math inline">\(A\)</span>, is given by <span class="math display">\[
+<li><p>Show that the community matrix, <span class="math inline">\(A\)</span>, is given by <span id="eq-interacting-populations6"><span class="math display">\[
 A = \begin{pmatrix}
 1 - 2u - v(1 - e^{-\beta u}) - \beta uve^{-\beta u} &amp; -u\left(1 - e^{-\beta u}\right) \\
 \alpha v\beta e^{-\beta u} &amp; -\delta + \alpha(1 - e^{-\beta u})
 \end{pmatrix}.
-\]</span></p></li>
+\tag{5.34}\]</span></span></p></li>
 <li><p>Assuming henceforth that <span class="math inline">\(\delta/\alpha &lt; 1\)</span>, determine the linear stability of each of the fixed points.</p></li>
 <li><p>Sketch the <span class="math inline">\((u, v)\)</span> phase portrait to indicate the stability of each steady state for the two cases <span class="math inline">\(\beta &gt; \beta_c\)</span> and <span class="math inline">\(0 &lt; \beta &lt; \beta_c\)</span> (remember <span class="math inline">\(\alpha &gt; \delta\)</span>).</p></li>
 </ol>
 </div>
 <hr>
+</section>
+<section id="predator-prey-model-with-allee-effect" class="level4">
+<h4 class="anchored" data-anchor-id="predator-prey-model-with-allee-effect">Predator-prey model with Allee effect</h4>
 <div id="exr-interacting-populations-3" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 5.3</strong></span> &nbsp;</p>
 <!--- From 2017 exam --->
-<p>Consider the predator-prey model with Allee effect in the prey: <span class="math display">\[
+<p>Consider the predator-prey model with Allee effect in the prey: <span id="eq-interacting-populations7"><span class="math display">\[
 \begin{split}
 \frac{dN}{dT} &amp;= rN\left(\frac{N}{K_0} - 1\right)\left(1 - \frac{N}{K}\right) - cNP,\\
 \frac{dP}{dT} &amp;= bNP - mP,
 \end{split}
-\]</span> where <span class="math inline">\(N(T)\)</span> is the number of prey and <span class="math inline">\(P(T)\)</span> is the number of predators at time <span class="math inline">\(T\)</span>, and <span class="math inline">\(r, K, c, b, m\)</span> are positive constants with <span class="math inline">\(0 &lt; K_0 &lt; K\)</span>. The populations <span class="math inline">\(N(T), P(T)\)</span> are non-negative quantities.</p>
+\tag{5.35}\]</span></span> where <span class="math inline">\(N(T)\)</span> is the number of prey and <span class="math inline">\(P(T)\)</span> is the number of predators at time <span class="math inline">\(T\)</span>, and <span class="math inline">\(r, K, c, b, m\)</span> are positive constants with <span class="math inline">\(0 &lt; K_0 &lt; K\)</span>. The populations <span class="math inline">\(N(T), P(T)\)</span> are non-negative quantities.</p>
 <ol type="a">
 <li><p>Provide brief biological interpretations for <span class="math inline">\(r, K, K_0, c, b, m\)</span> for the above predator-prey model. What is the biological role of <span class="math inline">\(K_0\)</span> in the modified prey growth rate?</p></li>
 <li><p>Introduce the dimensionless variables <span class="math inline">\(\frac{N}{K} = x, \frac{cP}{r} = y, rT = t\)</span> and show that the above system can be reduced to</p></li>
 </ol>
-<p><span class="math display">\[\begin{split}
+<p><span id="eq-interacting-populations8"><span class="math display">\[\begin{split}
 \frac{dx}{dt} &amp;= x\left(\frac{x}{y} - 1\right)(1 - x) - y = x[g(x) - y],\\
 \frac{dy}{dt} &amp;= \beta(x - \alpha y).
-\end{split}\]</span> How are the new dimensionless constants <span class="math inline">\(\alpha, \beta\)</span> expressed in terms of the original parameters?</p>
+\end{split} \tag{5.36}\]</span></span> How are the new dimensionless constants <span class="math inline">\(\alpha, \beta\)</span> expressed in terms of the original parameters?</p>
 <ol start="3" type="a">
 <li><p>For the dimensionless system:</p>
 <ol type="i">
@@ -693,6 +711,7 @@ A = \begin{pmatrix}
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

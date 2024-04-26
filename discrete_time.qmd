@@ -553,6 +553,8 @@ In the lectures we drew diagrams illustrating three of the four types of bifurca
 Exercises marked with a * are essential and are to be handed in. Exercises marked with a + are important and you are urged to complete them. Other exercises are optional but recommended. The exercise marked with an o will be worked through in the problems class.
 
 
+----------------------------------------------------------------------
+
 #### + Verhulst model
 ::: {#exr-discrete_logistic}
 For some choices of the parameters, the Verhulst model
@@ -564,6 +566,8 @@ way to approach this is to think about what the cobweb diagram would have to loo
 such a scenario.
 :::
 
+----------------------------------------------------------------------
+
 #### * Ricker model
 ::: {#exr-ricker}
 Find the fixed points in the Ricker model
@@ -573,6 +577,7 @@ $$ {#eq-ex_ricker}
 and investigate their stability. Do this both analytically and by drawing cobweb diagrams.
 :::
 
+----------------------------------------------------------------------
 
 #### Beverton-Holt model
 ::: {#exr-beverton_holt}
@@ -582,6 +587,8 @@ N_{t+1} = \frac{R N_t}{1 + \frac{R-1}{K}N_t}.
 $$ {#eq-ex_beverton_holt}
 and investigate their stability. Do this both analytically and by drawing cobweb diagrams.
 :::
+
+----------------------------------------------------------------------
 
 #### o House finches
 ::: {#exr-finches}
@@ -647,6 +654,8 @@ are two positive steady states. Label key features of the curves.
 h) What type of bifurcation occurs when there is equality in the condition in part f)?
 
 :::
+
+----------------------------------------------------------------------
 
 #### Another model
 ::: {#exr-1.1}

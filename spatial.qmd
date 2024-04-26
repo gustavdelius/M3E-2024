@@ -1,0 +1,213 @@
+# Spatially-structured populations
+
+We now want to keep track of how individuals are distributed over space. So instead of describing a population by its total number of individuals $N(t)$ we describe it by a population density $u(x,t)$, where $u(x,t)dx$ is the number of individuals in the interval $[x,x+dx]$ at time $t$. We can recover the total number of individuals by integrating the density over the entire spatial domain.
+
+## Derivation of PDE
+In the non-spatial case we described the time evolution of the population by the equation
+$$
+\frac{dN}{dt} = f(N),
+$$ {#eq-nonspatial}
+where $f(N)$ is the net growth rate that encodes the difference between birth and death rates for the population as a whole. In the spatial case we have to consider the net growth rate of the population in a small interval $[x,x+dx]$. This is again given by a function $f$ that encodes the births and deaths, but now we also have  movement of individuals into or out of the interval. We write the rate of change of the number of individuals in the interval as
+$$
+\frac{\partial}{\partial t}\int_{x_0}^{x_0+\Delta x}u(x,t)dx = 
+\int_{x_0}^{x_0+\Delta x}f(u(x,t),x)dx +J(x_0)-J(x_0+\Delta x).
+$$ {#eq-spatial}
+The flux $J(x)$ is defined as the net rate at which individuals move through point $x$ from left to right. If more individuals move from right to left than from left to right, the flux is negative. We have indicated explicitly that $f$ can depend on both the population density $u$ at $x$ as well as the position $x$ itself. This is because the birth and death rates can depend on the local environment, for example the availability of resources or the presence of predators. The flux $J$ can also depend on the local population density and the position. For example, if individuals move from left to right at a rate that is proportional to the population density at $x$, we would have $J(x) = -\alpha u(x)$. We did not indicate this explicitly to simplify the notation.
+
+We now use the integral mean value theorem that states that for a continuous function $g(x)$ the integral over $g(x)$ over an interval $[a,b]$ is equal to $g(\xi)(b-a)$ for some $\xi\in[a,b]$. We apply this to the integrals in @eq-spatial to get
+$$
+\partial_t u(\xi_1,t)\Delta x = f(u(\xi_2,t),\xi_2)\Delta x +J(x_0)-J(x_0+\Delta x)
+$$ {#eq-spatial2}
+for some $\xi_1,\xi_2\in[x_0,x_0+\Delta x]$. We now divide both sides by $\Delta x$,
+$$
+\partial_t u(\xi_1,t) = f(u(\xi_2,t),\xi_2) x +\frac{J(x_0)-J(x_0+\Delta x)}{\Delta x}
+$$ {#eq-spatial3}
+and take the limit $\Delta x\to 0$, where $\xi_1\to x$ and $\xi_2\to x$ and the difference quotient becomes the derivative, to get
+$$
+\partial_t u(x,t) = f(u(x,t),x)-\partial_x J(x).
+$$  {#eq-transport}
+As discussed above, the flux $J$ can depend on the population density $u$ and the position $x$. An important example is the case where the flux is proportional to the gradient of the population density, $J(x) = -D\partial_x u(x)$, where $D$ is the diffusion coefficient. This models random motion of the individuals. Each individual is equally likely to move right or left, but if there are more individuals on the left and less on the right, then the result is a net movement to the right. That is why the flux has the opposite sign of the gradient of the density. This gives us the reaction-diffusion equation
+$$
+\partial_t u=f(u)-D\,\partial_x^2 u.
+$$ {#eq-rd}
+If there is no local population dynamics, the equation simplifies to the diffusion equation, also known as the heat equation.
+
+## Fishing model with diffusion
+
+## Invasion waves in SIR model
+
+## Turing instabilities
+
+## Directed motion
+
+## Exercises
+
+#### Travelling wave in 1-species model
+::: {#exr-spatial1}
+<!--- From sheet 4 --->
+A reaction-diffusion population model has the form
+$$
+\frac{\partial u}{\partial t}=f(u)+D\frac{\partial^2u}{\partial x^2}
+$$
+where $D>0$ and where $f$ satisfies $f(0)=f(1)=0$ and $f(u)>0$ for
+$u\in(0,1)$. 
+
+a) Convert this equation into travelling wave form by making the
+Ansatz that $u(x,t)=U(z)$ and $v(x,t)=V(z)$ with $z=x-ct$.
+
+b) Assuming
+that a solution exists such that $U(-\infty)=1$, $U(\infty)=0$ show, by
+linearising the equation at the leading edge,
+that for a biologically realistic solution the wave speed $c$ satisfies
+$c\geq 2\sqrt{Df'(0)}$.
+
+c) Suppose that, instead, $f(u)=0$. Show that the equation in travelling
+wave form becomes $DU''+c\,U'=0$.  Give the general solution of
+this. Does the solution look realistic for a function that represents
+a population?
+:::
+
+----------------------------------------------------------------------
+
+#### Travelling wave in 2-species model
+::: {#exr-spatial2}
+<!--- From sheet 4 --->
+Consider the system
+$$
+\begin{split}
+\frac{\partial u}{\partial t}&=-u^2v \\
+\frac{\partial v}{\partial t}&=u^2v-\rho
+v+\frac{\partial^2v}{\partial x^2}
+\end{split}
+$$
+where $\rho$ is a positive constant. 
+Convert this system into travelling wave form
+by making the
+Ansatz that $u(x,t)=U(z)$ and $v(x,t)=V(z)$ with $z=x-ct$, and show in particular that
+$$
+-c\frac{dV}{dz}=c\frac{dU}{dz}-\frac{\rho
+  c}{U^2}\frac{dU}{dz}+\frac{d^2V}{dz^2}.
+$$
+Consider a solution of the travelling wave equations
+such that $U(\infty)=1$, $U(-\infty)=a$, $V(\pm\infty)=0$ for some $a<1$.
+By integrating the above equation from $-\infty$ to
+$\infty$ and imposing the boundary conditions, determine 
+ the value of $a$. Also determine a lower bound on the
+wave velocity $c$ by linearising around the leading edge of the
+wave.
+:::
+
+----------------------------------------------------------------------
+
+#### SIR model with logistic growth
+::: {#exr-spatial3}
+<!--- From sheet 4 --->
+Assume that in the absence of rabies, the fox population is described by a
+logistic model with intrinsic growth rate $r$ and carrying capacity $K$.
+Adding this population dynamics to the SIR model gives the equations
+$$\begin{split}
+\partial_t S&=rS\left(1-\frac{S}{K}\right)-\beta SI\\
+\partial_t I&=\beta SI-\gamma I.
+\end{split}$$
+We ignore the removed component $R$, which in this case would correspond to
+dead foxes.
+
+
+a) Show that this model can be written in non-dimensionalised
+form as
+$$\begin{split}
+\partial_{\tilde{t}} u&=bu(1-u)-uv\\
+\partial_{\tilde{t}} v&=uv-mv.\label{dw}
+\end{split}$$
+
+b) Determine the steady state solutions (fixed points). Under
+what condition on the parameters is there an endemic state?
+
+Now assume that both susceptible and infected foxes move around randomly,
+but at different rates. This adds diffusion terms to the SIR model, where now
+$S=S(x,t)$ and $I=I(x,t)$ denote densities in space.
+
+$$\begin{split}
+\partial_t S&=rS\left(1-\frac{S}{K}\right)-\beta SI+D_1\partial_x^2S\\\
+\partial_t I&=\beta SI-\gamma I+D_2\partial_x^2I.
+\end{split}$$
+
+c) Give expressions for $\tilde{x}$ and $d$ such that this model can be written in non-dimensionalised
+form as
+$$\begin{split}
+\partial_{\tilde{t}} u&=bu(1-u)-uv+\partial_{\tilde{x}}^2u\\
+\partial_{\tilde{t}} v&=uv-m v+d\,\partial_{\tilde{x}}^2v
+\end{split}$$
+
+We will now work with these non-dimensional equations but drop the tildes to avoid clutter.
+
+d) Make the travelling wave Ansatz
+$$
+u(x,t)=A(z),~~~v(x,t)=B(z)
+$$
+with $z=x-ct$ for some $c>0$
+and derive the system of ODEs describing the functions $A$ and $B$. 
+
+e) If $A(\infty)=1$, what are $A(-\infty), B(\infty)$ and $B(-\infty)$? Make a sketch of $A(z)$
+and $B(z)$ and indicate the direction of travel with an arrow. 
+
+f) By linearising about the leading edge of the wave where $B$ is
+very small, determine a lower limit on the wave speed $c$.
+
+:::
+
+----------------------------------------------------------------------
+
+#### Derive Turing instability
+::: {#exr-spatial4}
+Consider the reaction-diffusion model
+$$\begin{split}
+\frac{\partial u}{\partial t}&=a-u+u^2v+D_1\frac{\partial^2u}{\partial
+  x^2} \\
+\frac{\partial v}{\partial t}&=b-u^2v+D_2\frac{\partial^2v}{\partial
+  x^2}
+\end{split}$$
+where $b>0$ and $a+b>0$.
+
+Show that a spatially uniform steady state solution $(u^*,v^*)$ exists
+for this model and is given by $(u^*,v^*)=(a+b\,,\;b/(a+b)^2)$. Show that
+the conditions for this steady state to be driven unstable by
+diffusion are that the three inequalities
+$$
+b-a<(a+b)^3$$
+$$\left[D_2\left(\frac{b-a}{a+b}\right)-D_1(a+b)^2\right]^2>4D_1D_2(a+b)^2
+$$
+$$D_2\left(\frac{b-a}{a+b}\right)-D_1(a+b)^2>0$$
+should all hold simultaneously.
+
+:::
+
+----------------------------------------------------------------------
+
+#### Slime mould with boundary
+::: {#exr-spatial5}
+In the model for the aggregation of slime mould amoebae
+suppose that the spatial domain is $0\leq x\leq L$ rather than
+$-\infty<x<\infty$. Show that the conditions for aggregation to occur
+are $\mbox{\large $\chi$} a^*f>k\mu$ and
+$$L>\pi\sqrt{\frac{D\mu}{\chi a^* f-k\mu}}.$$
+:::
+
+----------------------------------------------------------------------
+
+#### Conditions for Turing instability
+::: {#exr-spatial6}
+
+Consider the reaction-diffusion model
+$$\begin{split}
+\frac{\partial c_1}{\partial t}&=\delta -kc_1 - c_1c_2^2 + D_1\frac{\partial^2c_1}{\partial
+  x^2} \\
+\frac{\partial c_2}{\partial t}&=kc_1+c_1c_2^2 - c_2 + D_2\frac{\partial^2c_2}{\partial
+  x^2}
+\end{split}$$
+
+Show that a spatially uniform steady state solution $(c_1^*,c_2^*)$ exists
+for this model and  give the conditions for this steady state to be driven unstable by
+diffusion. You may use any results derived in the lectures.
+
+:::

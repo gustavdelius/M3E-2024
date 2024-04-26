@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./solutions.html" rel="next">
+<link href="./spatial.html" rel="next">
 <link href="./interacting.html" rel="prev">
 <link href="./virus.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -225,6 +225,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Epidemics</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./spatial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Spatially-structured populations</span></span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
@@ -260,14 +266,22 @@ window.Quarto = {
   </ul></li>
   <li><a href="#how-an-epidemic-unfolds" id="toc-how-an-epidemic-unfolds" class="nav-link" data-scroll-target="#how-an-epidemic-unfolds"><span class="header-section-number">6.2</span> How an epidemic unfolds</a>
   <ul>
-  <li><a href="#trajectory-in-s-i-plane" id="toc-trajectory-in-s-i-plane" class="nav-link" data-scroll-target="#trajectory-in-s-i-plane"><span class="header-section-number">6.2.1</span> Trajectory in S-I plane</a></li>
-  <li><a href="#peak-of-an-epidemic" id="toc-peak-of-an-epidemic" class="nav-link" data-scroll-target="#peak-of-an-epidemic"><span class="header-section-number">6.2.2</span> Peak of an epidemic</a></li>
+  <li><a href="#sec-si" id="toc-sec-si" class="nav-link" data-scroll-target="#sec-si"><span class="header-section-number">6.2.1</span> Trajectory in S-I plane</a></li>
+  <li><a href="#sec-peak" id="toc-sec-peak" class="nav-link" data-scroll-target="#sec-peak"><span class="header-section-number">6.2.2</span> Peak of an epidemic</a></li>
   <li><a href="#trajectory-in-r-s-plane" id="toc-trajectory-in-r-s-plane" class="nav-link" data-scroll-target="#trajectory-in-r-s-plane"><span class="header-section-number">6.2.3</span> Trajectory in R-S plane</a></li>
   <li><a href="#size-of-an-epidemic" id="toc-size-of-an-epidemic" class="nav-link" data-scroll-target="#size-of-an-epidemic"><span class="header-section-number">6.2.4</span> Size of an epidemic</a></li>
   <li><a href="#sec-doubling" id="toc-sec-doubling" class="nav-link" data-scroll-target="#sec-doubling"><span class="header-section-number">6.2.5</span> Initial exponential growth</a></li>
   <li><a href="#doubling-time" id="toc-doubling-time" class="nav-link" data-scroll-target="#doubling-time"><span class="header-section-number">6.2.6</span> Doubling time</a></li>
   </ul></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">6.3</span> Exercises</a></li>
+  <li><a href="#sec-vaccinations" id="toc-sec-vaccinations" class="nav-link" data-scroll-target="#sec-vaccinations"><span class="header-section-number">6.3</span> Effect of vaccination</a></li>
+  <li><a href="#sec-loi" id="toc-sec-loi" class="nav-link" data-scroll-target="#sec-loi"><span class="header-section-number">6.4</span> Effect of loss of immunity</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">6.5</span> Exercises</a>
+  <ul>
+  <li><a href="#sec-sir1" id="toc-sec-sir1" class="nav-link" data-scroll-target="#sec-sir1">* SIR with vaccination and loss of immunity</a></li>
+  <li><a href="#sec-sir2" id="toc-sec-sir2" class="nav-link" data-scroll-target="#sec-sir2">SIR with recrudescence</a></li>
+  <li><a href="#sec-sir3" id="toc-sec-sir3" class="nav-link" data-scroll-target="#sec-sir3">SIR model with reinfections</a></li>
+  <li><a href="#sec-sir4" id="toc-sec-sir4" class="nav-link" data-scroll-target="#sec-sir4">Sex-structured SIR model</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/gustavdelius/M3E-2024/edit/main/epidemics.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -338,14 +352,25 @@ window.Quarto = {
 <p>The first equation describes the rate of change of the susceptible compartment over time. It states that the number of susceptible individuals decreases over time as they become infected with the disease at a rate proportional to the proportion <span class="math inline">\(I/N\)</span> of infected individuals and the transmission rate <span class="math inline">\(\beta\)</span>. The minus sign indicates that the number of susceptible individuals is decreasing over time.</p>
 <p>The second equation describes the rate of change of the infected compartment over time. It states that the number of infected individuals increases over time at the same rate at which the susceptibles become infected, and decreases over time as infected individuals recover at a rate <span class="math inline">\(\gamma\)</span>.</p>
 <p>The third equation describes the rate of change of the recovered compartment over time. It states that the number of recovered individuals increases over time as infected individuals recover and become immune at the recovery rate <span class="math inline">\(\gamma\)</span>.</p>
+<p>We can represent the SIR model graphically by a directed graph with one node for each component and directed edges between the nodes to represent the flow of individuals between the compartments. This is illustrated in <a href="#fig-sir" class="quarto-xref">Figure&nbsp;<span>6.2</span></a>. We have labeled the edges by the per-capita rates.</p>
+<div id="fig-sir" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sir-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/Epidemics/SIR.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sir-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.1: Graphical representation of the SIR model.
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="assumptions-made-by-sir-model" class="level3" data-number="6.1.2">
 <h3 data-number="6.1.2" class="anchored" data-anchor-id="assumptions-made-by-sir-model"><span class="header-section-number">6.1.2</span> Assumptions made by SIR model</h3>
-<p>Like all models, the SIR model makes a number of simplifying assumptions to make the calculations tractable and the results interpretable. it is important to note that therefore an SIR model will not capture all of the nuances of disease transmission in a real population. The assumptions made by the SIR model include:</p>
+<p>Like all models, the SIR model makes a number of simplifying assumptions to make the calculations tractable and the results interpretable. It is important to note that therefore an SIR model will not capture all of the nuances of disease transmission in a real population. The assumptions made by the SIR model include:</p>
 <ol type="1">
-<li><p>Fixed population: The SIR model assumes that the total population size <span class="math inline">\(N=S+I+R\)</span> is fixed and does not change over time. We can see that by observing that <span class="math display">\[
+<li><p>Fixed population: The SIR model assumes that the total population size <span class="math inline">\(N=S+I+R\)</span> is fixed and does not change over time. We can see that by observing that <span id="eq-dN"><span class="math display">\[
 \frac{dN}{dt}=\frac{dS}{dt}+\frac{dI}{dt}+\frac{dR}{dt}=0.
-\]</span> So there is no population dynamics such as birth or natural death (death from the illness itself can be included by viewing the <span class="math inline">\(R\)</span> component as the “removed” component) or immigration or emigration. Neglecting population dynamics is fine if the spread of the disease happens much faster than the population dynamics.</p></li>
+\tag{6.2}\]</span></span> So there is no population dynamics such as birth or natural death (death from the illness itself can be included by viewing the <span class="math inline">\(R\)</span> component as the “removed” component) or immigration or emigration. Neglecting population dynamics is fine if the spread of the disease happens much faster than the population dynamics.</p></li>
 <li><p>Well-mixed population: The SIR model assumes that the population is well-mixed, meaning that all individuals have the same probability of coming into contact with one another, regardless of their location or social network. That is why the total rate of infection is simply proportional to both <span class="math inline">\(S\)</span> and <span class="math inline">\(I\)</span>, which is also known as the <em>mass-action dynamics</em>, a concept taken over from the modelling of chemical reactions.</p></li>
 <li><p>No vaccinations: The SIR model assumes that there are no vaccinations available for the disease, and that individuals can only become immune to the disease by recovering from the infection.</p></li>
 <li><p>No incubation period: The SIR model assumes that there is no incubation period, which means that individuals move directly from the susceptible compartment to the infectious compartment once they become infected. This assumption is often referred to as the “instantaneous transmission” assumption.</p>
@@ -361,14 +386,14 @@ window.Quarto = {
 <section id="condition-for-an-epidemic" class="level3" data-number="6.1.3">
 <h3 data-number="6.1.3" class="anchored" data-anchor-id="condition-for-an-epidemic"><span class="header-section-number">6.1.3</span> Condition for an epidemic</h3>
 <p>Let us investigate the possibility of an epidemic. So we start with initial conditions where the number of infecteds is small and the number of susceptibles is high. There are no recovereds yet. We’ll write the initial conditions as</p>
-<p><span class="math display">\[
+<p><span id="eq-IC"><span class="math display">\[
 S(0)=S_0, ~~~ I(0)=I_0, ~~~R(0)=0,
-\]</span> with <span class="math inline">\(S_0\approx N\)</span> and <span class="math inline">\(I_0 &lt;&lt; N\)</span>.</p>
-<p>In order for an epidemic to start we need a positive rate of increase in the number of infecteds. Thus we need <span class="math display">\[
+\tag{6.3}\]</span></span> with <span class="math inline">\(S_0\approx N\)</span> and <span class="math inline">\(I_0 &lt;&lt; N\)</span>.</p>
+<p>In order for an epidemic to start we need a positive rate of increase in the number of infecteds. Thus we need <span id="eq-epidemic"><span class="math display">\[
 \left.\frac{dI}{dt}\right|_{t=0} = \beta I_0S_0/N -\gamma I_0&gt;0.
-\]</span> This happens when <span class="math display">\[
+\tag{6.4}\]</span></span> This happens when <span id="eq-R0"><span class="math display">\[
 R_0 :=\frac{\beta S_0}{\gamma N} &gt; 1.
-\]</span></p>
+\tag{6.5}\]</span></span></p>
 <p>We have introduced the <strong>basic reproduction ratio</strong> <span class="math inline">\(R_0\)</span>. It is a key parameter in infectious disease epidemiology that measures the average number of secondary infections that a single infectious individual will produce. It is a useful metric for understanding the potential for an infectious disease to spread through a population, because if <span class="math inline">\(R_0\)</span> is greater than <span class="math inline">\(1\)</span>, then an epidemic can occur, as each infectious individual will produce more than one secondary infection on average, leading to a sustained increase in the number of infected individuals. If<span class="math inline">\(R_0\)</span> is less than <span class="math inline">\(1\)</span>, then an epidemic can not occur, as each infectious individual will produce less than one secondary infection on average, leading to a decline in the number of infected individuals over time.</p>
 <p>The basic reproduction ratio is also sometimes referred to as the <em>basic reproductive number</em>. Do not call it the <em>basic reproductive rate</em> because it is not a rate. There is also potential confusion due to the notation between <span class="math inline">\(R_0\)</span> and <span class="math inline">\(R(0)\)</span>.</p>
 <p>It is interesting to observe there are three ways an epidemic can start:</p>
@@ -383,7 +408,7 @@ R_0 :=\frac{\beta S_0}{\gamma N} &gt; 1.
 <h2 data-number="6.2" class="anchored" data-anchor-id="how-an-epidemic-unfolds"><span class="header-section-number">6.2</span> How an epidemic unfolds</h2>
 <p>Let us think about how an epidemic unfolds, once started. The epidemic begins with an initial number of infectious individuals, and as these individuals come into contact with susceptible individuals, the number of infectious individuals increases, and the number of susceptible individuals decreases. The number of individuals in the recovered compartment also increases as more individuals recover from the infection and become immune to the disease.</p>
 <p>The epidemic reaches its peak when the number of infectious individuals in the population is at its maximum. After this point, the number of infectious individuals begins to decrease, and the number of recovered individuals continues to increase. The epidemic ends when the number of infectious individuals reaches zero and the disease is no longer spreading in the population.</p>
-<p>As is usual with non-linear models, a direct solution of the set of differential equations in <a href="#eq-SIR" class="quarto-xref">Eq.&nbsp;<span>6.1</span></a> is only possible numerically. Such a numerical solution is displayed in <a href="#fig-sir" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>.</p>
+<p>As is usual with non-linear models, a direct solution of the set of differential equations in <a href="#eq-SIR" class="quarto-xref">Eq.&nbsp;<span>6.1</span></a> is only possible numerically. Such a numerical solution is displayed in <a href="#fig-sir" class="quarto-xref">Figure&nbsp;<span>6.2</span></a>.</p>
 <div id="cell-fig-sir" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
@@ -443,25 +468,25 @@ R_0 :=\frac{\beta S_0}{\gamma N} &gt; 1.
 <img src="epidemics_files/figure-html/fig-sir-output-1.png" alt="Example of an epidemic in an SIR model" width="510" height="371" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sir-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.1: Evolution of an epidemic as described by the SIR model. The graph shows the dynamics of the susceptible <span class="math inline">\(S\)</span>, infected <span class="math inline">\(I\)</span>, and recovered <span class="math inline">\(R\)</span> population fractions over time. In this scenario, we start with a single infected individual in a population of 1000, with a contact rate of <span class="math inline">\(\beta=0.3\)</span> and a recovery rate of <span class="math inline">\(\gamma=0.1\)</span>. The plot demonstrates how the infection spreads through the population, peaks, and eventually declines as individuals recover and gain immunity.
+Figure&nbsp;6.2: Evolution of an epidemic as described by the SIR model. The graph shows the dynamics of the susceptible <span class="math inline">\(S\)</span>, infected <span class="math inline">\(I\)</span>, and recovered <span class="math inline">\(R\)</span> population fractions over time. In this scenario, we start with a single infected individual in a population of 1000, with a contact rate of <span class="math inline">\(\beta=0.3\)</span> and a recovery rate of <span class="math inline">\(\gamma=0.1\)</span>. The plot demonstrates how the infection spreads through the population, peaks, and eventually declines as individuals recover and gain immunity.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>We however are interested in analytic insights. It turns out that it is easy to determine the shape of the trajectories in the SIR phase space.</p>
-<section id="trajectory-in-s-i-plane" class="level3" data-number="6.2.1">
-<h3 data-number="6.2.1" class="anchored" data-anchor-id="trajectory-in-s-i-plane"><span class="header-section-number">6.2.1</span> Trajectory in S-I plane</h3>
+<section id="sec-si" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="sec-si"><span class="header-section-number">6.2.1</span> Trajectory in S-I plane</h3>
 <p>First we will determine how the number of infecteds changes with the number of susceptibles. This is described by the differential equation</p>
 <p><span id="eq-dids"><span class="math display">\[
 \frac{dI}{dS}=\frac{dI/dt}{dS/dt}=\frac{\beta IS-\gamma IN}{-\beta IS}=-1+\frac{\gamma}{\beta}\frac{N}{S}
-\tag{6.2}\]</span></span> We can easily integrate this equation: <span class="math display">\[
+\tag{6.6}\]</span></span> We can easily integrate this equation: <span id="eq-int"><span class="math display">\[
 \int_{I_0}^{I(S)} d\tilde{I}=\int_{S_0}^S\left(-1+\frac{\gamma N}{\beta \tilde{S}}\right)d\tilde{S}
-\]</span> gives <span class="math display">\[
+\tag{6.7}\]</span></span> gives <span id="eq-I"><span class="math display">\[
 I(S)-I_0 = -S+S_0+\frac{\gamma N}{\beta}\log\left( \frac{S}{S_0}\right),
-\]</span> which we can rewrite as <span id="eq-is"><span class="math display">\[
+\tag{6.8}\]</span></span> which we can rewrite as <span id="eq-is"><span class="math display">\[
 I(S) = N-S + \frac{\gamma N}{\beta}\log \frac{S}{S_0},
-\tag{6.3}\]</span></span> where we used that <span class="math inline">\(N=S_0+I_0\)</span>.</p>
+\tag{6.9}\]</span></span> where we used that <span class="math inline">\(N=S_0+I_0\)</span>.</p>
 <div id="cell-fig-si" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
@@ -508,32 +533,32 @@ I(S) = N-S + \frac{\gamma N}{\beta}\log \frac{S}{S_0},
 <img src="epidemics_files/figure-html/fig-si-output-1.png" width="482" height="376" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-si-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.2: Shape of epidemic in S-I plane
+Figure&nbsp;6.3: Shape of epidemic in S-I plane
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>This is depicted in <a href="#fig-si" class="quarto-xref">Figure&nbsp;<span>6.2</span></a>. It agrees with our earlier intuitive description of how an epidemic unfolds. The number of infecteds increases with the number of susceptibles until the number of susceptibles is low enough that the number of infecteds reaches its maximum. After this point, the number of infecteds begins to decrease as the number of susceptibles decreases further.</p>
+<p>This is depicted in <a href="#fig-si" class="quarto-xref">Figure&nbsp;<span>6.3</span></a>. It agrees with our earlier intuitive description of how an epidemic unfolds. The number of infecteds increases with the number of susceptibles until the number of susceptibles is low enough that the number of infecteds reaches its maximum. After this point, the number of infecteds begins to decrease as the number of susceptibles decreases further.</p>
 <p>We can use this result to determine the number <span class="math inline">\(I_{max}\)</span> of infected individuals at the peak of the epidemic.</p>
 </section>
-<section id="peak-of-an-epidemic" class="level3" data-number="6.2.2">
-<h3 data-number="6.2.2" class="anchored" data-anchor-id="peak-of-an-epidemic"><span class="header-section-number">6.2.2</span> Peak of an epidemic</h3>
-<p>Knowing the maximum number of infected individuals can help public health officials plan for the allocation of resources such as hospital beds, medical staff, and equipment. This information can be used to anticipate the surge in demand for healthcare services and to prepare for the management of large numbers of patients. It can also be used to guide the planning of interventions such as vaccinations in order to avoid overstretching the health system at the peak of the epidemic. We will discuss that in <span class="quarto-unresolved-ref">?sec-vaccinations</span>.</p>
-<p>The peak is where <span class="math inline">\(dI/dS=0\)</span>, which according to <a href="#eq-dids" class="quarto-xref">Eq.&nbsp;<span>6.2</span></a> happens at <span class="math inline">\(S=\gamma N/\beta\)</span>. Thus according to <a href="#eq-is" class="quarto-xref">Eq.&nbsp;<span>6.3</span></a> <span class="math display">\[
+<section id="sec-peak" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="sec-peak"><span class="header-section-number">6.2.2</span> Peak of an epidemic</h3>
+<p>Knowing the maximum number of infected individuals can help public health officials plan for the allocation of resources such as hospital beds, medical staff, and equipment. This information can be used to anticipate the surge in demand for healthcare services and to prepare for the management of large numbers of patients. It can also be used to guide the planning of interventions such as vaccinations in order to avoid overstretching the health system at the peak of the epidemic. We will discuss that in <a href="#sec-vaccinations" class="quarto-xref"><span>Section 6.3</span></a>.</p>
+<p>The peak is where <span class="math inline">\(dI/dS=0\)</span>, which according to <a href="#eq-dids" class="quarto-xref">Eq.&nbsp;<span>6.6</span></a> happens at <span class="math inline">\(S=\gamma N/\beta\)</span>. Thus according to <a href="#eq-is" class="quarto-xref">Eq.&nbsp;<span>6.9</span></a> <span id="eq-Imax"><span class="math display">\[
 I_{max}=I\left(\frac{\gamma}{\beta}N\right)
 =N-\frac{\gamma}{\beta}N\left(1-\log\frac{\gamma N}{\beta S_0}\right)
-\]</span> We can express this in terms of the basic reproduction ratio <span class="math inline">\(R_0\)</span> as <span class="math display">\[
+\tag{6.10}\]</span></span> We can express this in terms of the basic reproduction ratio <span class="math inline">\(R_0\)</span> as <span id="eq-ImaxR0"><span class="math display">\[
 I_{max}= N-\frac{S_0}{R_0}(1+\log R_0)
-\]</span></p>
+\tag{6.11}\]</span></span></p>
 </section>
 <section id="trajectory-in-r-s-plane" class="level3" data-number="6.2.3">
 <h3 data-number="6.2.3" class="anchored" data-anchor-id="trajectory-in-r-s-plane"><span class="header-section-number">6.2.3</span> Trajectory in R-S plane</h3>
-<p>Next we will determine the relationship between the number of susceptibles and the number of recovereds, by using <span class="math display">\[
+<p>Next we will determine the relationship between the number of susceptibles and the number of recovereds, by using <span id="eq-dsdr"><span class="math display">\[
 \frac{dS}{dR}=\frac{dS/dt}{dR/dt}= -\frac{\beta}{\gamma}\frac{S}{N}.
-\]</span> This is solved by <span class="math display">\[
+\tag{6.12}\]</span></span> This is solved by <span id="eq-SR"><span class="math display">\[
 S(R) = S_0 \exp\left(-\frac{\beta}{\gamma}\frac{R}{N}\right)
-\]</span> This is depicted in <a href="#fig-rs" class="quarto-xref">Figure&nbsp;<span>6.3</span></a>. We see in particular that the number of susceptibles decreases exponentially with the number of recovereds but never reaches zero. This means that at the time where the last infected individual recovers and the epidemic ends, there are still individuals that never caught the disease.</p>
+\tag{6.13}\]</span></span> This is depicted in <a href="#fig-rs" class="quarto-xref">Figure&nbsp;<span>6.4</span></a>. We see in particular that the number of susceptibles decreases exponentially with the number of recovereds but never reaches zero. This means that at the time where the last infected individual recovers and the epidemic ends, there are still individuals that never caught the disease.</p>
 <div id="cell-fig-rs" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
@@ -573,7 +598,7 @@ S(R) = S_0 \exp\left(-\frac{\beta}{\gamma}\frac{R}{N}\right)
 <img src="epidemics_files/figure-html/fig-rs-output-1.png" width="490" height="376" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.3: Shape of epidemic in R-S plane
+Figure&nbsp;6.4: Shape of epidemic in R-S plane
 </figcaption>
 </figure>
 </div>
@@ -582,42 +607,42 @@ Figure&nbsp;6.3: Shape of epidemic in R-S plane
 </section>
 <section id="size-of-an-epidemic" class="level3" data-number="6.2.4">
 <h3 data-number="6.2.4" class="anchored" data-anchor-id="size-of-an-epidemic"><span class="header-section-number">6.2.4</span> Size of an epidemic</h3>
-<p>By the size of an epidemic we mean the total number of individuals that catches the disease in the course of the epidemic. As we saw above, this will be less than the total population number. Let us denote the numbers at the end of the epidemic by a subscript <span class="math inline">\(\infty\)</span>. We have that <span class="math inline">\(I(\infty)=0\)</span> and <span class="math inline">\(S(\infty)\)</span> is the solution to the equation <span class="math display">\[
+<p>By the size of an epidemic we mean the total number of individuals that catches the disease in the course of the epidemic. As we saw above, this will be less than the total population number. Let us denote the numbers at the end of the epidemic by a subscript <span class="math inline">\(\infty\)</span>. We have that <span class="math inline">\(I(\infty)=0\)</span> and <span class="math inline">\(S(\infty)\)</span> is the solution to the equation <span id="eq-Sinf"><span class="math display">\[
 \begin{split}
 S_\infty&amp;=S(R_\infty)=S_0\exp\left(-\frac{\beta}{\gamma N}R_\infty\right)\\
 &amp;=S_0\exp\left(-\frac{\beta}{\gamma N}(N-S_\infty)\right)\\
 &amp;=S_0\exp\left(-\frac{\beta}{\gamma}\right)\exp\left(\frac{\beta}{\gamma N}S_\infty\right).
 \end{split}
-\]</span> This equation can be solved numerically. We can also get an approximate analytic solution in the case where the epidemic is large so that the fraction of the population that never gets infected is small compared to <span class="math inline">\(\gamma/\beta\)</span>, <span class="math inline">\(S_\infty/N&lt;&lt;\gamma/\beta\)</span>. In this case we can expand the last exponential in the equation above to first order in <span class="math inline">\(S_\infty/N\)</span> to get the approximate equation <span class="math display">\[
+\tag{6.14}\]</span></span> This equation can be solved numerically. We can also get an approximate analytic solution in the case where the epidemic is large so that the fraction of the population that never gets infected is small compared to <span class="math inline">\(\gamma/\beta\)</span>, <span class="math inline">\(S_\infty/N&lt;&lt;\gamma/\beta\)</span>. In this case we can expand the last exponential in the equation above to first order in <span class="math inline">\(S_\infty/N\)</span> to get the approximate equation <span id="eq-Sinfapp"><span class="math display">\[
 S_\infty\approx S_0\exp\left(-\frac{\beta}{\gamma}\right)\left(1+\frac{\beta}{\gamma N}S_\infty\right)
-\]</span> This we can now easily solve for <span class="math inline">\(S_\infty\)</span> to get <span class="math display">\[
+\tag{6.15}\]</span></span> This we can now easily solve for <span class="math inline">\(S_\infty\)</span> to get <span id="eq-Sinfapp2"><span class="math display">\[
 S_\infty\approx \frac{S_0e^{-\beta/\gamma}}{1-\frac{\beta}{\gamma}\frac{S_0}{N}e^{-\beta/\gamma}}.
-\]</span> We can express this in terms of the basic reproduction ratio <span class="math inline">\(R_0\)</span> as <span class="math display">\[
+\tag{6.16}\]</span></span> We can express this in terms of the basic reproduction ratio <span class="math inline">\(R_0\)</span> as <span id="eq-Sinfapp3"><span class="math display">\[
 \frac{S_\infty}{S_0}\approx \frac{1}{e^{\beta/\gamma}-R_0}.
-\]</span></p>
+\tag{6.17}\]</span></span></p>
 </section>
 <section id="sec-doubling" class="level3" data-number="6.2.5">
 <h3 data-number="6.2.5" class="anchored" data-anchor-id="sec-doubling"><span class="header-section-number">6.2.5</span> Initial exponential growth</h3>
-<p>At the start of the epidemic when the number of infecteds is small and hence the number of susceptibles is close to <span class="math inline">\(N\)</span>, we can approximate <span class="math display">\[
+<p>At the start of the epidemic when the number of infecteds is small and hence the number of susceptibles is close to <span class="math inline">\(N\)</span>, we can approximate <span id="eq-dIdt"><span class="math display">\[
 \frac{dI}{dt}=\beta I\frac{S}{N}-\gamma I\approx (\beta -\gamma)I
-\]</span> and hence <span id="eq-Ii"><span class="math display">\[
+\tag{6.18}\]</span></span> and hence <span id="eq-Ii"><span class="math display">\[
 I(t)\approx I_0e^{(\beta -\gamma)t}.
-\tag{6.4}\]</span></span></p>
-<p>We can also get an equation for <span class="math inline">\(R(t)\)</span> by using the equation for <span class="math inline">\(S(R)\)</span> as follows: <span class="math display">\[
+\tag{6.19}\]</span></span></p>
+<p>We can also get an equation for <span class="math inline">\(R(t)\)</span> by using the equation for <span class="math inline">\(S(R)\)</span> as follows: <span id="eq-dRdt"><span class="math display">\[
 \begin{split}
 \frac{dR}{dt}&amp;=\gamma I=\gamma \left(N-R-S\right)\\
 &amp;=\gamma \left(N-R-S_0\exp\left(-\frac{\beta}{\gamma}\frac{R}{N}\right)\right)
 \end{split}
-\]</span></p>
-<p>At the initial stages of the epidemic while the number of recovereds is small we can expand the exponential and keep only the first-order term to get <span class="math display">\[
+\tag{6.20}\]</span></span></p>
+<p>At the initial stages of the epidemic while the number of recovereds is small we can expand the exponential and keep only the first-order term to get <span id="eq-dRdt2"><span class="math display">\[
 \begin{split}
 \frac{dR}{dt}&amp;
 \approx \gamma \left(N-R-S_0\left(1-\frac{\beta}{\gamma}\frac{R}{N}\right)\right)\\
 &amp;=\gamma I_0 - \gamma (1 + R_0)R
 \end{split}
-\]</span> where we used that <span class="math inline">\(N-S_0=I_0\)</span>. Again we must not be confused by the notation: <span class="math inline">\(R_0\)</span> is the basic reproduction number, not the number of recovered at time <span class="math inline">\(0\)</span>. We have a linear differential equation for <span class="math inline">\(R(t)\)</span> that can be solved to give <span id="eq-Ri"><span class="math display">\[
+\tag{6.21}\]</span></span> where we used that <span class="math inline">\(N-S_0=I_0\)</span>. Again we must not be confused by the notation: <span class="math inline">\(R_0\)</span> is the basic reproduction number, not the number of recovered at time <span class="math inline">\(0\)</span>. We have a linear differential equation for <span class="math inline">\(R(t)\)</span> that can be solved to give <span id="eq-Ri"><span class="math display">\[
 R(t) = \frac{I_0}{1+R_0} \left(1-e^{-(1+R_0)\gamma t}\right).
-\tag{6.5}\]</span></span></p>
+\tag{6.22}\]</span></span></p>
 <div id="cell-fig-initial-sir" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
@@ -685,48 +710,192 @@ R(t) = \frac{I_0}{1+R_0} \left(1-e^{-(1+R_0)\gamma t}\right).
 <img src="epidemics_files/figure-html/fig-initial-sir-output-1.png" alt="Exponential approximation of initial growth of an epidemic." width="518" height="371" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-initial-sir-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;6.4: Exponential approximation of initial growth of an epidemic. The solid lines are the numeric solutions and the dotted lines are the exponential approximations.
+Figure&nbsp;6.5: Exponential approximation of initial growth of an epidemic. The solid lines are the numeric solutions and the dotted lines are the exponential approximations.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p><a href="#fig-initial-sir" class="quarto-xref">Figure&nbsp;<span>6.4</span></a> compares the approximate expressions <a href="#eq-Ii" class="quarto-xref">Eq.&nbsp;<span>6.4</span></a> and <a href="#eq-Ri" class="quarto-xref">Eq.&nbsp;<span>6.5</span></a> that we have derived above with the numerical solution of the SIR model for the choice of parameters from <a href="#fig-sir" class="quarto-xref">Figure&nbsp;<span>6.1</span></a>. We see that the exponential approximation is very good for the initial stages of the epidemic.</p>
+<p><a href="#fig-initial-sir" class="quarto-xref">Figure&nbsp;<span>6.5</span></a> compares the approximate expressions <a href="#eq-Ii" class="quarto-xref">Eq.&nbsp;<span>6.19</span></a> and <a href="#eq-Ri" class="quarto-xref">Eq.&nbsp;<span>6.22</span></a> that we have derived above with the numerical solution of the SIR model for the choice of parameters from <a href="#fig-sir" class="quarto-xref">Figure&nbsp;<span>6.2</span></a>. We see that the exponential approximation is very good for the initial stages of the epidemic.</p>
 </section>
 <section id="doubling-time" class="level3" data-number="6.2.6">
 <h3 data-number="6.2.6" class="anchored" data-anchor-id="doubling-time"><span class="header-section-number">6.2.6</span> Doubling time</h3>
 <p>The doubling time of an epidemic is the time it takes for the number of infected individuals to double. It is an important metric for understanding the rate of spread of an infectious disease and can help public health officials anticipate the growth of an epidemic and plan for the allocation of resources such as hospital beds, medical staff, and equipment.</p>
-<p>From our initial exponential approximation for <span class="math inline">\(I(t)\)</span> in <a href="#eq-Ii" class="quarto-xref">Eq.&nbsp;<span>6.4</span></a>, we see that the number of infecteds doubles in a time <span class="math inline">\(t_d\)</span> when <span class="math display">\[
+<p>From our initial exponential approximation for <span class="math inline">\(I(t)\)</span> in <a href="#eq-Ii" class="quarto-xref">Eq.&nbsp;<span>6.19</span></a>, we see that the number of infecteds doubles in a time <span class="math inline">\(t_d\)</span> when <span id="eq-doubling"><span class="math display">\[
 2I_0 = I_0 e^{(\beta -\gamma)t_d},
-\]</span> which gives the doubling time <span class="math display">\[
+\tag{6.23}\]</span></span> which gives the doubling time <span id="eq-doublingtime"><span class="math display">\[
 t_d = \frac{\log 2}{\beta-\gamma}.
-\]</span></p>
+\tag{6.24}\]</span></span></p>
 </section>
 </section>
-<section id="exercises" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="exercises"><span class="header-section-number">6.3</span> Exercises</h2>
+<section id="sec-vaccinations" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="sec-vaccinations"><span class="header-section-number">6.3</span> Effect of vaccination</h2>
+<p>Vaccination is a way to move individuals directly from the S component to the R component. This is illustrated in <a href="#fig-vaccination" class="quarto-xref">Figure&nbsp;<span>6.6</span></a> .</p>
+<div id="fig-vaccination" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-vaccination-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/Epidemics/vaccination.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-vaccination-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.6: Graphical representation of the SIR model with vaccination.
+</figcaption>
+</figure>
+</div>
+<p>The extra flow from S to R adds a negative term to the equation for <span class="math inline">\(dS/dt\)</span> and a positive term to the equation for <span class="math inline">\(dR/dt\)</span>. The equations become <span id="eq-SIRV"><span class="math display">\[\begin{split}
+\frac{dS}{dt} &amp;= -\beta IS/N - \nu S,\\
+\frac{dI}{dt} &amp;= \beta IS/N -\gamma I,\\
+\frac{dR}{dt} &amp;= \gamma I + \nu S,
+\end{split}
+\tag{6.25}\]</span></span></p>
+<p>where <span class="math inline">\(\nu\)</span> is the per-capita vaccination rate.</p>
+<p>The modified model still has the feature that the total population size is constant, <span class="math inline">\(dN/dt=0\)</span>. This is because the vaccinated individuals simply move from the S compartment to the R compartment and stay part of the total population.</p>
+<p>Also the expression for the basic reproduction number <span class="math inline">\(R_0\)</span> is the same as before: <span class="math inline">\(R_0=\beta S_0/\gamma N\)</span>. The condition for an epidemic to start is also the same: <span class="math inline">\(R_0&gt;1\)</span>. However, if a vaccination program has already been in place before the start of an epidemic, the number <span class="math inline">\(S_0\)</span> of susceptibles is reduced and hence the basic reproduction number is reduced. If the proportion of unvaccinated individuals in the population <span class="math inline">\(S_0/N\)</span> is less than <span class="math inline">\(\gamma/\beta\)</span>, then the basic reproduction number is below 1 and the epidemic will not start. Said differently, one needs to only vaccinate a proportion <span class="math inline">\(1-\gamma/\beta\)</span> of the population to prevent an epidemic from starting.</p>
+<p>But even a vaccination program that does not prevent an epidemic from starting can have a large effect on the size of the epidemic. This is because the number of susceptibles is reduced and hence the number of infecteds at the peak of the epidemic is reduced. To understand this in detail we will repeat the analysis from sections <a href="#sec-si" class="quarto-xref"><span>Section 6.2.1</span></a> and <a href="#sec-peak" class="quarto-xref"><span>Section 6.2.2</span></a> but with the modified equations <a href="#eq-SIRV" class="quarto-xref">Eq.&nbsp;<span>6.25</span></a>.</p>
+<p>We now have <span id="eq-didsV"><span class="math display">\[
+\frac{dI}{dS}=\frac{\beta IS-\gamma IN}{-\beta IS-\nu S}
+=\frac{\beta-\gamma N/S}{-\beta-\nu N/I}.
+\tag{6.26}\]</span></span> This is easily solved by separation of variables: <span id="eq-intV"><span class="math display">\[
+\begin{split}
+\int_{I_0}^{I(S)}\left(-\beta-\frac{\nu N}{\tilde{I}}\right) d\tilde{I}&amp;=\int_{S_0}^S\left(\beta-\frac{\gamma N}{\tilde{S}}\right)d\tilde{S}.
+\end{split}
+\tag{6.27}\]</span></span> These integrals are easy to perform, and we get <span id="eq-ISV"><span class="math display">\[
+I(S)+ \frac{\nu N}{\beta}\log \frac{I(S)}{I_0} = N - S + \frac{\gamma N}{\beta}\log \frac{S}{S_0} .
+\tag{6.28}\]</span></span></p>
+<p>As before, the peak of the epidemic is where <span class="math inline">\(dI/dS=0\)</span>, which still happens at <span class="math inline">\(S=\gamma N/\beta\)</span>, as in the case without vaccination, because vaccination did not affect the equation for <span class="math inline">\(dI/dt\)</span>. Thus we again get the number of infecteds at the peak of the epidemic as <span class="math inline">\(I(\gamma N/\beta)\)</span>. Thus <span id="eq-ImaxV"><span class="math display">\[
+I_{max}+ \frac{\nu N}{\beta}\log \frac{I_{max}}{I_0} = N - \frac{\gamma N}{\beta}\left(1-\log \frac{\gamma N}{\beta S_0}\right)=I_{max}(\nu=0),
+\tag{6.29}\]</span></span> where we have recognised the right-hand side as the expression for the peak of the epdidemic in the absence of vaccinations. We can see that the number of infecteds at the peak of the epidemic is reduced by the vaccination rate <span class="math inline">\(\nu\)</span>.</p>
+</section>
+<section id="sec-loi" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="sec-loi"><span class="header-section-number">6.4</span> Effect of loss of immunity</h2>
+<p>Unfortunately, immunity to many infectious diseases is not permanent, and individuals who have recovered from the disease can lose their immunity over time. This means that individuals who have recovered from the disease can become susceptible to the disease again and can be re-infected. This is illustrated in <a href="#fig-loi" class="quarto-xref">Figure&nbsp;<span>6.7</span></a> where we have added a flow from the R compartment back to the S compartment with a per-capita rate of <span class="math inline">\(\mu\)</span>.</p>
+<div id="fig-loi" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-loi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/Epidemics/loss_of_immunity.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-loi-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6.7: Graphical representation of the SIR model with loss of immunity.
+</figcaption>
+</figure>
+</div>
+<p>The equations for the SIR model with loss of immunity are <span id="eq-SIRL"><span class="math display">\[\begin{split}
+\frac{dS}{dt} &amp;= -\beta IS/N + \mu R,\\
+\frac{dI}{dt} &amp;= \beta IS/N -\gamma I,\\
+\frac{dR}{dt} &amp;= \gamma I - \mu R.
+\end{split}
+\tag{6.30}\]</span></span></p>
+<p>We will now look at the steady states of the SIR model with loss of immunity. There is of course the disease-free state where the number of infecteds is <span class="math inline">\(I^*=0\)</span> and everyone has lost their immunity, so <span class="math inline">\(R^*=0\)</span> and <span class="math inline">\(S^*=N\)</span>. But now there is also a new steady state where the number of infecteds is non-zero and the number of recovereds is non-zero. We can find this steady state by setting the time derivatives in <a href="#eq-SIRL" class="quarto-xref">Eq.&nbsp;<span>6.30</span></a> to zero. From <span class="math inline">\(dR/dt=0\)</span> we get <span id="eq-Rstar"><span class="math display">\[
+R^* = \frac{\gamma}{\mu}I^*.
+\tag{6.31}\]</span></span> From <span class="math inline">\(dI/dt=0\)</span> we get <span id="eq-Sstar"><span class="math display">\[
+S^* = \frac{\gamma}{\beta}N.
+\tag{6.32}\]</span></span> From <span class="math inline">\(N=S^*+I^*+R^*\)</span> we get <span id="eq-Istar"><span class="math display">\[
+I^* = N\frac{1-\frac{\gamma}{\beta}}{1+\frac{\gamma}{\mu}}.
+\tag{6.33}\]</span></span> This is the endemic steady state of the SIR model with loss of immunity. We see that the number of infecteds at the endemic steady state is reduced by the loss of immunity rate <span class="math inline">\(\mu\)</span>.</p>
+<p>We now want to determine whether this endemic state is stable or not. We will do this by linearising the equations <a href="#eq-SIRL" class="quarto-xref">Eq.&nbsp;<span>6.30</span></a> around the endemic steady state. We will then determine the eigenvalues of the Jacobian matrix at the endemic steady state. If all eigenvalues have negative real parts, the endemic steady state is stable. If at least one eigenvalue has a positive real part, the endemic steady state is unstable.</p>
+<p>We choose to view the SIR model with loss of immunity as a two-dimensional model for the variables <span class="math inline">\(I\)</span> and <span class="math inline">\(R\)</span>. We can then write the equations <a href="#eq-SIRL" class="quarto-xref">Eq.&nbsp;<span>6.30</span></a> as <span id="eq-SIRL2"><span class="math display">\[\begin{split}
+\frac{dI}{dt}&amp;=\beta \frac{I(N-I-R)}{N}-\gamma I,\\
+\frac{dR}{dt}&amp;=\gamma I-\mu R.
+\end{split}
+\tag{6.34}\]</span></span> We now write <span class="math inline">\(I(t)=I^*+i(t)\)</span> and <span class="math inline">\(R(t)=R^*+r(t)\)</span> where <span class="math inline">\(i(t)\)</span> and <span class="math inline">\(r(t)\)</span> are small perturbations around the endemic steady state. We then linearise the equations <a href="#eq-SIRL2" class="quarto-xref">Eq.&nbsp;<span>6.34</span></a> around the endemic steady state by keeping only terms linear in <span class="math inline">\(i(t)\)</span> and <span class="math inline">\(r(t)\)</span>. We get <span id="eq-SIRL3"><span class="math display">\[\begin{split}
+\frac{di(t)}{dt}&amp;=\frac{\beta}{N} \left(N-2I^*-R^*\right)i(t)-\gamma\, i(t)
+-\frac{\beta I^*}{N}r(t),\\
+\frac{dr(t)}{dt}&amp;=\gamma\, i(t)-\mu\, r(t).
+\end{split}
+\tag{6.35}\]</span></span> We solve this by making the Ansatz <span class="math inline">\(i(t)=v_1e^{\lambda t}\)</span> and <span class="math inline">\(r(t)=v_2e^{\lambda t}\)</span>. Substituting this into <a href="#eq-SIRL3" class="quarto-xref">Eq.&nbsp;<span>6.35</span></a> and dividing by <span class="math inline">\(e^{\lambda t}\)</span> gives <span id="eq-SIRL4"><span class="math display">\[
+\begin{split}
+\lambda v_1&amp;=\frac{\beta}{N} \left(N-2I^*-R^*\right)v_1-\gamma v_1
+-\frac{\beta I^*}{N}v_2,\\
+\lambda v_2&amp;=\gamma v_1-\mu v_2.
+\end{split}
+\tag{6.36}\]</span></span> We can write this as a matrix equation <span id="eq-SIRL4"><span class="math display">\[
+\lambda\begin{pmatrix}v_1\\v_2\end{pmatrix} = A\begin{pmatrix}v_1\\v_2\end{pmatrix},
+\tag{6.37}\]</span></span> where <span id="eq-A"><span class="math display">\[
+A=\begin{pmatrix}
+\frac{\beta}{N} \left(N-2I^*-R^*\right)-\gamma &amp; -\frac{\beta I^*}{N}\\
+\gamma &amp; -\mu
+\end{pmatrix}.
+\tag{6.38}\]</span></span></p>
+<p>When we evaluate this Jacobian matrix <span class="math inline">\(A\)</span> at the disease-free state we get <span id="eq-A0"><span class="math display">\[
+A(0,0)=\begin{pmatrix}
+\beta-\gamma &amp; 0\\
+\gamma &amp; -\mu
+\end{pmatrix}.
+\tag{6.39}\]</span></span> The eigenvalues of this matrix are <span class="math inline">\(\lambda_1=\beta-\gamma\)</span> and <span class="math inline">\(\lambda_2=-\mu\)</span>. If <span class="math inline">\(\beta&gt;\gamma\)</span> then one of the eigenvalues is positive and one negative, meaning that the disease-free steady state is unstable. If <span class="math inline">\(\beta&lt;\gamma\)</span> then both eigenvalues are negative, meaning that the disease-free steady state is stable.</p>
+<p>When we evaluate the Jacobian matrix <span class="math inline">\(A\)</span> at the endemic steady state we can use the relation <span class="math inline">\(\beta(N-I^*-R^*)/N-\gamma=0\)</span> to get <span id="eq-Astar"><span class="math display">\[
+A(I^*,R^*)=\begin{pmatrix}
+-\frac{\beta I^*}{N} &amp; -\frac{\beta I^*}{N}\\
+\gamma &amp; -\mu
+\end{pmatrix}.
+\tag{6.40}\]</span></span> This time we can not easily read off the eigenvalues, so we calculate the trace and the determinant: <span id="eq-ADstar"><span class="math display">\[
+\begin{split}
+\text{Tr}(A)&amp;=-\frac{\beta I^*}{N}-\mu,\\
+\text{Det}(A)&amp;=\frac{\beta I^*}{N}(\mu+\gamma).
+\end{split}
+\tag{6.41}\]</span></span> We see that the trace is negative and the determinant is positive, meaning that both eigenvalues have negative real parts and the endemic steady state is stable.</p>
+</section>
+<section id="exercises" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="exercises"><span class="header-section-number">6.5</span> Exercises</h2>
+<section id="sec-sir1" class="level4">
+<h4 class="anchored" data-anchor-id="sec-sir1">* SIR with vaccination and loss of immunity</h4>
 <div id="exr-sir1" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 6.1</strong></span> &nbsp;</p>
 <!--- From sheet 4 --->
-<p>In a mathematical model for a certain venereal disease the male population is divided into susceptibles <span class="math inline">\(S\)</span>, infectives <span class="math inline">\(I\)</span> and removeds <span class="math inline">\(R\)</span>. The female population is similarly divided; the three groups being denoted <span class="math inline">\(S'\)</span>, <span class="math inline">\(I'\)</span> and <span class="math inline">\(R'\)</span> (note that we use the prime to distinguish between male and female, not to indicate differentiation). The equations are <span class="math display">\[\begin{split}
+<p>In the lectures we studied the SIR model with vaccination rate <span class="math inline">\(\nu\)</span> and the SIR model with loss of immunity at a rate <span class="math inline">\(\mu\)</span>. Now consider the SIR model with both vaccination and loss of immunity. For simplicity assume that the minimum immunity time is <span class="math inline">\(T=0\)</span>.</p>
+<ol type="1">
+<li><p>Write down the differential equations for the numbers of susceptibles <span class="math inline">\(S\)</span>, infecteds <span class="math inline">\(I\)</span> and recovereds <span class="math inline">\(R\)</span>.</p></li>
+<li><p>Find the disease-free steady state.</p></li>
+<li><p>Find the endemic steady state and give the condition on the parameters needed for its existence.</p></li>
+<li><p>Now view this model as a two-dimensional model for the variables <span class="math inline">\(I\)</span> and <span class="math inline">\(R\)</span>. Determine the Jacobian matrix <span class="math inline">\(A\)</span> for this model.</p></li>
+<li><p>Evaluate <span class="math inline">\(A\)</span> at the disease-free steady state and use this to classify this fixed point.</p></li>
+<li><p>Evaluate <span class="math inline">\(A\)</span> at the endemic steady state and use this to classify this fixed point.</p></li>
+</ol>
+<p>You will want to compare your results to the results from the lecture and make sure that they make sense.</p>
+</div>
+<hr>
+</section>
+<section id="sec-sir2" class="level4">
+<h4 class="anchored" data-anchor-id="sec-sir2">SIR with recrudescence</h4>
+<div id="exr-sir2" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 6.2</strong></span> Imagine a disease that, even after an individual has recovered from it, stays in the body in a dormant state and can be reactivated. Model this as a modification of the SIR model where recovereds can become infected again at a per-capita rate <span class="math inline">\(\delta\)</span>.</p>
+<ol type="1">
+<li><p>Determine the number of infecteds in the endemic state.</p></li>
+<li><p>Is the endemic state stable for all positive values of the parameters?</p></li>
+</ol>
+</div>
+<hr>
+</section>
+<section id="sec-sir3" class="level4">
+<h4 class="anchored" data-anchor-id="sec-sir3">SIR model with reinfections</h4>
+<div id="exr-sir3" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 6.3</strong></span> In <a href="#sec-loi" class="quarto-xref"><span>Section 6.4</span></a> we studied the SIR model where recovered individuals lose their immunity at a per-capita rate <span class="math inline">\(\mu\)</span> so that they can then become infected again at a per-capita rate <span class="math inline">\(\beta I/N\)</span>. The question was raised whether the same effect could be achieved by direct reinfections, i.e., a flow from the <span class="math inline">\(R\)</span> component directly into the <span class="math inline">\(I\)</span> component at a per-capita rate <span class="math inline">\(\mu\beta I/N\)</span>. Settle this question by determining the number of infecteds in the steady state for the SIR model with direct reinfections and compare it to the corresponding result from <a href="#eq-Istar" class="quarto-xref">Eq.&nbsp;<span>6.33</span></a>.</p>
+</div>
+<hr>
+</section>
+<section id="sec-sir4" class="level4">
+<h4 class="anchored" data-anchor-id="sec-sir4">Sex-structured SIR model</h4>
+<div id="exr-sir4" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 6.4</strong></span> &nbsp;</p>
+<!--- From sheet 4 --->
+<p>In a mathematical model for a certain venereal disease the male population is divided into susceptibles <span class="math inline">\(S\)</span>, infectives <span class="math inline">\(I\)</span> and removeds <span class="math inline">\(R\)</span>. The female population is similarly divided; the three groups being denoted <span class="math inline">\(S'\)</span>, <span class="math inline">\(I'\)</span> and <span class="math inline">\(R'\)</span> (note that we use the prime to distinguish between male and female, not to indicate differentiation). The equations are <span id="eq-exSIR"><span class="math display">\[\begin{split}
 \frac{dS}{dt}&amp;=-rSI',\hspace{.2in}\frac{dI}{dt}=rSI'-aI,\hspace{.2in}
 \frac{dR}{dt}=aI,\\
 \frac{dS'}{dt}&amp;=-r'S'I,\hspace{.2in}\frac{dI'}{dt}=r'S'I-a'I',\hspace{.2in}
 \frac{dR'}{dt}=a'I'
-\end{split}\]</span> where <span class="math inline">\(r\)</span>, <span class="math inline">\(r'\)</span> and <span class="math inline">\(a\)</span>, <span class="math inline">\(a'\)</span> are positive constants. The equations are with initial conditions <span class="math inline">\(S(0)=S_0\)</span>, <span class="math inline">\(I(0)=I_0\)</span>, <span class="math inline">\(S'(0)=S'_0\)</span>, <span class="math inline">\(I'(0)=I'_0\)</span>, <span class="math inline">\(R(0)=R'(0)=0\)</span>. The total male population is <span class="math inline">\(N=S+I+R\)</span> and the total female population <span class="math inline">\(N'=S'+I'+R'\)</span>.</p>
+\end{split} \tag{6.42}\]</span></span> where <span class="math inline">\(r\)</span>, <span class="math inline">\(r'\)</span> and <span class="math inline">\(a\)</span>, <span class="math inline">\(a'\)</span> are positive constants. The equations are with initial conditions <span class="math inline">\(S(0)=S_0\)</span>, <span class="math inline">\(I(0)=I_0\)</span>, <span class="math inline">\(S'(0)=S'_0\)</span>, <span class="math inline">\(I'(0)=I'_0\)</span>, <span class="math inline">\(R(0)=R'(0)=0\)</span>. The total male population is <span class="math inline">\(N=S+I+R\)</span> and the total female population <span class="math inline">\(N'=S'+I'+R'\)</span>.</p>
 <ol type="a">
 <li><p>Show that <span class="math inline">\(N\)</span> and <span class="math inline">\(N'\)</span> are both constant.</p></li>
 <li><p>Show that <span class="math inline">\(S(t)=S_0\exp\left(-\frac{r}{a'}R'(t)\right)\)</span> and obtain another similar equation.</p></li>
-<li><p>Assuming that <span class="math inline">\(I(\infty)=I'(\infty)=0\)</span> show that <span class="math inline">\(S(\infty)\)</span> and <span class="math inline">\(S'(\infty)\)</span> are found by solving simultaneously the equations <span class="math display">\[
+<li><p>Assuming that <span class="math inline">\(I(\infty)=I'(\infty)=0\)</span> show that <span class="math inline">\(S(\infty)\)</span> and <span class="math inline">\(S'(\infty)\)</span> are found by solving simultaneously the equations <span id="eq-exSinf"><span class="math display">\[
 \begin{split}
 S(\infty)&amp;=S_0\exp\left(-\frac{r}{a'}(N'-S'(\infty))\right),\\
 S'(\infty)&amp;=S'_0\exp\left(-\frac{r'}{a}(N-S(\infty))\right).
 \end{split}
-\]</span></p></li>
+\tag{6.43}\]</span></span></p></li>
 </ol>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1142,8 +1311,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./solutions.html" class="pagination-link" aria-label="<span class='chapter-number'>A</span>&nbsp; <span class='chapter-title'>Solutions</span>">
-        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Solutions</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./spatial.html" class="pagination-link" aria-label="<span class='chapter-number'>7</span>&nbsp; <span class='chapter-title'>Spatially-structured populations</span>">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Spatially-structured populations</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

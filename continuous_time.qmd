@@ -491,12 +491,17 @@ We see that any non-zero quota leads to critical depensation, i.e., it introduce
 Exercises marked with a * are essential and are to be handed in. Exercises marked with a + are important and you are urged to complete them. Other exercises are optional but recommended.
 
 
+----------------------------------------------------------------------
+
+
 #### *Sketching solutions
 ::: {#exr-sketch_solutions}
 Consider the population model with carrying capacity and Allee effect given by the differential equation
 $$\frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)\left(\frac{N}{K_0}-1\right).$$
 Here $r>0$, $K>K_0>0$ are constants. Simply by considering the shape of the right hand side, sketch a graph with several solutions for different initial conditions. Choose two initial conditions between $0$ and $K_0$, two initial conditions between $K_0$ and $K$ and one initial condition larger than $K$. Note that the graph only needs to be qualitatively correct, similar to the rough sketch for the solutions of the logistic model sketched in the first lecture.
 :::
+
+----------------------------------------------------------------------
 
 #### +Von Bertalanffy growth
 ::: {#exr-vonBertalanffy-growth}
@@ -513,6 +518,7 @@ ii) Derive the linear first order ODE for $u=w^{1/3}$ and solve it.
 iii) Use the solution for $u$ to find the solution for $w$.
 :::
 
+----------------------------------------------------------------------
 
 #### Solving logistic equation
 ::: {#exr-logistic_solution}
@@ -521,6 +527,7 @@ $$\frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)$$
 with initial condition $N(0)=N_0$.
 :::
 
+----------------------------------------------------------------------
 
 #### * Harvesting with fixed effort
 ::: {#exr-harvest_effort}
@@ -535,6 +542,8 @@ $Y = E N$. This is called the yield.  Write down the differential equation for $
 fixed points and their stability. Find the maximum sustainable yield, i.e., the maximum yield that can be sustained indefinitely.
 :::
 
+----------------------------------------------------------------------
+
 #### Harvesting with fixed quota
 ::: {#exr-harvest_quota}
 As in @exr-harvest_effort, consider a population $N(t)$ that is described by the Gompertz model. Imagine that this describes a fish population in a lake where fishing is going to be introduced, and that you are tasked with setting the quota that 
@@ -543,7 +552,9 @@ maximum sustainable level. What is the maximum sustainable quota according to th
 the fishers and set the quota at this level?
 :::
 
-#### Wasps
+----------------------------------------------------------------------
+
+#### Wasp model
 ::: {#exr-Hornet}
 In a colony of the European Hornet there is a single queen that produces all the offspring. It
 produces two kinds of offspring: workers and reproducers.
@@ -566,7 +577,9 @@ in order to achieve the largest number of producers $N(T)$ at the start of the w
 number of wasps in the following year.
 :::
 
-#### Wasps with death
+----------------------------------------------------------------------
+
+#### Wasp model with death
 ::: {#exr-wasp_death}
 In the wasp example from question 1, assume that the worker wasps die
 at a constant per-capita rate $d$ but the reproducers do not die. 
