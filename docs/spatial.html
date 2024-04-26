@@ -231,12 +231,12 @@ window.Quarto = {
   <li><a href="#directed-motion" id="toc-directed-motion" class="nav-link" data-scroll-target="#directed-motion"><span class="header-section-number">7.5</span> Directed motion</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">7.6</span> Exercises</a>
   <ul>
-  <li><a href="#travelling-wave-in-1-species-model" id="toc-travelling-wave-in-1-species-model" class="nav-link" data-scroll-target="#travelling-wave-in-1-species-model">Travelling wave in 1-species model</a></li>
-  <li><a href="#travelling-wave-in-2-species-model" id="toc-travelling-wave-in-2-species-model" class="nav-link" data-scroll-target="#travelling-wave-in-2-species-model">Travelling wave in 2-species model</a></li>
+  <li><a href="#travelling-wave-in-1-species-reaction-diffusion-model" id="toc-travelling-wave-in-1-species-reaction-diffusion-model" class="nav-link" data-scroll-target="#travelling-wave-in-1-species-reaction-diffusion-model">Travelling wave in 1-species reaction-diffusion model</a></li>
+  <li><a href="#travelling-wave-in-2-species-reaction-diffusion-model" id="toc-travelling-wave-in-2-species-reaction-diffusion-model" class="nav-link" data-scroll-target="#travelling-wave-in-2-species-reaction-diffusion-model">* Travelling wave in 2-species reaction-diffusion model</a></li>
   <li><a href="#sir-model-with-logistic-growth" id="toc-sir-model-with-logistic-growth" class="nav-link" data-scroll-target="#sir-model-with-logistic-growth">SIR model with logistic growth</a></li>
   <li><a href="#derive-turing-instability" id="toc-derive-turing-instability" class="nav-link" data-scroll-target="#derive-turing-instability">Derive Turing instability</a></li>
+  <li><a href="#conditions-for-turing-instability" id="toc-conditions-for-turing-instability" class="nav-link" data-scroll-target="#conditions-for-turing-instability">* Conditions for Turing instability</a></li>
   <li><a href="#slime-mould-with-boundary" id="toc-slime-mould-with-boundary" class="nav-link" data-scroll-target="#slime-mould-with-boundary">Slime mould with boundary</a></li>
-  <li><a href="#conditions-for-turing-instability" id="toc-conditions-for-turing-instability" class="nav-link" data-scroll-target="#conditions-for-turing-instability">Conditions for Turing instability</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/gustavdelius/M3E-2024/edit/main/spatial.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
@@ -284,7 +284,7 @@ window.Quarto = {
 </section>
 <section id="fishing-model-with-diffusion" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="fishing-model-with-diffusion"><span class="header-section-number">7.2</span> Fishing model with diffusion</h2>
-<p>We now consider a model for a population of fish that is subject to fishing and that moves around randomly. We assume that in the absence of fishing the population has a logistic growth rate. The population density <span class="math inline">\(u(x,t)\)</span> satisfies the equation $$</p>
+<p>We now consider a model for a population of fish that is subject to fishing and that moves around randomly. We assume that in the absence of fishing the population has a logistic growth rate. The population density <span class="math inline">\(u(x,t)\)</span> satisfies the equation</p>
 </section>
 <section id="invasion-waves-in-sir-model" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="invasion-waves-in-sir-model"><span class="header-section-number">7.3</span> Invasion waves in SIR model</h2>
@@ -297,8 +297,8 @@ window.Quarto = {
 </section>
 <section id="exercises" class="level2" data-number="7.6">
 <h2 data-number="7.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">7.6</span> Exercises</h2>
-<section id="travelling-wave-in-1-species-model" class="level4">
-<h4 class="anchored" data-anchor-id="travelling-wave-in-1-species-model">Travelling wave in 1-species model</h4>
+<section id="travelling-wave-in-1-species-reaction-diffusion-model" class="level4">
+<h4 class="anchored" data-anchor-id="travelling-wave-in-1-species-reaction-diffusion-model">Travelling wave in 1-species reaction-diffusion model</h4>
 <div id="exr-spatial1" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 7.1</strong></span> &nbsp;</p>
 <!--- From sheet 4 --->
@@ -313,8 +313,8 @@ window.Quarto = {
 </div>
 <hr>
 </section>
-<section id="travelling-wave-in-2-species-model" class="level4">
-<h4 class="anchored" data-anchor-id="travelling-wave-in-2-species-model">Travelling wave in 2-species model</h4>
+<section id="travelling-wave-in-2-species-reaction-diffusion-model" class="level4">
+<h4 class="anchored" data-anchor-id="travelling-wave-in-2-species-reaction-diffusion-model">* Travelling wave in 2-species reaction-diffusion model</h4>
 <div id="exr-spatial2" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 7.2</strong></span> &nbsp;</p>
 <!--- From sheet 4 --->
@@ -384,23 +384,23 @@ b-a&lt;(a+b)^3\]</span> <span class="math display">\[\left[D_2\left(\frac{b-a}{a
 </div>
 <hr>
 </section>
-<section id="slime-mould-with-boundary" class="level4">
-<h4 class="anchored" data-anchor-id="slime-mould-with-boundary">Slime mould with boundary</h4>
-<div id="exr-spatial5" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 7.5</strong></span> In the model for the aggregation of slime mould amoebae suppose that the spatial domain is <span class="math inline">\(0\leq x\leq L\)</span> rather than <span class="math inline">\(-\infty&lt;x&lt;\infty\)</span>. Show that the conditions for aggregation to occur are $ a^*f&gt;k$ and <span class="math display">\[L&gt;\pi\sqrt{\frac{D\mu}{\chi a^* f-k\mu}}.\]</span></p>
-</div>
-<hr>
-</section>
 <section id="conditions-for-turing-instability" class="level4">
-<h4 class="anchored" data-anchor-id="conditions-for-turing-instability">Conditions for Turing instability</h4>
+<h4 class="anchored" data-anchor-id="conditions-for-turing-instability">* Conditions for Turing instability</h4>
 <div id="exr-spatial6" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 7.6</strong></span> Consider the reaction-diffusion model <span class="math display">\[\begin{split}
+<p><span class="theorem-title"><strong>Exercise 7.5</strong></span> Consider the reaction-diffusion model <span class="math display">\[\begin{split}
 \frac{\partial c_1}{\partial t}&amp;=\delta -kc_1 - c_1c_2^2 + D_1\frac{\partial^2c_1}{\partial
   x^2} \\
 \frac{\partial c_2}{\partial t}&amp;=kc_1+c_1c_2^2 - c_2 + D_2\frac{\partial^2c_2}{\partial
   x^2}
 \end{split}\]</span></p>
 <p>Show that a spatially uniform steady state solution <span class="math inline">\((c_1^*,c_2^*)\)</span> exists for this model and give the conditions for this steady state to be driven unstable by diffusion. You may use any results derived in the lectures.</p>
+</div>
+<hr>
+</section>
+<section id="slime-mould-with-boundary" class="level4">
+<h4 class="anchored" data-anchor-id="slime-mould-with-boundary">Slime mould with boundary</h4>
+<div id="exr-spatial5" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 7.6</strong></span> In the model for the aggregation of slime mould amoebae suppose that the spatial domain is <span class="math inline">\(0\leq x\leq L\)</span> rather than <span class="math inline">\(-\infty&lt;x&lt;\infty\)</span>. Show that the conditions for aggregation to occur are $ a^*f&gt;k$ and <span class="math display">\[L&gt;\pi\sqrt{\frac{D\mu}{\chi a^* f-k\mu}}.\]</span></p>
 </div>
 
 
