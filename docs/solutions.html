@@ -252,7 +252,8 @@ window.Quarto = {
   </ul></li>
   <li><a href="#spatially-structured-population-models" id="toc-spatially-structured-population-models" class="nav-link" data-scroll-target="#spatially-structured-population-models"><span class="header-section-number">A.7</span> Spatially-structured population models</a>
   <ul>
-  <li><a href="#turing-instabilities-1" id="toc-turing-instabilities-1" class="nav-link" data-scroll-target="#turing-instabilities-1">Turing instabilities 1</a></li>
+  <li><a href="#sir-model-with-logistic-growth" id="toc-sir-model-with-logistic-growth" class="nav-link" data-scroll-target="#sir-model-with-logistic-growth">SIR model with logistic growth</a></li>
+  <li><a href="#derive-turing-instability" id="toc-derive-turing-instability" class="nav-link" data-scroll-target="#derive-turing-instability">Derive Turing instability</a></li>
   <li><a href="#slime-mould-with-boundary" id="toc-slime-mould-with-boundary" class="nav-link" data-scroll-target="#slime-mould-with-boundary">Slime mould with boundary</a></li>
   </ul></li>
   </ul>
@@ -547,8 +548,47 @@ I^*=N-R^*=N\left(1-\frac{\gamma}{\beta\mu}\right).
 </section>
 <section id="spatially-structured-population-models" class="level2" data-number="A.7">
 <h2 data-number="A.7" class="anchored" data-anchor-id="spatially-structured-population-models"><span class="header-section-number">A.7</span> Spatially-structured population models</h2>
-<section id="turing-instabilities-1" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="turing-instabilities-1">Turing instabilities 1</h3>
+<section id="sir-model-with-logistic-growth" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="sir-model-with-logistic-growth">SIR model with logistic growth</h3>
+<p><a href="spatial.html#exr-spatial3" class="quarto-xref">Exercise&nbsp;<span>7.3</span></a>:</p>
+<ol type="a">
+<li><p>One can either approach this systematically or one can just try to guess the necessary change of variables. We will use a blended approach: we guess the expressions for <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> by inspecting the equations, and we make a general Ansatz for <span class="math inline">\(\tilde{t}\)</span>.</p>
+<p>By comparing the <span class="math inline">\((1-S/K)\)</span> factor in the equation for <span class="math inline">\(S\)</span> to the factor <span class="math inline">\((1-u)\)</span> in the equation for <span class="math inline">\(u\)</span> we see that <span class="math inline">\(u=S/K\)</span>. It is natural to also choose <span class="math inline">\(v=I/K\)</span>. We write <span class="math inline">\(\tilde{t}=t/\tau\)</span>, where <span class="math inline">\(\tau\)</span> is still to be determined. With these we have <span class="math display">\[\begin{split}
+\partial_{\tilde{t}}u&amp;=\tau/K\partial_tS=
+\tau/K\left(rKu(1-u)-\beta K^2uv\right)\\
+&amp;=
+\tau r u(1-u)-\tau \beta K uv
+\end{split}\]</span> By comparing this with equation for <span class="math inline">\(u\)</span> in the problem statement, we can read off that <span class="math display">\[
+\tau = \frac{1}{\beta K}, ~~~b=\frac{r}{\beta K}.
+\]</span> Then <span class="math display">\[\begin{split}
+\partial_{\tilde{t}}v&amp;=\tau/K\partial_tI=
+\tau/K\left(\beta K^2uv-\gamma Kv\right)\\
+&amp;=uv-\frac{\gamma}{\beta K}v.
+\end{split}\]</span> By comparing this with the equation for <span class="math inline">\(v\)</span> in the problem statement we read off that <span class="math display">\[
+m=\frac{\gamma}{\beta K}.
+\]</span></p></li>
+<li><p>By inspection we see that one steady state is <span class="math inline">\((u(x,t),v(x,t))=(0,0)\)</span> and that another is <span class="math display">\[
+(u(x,t),v(x,t))=(1,0).
+\]</span> The first describes a situation where the foxes are extinct, the second the situation where in the absence of the disease the fox population sits at its carrying capacity. We look for another steady state <span class="math inline">\((u(x,t),v(x,t))=(u^*,v^*)\)</span> with <span class="math inline">\(v^*\neq 0\)</span>. From the equation for <span class="math inline">\(v\)</span> we read off that <span class="math inline">\(u^*=m\)</span> and then from the equation for <span class="math inline">\(u\)</span> we get <span class="math inline">\(v^*=b(1-m)\)</span>. This is the endemic state because the number of infecteds is nonzero. It exists as long as <span class="math inline">\(m&lt;1\)</span>. This tells us that the existence of the endemic state is independent of the intrinsic growth rate <span class="math inline">\(r\)</span> of the fox population but does depend on its carrying capacity.</p></li>
+<li><p>We want <span class="math inline">\(D_1\partial_x^2S=\partial_{\tilde{x}}^2u\)</span>, where <span class="math inline">\(u=S/K\)</span>. Hence <span class="math display">\[\tilde{x}=\sqrt{\frac{K\beta}{D_1}}x.\]</span> Then <span class="math inline">\(d\,\partial_{\tilde{x}}^2v =d\,D_1\partial_x^2I\)</span> but we want <span class="math inline">\(D_2\partial_x^2I\)</span> so we need <span class="math display">\[d=\frac{D_2}{D_1}.\]</span></p></li>
+<li><p>Substituting the wave Ansatz into the PDEs for <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> gives <span id="eq-AB"><span class="math display">\[
+-cA'=bA(1-A)-AB+A'',~~~-cB'=AB-mB+dB''.
+\tag{A.2}\]</span></span></p></li>
+<li><p>If <span class="math inline">\(A(\infty)=1\)</span> (which corresponds to <span class="math inline">\(S=K\)</span>) then that means that at <span class="math inline">\(x=\infty\)</span> the system is in the disease-free state and thus <span class="math inline">\(B(\infty)=0\)</span>. At <span class="math inline">\(x=-\infty\)</span> the system must thus be in the endemic state, so <span class="math inline">\(A(-\infty)=u^*=m\)</span> and <span class="math inline">\(B(-\infty)=v^*=b(1-m)\)</span>. So the key to this question was the observation that the travelling wave will always have to interpolate between two steady states.</p></li>
+<li><p>At the leading edge where <span class="math inline">\(B\)</span> is very small, <span class="math inline">\(A\)</span> is very close to <span class="math inline">\(1\)</span>, so <span class="math inline">\(A=1-\epsilon\)</span> for a small <span class="math inline">\(\epsilon&gt;0\)</span>. The equations <a href="#eq-AB" class="quarto-xref">Eq.&nbsp;<span>A.2</span></a> can thus be approximated by the linear equations <span id="eq-ABl"><span class="math display">\[
+c\epsilon'=b\epsilon-B-\epsilon'',~~~-cB'=B-mB+dB''.
+\tag{A.3}\]</span></span> We obtained this by dropping all terms involving <span class="math inline">\(\epsilon^2\)</span> or <span class="math inline">\(\epsilon B\)</span> because they are negligible when <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(B\)</span> are both small.</p>
+<p>We concentrate on the second equation, which we solve with the Ansatz <span class="math inline">\(B(x)=\exp(\lambda x)\)</span>. Substituting this Ansatz into the equation gives the characteristic equation for <span class="math inline">\(\lambda\)</span>: <span class="math display">\[
+d\lambda^2+c\lambda+1-m=0,
+\]</span> and thus <span class="math display">\[
+\lambda=\frac{-c\pm\sqrt{c^2-4d(1-m)}}{2d}.
+\]</span> We do not want the solution to oscillate, so we want <span class="math inline">\(\lambda\)</span> to be real, hence <span class="math display">\[
+c\geq 2\sqrt{d(1-m)}.
+\]</span></p></li>
+</ol>
+</section>
+<section id="derive-turing-instability" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="derive-turing-instability">Derive Turing instability</h3>
 <p><a href="spatial.html#exr-spatial4" class="quarto-xref">Exercise&nbsp;<span>7.4</span></a>: Here, <span class="math inline">\(f(u,v)=a-u + u^2v\)</span> and <span class="math inline">\(g(u,v)=b-u^2v\)</span>.</p>
 <p><strong>Step 1. Uniform steady state</strong></p>
 <p><span class="math inline">\(a-u^* + {u^*}^2 v^*=0\)</span> and <span class="math inline">\(b-{u^*}^2 v^*=0\)</span> <span class="math inline">\(\implies (u^*,~v^*)=(a+b,~b/(a+b)^2)\)</span>.</p>
@@ -608,7 +648,7 @@ h(k^2)= D_1D_2k^4 - \left[ D_2\frac{b-a}{a+b} - D_1(a+b)^2  \right] k^2 +(a+b)^2
 </section>
 <section id="slime-mould-with-boundary" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="slime-mould-with-boundary">Slime mould with boundary</h3>
-<p><a href="spatial.html#exr-spatial5" class="quarto-xref">Exercise&nbsp;<span>7.5</span></a> <span class="math display">\[
+<p><a href="spatial.html#exr-spatial5" class="quarto-xref">Exercise&nbsp;<span>7.6</span></a> <span class="math display">\[
 \frac{\partial a}{\partial t} = \frac{\partial}{\partial x} \left( \mu \frac{\partial a}{\partial x} - \chi a \frac{\partial \rho}{\partial x}   \right), ~~~\mbox{and} ~~~ \frac{\partial \rho}{\partial t} = fa -k\rho + D\frac{\partial^2 \rho}{\partial x^2}.
 \]</span> Steady states are <span class="math inline">\(fa^*=k\rho^*\)</span>.</p>
 <p>Consider a perturbation <span class="math inline">\(a=a^*+\xi\)</span> and <span class="math inline">\(\rho = \rho^* +\eta\)</span>, where <span class="math inline">\(\xi\)</span> and <span class="math inline">\(\eta\)</span> are small. Substitute and linearize to give <span class="math display">\[

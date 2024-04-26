@@ -416,7 +416,97 @@ This is not the same as the number of infecteds in the endemic state of the mode
 
 ## Spatially-structured population models
 
-### Turing instabilities 1 {.unnumbered}
+### SIR model with logistic growth {.unnumbered}
+@exr-spatial3:
+
+a. One can either approach this systematically or one can just try to guess the necessary
+change of variables. We will use a blended approach: we guess the expressions for $u$
+and $v$ by inspecting the equations, and we make a general Ansatz for $\tilde{t}$.
+
+    By comparing the $(1-S/K)$ factor in the equation for $S$ to the factor $(1-u)$ in the equation for $u$ we see that $u=S/K$. It is natural to also choose $v=I/K$. We write $\tilde{t}=t/\tau$, where $\tau$ is still to be determined. With these we have
+$$\begin{split}
+\partial_{\tilde{t}}u&=\tau/K\partial_tS=
+\tau/K\left(rKu(1-u)-\beta K^2uv\right)\\
+&=
+\tau r u(1-u)-\tau \beta K uv
+\end{split}$$
+By comparing this with equation for $u$ in the problem statement, we can 
+read off that
+$$
+\tau = \frac{1}{\beta K}, ~~~b=\frac{r}{\beta K}.
+$$
+Then
+$$\begin{split}
+\partial_{\tilde{t}}v&=\tau/K\partial_tI=
+\tau/K\left(\beta K^2uv-\gamma Kv\right)\\
+&=uv-\frac{\gamma}{\beta K}v.
+\end{split}$$
+By comparing this with the equation for $v$ in the problem statement we read off
+that
+$$
+m=\frac{\gamma}{\beta K}.
+$$
+
+
+b. By inspection we see that one steady state is $(u(x,t),v(x,t))=(0,0)$ and that another is
+$$
+(u(x,t),v(x,t))=(1,0).
+$$
+The first describes a situation where the foxes are extinct, the second  the situation where in the absence of the disease the fox population sits at its
+carrying capacity.
+We look for another steady state $(u(x,t),v(x,t))=(u^*,v^*)$
+with $v^*\neq 0$. From the equation for $v$ we read off that $u^*=m$ and then from the equation for $u$ we get  $v^*=b(1-m)$. 
+This is the endemic state
+because the number of infecteds is nonzero. It exists as long as $m<1$.
+This tells us that the existence of the endemic state is independent of the
+intrinsic growth rate $r$ of the fox population but does depend on its carrying capacity.
+
+c. We want $D_1\partial_x^2S=\partial_{\tilde{x}}^2u$, where $u=S/K$. Hence
+$$\tilde{x}=\sqrt{\frac{K\beta}{D_1}}x.$$
+Then $d\,\partial_{\tilde{x}}^2v =d\,D_1\partial_x^2I$ but we want 
+$D_2\partial_x^2I$ so we need
+$$d=\frac{D_2}{D_1}.$$
+
+d. Substituting the wave Ansatz into the PDEs for $u$ and $v$ gives
+$$
+-cA'=bA(1-A)-AB+A'',~~~-cB'=AB-mB+dB''.
+$$ {#eq-AB}
+
+e. If $A(\infty)=1$ (which corresponds to $S=K$) then that means that at $x=\infty$ the system is in
+the disease-free state and thus $B(\infty)=0$. At $x=-\infty$ the 
+system must thus be in the endemic state, so $A(-\infty)=u^*=m$
+and $B(-\infty)=v^*=b(1-m)$.
+So the key to this question was the observation that the travelling wave will
+always have to interpolate between two steady states.
+
+f. At the leading edge where $B$ is very small, $A$ is very close to $1$,
+so $A=1-\epsilon$ for a small $\epsilon>0$.
+The equations @eq-AB can thus be approximated by the linear
+equations
+$$
+c\epsilon'=b\epsilon-B-\epsilon'',~~~-cB'=B-mB+dB''.
+$$ {#eq-ABl}
+We obtained this by dropping all terms involving $\epsilon^2$ or $\epsilon B$ because
+they are negligible when $\epsilon$ and $B$ are both small.
+
+    We concentrate on the second equation, which we  solve with the Ansatz $B(x)=\exp(\lambda x)$.
+Substituting this Ansatz into the equation gives the characteristic equation for $\lambda$:
+$$
+d\lambda^2+c\lambda+1-m=0,
+$$
+and thus
+$$
+\lambda=\frac{-c\pm\sqrt{c^2-4d(1-m)}}{2d}.
+$$
+We do not want the solution to oscillate, so we want $\lambda$ to
+be real, hence
+$$
+c\geq 2\sqrt{d(1-m)}.
+$$
+
+
+
+### Derive Turing instability {.unnumbered}
 @exr-spatial4:
 Here, $f(u,v)=a-u + u^2v$ and $g(u,v)=b-u^2v$.
 
@@ -550,7 +640,6 @@ Aggregation will not occur if $h(q_1^2)>0$, which implies
 $$
 L<\pi\sqrt{\frac{D\mu}{\chi a^*f-k\mu}}.
 $$
-
 
 Aggregation will occur if 
 $$
