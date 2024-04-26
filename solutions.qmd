@@ -489,6 +489,66 @@ $$ {#eq-sir4Ssolprimeinf}
 
 ## Spatially-structured population models
 
+### Travelling wave in 1-species reaction-diffusion model {.unnumbered}
+@exr-spatial1:
+
+a. With $z=x-ct$ we have
+$$
+\frac{\partial }{\partial t}= \frac{\partial z}{\partial t}\frac{\partial }{\partial z} = -c \frac{\partial }{\partial z} \text{ and } 
+\frac{\partial }{\partial x}= \frac{\partial z}{\partial x}\frac{\partial }{\partial z} = \frac{\partial }{\partial z}.
+$$ {#eq-spatial1}
+Substituting this into the PDE gives the ODE
+$$
+-cU' = f(U) + DU''.
+$$ {#eq-spatial1b}
+
+b. For a travelling wave from left to right ($c>0$) we expect solution at $\pm \infty$ to be at steady state: $U(-\infty) = 1$ and $U(\infty)=0$, with $U'(\pm \infty)=0$.
+
+    We will now use a slightly different way to approach the linearisation around the leading
+edge of the travelling wave than the one we used in the lecture. The methods
+are equivalent, and it is always instructional to look at different ways of doing the same
+thing. 
+
+    At the leading edge of the wave we have that $U$ is very small, so we can Taylor-expand
+$f(U)=f(0)+Uf'(0)+\dots$. We keep only the first two terms and also use that $f(0)=0$ to
+get the linear ODE
+$$
+-cU' = Uf'(0)+DU''.
+$$ {#eq-spatial1c}
+Rather than making an Ansatz for $U$ as in the lecture, we convert
+this second order ODE into a set of first-order ODEs by introducing a second variable $V$ so
+that 
+ $U'=V$ and $V' = -\frac{U}{D}f'(0) - \frac{c}{D}V$.
+In vector notation this reads
+$$
+\begin{pmatrix}
+U'\\
+V'
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 & 1\\
+-\frac{f'(0)}{D}U & -\frac{c}{D}
+\end{pmatrix}
+\begin{pmatrix}
+U\\
+V
+\end{pmatrix}.
+$$ {#eq-spatial1da}
+The eigenvalues $\lambda$ of this linear matrix ODE  are solutions of 
+$$
+\det \begin{pmatrix}
+-\lambda & 1 \\ -\frac{f'(0)}{D} & -\lambda -\frac{c}{D}
+\end{pmatrix} = 0
+~~~~\implies ~~~~\lambda^2 + \frac{c}{D} \lambda + \frac{f'(0)}{D}=0.
+$$ {#eq-spatial1d}
+Real eigenvalues and thus realistic biological solutions exist iff 
+$$
+\frac{c^2}{D^2}-4\frac{f'(0)}{D}\geq 0, ~~~~\implies ~~~~ c\geq 2\sqrt{Df'(0)}.
+$$ {#eq-spatial1e}
+
+c. If $f(u)= 0$ for all $u$ we get $DU''+cU'=0$. Setting $U(z)=e^{\mu z}$ $\implies$ $D\mu^2+c\mu$ $\implies$ $\mu = 0$ or $-c/D$. The general solution is $U=Ae^{-\frac{c}{D} z}+B$.  Clearly $|U|\rightarrow \infty$ as $z \rightarrow -\infty$.  This is not a biologically realistic solution.
+
 ### SIR model with logistic growth {.unnumbered}
 @exr-spatial3:
 
