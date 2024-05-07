@@ -408,21 +408,21 @@ $$ {#eq-ex_sir2b}
 The Jacobian matrix is
 $$
 A = \begin{pmatrix}
-\frac{\beta}{N} \left(N-2I-R\right) -\gamma & \delta\\
+\frac{\beta}{N} \left(N-2I-R\right) -\gamma & \delta-\frac{\beta I}{N}\\
 \gamma & -\delta
 \end{pmatrix}.
 $$ {#eq-ex_sir2c}
 Evaluated at the endemic state this gives
 $$
 A = \begin{pmatrix}
--\frac{\beta}{N}I^* -\gamma & \delta\\
+-\frac{\beta}{N}I^* -\gamma & \delta-\frac{\beta}{N}I^*\\
 \gamma & -\delta
 \end{pmatrix}.
 $$ {#eq-ex_sir2d}
 This has determinant and trace given by
 $$
 \begin{split}
-\det(A) &= \frac{\delta\beta}{N}I^*>0,\\
+\det(A) &= (\delta+\gamma)\frac{\beta}{N}I^*>0,\\
 \text{tr}(A) &= -\frac{\beta}{N}I^* -\gamma -\delta <0.
 \end{split}
 $$ {#eq-ex_sir2e}
