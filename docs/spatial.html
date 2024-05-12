@@ -231,6 +231,7 @@ window.Quarto = {
   <li><a href="#directed-motion" id="toc-directed-motion" class="nav-link" data-scroll-target="#directed-motion"><span class="header-section-number">7.5</span> Directed motion</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">7.6</span> Exercises</a>
   <ul>
+  <li><a href="#fishing-model-with-diffusion-1" id="toc-fishing-model-with-diffusion-1" class="nav-link" data-scroll-target="#fishing-model-with-diffusion-1">Fishing model with diffusion</a></li>
   <li><a href="#travelling-wave-in-1-species-reaction-diffusion-model" id="toc-travelling-wave-in-1-species-reaction-diffusion-model" class="nav-link" data-scroll-target="#travelling-wave-in-1-species-reaction-diffusion-model">Travelling wave in 1-species reaction-diffusion model</a></li>
   <li><a href="#travelling-wave-in-2-species-reaction-diffusion-model" id="toc-travelling-wave-in-2-species-reaction-diffusion-model" class="nav-link" data-scroll-target="#travelling-wave-in-2-species-reaction-diffusion-model">* Travelling wave in 2-species reaction-diffusion model</a></li>
   <li><a href="#sir-model-with-logistic-growth" id="toc-sir-model-with-logistic-growth" class="nav-link" data-scroll-target="#sir-model-with-logistic-growth">SIR model with logistic growth</a></li>
@@ -301,14 +302,35 @@ J(x) = -D\partial_x u(x),
 </section>
 <section id="exercises" class="level2" data-number="7.6">
 <h2 data-number="7.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">7.6</span> Exercises</h2>
+<section id="fishing-model-with-diffusion-1" class="level4">
+<h4 class="anchored" data-anchor-id="fishing-model-with-diffusion-1">Fishing model with diffusion</h4>
+<div id="exr-fish" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 7.1</strong></span> &nbsp;</p>
+<!--- From Exam 2020 --->
+<p>A population of fish <span class="math inline">\(F(x,t)\)</span> in a river of width <span class="math inline">\(L\)</span> with banks at <span class="math inline">\(x=0\)</span> and <span class="math inline">\(x=L\)</span> can be modelled by the partial differential equation <span id="eq-fish"><span class="math display">\[
+\frac{\partial F}{\partial t} = rF\left( 1-\frac{F}{K} \right) + D\frac{\partial^2 F}{\partial x^2},
+\tag{7.8}\]</span></span> where <span class="math inline">\(r\)</span>, <span class="math inline">\(K\)</span> and <span class="math inline">\(D\)</span> are positive constants. No-flux boundary conditions are applied at <span class="math inline">\(x=L\)</span>. At precisely <span class="math inline">\(x=0\)</span> some shore-based fishermen catch all of the fish. We wish to find the minimum width of the river to ensure the fish population does not collapse.</p>
+<ol type="1">
+<li><p>First determine the spatially uniform steady states and indicate their stability.</p></li>
+<li><p>Linearise the system for small <span class="math inline">\(F\)</span>.</p></li>
+<li><p>By considering a solution of the form <span class="math inline">\(F(x,t) = e^{\lambda t} \left( A \cos kx + B \sin kx \right)\)</span> show that <span id="eq-fishlambda"><span class="math display">\[
+\lambda = \lambda_n =: r-k_n^2D,
+\tag{7.9}\]</span></span> where <span class="math display">\[
+k = k_n =: \frac{(2n+1)\pi }{2L}, ~~~ n = 0,~1,~2,...
+\]</span></p></li>
+<li><p>Hence, determine the condition on <span class="math inline">\(L\)</span> for the fish population not to collapse.</p></li>
+</ol>
+</div>
+<hr>
+</section>
 <section id="travelling-wave-in-1-species-reaction-diffusion-model" class="level4">
 <h4 class="anchored" data-anchor-id="travelling-wave-in-1-species-reaction-diffusion-model">Travelling wave in 1-species reaction-diffusion model</h4>
 <div id="exr-spatial1" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 7.1</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Exercise 7.2</strong></span> &nbsp;</p>
 <!--- From sheet 4 --->
 <p>A reaction-diffusion population model has the form <span id="eq-rd1"><span class="math display">\[
 \frac{\partial u}{\partial t}=f(u)+D\frac{\partial^2u}{\partial x^2}
-\tag{7.8}\]</span></span> where <span class="math inline">\(D&gt;0\)</span> and where <span class="math inline">\(f\)</span> satisfies <span class="math inline">\(f(0)=f(1)=0\)</span> and <span class="math inline">\(f(u)&gt;0\)</span> for <span class="math inline">\(u\in(0,1)\)</span>.</p>
+\tag{7.10}\]</span></span> where <span class="math inline">\(D&gt;0\)</span> and where <span class="math inline">\(f\)</span> satisfies <span class="math inline">\(f(0)=f(1)=0\)</span> and <span class="math inline">\(f(u)&gt;0\)</span> for <span class="math inline">\(u\in(0,1)\)</span>.</p>
 <ol type="a">
 <li><p>Convert this equation into travelling wave form by making the Ansatz that <span class="math inline">\(u(x,t)=U(z)\)</span> and <span class="math inline">\(v(x,t)=V(z)\)</span> with <span class="math inline">\(z=x-ct\)</span>.</p></li>
 <li><p>Assuming that a solution exists such that <span class="math inline">\(U(-\infty)=1\)</span>, <span class="math inline">\(U(\infty)=0\)</span> show, by linearising the equation at the leading edge, that for a biologically realistic solution the wave speed <span class="math inline">\(c\)</span> satisfies <span class="math inline">\(c\geq 2\sqrt{Df'(0)}\)</span>.</p></li>
@@ -320,7 +342,7 @@ J(x) = -D\partial_x u(x),
 <section id="travelling-wave-in-2-species-reaction-diffusion-model" class="level4">
 <h4 class="anchored" data-anchor-id="travelling-wave-in-2-species-reaction-diffusion-model">* Travelling wave in 2-species reaction-diffusion model</h4>
 <div id="exr-spatial2" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 7.2</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Exercise 7.3</strong></span> &nbsp;</p>
 <!--- From sheet 4 --->
 <p>Consider the system <span id="eq-rd2"><span class="math display">\[
 \begin{split}
@@ -328,44 +350,44 @@ J(x) = -D\partial_x u(x),
 \frac{\partial v}{\partial t}&amp;=u^2v-\rho
 v+\frac{\partial^2v}{\partial x^2}
 \end{split}
-\tag{7.9}\]</span></span> where <span class="math inline">\(\rho\)</span> is a positive constant. Convert this system into travelling wave form by making the Ansatz that <span class="math inline">\(u(x,t)=U(z)\)</span> and <span class="math inline">\(v(x,t)=V(z)\)</span> with <span class="math inline">\(z=x-ct\)</span>, and show in particular that <span id="eq-rd3"><span class="math display">\[
+\tag{7.11}\]</span></span> where <span class="math inline">\(\rho\)</span> is a positive constant. Convert this system into travelling wave form by making the Ansatz that <span class="math inline">\(u(x,t)=U(z)\)</span> and <span class="math inline">\(v(x,t)=V(z)\)</span> with <span class="math inline">\(z=x-ct\)</span>, and show in particular that <span id="eq-rd3"><span class="math display">\[
 -c\frac{dV}{dz}=c\frac{dU}{dz}-\frac{\rho
   c}{U^2}\frac{dU}{dz}+\frac{d^2V}{dz^2}.
-\tag{7.10}\]</span></span> Consider a solution of the travelling wave equations such that <span class="math inline">\(U(\infty)=1\)</span>, <span class="math inline">\(U(-\infty)=a\)</span>, <span class="math inline">\(V(\pm\infty)=0\)</span> for some <span class="math inline">\(a&lt;1\)</span>. By integrating the above equation from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span> and imposing the boundary conditions, determine the value of <span class="math inline">\(a\)</span>. Also determine a lower bound on the wave velocity <span class="math inline">\(c\)</span> by linearising around the leading edge of the wave.</p>
+\tag{7.12}\]</span></span> Consider a solution of the travelling wave equations such that <span class="math inline">\(U(\infty)=1\)</span>, <span class="math inline">\(U(-\infty)=a\)</span>, <span class="math inline">\(V(\pm\infty)=0\)</span> for some <span class="math inline">\(a&lt;1\)</span>. By integrating the above equation from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span> and imposing the boundary conditions, determine the value of <span class="math inline">\(a\)</span>. Also determine a lower bound on the wave velocity <span class="math inline">\(c\)</span> by linearising around the leading edge of the wave.</p>
 </div>
 <hr>
 </section>
 <section id="sir-model-with-logistic-growth" class="level4">
 <h4 class="anchored" data-anchor-id="sir-model-with-logistic-growth">SIR model with logistic growth</h4>
 <div id="exr-spatial3" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 7.3</strong></span> &nbsp;</p>
+<p><span class="theorem-title"><strong>Exercise 7.4</strong></span> &nbsp;</p>
 <!--- From sheet 4 --->
 <p>Assume that in the absence of rabies, the fox population is described by a logistic model with intrinsic growth rate <span class="math inline">\(r\)</span> and carrying capacity <span class="math inline">\(K\)</span>. Adding this population dynamics to the SIR model gives the equations <span id="eq-sirlogistic"><span class="math display">\[\begin{split}
 \partial_t S&amp;=rS\left(1-\frac{S}{K}\right)-\beta SI\\
 \partial_t I&amp;=\beta SI-\gamma I.
-\end{split} \tag{7.11}\]</span></span> We ignore the removed component <span class="math inline">\(R\)</span>, which in this case would correspond to dead foxes.</p>
+\end{split} \tag{7.13}\]</span></span> We ignore the removed component <span class="math inline">\(R\)</span>, which in this case would correspond to dead foxes.</p>
 <ol type="a">
 <li><p>Show that this model can be written in non-dimensionalised form as <span id="eq-sirlogistic2"><span class="math display">\[\begin{split}
 \partial_{\tilde{t}} u&amp;=bu(1-u)-uv\\
 \partial_{\tilde{t}} v&amp;=uv-mv.
-\end{split} \tag{7.12}\]</span></span></p></li>
+\end{split} \tag{7.14}\]</span></span></p></li>
 <li><p>Determine the steady state solutions (fixed points). Under what condition on the parameters is there an endemic state?</p></li>
 </ol>
 <p>Now assume that both susceptible and infected foxes move around randomly, but at different rates. This adds diffusion terms to the SIR model, where now <span class="math inline">\(S=S(x,t)\)</span> and <span class="math inline">\(I=I(x,t)\)</span> denote densities in space. <span id="eq-sirlogistic3"><span class="math display">\[\begin{split}
 \partial_t S&amp;=rS\left(1-\frac{S}{K}\right)-\beta SI+D_1\partial_x^2S\\\
 \partial_t I&amp;=\beta SI-\gamma I+D_2\partial_x^2I.
-\end{split} \tag{7.13}\]</span></span></p>
+\end{split} \tag{7.15}\]</span></span></p>
 <ol start="3" type="a">
 <li>Give expressions for <span class="math inline">\(\tilde{x}\)</span> and <span class="math inline">\(d\)</span> such that this model can be written in non-dimensionalised form as <span id="eq-sirlogistic4"><span class="math display">\[\begin{split}
 \partial_{\tilde{t}} u&amp;=bu(1-u)-uv+\partial_{\tilde{x}}^2u\\
 \partial_{\tilde{t}} v&amp;=uv-m v+d\,\partial_{\tilde{x}}^2v
-\end{split} \tag{7.14}\]</span></span></li>
+\end{split} \tag{7.16}\]</span></span></li>
 </ol>
 <p>We will now work with these non-dimensional equations but drop the tildes to avoid clutter.</p>
 <ol start="4" type="a">
 <li><p>Make the travelling wave Ansatz <span id="eq-sirlogistic5"><span class="math display">\[
 u(x,t)=A(z),~~~v(x,t)=B(z)
-\tag{7.15}\]</span></span> with <span class="math inline">\(z=x-ct\)</span> for some <span class="math inline">\(c&gt;0\)</span> and derive the system of ODEs describing the functions <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.</p></li>
+\tag{7.17}\]</span></span> with <span class="math inline">\(z=x-ct\)</span> for some <span class="math inline">\(c&gt;0\)</span> and derive the system of ODEs describing the functions <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.</p></li>
 <li><p>If <span class="math inline">\(A(\infty)=1\)</span>, what are <span class="math inline">\(A(-\infty), B(\infty)\)</span> and <span class="math inline">\(B(-\infty)\)</span>? Make a sketch of <span class="math inline">\(A(z)\)</span> and <span class="math inline">\(B(z)\)</span> and indicate the direction of travel with an arrow.</p></li>
 <li><p>By linearising about the leading edge of the wave where <span class="math inline">\(B\)</span> is very small, determine a lower limit on the wave speed <span class="math inline">\(c\)</span>.</p></li>
 </ol>
@@ -375,30 +397,30 @@ u(x,t)=A(z),~~~v(x,t)=B(z)
 <section id="derive-turing-instability" class="level4">
 <h4 class="anchored" data-anchor-id="derive-turing-instability">Derive Turing instability</h4>
 <div id="exr-spatial4" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 7.4</strong></span> Consider the reaction-diffusion model <span id="eq-ex_turing"><span class="math display">\[\begin{split}
+<p><span class="theorem-title"><strong>Exercise 7.5</strong></span> Consider the reaction-diffusion model <span id="eq-ex_turing"><span class="math display">\[\begin{split}
 \frac{\partial u}{\partial t}&amp;=a-u+u^2v+D_1\frac{\partial^2u}{\partial
   x^2} \\
 \frac{\partial v}{\partial t}&amp;=b-u^2v+D_2\frac{\partial^2v}{\partial
   x^2}
-\end{split} \tag{7.16}\]</span></span> where <span class="math inline">\(b&gt;0\)</span> and <span class="math inline">\(a+b&gt;0\)</span>.</p>
+\end{split} \tag{7.18}\]</span></span> where <span class="math inline">\(b&gt;0\)</span> and <span class="math inline">\(a+b&gt;0\)</span>.</p>
 <p>Show that a spatially uniform steady state solution <span class="math inline">\((u^*,v^*)\)</span> exists for this model and is given by <span class="math inline">\((u^*,v^*)=(a+b\,,\;b/(a+b)^2)\)</span>. Show that the conditions for this steady state to be driven unstable by diffusion are that the three inequalities <span class="math display">\[
 b-a&lt;(a+b)^3\]</span> <span id="eq-turing2"><span class="math display">\[
 \left[D_2\left(\frac{b-a}{a+b}\right)-D_1(a+b)^2\right]^2&gt;4D_1D_2(a+b)^2
-\tag{7.17}\]</span></span> <span id="eq-turing3"><span class="math display">\[
+\tag{7.19}\]</span></span> <span id="eq-turing3"><span class="math display">\[
 D_2\left(\frac{b-a}{a+b}\right)-D_1(a+b)^2&gt;0
-\tag{7.18}\]</span></span> should all hold simultaneously.</p>
+\tag{7.20}\]</span></span> should all hold simultaneously.</p>
 </div>
 <hr>
 </section>
 <section id="conditions-for-turing-instability" class="level4">
 <h4 class="anchored" data-anchor-id="conditions-for-turing-instability">* Conditions for Turing instability</h4>
 <div id="exr-spatial6" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 7.5</strong></span> Consider the reaction-diffusion model <span id="eq-ex_turing4"><span class="math display">\[\begin{split}
+<p><span class="theorem-title"><strong>Exercise 7.6</strong></span> Consider the reaction-diffusion model <span id="eq-ex_turing4"><span class="math display">\[\begin{split}
 \frac{\partial c_1}{\partial t}&amp;=\delta -kc_1 - c_1c_2^2 + D_1\frac{\partial^2c_1}{\partial
   x^2} \\
 \frac{\partial c_2}{\partial t}&amp;=kc_1+c_1c_2^2 - c_2 + D_2\frac{\partial^2c_2}{\partial
   x^2}
-\end{split} \tag{7.19}\]</span></span> where <span class="math inline">\(k&gt;0\)</span> and <span class="math inline">\(\delta&gt;0\)</span>.</p>
+\end{split} \tag{7.21}\]</span></span> where <span class="math inline">\(k&gt;0\)</span> and <span class="math inline">\(\delta&gt;0\)</span>.</p>
 <p>Show that a spatially uniform steady state solution <span class="math inline">\((c_1^*,c_2^*)\)</span> exists for this model and give the conditions for this steady state to be driven unstable by diffusion. You may use any results derived in the lectures.</p>
 </div>
 <hr>
@@ -406,9 +428,9 @@ D_2\left(\frac{b-a}{a+b}\right)-D_1(a+b)^2&gt;0
 <section id="slime-mould-with-boundary" class="level4">
 <h4 class="anchored" data-anchor-id="slime-mould-with-boundary">Slime mould with boundary</h4>
 <div id="exr-spatial5" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 7.6</strong></span> In the model for the aggregation of slime mould amoebae suppose that the spatial domain is <span class="math inline">\(0\leq x\leq L\)</span> rather than <span class="math inline">\(-\infty&lt;x&lt;\infty\)</span>. Show that the conditions for aggregation to occur are <span class="math inline">\(\chi a^*f&gt;k\mu\)</span> and <span id="eq-slime2"><span class="math display">\[
+<p><span class="theorem-title"><strong>Exercise 7.7</strong></span> In the model for the aggregation of slime mould amoebae suppose that the spatial domain is <span class="math inline">\(0\leq x\leq L\)</span> rather than <span class="math inline">\(-\infty&lt;x&lt;\infty\)</span>. Show that the conditions for aggregation to occur are <span class="math inline">\(\chi a^*f&gt;k\mu\)</span> and <span id="eq-slime2"><span class="math display">\[
 L&gt;\pi\sqrt{\frac{D\mu}{\chi a^* f-k\mu}}.
-\tag{7.20}\]</span></span></p>
+\tag{7.22}\]</span></span></p>
 </div>
 
 

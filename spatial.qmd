@@ -52,6 +52,34 @@ We now consider a model for a population of fish that is subject to fishing and 
 ## Directed motion
 
 ## Exercises
+#### Fishing model with diffusion
+::: {#exr-fish}
+<!--- From Exam 2020 --->
+A population of fish $F(x,t)$ in a river of width $L$ with banks at $x=0$ and $x=L$ can be modelled by the partial differential equation
+$$
+\frac{\partial F}{\partial t} = rF\left( 1-\frac{F}{K} \right) + D\frac{\partial^2 F}{\partial x^2},
+$$ {#eq-fish}
+where $r$, $K$ and $D$ are positive constants.
+No-flux boundary conditions are applied at $x=L$.  At precisely $x=0$ some shore-based fishermen catch all of the fish.  We wish to find the minimum width of the river to ensure the fish population does not collapse.
+
+1. First determine the spatially uniform steady states and indicate their stability.
+
+2. Linearise the system for small $F$.
+
+3. By considering a solution of the form $F(x,t) = e^{\lambda t} \left( A \cos kx + B \sin kx \right)$ show that 
+$$
+\lambda = \lambda_n =: r-k_n^2D,
+$$ {#eq-fishlambda}
+where
+$$
+k = k_n =: \frac{(2n+1)\pi }{2L}, ~~~ n = 0,~1,~2,...
+$$ 
+
+4. Hence, determine the condition on $L$ for the fish population not to collapse.
+
+:::
+
+----------------------------------------------------------------------
 
 #### Travelling wave in 1-species reaction-diffusion model
 ::: {#exr-spatial1}

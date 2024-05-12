@@ -489,6 +489,33 @@ $$ {#eq-sir4Ssolprimeinf}
 
 ## Spatially-structured population models
 
+### Fishing model with diffusion {.unnumbered}
+@exr-fish
+
+1. The spatially uniform steady states are $F^*=0$ and $K$. Stability can be determined graphically or from the gradient at the steady state, with the result that $F^*=0$ is unstable and $F^*=K$ is stable.
+
+2. If $F$ is small then $\frac{\partial F}{\partial t} \approx rF + D\frac{\partial^2 F}{\partial x^2}$.
+
+3. Try $F(x,t) = e^{\lambda t}\left( A \cos k x + B\sin k x \right)$ such that
+$$
+\frac{\partial F}{\partial x} = k e^{\lambda t}\left( -A \sin k x + B\cos k x \right).
+$$ {#eq-solfishapprox}
+The boundary conditions are $F(0,t) = 0 = \frac{\partial F}{\partial x}(L,t)$.  The boundary condition at $x=0$ implies that $A=0$.  The second implies that 
+$$
+\cos kL = 0\implies k = \frac{(2n+1)\pi }{2L} =: k_n, ~~~ n = 0,~1,~2,....
+$$ {#eq-solfishk}
+Substituting this solution into the PDE gives
+$$
+\lambda = \lambda_n  =: r-k_n^2D.
+$$ {#eq-solfishlambda}
+
+4. A full solution is a superposition of the above solutions.  For the fish population not to collapse we need at least one $\lambda_n>0$ for some $n$.  The largest $\lambda_n$ is for the smallest $k_n$, which occurs when $n=0$, giving the requirement that $\lambda_0 = r-D\left( \frac{\pi}{2L}\right)^2>0$.  Hence, we need
+$$
+L^2>\frac{D\pi^2}{4r}.
+$$ {#eq-solfishL}
+
+----------------------------------------------------
+
 ### Travelling wave in 1-species reaction-diffusion model {.unnumbered}
 @exr-spatial1:
 

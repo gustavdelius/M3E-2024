@@ -253,6 +253,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#spatially-structured-population-models" id="toc-spatially-structured-population-models" class="nav-link" data-scroll-target="#spatially-structured-population-models"><span class="header-section-number">A.7</span> Spatially-structured population models</a>
   <ul>
+  <li><a href="#fishing-model-with-diffusion" id="toc-fishing-model-with-diffusion" class="nav-link" data-scroll-target="#fishing-model-with-diffusion">Fishing model with diffusion</a></li>
   <li><a href="#travelling-wave-in-1-species-reaction-diffusion-model" id="toc-travelling-wave-in-1-species-reaction-diffusion-model" class="nav-link" data-scroll-target="#travelling-wave-in-1-species-reaction-diffusion-model">Travelling wave in 1-species reaction-diffusion model</a></li>
   <li><a href="#sir-model-with-logistic-growth" id="toc-sir-model-with-logistic-growth" class="nav-link" data-scroll-target="#sir-model-with-logistic-growth">SIR model with logistic growth</a></li>
   <li><a href="#derive-turing-instability" id="toc-derive-turing-instability" class="nav-link" data-scroll-target="#derive-turing-instability">Derive Turing instability</a></li>
@@ -610,21 +611,40 @@ S'(\infty)=S'_0 e^{-\frac{r'}{a}(N-S(\infty))}.
 </section>
 <section id="spatially-structured-population-models" class="level2" data-number="A.7">
 <h2 data-number="A.7" class="anchored" data-anchor-id="spatially-structured-population-models"><span class="header-section-number">A.7</span> Spatially-structured population models</h2>
+<section id="fishing-model-with-diffusion" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="fishing-model-with-diffusion">Fishing model with diffusion</h3>
+<p><a href="spatial.html#exr-fish" class="quarto-xref">Exercise&nbsp;<span>7.1</span></a></p>
+<ol type="1">
+<li><p>The spatially uniform steady states are <span class="math inline">\(F^*=0\)</span> and <span class="math inline">\(K\)</span>. Stability can be determined graphically or from the gradient at the steady state, with the result that <span class="math inline">\(F^*=0\)</span> is unstable and <span class="math inline">\(F^*=K\)</span> is stable.</p></li>
+<li><p>If <span class="math inline">\(F\)</span> is small then <span class="math inline">\(\frac{\partial F}{\partial t} \approx rF + D\frac{\partial^2 F}{\partial x^2}\)</span>.</p></li>
+<li><p>Try <span class="math inline">\(F(x,t) = e^{\lambda t}\left( A \cos k x + B\sin k x \right)\)</span> such that <span id="eq-solfishapprox"><span class="math display">\[
+\frac{\partial F}{\partial x} = k e^{\lambda t}\left( -A \sin k x + B\cos k x \right).
+\tag{A.69}\]</span></span> The boundary conditions are <span class="math inline">\(F(0,t) = 0 = \frac{\partial F}{\partial x}(L,t)\)</span>. The boundary condition at <span class="math inline">\(x=0\)</span> implies that <span class="math inline">\(A=0\)</span>. The second implies that <span id="eq-solfishk"><span class="math display">\[
+\cos kL = 0\implies k = \frac{(2n+1)\pi }{2L} =: k_n, ~~~ n = 0,~1,~2,....
+\tag{A.70}\]</span></span> Substituting this solution into the PDE gives <span id="eq-solfishlambda"><span class="math display">\[
+\lambda = \lambda_n  =: r-k_n^2D.
+\tag{A.71}\]</span></span></p></li>
+<li><p>A full solution is a superposition of the above solutions. For the fish population not to collapse we need at least one <span class="math inline">\(\lambda_n&gt;0\)</span> for some <span class="math inline">\(n\)</span>. The largest <span class="math inline">\(\lambda_n\)</span> is for the smallest <span class="math inline">\(k_n\)</span>, which occurs when <span class="math inline">\(n=0\)</span>, giving the requirement that <span class="math inline">\(\lambda_0 = r-D\left( \frac{\pi}{2L}\right)^2&gt;0\)</span>. Hence, we need <span id="eq-solfishL"><span class="math display">\[
+L^2&gt;\frac{D\pi^2}{4r}.
+\tag{A.72}\]</span></span></p></li>
+</ol>
+<hr>
+</section>
 <section id="travelling-wave-in-1-species-reaction-diffusion-model" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="travelling-wave-in-1-species-reaction-diffusion-model">Travelling wave in 1-species reaction-diffusion model</h3>
-<p><a href="spatial.html#exr-spatial1" class="quarto-xref">Exercise&nbsp;<span>7.1</span></a>:</p>
+<p><a href="spatial.html#exr-spatial1" class="quarto-xref">Exercise&nbsp;<span>7.2</span></a>:</p>
 <ol type="a">
 <li><p>With <span class="math inline">\(z=x-ct\)</span> we have <span id="eq-spatial1"><span class="math display">\[
 \frac{\partial }{\partial t}= \frac{\partial z}{\partial t}\frac{\partial }{\partial z} = -c \frac{\partial }{\partial z} \text{ and }
 \frac{\partial }{\partial x}= \frac{\partial z}{\partial x}\frac{\partial }{\partial z} = \frac{\partial }{\partial z}.
-\tag{A.69}\]</span></span> Substituting this into the PDE gives the ODE <span id="eq-spatial1b"><span class="math display">\[
+\tag{A.73}\]</span></span> Substituting this into the PDE gives the ODE <span id="eq-spatial1b"><span class="math display">\[
 -cU' = f(U) + DU''.
-\tag{A.70}\]</span></span></p></li>
+\tag{A.74}\]</span></span></p></li>
 <li><p>For a travelling wave from left to right (<span class="math inline">\(c&gt;0\)</span>) we expect solution at <span class="math inline">\(\pm \infty\)</span> to be at steady state: <span class="math inline">\(U(-\infty) = 1\)</span> and <span class="math inline">\(U(\infty)=0\)</span>, with <span class="math inline">\(U'(\pm \infty)=0\)</span>.</p>
 <p>We will now use a slightly different way to approach the linearisation around the leading edge of the travelling wave than the one we used in the lecture. The methods are equivalent, and it is always instructional to look at different ways of doing the same thing.</p>
 <p>At the leading edge of the wave we have that <span class="math inline">\(U\)</span> is very small, so we can Taylor-expand <span class="math inline">\(f(U)=f(0)+Uf'(0)+\dots\)</span>. We keep only the first two terms and also use that <span class="math inline">\(f(0)=0\)</span> to get the linear ODE <span id="eq-spatial1c"><span class="math display">\[
 -cU' = Uf'(0)+DU''.
-\tag{A.71}\]</span></span> Rather than making an Ansatz for <span class="math inline">\(U\)</span> as in the lecture, we convert this second order ODE into a set of first-order ODEs by introducing a second variable <span class="math inline">\(V\)</span> so that <span class="math inline">\(U'=V\)</span> and <span class="math inline">\(V' = -\frac{U}{D}f'(0) - \frac{c}{D}V\)</span>. In vector notation this reads <span id="eq-spatial1da"><span class="math display">\[
+\tag{A.75}\]</span></span> Rather than making an Ansatz for <span class="math inline">\(U\)</span> as in the lecture, we convert this second order ODE into a set of first-order ODEs by introducing a second variable <span class="math inline">\(V\)</span> so that <span class="math inline">\(U'=V\)</span> and <span class="math inline">\(V' = -\frac{U}{D}f'(0) - \frac{c}{D}V\)</span>. In vector notation this reads <span id="eq-spatial1da"><span class="math display">\[
 \begin{pmatrix}
 U'\\
 V'
@@ -638,20 +658,20 @@ V'
 U\\
 V
 \end{pmatrix}.
-\tag{A.72}\]</span></span> The eigenvalues <span class="math inline">\(\lambda\)</span> of this linear matrix ODE are solutions of <span id="eq-spatial1d"><span class="math display">\[
+\tag{A.76}\]</span></span> The eigenvalues <span class="math inline">\(\lambda\)</span> of this linear matrix ODE are solutions of <span id="eq-spatial1d"><span class="math display">\[
 \det \begin{pmatrix}
 -\lambda &amp; 1 \\ -\frac{f'(0)}{D} &amp; -\lambda -\frac{c}{D}
 \end{pmatrix} = 0
 ~~~~\implies ~~~~\lambda^2 + \frac{c}{D} \lambda + \frac{f'(0)}{D}=0.
-\tag{A.73}\]</span></span> Real eigenvalues and thus realistic biological solutions exist iff <span id="eq-spatial1e"><span class="math display">\[
+\tag{A.77}\]</span></span> Real eigenvalues and thus realistic biological solutions exist iff <span id="eq-spatial1e"><span class="math display">\[
 \frac{c^2}{D^2}-4\frac{f'(0)}{D}\geq 0, ~~~~\implies ~~~~ c\geq 2\sqrt{Df'(0)}.
-\tag{A.74}\]</span></span></p></li>
+\tag{A.78}\]</span></span></p></li>
 <li><p>If <span class="math inline">\(f(u)= 0\)</span> for all <span class="math inline">\(u\)</span> we get <span class="math inline">\(DU''+cU'=0\)</span>. Setting <span class="math inline">\(U(z)=e^{\mu z}\)</span> <span class="math inline">\(\implies\)</span> <span class="math inline">\(D\mu^2+c\mu\)</span> <span class="math inline">\(\implies\)</span> <span class="math inline">\(\mu = 0\)</span> or <span class="math inline">\(-c/D\)</span>. The general solution is <span class="math inline">\(U=Ae^{-\frac{c}{D} z}+B\)</span>. Clearly <span class="math inline">\(|U|\rightarrow \infty\)</span> as <span class="math inline">\(z \rightarrow -\infty\)</span>. This is not a biologically realistic solution.</p></li>
 </ol>
 </section>
 <section id="sir-model-with-logistic-growth" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="sir-model-with-logistic-growth">SIR model with logistic growth</h3>
-<p><a href="spatial.html#exr-spatial3" class="quarto-xref">Exercise&nbsp;<span>7.3</span></a>:</p>
+<p><a href="spatial.html#exr-spatial3" class="quarto-xref">Exercise&nbsp;<span>7.4</span></a>:</p>
 <ol type="a">
 <li><p>One can either approach this systematically or one can just try to guess the necessary change of variables. We will use a blended approach: we guess the expressions for <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> by inspecting the equations, and we make a general Ansatz for <span class="math inline">\(\tilde{t}\)</span>.</p>
 <p>By comparing the <span class="math inline">\((1-S/K)\)</span> factor in the equation for <span class="math inline">\(S\)</span> to the factor <span class="math inline">\((1-u)\)</span> in the equation for <span class="math inline">\(u\)</span> we see that <span class="math inline">\(u=S/K\)</span>. It is natural to also choose <span class="math inline">\(v=I/K\)</span>. We write <span class="math inline">\(\tilde{t}=t/\tau\)</span>, where <span class="math inline">\(\tau\)</span> is still to be determined. With these we have <span id="eq-spatial3ut"><span class="math display">\[\begin{split}
@@ -659,51 +679,51 @@ V
 \tau/K\left(rKu(1-u)-\beta K^2uv\right)\\
 &amp;=
 \tau r u(1-u)-\tau \beta K uv
-\end{split} \tag{A.75}\]</span></span> By comparing this with equation for <span class="math inline">\(u\)</span> in the problem statement, we can read off that <span id="eq-spatial3tau"><span class="math display">\[
+\end{split} \tag{A.79}\]</span></span> By comparing this with equation for <span class="math inline">\(u\)</span> in the problem statement, we can read off that <span id="eq-spatial3tau"><span class="math display">\[
 \tau = \frac{1}{\beta K}, ~~~b=\frac{r}{\beta K}.
-\tag{A.76}\]</span></span> Then <span id="eq-spatial3vt"><span class="math display">\[\begin{split}
+\tag{A.80}\]</span></span> Then <span id="eq-spatial3vt"><span class="math display">\[\begin{split}
 \partial_{\tilde{t}}v&amp;=\tau/K\partial_tI=
 \tau/K\left(\beta K^2uv-\gamma Kv\right)\\
 &amp;=uv-\frac{\gamma}{\beta K}v.
-\end{split} \tag{A.77}\]</span></span> By comparing this with the equation for <span class="math inline">\(v\)</span> in the problem statement we read off that <span id="eq-spatial3m"><span class="math display">\[
+\end{split} \tag{A.81}\]</span></span> By comparing this with the equation for <span class="math inline">\(v\)</span> in the problem statement we read off that <span id="eq-spatial3m"><span class="math display">\[
 m=\frac{\gamma}{\beta K}.
-\tag{A.78}\]</span></span></p></li>
+\tag{A.82}\]</span></span></p></li>
 <li><p>By inspection we see that one steady state is <span class="math inline">\((u(x,t),v(x,t))=(0,0)\)</span> and that another is <span id="eq-spatial3ss"><span class="math display">\[
 (u(x,t),v(x,t))=(1,0).
-\tag{A.79}\]</span></span> The first describes a situation where the foxes are extinct, the second the situation where in the absence of the disease the fox population sits at its carrying capacity. We look for another steady state <span class="math inline">\((u(x,t),v(x,t))=(u^*,v^*)\)</span> with <span class="math inline">\(v^*\neq 0\)</span>. From the equation for <span class="math inline">\(v\)</span> we read off that <span class="math inline">\(u^*=m\)</span> and then from the equation for <span class="math inline">\(u\)</span> we get <span class="math inline">\(v^*=b(1-m)\)</span>. This is the endemic state because the number of infecteds is nonzero. It exists as long as <span class="math inline">\(m&lt;1\)</span>. This tells us that the existence of the endemic state is independent of the intrinsic growth rate <span class="math inline">\(r\)</span> of the fox population but does depend on its carrying capacity.</p></li>
+\tag{A.83}\]</span></span> The first describes a situation where the foxes are extinct, the second the situation where in the absence of the disease the fox population sits at its carrying capacity. We look for another steady state <span class="math inline">\((u(x,t),v(x,t))=(u^*,v^*)\)</span> with <span class="math inline">\(v^*\neq 0\)</span>. From the equation for <span class="math inline">\(v\)</span> we read off that <span class="math inline">\(u^*=m\)</span> and then from the equation for <span class="math inline">\(u\)</span> we get <span class="math inline">\(v^*=b(1-m)\)</span>. This is the endemic state because the number of infecteds is nonzero. It exists as long as <span class="math inline">\(m&lt;1\)</span>. This tells us that the existence of the endemic state is independent of the intrinsic growth rate <span class="math inline">\(r\)</span> of the fox population but does depend on its carrying capacity.</p></li>
 <li><p>We want <span class="math inline">\(D_1\partial_x^2S=\partial_{\tilde{x}}^2u\)</span>, where <span class="math inline">\(u=S/K\)</span>. Hence <span id="eq-spatial3x"><span class="math display">\[
 \tilde{x}=\sqrt{\frac{K\beta}{D_1}}x.
-\tag{A.80}\]</span></span> Then <span class="math inline">\(d\,\partial_{\tilde{x}}^2v =d\,D_1\partial_x^2I\)</span> but we want <span class="math inline">\(D_2\partial_x^2I\)</span> so we need <span id="eq-spatial3d"><span class="math display">\[
+\tag{A.84}\]</span></span> Then <span class="math inline">\(d\,\partial_{\tilde{x}}^2v =d\,D_1\partial_x^2I\)</span> but we want <span class="math inline">\(D_2\partial_x^2I\)</span> so we need <span id="eq-spatial3d"><span class="math display">\[
 d=\frac{D_2}{D_1}.
-\tag{A.81}\]</span></span></p></li>
+\tag{A.85}\]</span></span></p></li>
 <li><p>Substituting the wave Ansatz into the PDEs for <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> gives <span id="eq-AB"><span class="math display">\[
 -cA'=bA(1-A)-AB+A'',~~~-cB'=AB-mB+dB''.
-\tag{A.82}\]</span></span></p></li>
+\tag{A.86}\]</span></span></p></li>
 <li><p>If <span class="math inline">\(A(\infty)=1\)</span> (which corresponds to <span class="math inline">\(S=K\)</span>) then that means that at <span class="math inline">\(x=\infty\)</span> the system is in the disease-free state and thus <span class="math inline">\(B(\infty)=0\)</span>. At <span class="math inline">\(x=-\infty\)</span> the system must thus be in the endemic state, so <span class="math inline">\(A(-\infty)=u^*=m\)</span> and <span class="math inline">\(B(-\infty)=v^*=b(1-m)\)</span>. So the key to this question was the observation that the travelling wave will always have to interpolate between two steady states.</p></li>
-<li><p>At the leading edge where <span class="math inline">\(B\)</span> is very small, <span class="math inline">\(A\)</span> is very close to <span class="math inline">\(1\)</span>, so <span class="math inline">\(A=1-\epsilon\)</span> for a small <span class="math inline">\(\epsilon&gt;0\)</span>. The equations <a href="#eq-AB" class="quarto-xref">Eq.&nbsp;<span>A.82</span></a> can thus be approximated by the linear equations <span id="eq-ABl"><span class="math display">\[
+<li><p>At the leading edge where <span class="math inline">\(B\)</span> is very small, <span class="math inline">\(A\)</span> is very close to <span class="math inline">\(1\)</span>, so <span class="math inline">\(A=1-\epsilon\)</span> for a small <span class="math inline">\(\epsilon&gt;0\)</span>. The equations <a href="#eq-AB" class="quarto-xref">Eq.&nbsp;<span>A.86</span></a> can thus be approximated by the linear equations <span id="eq-ABl"><span class="math display">\[
 c\epsilon'=b\epsilon-B-\epsilon'',~~~-cB'=B-mB+dB''.
-\tag{A.83}\]</span></span> We obtained this by dropping all terms involving <span class="math inline">\(\epsilon^2\)</span> or <span class="math inline">\(\epsilon B\)</span> because they are negligible when <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(B\)</span> are both small.</p>
+\tag{A.87}\]</span></span> We obtained this by dropping all terms involving <span class="math inline">\(\epsilon^2\)</span> or <span class="math inline">\(\epsilon B\)</span> because they are negligible when <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(B\)</span> are both small.</p>
 <p>We concentrate on the second equation, which we solve with the Ansatz <span class="math inline">\(B(x)=\exp(\lambda x)\)</span>. Substituting this Ansatz into the equation gives the characteristic equation for <span class="math inline">\(\lambda\)</span>: <span id="eq-spatial3lambda"><span class="math display">\[
 d\lambda^2+c\lambda+1-m=0,
-\tag{A.84}\]</span></span> and thus <span id="eq-spatial3lambda2"><span class="math display">\[
+\tag{A.88}\]</span></span> and thus <span id="eq-spatial3lambda2"><span class="math display">\[
 \lambda=\frac{-c\pm\sqrt{c^2-4d(1-m)}}{2d}.
-\tag{A.85}\]</span></span> We do not want the solution to oscillate, so we want <span class="math inline">\(\lambda\)</span> to be real, hence <span id="eq-spatial3c"><span class="math display">\[
+\tag{A.89}\]</span></span> We do not want the solution to oscillate, so we want <span class="math inline">\(\lambda\)</span> to be real, hence <span id="eq-spatial3c"><span class="math display">\[
 c\geq 2\sqrt{d(1-m)}.
-\tag{A.86}\]</span></span></p></li>
+\tag{A.90}\]</span></span></p></li>
 </ol>
 </section>
 <section id="derive-turing-instability" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="derive-turing-instability">Derive Turing instability</h3>
-<p><a href="spatial.html#exr-spatial4" class="quarto-xref">Exercise&nbsp;<span>7.4</span></a>:</p>
+<p><a href="spatial.html#exr-spatial4" class="quarto-xref">Exercise&nbsp;<span>7.5</span></a>:</p>
 <p>Here, <span id="eq-spatial4fg"><span class="math display">\[
 f(u,v)=a-u + u^2v, ~~~~ g(u,v)=b-u^2v.
-\tag{A.87}\]</span></span></p>
+\tag{A.91}\]</span></span></p>
 <p><strong>Step 1. Uniform steady state</strong></p>
 <p><span id="eq-spatial4ss"><span class="math display">\[
 a-u^* + {u^*}^2 v^*=0~\text{ and }~b-{u^*}^2 v^*=0
-\tag{A.88}\]</span></span> implies <span id="eq-spatial4ss2"><span class="math display">\[
+\tag{A.92}\]</span></span> implies <span id="eq-spatial4ss2"><span class="math display">\[
 (u^*,~v^*)=(a+b,~b/(a+b)^2).
-\tag{A.89}\]</span></span></p>
+\tag{A.93}\]</span></span></p>
 <p><strong>Step 2. Linearize</strong></p>
 <p>Set <span class="math inline">\(u=u^*+\xi\)</span> and <span class="math inline">\(v=v^*+\eta\)</span> with <span class="math inline">\(\xi\)</span> and <span class="math inline">\(\eta\)</span> small. Substitute and Taylor expand to get <span id="eq-spatial4lin"><span class="math display">\[
 \begin{pmatrix}
@@ -720,7 +740,7 @@ a_{11} &amp; a_{12} \\a_{21} &amp; a_{22}
 \begin{pmatrix}
 D_1 \frac{\partial^2 \xi}{\partial x^2} \\ D_2\frac{\partial^2 \eta}{\partial x^2}
 \end{pmatrix},
-\tag{A.90}\]</span></span> where <span id="eq-spatial4lin2"><span class="math display">\[
+\tag{A.94}\]</span></span> where <span id="eq-spatial4lin2"><span class="math display">\[
 \begin{split}
 a_{11} = \frac{\partial f}{\partial u}(u^*,v^*) &amp;= -1+2u^*v^* \\
 &amp;= -1+2(a+b)b/(a+b)^2 \\
@@ -729,7 +749,7 @@ a_{12} = \frac{\partial f}{\partial v}(u^*,v^*) &amp;= {u^*}^2 =(a+b)^2\\
 a_{21} = \frac{\partial g}{\partial u}(u^*,v^*) &amp;= -2 u^* v^* =-2b/(a+b)\\
 a_{22} = \frac{\partial g}{\partial v}(u^*,v^*) &amp;= -{u^*}^2 =-(a+b)^2
 \end{split}
-\tag{A.91}\]</span></span></p>
+\tag{A.95}\]</span></span></p>
 <p><strong>Step 3. Solutions</strong></p>
 <p>Make the Ansatz <span class="math inline">\(\xi = A_1 e^{\sigma t} \sin( kx+\alpha)\)</span> and <span class="math inline">\(\eta = A_2 e^{\sigma t} \sin( kx+\alpha)\)</span>. Substitute to get <span id="eq-spatial4sol"><span class="math display">\[
 \begin{pmatrix}
@@ -740,35 +760,35 @@ a_{22} = \frac{\partial g}{\partial v}(u^*,v^*) &amp;= -{u^*}^2 =-(a+b)^2
 A_1 \\ A_2
 \end{pmatrix}=
 {\mathbf 0}
-\tag{A.92}\]</span></span> For a non-trivial solution we require the determinant of this matrix to be zero (otherwise we would be able to find an inverse, etc.). Hence, <span id="eq-spatial4sol2"><span class="math display">\[
+\tag{A.96}\]</span></span> For a non-trivial solution we require the determinant of this matrix to be zero (otherwise we would be able to find an inverse, etc.). Hence, <span id="eq-spatial4sol2"><span class="math display">\[
 \sigma^2 + \left[ (a+b)^2 - \frac{b-a}{a+b} + (D_1+D_2)k^2  \right] \sigma + h(k^2) = 0,
-\tag{A.93}\]</span></span> where <span id="eq-spatial4sol3"><span class="math display">\[
+\tag{A.97}\]</span></span> where <span id="eq-spatial4sol3"><span class="math display">\[
 h(k^2)= D_1D_2k^4 - \left[ D_2\frac{b-a}{a+b} - D_1(a+b)^2  \right] k^2 +(a+b)^2.
-\tag{A.94}\]</span></span></p>
+\tag{A.98}\]</span></span></p>
 <p><strong>Step 4. In the absence of diffusion</strong> (Put <span class="math inline">\(D_1=0=D_2\)</span>.) <span id="eq-spatial4sol4"><span class="math display">\[
 \sigma^2 + \left[ (a+b)^2 - \frac{b-a}{a+b} \right] \sigma + (a+b)^2 = 0.
-\tag{A.95}\]</span></span> For <span class="math inline">\(\sigma\)</span> to have roots in the left half of the complex plane (giving us a stable steady state) we need <span class="math inline">\((a+b)^2-\frac{b-a}{a+b}&gt;0 ~\implies ~ b-a&lt;(a+b)^3\)</span> and <span class="math inline">\((a+b)^2&gt;0\)</span> (which it is).</p>
+\tag{A.99}\]</span></span> For <span class="math inline">\(\sigma\)</span> to have roots in the left half of the complex plane (giving us a stable steady state) we need <span class="math inline">\((a+b)^2-\frac{b-a}{a+b}&gt;0 ~\implies ~ b-a&lt;(a+b)^3\)</span> and <span class="math inline">\((a+b)^2&gt;0\)</span> (which it is).</p>
 <p><strong>Step 5. With diffusion</strong> (<span class="math inline">\(D_1\neq 0\neq D_2\)</span>.)</p>
 <p>We want steady state to be unstable in this case. The coefficient of <span class="math inline">\(\sigma\)</span> is <span id="eq-spatial4sol5"><span class="math display">\[
 (a+b)^2 - \frac{b-a}{a+b} + (D_1+D_2)k^2 &gt; (D_1+D_2)k^2&gt;0 ~~~~\mbox{from Step 4}
-\tag{A.96}\]</span></span> Therefore, we require <span class="math inline">\(h(k^2)&lt;0\)</span> for some <span class="math inline">\(k^2\)</span> for there to be an instability.</p>
+\tag{A.100}\]</span></span> Therefore, we require <span class="math inline">\(h(k^2)&lt;0\)</span> for some <span class="math inline">\(k^2\)</span> for there to be an instability.</p>
 <p>As <span class="math inline">\(h(0)&gt;0\)</span> we must have two positive real roots of <span class="math inline">\(h(k^2)=0\)</span> for there to be an instability.</p>
 <p>Real distinct roots (<span class="math inline">\(\implies ~~B^2-4AC&gt;0\)</span>) <span id="eq-spatial4sol6"><span class="math display">\[
 \implies \left[ D_2\frac{b-a}{a+b} - D_1(a+b)^2  \right]^2&gt; 4D_1D_2 (a+b)^2.
-\tag{A.97}\]</span></span> Both positive (<span class="math inline">\(\implies B&lt;0\)</span>) <span id="eq-spatial4sol7"><span class="math display">\[
+\tag{A.101}\]</span></span> Both positive (<span class="math inline">\(\implies B&lt;0\)</span>) <span id="eq-spatial4sol7"><span class="math display">\[
 \implies D_2\frac{b-a}{a+b} - D_1(a+b)^2 &gt; 0.
-\tag{A.98}\]</span></span></p>
+\tag{A.102}\]</span></span></p>
 <hr>
 </section>
 <section id="slime-mould-with-boundary" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="slime-mould-with-boundary">Slime mould with boundary</h3>
-<p><a href="spatial.html#exr-spatial5" class="quarto-xref">Exercise&nbsp;<span>7.6</span></a> <span id="eq-spatial5"><span class="math display">\[
+<p><a href="spatial.html#exr-spatial5" class="quarto-xref">Exercise&nbsp;<span>7.7</span></a> <span id="eq-spatial5"><span class="math display">\[
 \frac{\partial a}{\partial t} = \frac{\partial}{\partial x} \left( \mu \frac{\partial a}{\partial x} - \chi a \frac{\partial \rho}{\partial x}   \right), ~~~\mbox{and} ~~~ \frac{\partial \rho}{\partial t} = fa -k\rho + D\frac{\partial^2 \rho}{\partial x^2}.
-\tag{A.99}\]</span></span> Steady states are <span class="math inline">\(fa^*=k\rho^*\)</span>.</p>
+\tag{A.103}\]</span></span> Steady states are <span class="math inline">\(fa^*=k\rho^*\)</span>.</p>
 <p>Consider a perturbation <span class="math inline">\(a=a^*+\xi\)</span> and <span class="math inline">\(\rho = \rho^* +\eta\)</span>, where <span class="math inline">\(\xi\)</span> and <span class="math inline">\(\eta\)</span> are small. Substitute and linearize to give <span id="eq-spatial5lin"><span class="math display">\[
 \frac{\partial \xi}{\partial t} = \mu \frac{\partial^2 \xi}{\partial x^2} - \chi a^* \frac{\partial^2 \eta}{\partial x^2}, ~~~\mbox{and} ~~~
 \frac{\partial \eta}{\partial t} = f\xi -k\eta + D\frac{\partial^2 \eta}{\partial x^2}.
-\tag{A.100}\]</span></span> Put <span class="math inline">\(\xi = A_1 e^{\sigma t + iqx}\)</span> and <span class="math inline">\(\eta = A_2 e^{\sigma t + iqx}\)</span>. Hence, <span id="eq-spatial5sol"><span class="math display">\[
+\tag{A.104}\]</span></span> Put <span class="math inline">\(\xi = A_1 e^{\sigma t + iqx}\)</span> and <span class="math inline">\(\eta = A_2 e^{\sigma t + iqx}\)</span>. Hence, <span id="eq-spatial5sol"><span class="math display">\[
 \begin{pmatrix}
 \sigma +\mu q^2 &amp; -\chi a^*q^2 \\  
 -f &amp; \sigma + k+Dq^2
@@ -777,21 +797,21 @@ h(k^2)= D_1D_2k^4 - \left[ D_2\frac{b-a}{a+b} - D_1(a+b)^2  \right] k^2 +(a+b)^2
 A_1 \\ A_2
 \end{pmatrix}=
 {\mathbf 0}
-\tag{A.101}\]</span></span></p>
+\tag{A.105}\]</span></span></p>
 <p>A non-trivial solution requires the determinant of the matrix to be zero <span id="eq-spatial5sol2"><span class="math display">\[
 \implies ~\sigma^2 +g(q^2)\sigma + h(q^2) = 0,
-\tag{A.102}\]</span></span> where <span class="math inline">\(g(q^2) = k+(D+\mu)q^2&gt;0\)</span> and <span class="math inline">\(h(q^2) = \mu Dq^4+(k\mu -\chi a^*f)q^2&gt;0\)</span>.</p>
+\tag{A.106}\]</span></span> where <span class="math inline">\(g(q^2) = k+(D+\mu)q^2&gt;0\)</span> and <span class="math inline">\(h(q^2) = \mu Dq^4+(k\mu -\chi a^*f)q^2&gt;0\)</span>.</p>
 <p>We need <span class="math inline">\((k\mu -\chi a^*f)&lt;0\)</span> for there to be a positive root of <span class="math inline">\(h(q^2)=0\)</span> and so instability.</p>
 <p>If <span class="math inline">\(0\leq x \leq L\)</span> we need boundary conditions. Assume no flux at <span class="math inline">\(x=0,~L\)</span>: <span class="math inline">\(\frac{\partial a}{\partial x}=0=\frac{\partial \rho}{\partial x}\)</span> at <span class="math inline">\(x=0,~L\)</span>.</p>
 <p>Try <span class="math inline">\(\xi = A_1 e^{\sigma t}\cos qx\)</span> and <span class="math inline">\(\eta = A_2 e^{\sigma t}\cos qx\)</span> to satisfy BCs at <span class="math inline">\(x=0\)</span>.</p>
 <p>At <span class="math inline">\(x=L\)</span> we have <span class="math inline">\(\sin qL = 0\)</span> for a non-trivial solution <span class="math inline">\(~\implies q=q_n:= n\pi/L\)</span>, <span class="math inline">\(n=0,1,2,...\)</span></p>
 <p>Aggregation will not occur if <span class="math inline">\(h(q_1^2)&gt;0\)</span>, which implies <span id="eq-spatial5L"><span class="math display">\[
 L&lt;\pi\sqrt{\frac{D\mu}{\chi a^*f-k\mu}}.
-\tag{A.103}\]</span></span></p>
+\tag{A.107}\]</span></span></p>
 <p>Aggregation will occur if <span id="eq-spatial5L2"><span class="math display">\[
 k\mu&lt;\chi a^*f  ~~~\mbox{and}~~~
 L&gt;\pi\sqrt{\frac{D\mu}{\chi a^*f-k\mu}}.
-\tag{A.104}\]</span></span></p>
+\tag{A.108}\]</span></span></p>
 
 
 </section>
