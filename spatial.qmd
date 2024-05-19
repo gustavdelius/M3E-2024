@@ -42,6 +42,16 @@ If there is no local population dynamics, the equation simplifies to the diffusi
 ## Fishing model with diffusion
 
 We now consider a model for a population of fish that is subject to fishing and that moves around randomly. We assume that in the absence of fishing the population has a logistic growth rate. The population density $u(x,t)$ satisfies the equation
+$$
+\partial_t u = r u \left(1-\frac{u}{K}\right) - E u + D \partial_x^2 u,
+$$ {#eq-fish}
+where $r$ is the intrinsic growth rate, $K$ is the carrying capacity, $E$ is the fishing rate and $D$ is the diffusion coefficient. The first term on the right-hand side describes the logistic growth, the second term the fishing and the third term the random motion of the fish.
+
+![Sketch of the marine protected area](figures/Spatial/mpa.svg){width=70%}
+
+We now want to determine the minimum width of the river to ensure the fish population does not collapse. We first determine the spatially uniform steady states and indicate their stability. The steady states are given by the solutions of
+
+
 
 
 
