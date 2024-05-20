@@ -24,7 +24,7 @@ Before we get started, let us explain some terms used to describe different leve
 
 3. _Endemic_: An endemic disease is one that is regularly found in a population or geographic area at a consistent and predictable rate. Endemic diseases may cause illness and death but are typically well-controlled by routine public health measures, such as vaccination and surveillance. For example, malaria is endemic in many parts of the world, and measures such as mosquito control and antimalarial medications are used to prevent and treat the disease.
 
-## SIR model
+## SIR model {#sec-sir}
 
 The SIR model is a very idealised mathematical model that is commonly used to describe the spread of infectious diseases in a population. The acronym SIR stands for Susceptible, Infected, and Recovered, which are the three main compartments of the model.
 
