@@ -41,21 +41,180 @@ If there is no local population dynamics, the equation simplifies to the diffusi
 
 ## Fishing model with diffusion
 
-We now consider a model for a population of fish that is subject to fishing and that moves around randomly. We assume that in the absence of fishing the population has a logistic growth rate. The population density $u(x,t)$ satisfies the equation
+We now consider a model for a population of fish that is subject to fishing and that moves around randomly. We want to model a marine protected area where fishing is limited to avoid a collapse of the fish population. @fig-mpa shows the spatial setup. The $x$-axis runs perpendicular to the shore at $x=0$. A marine protected area runs out upto a distance $L$ from the shore. We assume that the marine protected area has infinite extension in the $y$-direction, so that we can ignore the $y$-coordinate and model the fish population as a function of $x$ only.
+
+Beyond $x=L$ there is no management of the fishing activity. We assume that the fishers are so efficient that they catch all fish that venture outside the protected area. So we set $u(x,t)=0$ for $x\geq L$. This is of course an idealisation, but it allows us to focus on the dynamics within the protected area. 
+
+![Sketch of the marine protected area](figures/Spatial/mpa.svg){width=70%, #fig-mpa}
+
+
+We assume that in the absence of fishing the population has a logistic growth rate. The population density $u(x,t)$ satisfies the equation
 $$
 \partial_t u = r u \left(1-\frac{u}{K}\right) - E u + D \partial_x^2 u,
 $$ {#eq-fish}
 where $r$ is the intrinsic growth rate, $K$ is the carrying capacity, $E$ is the fishing rate and $D$ is the diffusion coefficient. The first term on the right-hand side describes the logistic growth, the second term the fishing and the third term the random motion of the fish.
 
-![Sketch of the marine protected area](figures/Spatial/mpa.svg){width=70%}
+In the protected area, the fishing rate $E$ must certainly be below the intrinsic growth rate $r$, otherwise the population is guaranteed to die out. However we must also take into account that some fish will be lost when they randomly move out of the protected area, where they are fished immediately. We expect this effect to be larger when the protected area is smaller. So when the marine protected area is planned, there will be a trade-off between the width $L$ of the protected area and the allowed rate of fishing $E$. Our aim is to describe this trade-off precisely by finding the condition on $E$ and $L$ such that the population does not collapse.
 
-We now want to determine the minimum width of the river to ensure the fish population does not collapse. We first determine the spatially uniform steady states and indicate their stability. The steady states are given by the solutions of
+To achieve our aim, we will need to solve the PDE. But before solving a PDE we always need to be clear about the boundary conditions on the solution. We have already discussed that we assume that $u(x,t)=0$ for $x\geq L$, i.e., we have a Dirichlet boundary condition at $x=L$. At $x=0$ we impose a no-flux boundary condition, which means that there are no fish moving from the sea onto the shore or the other way around. This is a reasonable assumption if the shore is a steep cliff or a sandy beach where fish cannot live. The no-flux boundary condition is the Neumann boundary condition $\partial_x u(0,t) = 0$.
 
+The PDE @eq-fish is a nonlinear PDE, so we cannot solve it analytically in general. However, we can still make progress by realising that before the population goes extinct, it will get small. We can then linearise the PDE around the extinction state $u=0$ and solve the linearised equation. If the extinction steady state is linearly unstable, then the population will not go extinct.
 
+Linearising the PDE @eq-fish around the extinction state $u=0$ means that we neglect the term $u^2$ in the logistic growth term. We then have the linearised equation
+$$
+\partial_t u = (r - E)u + D \partial_x^2 u.
+$$ {#eq-fishlin}
+We can now solve this linear PDE with the method of separation of variables. We make the Ansatz $u(x,t) = X(x)T(t)$ and plug this into @eq-fishlin. We get
+$$
+XT'=(r-E)XT+DX''T
+$$ {#eq-fishsep}
+and after dividing by $XT$ we get
+$$
+\frac{T'}{T} = r-E + D \frac{X''}{X}.
+$$ {#eq-fishsep2}
+The left-hand side depends only on $t$ and the right-hand side only on $x$. Therefore both sides must be equal to a constant, which we call $gamma$. We then have the two ODEs
+$$
+T' = \gamma T, ~~~ X'' = \frac{\gamma-r+E}{D}X =:-\rho^2 X,
+$$ {#eq-fishsep3}
+where, in order to save writing, we have defined 
+$$
+\rho^2 = (r-E-\gamma)/D.
+$$ {#eq-fishrho}
+The solution of the time ODE is 
+$$
+T(t) = T(0)e^{\gamma t}
+$$ {#eq-fishT}
+and the solution of the spatial ODE is 
+$$
+X(x) = A \cos(\rho x) + B \sin(\rho x),
+$$ {#eq-fishX}
+where $A$ and $B$ are constants to be determined by the boundary conditions.
 
+Imposing the no-flux boundary condition $\partial_xu(0,t)$ gives 
+$$
+X'(0) =-A\rho\sin(\rho 0)+B\rho\cos(\rho 0)=B\rho= 0.
+$$ {#eq-fishBC1}
+So either $\rho=0$ or $B=0$. The case $\rho=0$ gives the trivial solution $X(x)=A$, which is not interesting. So we take $B=0$ and get $X(x) = A\cos(\rho x)$. 
+
+The Dirichlet boundary condition at $x=L$ gives $X(L) = A\cos(\rho L) = 0$. So either $A=0$ or $\cos(\rho L) = 0$. The former gives rise to the zero solution, so we want the latter, which requires $\rho L$ to be an odd multiple of $\pi/2$, i.e.,
+$$
+\rho=\rho_n = \frac{(2n+1)\pi}{2L}
+$$  {#eq-fishrho2}
+for $n=0,1,2,...$. To each of these $\rho_n$ there corresponds, according to @eq-fishrho, a 
+$$
+\gamma_n = r-E-D\rho_n^2
+$$  {#eq-fishgamma}
+and a solution 
+$$
+u_n(x,t) = X_n(x)T_n(t) = A_ne^{\gamma_n t}\cos(\rho_n x)
+$$ {#eq-fishsol}
+The general solution is then a linear combination of these solutions,
+$$
+u(x,t) = \sum_{n=0}^\infty A_ne^{\gamma_n t}\cos(\rho_n x).
+$$ {#eq-fishgensol}
+
+The condition for the population not to go extinct is that the extinction steady state is linearly unstable. This means that there is at least one $\gamma_n$ with positive real part. We see from @eq-fishgamma that $\gamma_n$ increases with $n$. So the condition for the population not to go extinct is that $\gamma_0$ is positive. This gives the condition
+$$
+\gamma_0=r-E-D\rho_0^2=r-E-\frac{D\pi^2}{4L^2}>0.
+$$ {#eq-fishcond}
+We can now solve this inequality for $L$ to get the condition on the width of the marine protected area that ensures the population does not collapse.
+$$
+L>\frac{\pi}{2}\sqrt{\frac{D}{r-E}}.
+$$ {#eq-fishcond2}
+Alternatively we can solve the inequality for $E$ to get the condition on the fishing rate that ensures the population does not collapse.
+$$
+E<r-\frac{D\pi^2}{4L^2}.
+$$ {#eq-fishcond3}
+This can now be used to inform policy decisions on the width of the marine protected area and the allowed fishing rate.
 
 
 ## Invasion waves in SIR model
+
+We now want to use our spatial modelling skills to study the spread of an infectious disease through space. For concreteness think of a situation where rabies has infected foxes in Dover and we want to get an idea of how soon we will have rabid foxes in York. We model the fox population by the SIR model, where $S(x,t)$ is the density of susceptible foxes, $I(x,t)$ is the density of infected foxes and $R(x,t)$ is the density of removed foxes. So where in @sec-sir we had ordinary differential equations for the total number of susceptible, infected and removed foxes, we now have partial differential equations for the densities of susceptible, infected and removed foxes in space.
+
+While foxes are usually very territorial and stay in their own territory, infected foxes become a bit insane and move around randomly. This is modelled by a diffusion term in the equation for the infected foxes. The equations are
+$$\begin{split}
+\partial_t S&=-\beta \frac{SI}{N},\\
+\partial_t I&=\beta \frac{SI}{N}-\gamma I+D\partial_x^2I,\\
+\partial_t R&=\gamma I,
+\end{split}$$ {#eq-sir}
+where $N=S+I+R$ is the total fox population, $\beta$ is the infection rate, $\gamma$ is the recovery rate and $D$ is the diffusion coefficient. For simplicity we study the movement in the $x$ direction only. The above equations are valid for all $x$. We will later concentrate on the equations for $I$ and $S$ only, as $R$ can then be calculated from $N=S+I+R$.
+
+Before analysing these equations further, let us think about what we expect to happen. 
+The infected foxes in Dover will infect more and more susceptible foxes. The infected foxes will then move around and infect susceptible foxes in neighbouring territories. This will lead to a wave of infection spreading out from Dover. The wave will move at a speed that depends on the infection rate, the recovery rate and the diffusion coefficient. The wave will have a front where the infected foxes are and a tail where the infected foxes have recovered and are immune.
+
+To make the further analysis easier, we will non-dimensionalise the equations. We introduce the non-dimensional variables
+$$
+u = S/N, ~~~ v = I/N,~~~ \tilde{t} = \beta t,
+$$ {#eq-sirnondim}
+Then the equations become
+$$\begin{split}
+\partial_{\tilde{t}} u&=-uv\\
+\partial_{\tilde{t}} v&=uv-\frac{\gamma}{\beta}v+\frac{D}{\beta}\partial_x^2v.
+\end{split}$$ {#eq-sirnondim2}
+We now also introduce the non-dimensional spatial variable $\tilde{x} = \sqrt{\frac{\beta}{D}}x$ and the non-dimensional parameter $r = \frac{\gamma}{\beta}$.
+We now drop the tildes to avoid clutter and write the equations as
+$$\begin{split}
+\partial_t u&=-uv\\
+\partial_t v&=uv-rv+\partial_x^2v.
+\end{split}$$ {#eq-sirnondim3}
+
+We are looking for a solution describing the spread of the infection from Dover to York. We make the Ansatz that the solution is a travelling wave, i.e., that it is of the form
+$$
+u(x,t)=U(z),~~~v(x,t)=V(z)
+$$ {#eq-sirnondim4}
+with $z=x-ct$ for some $c>0$. This means that the wave is a right-moving wave. We plug this into the equations and get the system of ODEs
+$$\begin{split}
+-cU'&=-UV\\
+-cV'&=UV-rV+V''.
+\end{split}$$ {#eq-sirnondim5}
+Next let us think about the boundary conditions. We expect that the solution will be $u=1$ and $v=0$ for $z\to\infty$ because ahead of the wave all individuals are still susceptible and there are no infecteds yet. Behind the wave the epidemic will have run its course and so $u=S_\infty/N=:a$ and $v=0$ for $z\to-\infty$. In other words, the travelling wave interpolates between the state before an epidemic (at $z=\infty$) and the state after an epidemic (at $\=-\infty$). We also have that the solution becomes flat at $z\to-\infty$, so in particular $V'(\pm\infty)=0$.
+
+We now massage the equations a bit to get them into a form that we can integrate more easily. From the first equation we see that $UV=cU'$ and also that $V=cU'/U=c(\log U)'$. We plug this into the second equation and get
+$$
+-cV'=cU'-rc(\log U)' + V''.
+$$ {#eq-sirnondim6}
+Now that each term in the equation is a total derivative, we can integrate it by just removing the differentiations:
+$$
+-cV=cU-rc\log U + V'+A,
+$$ {#eq-sirnondim7}
+where $A$ is a constant of integration. We use the boundary condition at $z\to\infty$ to determine $A$:
+$$
+0=c-rc\log 1 + 0 + A \Rightarrow A=-c.
+$$ {#eq-sirnondim8}
+At $z\to-\infty$ we get
+$$
+0=ca-rc\log a + 0 - c \Rightarrow a-1=r\log a.
+$$ {#eq-sirnondim9}
+This equation is equivalent to @eq-Sinf for $S_\infty$ in the case where $S_0=N$. Again this transcendental equation can only be solved numerically.
+
+Next we want to determine the wave speed $c$. We do this by linearising the equation around the leading edge of the wave where $V$ is very small and $U$ is close to 1, i.e, $U=1-\epsilon$ for small $\epsilon$. Substituting this into the second equation in [-@eq-sirnondim5] we get
+$$
+-cV' = (1-\epsilon)V - r V + V''.
+$$
+Because both $\epsilon$ and $V$ are small, we can neglect the product $\epsilon V$ and get
+$$
+-cV' = (1 - r) V + V''.
+$$
+This is a linear ODE with constant coefficients and can thus be solved with the Ansatz $V(z) = e^{-\lambda z}$. Substituting this into the ODE and dividing by $e^{-\lambda z}$ gives
+$$
+\lambda^2 -c\lambda+ 1-r=0.
+$$
+The solution of this quadratic equation is
+$$
+\lambda = \frac{c\pm\sqrt{c^2-4(1-r)}}{2}.
+$$
+We need $\lambda$ to be real, so we need the discriminant to be non-negative, i.e.,
+$$
+c^2-4(1-r)\geq 0
+$$
+and thus we get a lower bound on the wave speed:
+$$
+c\geq 2\sqrt{1-r}.
+$$
+
+
+
 
 ## Turing instabilities
 
