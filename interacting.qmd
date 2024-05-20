@@ -265,7 +265,7 @@ where $r$ is the intrinsic growth rate, $K$ is the carrying capacity, and $R(N)$
 
 2. **Type II** $NR(N) = \frac{AN}{N + B}$, with $A$ and $B$ being positive constants. In this model, the rate approaches a saturation level $A$ for large $N$, reflecting a limit to the predator's consumption rate. This model is more realistic as it accounts for the predator's limited appetite, which might be because there is a minimum handling time, the time the predator needs to consume a prey item.
 
-3. **Type III** $R(N) = \frac{AN^2}{N^2 + B^2}$. This response includes a saturation effect like the previous example but also models that if the prey is rare the predator may not be able to find it. This model is more complex and captures the idea that predators may switch to alternative prey when the primary prey is scarce. It may also encode a learning effect, where the predator's efficiency in capturing prey increases with experience so that initially the predator's consumption rate increases with prey density.
+3. **Type III** $NR(N) = \frac{AN^2}{N^2 + B^2}$. This response includes a saturation effect like the previous example but also models that if the prey is rare the predator may not be able to find it. This model is more complex and captures the idea that predators may switch to alternative prey when the primary prey is scarce. It may also encode a learning effect, where the predator's efficiency in capturing prey increases with experience so that initially the predator's consumption rate increases with prey density.
 
 ### Example
 
