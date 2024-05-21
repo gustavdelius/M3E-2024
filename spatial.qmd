@@ -214,11 +214,255 @@ c\geq 2\sqrt{1-r}.
 $$
 
 
-
-
 ## Turing instabilities
 
+We now come to a very intriguing topic: how the complicated spatial patterns one can observe in nature can arise. Whereas one might have thought that to explain complicated patterns one would need complicated models that encode all that complexity, it turns out that patterns can arise from very simple, translation-invariant models. The key idea is that the spatially uniform steady state in a translation-invariant model can be unstable to small perturbations, which then grow and form spatial patterns. This is called a Turing instability.
+
+We consider a system of two species, described by densities $u(x,t)$ and $v(x,t)$, that interact with each other locally but also move around randomly. The system is described by the equations
+$$\begin{split}
+\frac{\partial u}{\partial t}&=f(u,v)+D_1\frac{\partial^2u}{\partial x^2},\\
+\frac{\partial v}{\partial t}&=g(u,v)+D_2\frac{\partial^2v}{\partial x^2},
+\end{split}$$ {#eq-turing}
+where $f$ and $g$ are functions that describe the local dynamics of the two species. The diffusion terms model random motion of the individuals. 
+
+For values $(u^*,v^*)$ of the densities that satisfy $f(u^*,v^*)=g(u^*,v^*)=0$, the spatially homogeneous steady state 
+$u(x,t)=u^*$, $v(x,t)=v^*$
+is a solution of the system. Assume that in the absence of diffusion, this steady state is stable. Thus without diffusion, any perturbations to the spatially homogeneous steady state will decay. One would then expect that the spatially homogeneous steady state is stable also in the presence of diffusion, given that diffusion has the tendency to spread individuals out away from regions of higher concentration. However, we will now see that this is not always the case. Rather unintuitively, the random motion of the individuals can destabilise the spatially homogeneous steady state and give rise to spatial patterns.
+
+### Deriving conditions for Turing instabilities
+
+Mathematics is a great tool for dealing with non-intuitive phenomena. We just have to do the maths and see what it tells us. So we now derive the equations that describe the time-evolution of small perturbations and solve them and see whether the perturbations grow or not. So we set
+$$
+u(x,t)=u^*+\xi(x,t),~~~v(x,t)=v^*+\eta(x,t)
+$$ {#eq-turingpert}
+where $\xi(x,t)$ and $\eta(x,t)$ are small perturbations. If we plug this into @eq-turing we get equations for the time evolution of the small perturbations:
+$$\begin{split}
+\frac{\partial \xi}{\partial t}&=f(u^*+\xi(x,t),v^*+\eta(x,t))\xi+D_1\frac{\partial^2\xi}{\partial x^2},\\
+\frac{\partial \eta}{\partial t}&=g(u^*+\xi(x,t),v^*+\eta(x,t))\xi+D_2\frac{\partial^2\eta}{\partial x^2}.
+\end{split}$$ {#eq-turingpert2}
+We now use Taylor expansions to linearise the equations. We expand $f$ and $g$ around $(u^*,v^*)$ to first order and get
+$$\begin{split}
+\frac{\partial \xi}{\partial t}&=\frac{\partial f}{\partial u}(u^*,v^*)\xi+\frac{\partial f}{\partial v}(u^*,v^*)\eta+D_1\frac{\partial^2\xi}{\partial x^2}\\
+&=a_{11}\xi+a_{12}\eta+D_1\frac{\partial^2\xi}{\partial x^2},\\
+\frac{\partial \eta}{\partial t}&=\frac{\partial g}{\partial u}(u^*,v^*)\xi+\frac{\partial g}{\partial v}(u^*,v^*)\eta+D_2\frac{\partial^2\eta}{\partial x^2}\\
+&=a_{21}\xi+a_{22}\eta+D_1\frac{\partial^2\xi}{\partial x^2}.
+\end{split}$$ {#eq-turingpert3}
+Those partial derivatives of $f$ and $g$ with respect to $u$ and $v$ are familiar to us from the stability analysis in non-spatial models as the entries of the Jacobian matrix and we are using the same shorthand notation for them here.
+
+We now make the harmonic wave Ansatz
+$$
+\xi(x,t)=B_1e^{\sigma_k t}\sin(kx+\alpha),~~~\eta(x,t)=B_2e^{\sigma_k t}\sin(kx+\alpha).
+$$ {#eq-turingpert4}
+Plugging this into @eq-turingpert3 and dividing by $e^{\sigma_k t}\sin(kx+\alpha)$ we get
+$$\begin{split}
+\sigma_k B_1&=a_{11}B_1+a_{12}B_2-k^2D_1B_1\\
+\sigma_k B_2&=a_{21}B_1+a_{22}B_2k^2D_2B_2.
+\end{split}$$ {#eq-turingpert5}
+We can write this in matrix form as
+$$
+\sigma_k\begin{pmatrix}B_1&B_2\end{pmatrix}=A(k)\begin{pmatrix}B_1\\B_2\end{pmatrix}.
+$$ {#eq-turingpert6}
+where
+$$
+A(k)=\begin{pmatrix}a_{11}-k^2D_1&a_{12}\\a_{21}&a_{22}-k^2D_2\end{pmatrix}.
+$$ {#eq-turingpert7}
+This looks very similar to what we get when we do the stability analysis of a non-spatial model, except that now we have a whole family of matrices $A(k)$, one for each $k$. The condition for the spatially homogeneous steady state to be stable is that all the eigenvalues $\sigma_k$ of all the matrices $A(k)$ are negative.
+The spatially homogeneous steady state to be unstable is that there is at least one $k$ for which the real part of $\sigma_k$ is positive. 
+
+As we know from studying the stability of non-spatial models of two interacting species, an easy way to determine the stability is to look at the signs of the trace and the determinant of the matrix $A(k)$. For the trace we find
+$$
+\text{tr}(A(k))=a_{11}-k^2D_1+a_{22}-k^2D_2=\text{tr}(A(0))-k^2(D_1+D_2).
+$$
+We are interested in the case where the steady state is stable in the absence of diffusion and is destabilised by the diffusion. Stability in the absence of diffusion requires $\text{tr}(A(0))<0$. We see that in that case also $\text{tr}(A(k))<0$ for all $k$ because the $k$-dependent term $-k^2(D_1+D_2)$ is negative.
+
+For the determinant we find
+$$\begin{split}
+\det(A(k))&=(a_{11}-D_1k^2)(a_{22}-D_2k^2)-a_{12}a_{21}\\
+&=D_1D_2k^4-(D_1a_{22}+D_2a_{11})k^2+\det(A(0))
+\end{split}$$ {#eq-turingpert8}
+Stability in the absence of diffusion tells us that $\det(A(0))>0$. We see that $\det(A(k))$ is a quadratic polynomial in $k^2$ with positive leading coefficient. Its graph is a parabola. This means that the determinant is positive for small $k$ and for large $k$ but there may be an intermediate region where the parabola dips below the axis and the determinant is negative in that region. That region is bounded by values $k_\pm$ for which the determinant is zero. Using the quadratic formula we find that
+$$
+k_\pm^2=\frac{D_1a_{22}+D_2a_{11}\pm\sqrt{(D_1a_{22}+D_2a_{11})^2-4D_1D_2\det(A(0))}}{2D_1D_2}.
+$$ {#eq-turingk}
+The unstable interval exists if $k_\pm^2$ are real and positive. They are real if the discriminant under the square root is non-negative. This gives the condition
+$$
+(D_1a_{22}+D_2a_{11})^2>4D_1D_2\det(A(0)).
+$$ {#eq-turinginstab}
+They are positive if the numerator is positive. This gives the condition
+$$
+D_1a_{22}+D_2a_{11}>0.
+$$ {#eq-turinginstab2}
+The condition for the spatially homogeneous steady state to be unstable is that both @eq-turinginstab and @eq-turinginstab2 are satisfied.
+
+### Understanding the conditions for Turing instabilities
+
+We have now derived the conditions for Turing instabilities in terms of the entries of the Jacobian matrix of the local dynamics of the two species and the diffusion coefficients:
+$$\begin{split}
+a)\qquad&a_{11}+a_{22}<0,\\
+b)\qquad&a_{11}a_{22}-a_{12}a_{21}>0,\\
+c)\qquad&D_1a_{22}+D_2a_{11}>0,\\
+d)\qquad&(a_{11}+a_{22})^2>4(a_{11}a_{22}-a_{12}a_{21}).
+\end{split}$$ {#eq-turingconditions}
+Conditions a) and b) are the conditions for the spatially homogeneous steady state to be stable in the absence of diffusion. Condition c) and d) are the condition for the spatially homogeneous steady state to be unstable in the presence of diffusion.
+
+We will first look at what these conditions tell us about the sign structure of the Jacobian, which will introduce the concept of activator and inhibitor species. We make three observations:
+
+1. We observe that condition a) implies that at least one of $a_{11}$ and $a_{22}$ is negative. We are free to choose the numbering of our species, so without loss of generality let's say that $a_{22}<0$. This means that species 2 inhibits its own growth above the steady state. We call species 2 an inhibitor species. 
+
+2. From condition c) we see that if $a_{22}<0$ then $a_{11}>0$. This means that species 1 activates its own growth above the steady state. We call species 1 an activator species.
+
+3. From condition b) we now observe that, because $a_{11}a_{22}<0$, we must have that $a_{12}a_{21}<0$.
+
+Taking these three observations together tells us that there are only two possibilities for the sign structure of the Jacobian matrix:
+$$
+\text{sign}(A)=\begin{pmatrix}+&-\\+&-\end{pmatrix}~~~\text{or}~~~\text{sign}(A)=\begin{pmatrix}+&+\\-&-\end{pmatrix}.
+$$ {#eq-turingjac}
+If the signs in the Jacobian are different then you can immediately rule out a Turing instability.
+
+Next we look at what our conditions a) to d) tell us about the magnitude of the diffusion coefficients. From condition a) we know that $a_{11}<-a_{22}$ and hence $-a_{11}/a_{22}<1$. From condition c) we see that $D_1/D_2<-a_{11}/a_{22}$. Putting these together gives $D_1/D_2<1$ and hence $D_1<D_2$: The inhibitor must diffuse faster than the activator. This is a necessary condition for a Turing instability. Exactly how much faster the inhibitor must diffuse than the activator depends on the details of the local interactions in particular examples.
+
+### Example
+
+The Schnakenberg model is a simple model that exhibits Turing instabilities. It is a model of two species $u$ and $v$ described by
+$$\begin{split}
+\partial_tu&=-u+u^2v+D_1\partial_x^2u=f(u,v)+D_1\partial_x^2u,\\
+\partial_tv&=b-u^2v+D_2\partial_x^2v=g(u,v)+D_2\partial_x^2v.
+\end{split}$$ {#eq-schnak}
+
+The Jacobian matrix of the local dynamics is
+$$
+A=\begin{pmatrix}\frac{\partial f}{\partial u}&\frac{\partial f}{\partial v}\\
+\frac{\partial g}{\partial u}&\frac{\partial g}{\partial v}\end{pmatrix}=
+\begin{pmatrix}-1+2uv&u^2\\-2uv&-u^2\end{pmatrix}.
+$$ {#eq-schnakjac}
+We are interested in the coexistence steady state $(u^*,v^*)$ where both species coexist. By imposing that $f(u^*,v^*)=0$ gives us that $u^*v^*=1$ and then imposing that $g(u^*,v^*)=0$ gives us that $u^*=b$ and hence $v^*=1/b$. So the coexistence steady state is
+$$
+(u^*,v^*)=\left(b,\frac{1}{b}\right).
+$$ {#eq-schnakss}
+The Jacobian matrix evaluated at the coexistence steady state is
+$$
+A=\begin{pmatrix}1&b^2\\-2&-b^2\end{pmatrix}.
+$$ {#eq-schnakjac2}
+We see that the sign structure of this matrix is one of those that can give rise to a Turing instability. Species $u$ is the activator and species $v$ is the inhibitor.
+
+Now let us check each of the conditions a) to d) from @eq-turingconditions. Condition a) becomes $1-b^2<0$ and hence $b^2>1$. Condition b) becomes $-b^2+2b^2>0$ which is automatically satisfied. Condition c) becomes $D_2-b^2D_1>0$ which implies $D_1b^2<D_2$ or that the ratio $d=D_2/D_1>b^2$. Condition d) becomes $(D_2-b^2D_1)^2>4D_1D_2b^2$. Multiplying out the square and bringing everything to one side gives
+$b^4D_1^2-6D_1D_2+D_2^2>0.$. We can rewrite this in terms of the ratio $d=D_2/D_1$ as
+$$
+b^4-6db^2+d^2>0.
+$$ {#eq-schnakcond}
+The graph of the left-hand side is a parabola that opens upwards and has roots at
+$$
+d_\pm=3b^2\pm\sqrt{9b^4-b^4}=b^2(3\pm\sqrt{8}).
+$$ {#eq-schnakd}
+The condition in @eq-schnakcond tells us that $d$ is outside the interval $(d_-,d_+)$. However we already also derived that $d>b^2$ and $b^2>d_-$. So the final condition on the ratio of the diffusion rates is
+$$
+d=\frac{D_2}{D_1}>b^2(3+\sqrt{8}).
+$$ {#eq-schnakcond2}
+
+### Finite domain
+
+We now restrict space to a finite interval $[0,L]$ and impose no-flux boundary conditions at the boundaries:
+$$
+\partial_xu(0,t)=\partial_xu(L,t)=0,~~~\partial_xv(0,t)=\partial_xv(L,t)=0.
+$$ {#eq-schnakbc}
+This implies that also the perturbations away from the homogeneous steady state must satisfy these boundary conditions:
+$$
+\partial_x\xi(0,t)=\partial_x\xi(L,t)=0,~~~\partial_x\eta(0,t)=\partial_x\eta(L,t)=0.
+$$ {#eq-schnakbc2}
+Substituting our harmonic wave Ansatz @eq-turingpert4 into the boundary condition $\partial_x\xi(0,t)=0$ gives $k\cos(\alpha)=0$ and hence $\alpha=\pi/2$. Substituting into the boundary condition $\partial_x\xi(L,t)=0$ gives $k\cos(kL+\pi/2)=0$. This means that $kL$ must be a multiple of $\pi$ and hence $k$ must be an integer multiple of $\pi/L$. We can write this as
+$$
+k=k_n=\frac{n\pi}{L},~~~n=1,2,...
+$$ {#eq-schnakk}
+The boundary conditions for $\eta$ are satisfied for the same set of wave numbers $k_n$.
+
+We had seen that only perturbations with wave numbers in the interval $[k_-,k_+]$ can grow, with $k_\pm$ given by @eq-turingk. So the condition for a Turing instability in our bounded domain is that there is at least one $n$ for which $k_n$ is in the interval $[k_-,k_+]$. This gives the condition $k_1=\pi/L<k_+$ or equivalently $L>\pi/k_+$. 
+
+
 ## Directed motion
+
+So far we have only discussed random motion of individuals. We now want to consider directed motion. There are many reasons for individuals to move in a directed way. For example, they might move towards a food source or away from a predator. This kind of movement is referred to as __taxis__: the movement towards (or away from) a higher concentration of something (prey, predator, light, nutrient). If the something is a chemical this is called __chemotaxis__. Chemotaxis is a very important mechanism in biology. For example, immune cells move towards sites of infection, sperm cells move towards the egg, and bacteria move towards nutrients.
+
+To model this we introduce the density $n(\mathbf{x},t)$ of individuals and the density $a(\mathbf{x},t)$ of the chemical, which we will assume is an attractant, i.e., individuals move towards higher concentrations of the chemical. The individuals move in response to the gradient of the chemical, so the chemotactic movement is described by a flux
+$$
+\mathbf{J}_c=\chi n\mathbf{\nabla} a
+$$ {#eq-chemotaxis}
+where $\chi<0$ is the chemotactic sensitivity. Let's compare this with the diffusive flux
+$$
+\mathbf{J}_d=-D\mathbf{\nabla} n.
+$$ {#eq-diffusion}
+
+The equation for the density of individuals is then
+$$
+\partial_t n=f(n)-\mathbf{\nabla}\cdot\mathbf{J}
+$$ {#eq-chemotaxisn}
+where $f(n)$ describes the local population dynamics.
+We can now plug in the expressions for the fluxes and get
+$$
+\partial_t n=f(n)-\mathbf{\nabla}\cdot(\chi n\mathbf{\nabla} a)
++\mathbf{\nabla}\cdot(D_n\mathbf{\nabla} n)
+$$ {#eq-chemotaxisn3}
+The attractant $a$ is governed by the equation
+$$
+\partial_t a=g(a,n)+\mathbf{\nabla}\cdot(D_a\mathbf{\nabla} n).
+$$ {#eq-chemotaxisa}
+The local dynamics of the attractant is described by $g(a,n)$ and the diffusion of the attractant has diffusion coefficient $D_a$.
+
+### Slime mould aggregation
+
+A fascinating example of chemotaxis is the aggregation of slime moulds. Slime moulds are single-celled organisms that live in the soil and feed on bacteria. When the food supply runs out, the slime moulds aggregate to form a fruiting body that releases spores. The aggregation is guided by a chemical attractant. The slime moulds move towards higher concentrations of the attractant. The attractant is a chemical that is released by the slime moulds themselves.
+
+When modelling the slime mould aggregation we can neglect the population dynamics which are not relevant for the aggregation process and thus set $f(n)=0$. For the local dynamics of the attractant we use
+$$
+g(a,n)= h n - q a
+$$ {#eq-slimeg}
+where $h>0$ is the rate at which the attractant is produced by the slime moulds and $q>0$ is the rate at which the attractant is degraded. We assume that the chemotactic sensitivity $\chi$ and the diffusion coefficients $D_n$ and $D_a$ are positive constants. We also restrict ourselves again to motion in one dimension. 
+The equations for the slime mould aggregation are then
+$$\begin{split}
+\partial_t n&=-\chi\partial_x(n\partial_x a)+D_n\partial_x^2 n,\\
+\partial_t a&=hn-q a+D_a\partial_x^2 a.
+\end{split}$$ {#eq-slime}
+The homogeneous steady state where $n(x,t)=n^*, a(x,t)=a^*$ has to satisfies $h n^*=q a^*$. We can now linearise the equations around the homogeneous steady state by setting $n(x,t)=n^*+\xi(x,t)$ and $a(x,t)=a^*+\eta(x,t)$ with $\xi$ and $\eta$ small. We get
+$$\begin{split}
+\partial_t \xi&=-\chi n^*\partial_x^2\eta+D_n\partial_x^2\xi,\\
+\partial_t \eta&=h\xi-q\eta+D_a\partial_x^2\eta.
+\end{split}$$ {#eq-slimepert}
+We write this linear system in matrix form as
+$$
+\partial_t\begin{pmatrix}\xi\\\eta\end{pmatrix}=\begin{pmatrix}D_n\partial_x^2&-\chi n^*\partial_x^2\\h&-q+D_a\partial_x^2\end{pmatrix}\begin{pmatrix}\xi\\\eta\end{pmatrix}.
+$$ {#eq-slimemat}
+To solve this we make the Ansatz
+$$
+\begin{pmatrix}\xi\\\eta\end{pmatrix}=\begin{pmatrix}B_1\\B_2\end{pmatrix}e^{\sigma_k t}\sin(kx+\alpha).
+$$ {#eq-slimeansatz}
+Plugging this into @eq-slimemat and dividing by $e^{\sigma_k t}\sin(kx+\alpha)$ gives
+$$
+\sigma\begin{pmatrix}B_1\\B_2\end{pmatrix}=\begin{pmatrix}-D_nk^2&\chi n^*k^2\\h&-q-D_ak^2\end{pmatrix}\begin{pmatrix}B_1\\B_2\end{pmatrix}.
+$$ {#eq-slimeeig}
+We again denote the matrix above as $A(k)$. The condition for the homogeneous steady state to be stable is that the real parts of the eigenvalues $\sigma_k$ are all negative. The condition for the homogeneous steady state to be unstable is that there is at least one $k$ for which the real part of $\sigma_k$ is positive.
+
+To determine the stability we again calculate the trace and determinant of the matrix in @eq-slimeeig. The trace is
+$$
+\text{tr}=\text{tr}(A(k))=-(D_n+D_a)k^2-q.
+$$ {#eq-slimetrace}
+This is manifestly negative for all $k$, so this does not yet indicate any instability. The determinant is
+$$
+\det(A(k))=D_nD_ak^4+D_nqk^2-h\chi n^* k^2.
+$$ {#eq-slimedet}
+This is negative and hence gives an instability if
+$$
+D_nD_ak^2<h\chi n^* -D_nq
+$$ {#eq-slimeinstab}
+Because the left-hand side in this inequality is positive, the right-hand side must be positive as well. This gives us the condition
+$$
+D_n<\frac{h\chi n^*}{q}.
+$$ {#eq-slimeinstab2}
+This makes sense: if the individuals diffuse too fast, the aggregation can not happen.
+We can also rewrite the condition for the aggregation as
+$$
+h>\frac{qD_n}{\chi n^*}.
+$$
+So aggregation only happens if the rate of production of the attractant is larger enough.
+
 
 ## Exercises
 #### Fishing model with diffusion
