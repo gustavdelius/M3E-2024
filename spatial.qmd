@@ -41,7 +41,7 @@ If there is no local population dynamics, the equation simplifies to the diffusi
 
 ## Fishing model with diffusion
 
-We now consider a model for a population of fish that is subject to fishing and that moves around randomly. We want to model a marine protected area where fishing is limited to avoid a collapse of the fish population. @fig-mpa shows the spatial setup. The $x$-axis runs perpendicular to the shore at $x=0$. A marine protected area runs out upto a distance $L$ from the shore. We assume that the marine protected area has infinite extension in the $y$-direction, so that we can ignore the $y$-coordinate and model the fish population as a function of $x$ only.
+We now consider a model for a population of fish that is subject to fishing and that moves around randomly. We want to model a marine protected area where fishing is limited to avoid a collapse of the fish population. @fig-mpa shows the spatial setup. The $x$-axis runs perpendicular to the shore, which is at $x=0$. A marine protected area runs out upto a distance $L$ from the shore. We assume that the marine protected area has infinite extension in the $y$-direction, so that we can ignore the $y$-coordinate and model the fish population as a function of $x$ only.
 
 Beyond $x=L$ there is no management of the fishing activity. We assume that the fishers are so efficient that they catch all fish that venture outside the protected area. So we set $u(x,t)=0$ for $x\geq L$. This is of course an idealisation, but it allows us to focus on the dynamics within the protected area. 
 
@@ -54,11 +54,11 @@ $$
 $$ {#eq-fish}
 where $r$ is the intrinsic growth rate, $K$ is the carrying capacity, $E$ is the fishing rate and $D$ is the diffusion coefficient. The first term on the right-hand side describes the logistic growth, the second term the fishing and the third term the random motion of the fish.
 
-In the protected area, the fishing rate $E$ must certainly be below the intrinsic growth rate $r$, otherwise the population is guaranteed to die out. However we must also take into account that some fish will be lost when they randomly move out of the protected area, where they are fished immediately. We expect this effect to be larger when the protected area is smaller. So when the marine protected area is planned, there will be a trade-off between the width $L$ of the protected area and the allowed rate of fishing $E$. Our aim is to describe this trade-off precisely by finding the condition on $E$ and $L$ such that the population does not collapse.
+In the protected area, the fishing rate $E$ must certainly be below the intrinsic growth rate $r$, otherwise the population is guaranteed to die out. However we must also take into account that some fish will be lost when they randomly move out of the protected area and are then fished immediately. We expect this extra loss to be proportionally larger when the protected area is smaller. So when the marine protected area is planned, there will be a trade-off between the width $L$ of the protected area and the allowed rate of fishing $E$. Our aim is to describe this trade-off precisely by finding the condition on $E$ and $L$ such that the population does not collapse.
 
-To achieve our aim, we will need to solve the PDE. But before solving a PDE we always need to be clear about the boundary conditions on the solution. We have already discussed that we assume that $u(x,t)=0$ for $x\geq L$, i.e., we have a Dirichlet boundary condition at $x=L$. At $x=0$ we impose a no-flux boundary condition, which means that there are no fish moving from the sea onto the shore or the other way around. This is a reasonable assumption if the shore is a steep cliff or a sandy beach where fish cannot live. The no-flux boundary condition is the Neumann boundary condition $\partial_x u(0,t) = 0$.
+To achieve our aim, we will need to solve the PDE. But before solving a PDE we always need to be clear about the boundary conditions on the solution. We have already discussed that we assume that $u(x,t)=0$ for $x\geq L$, i.e., we have a Dirichlet boundary condition at $x=L$. At $x=0$ we impose a no-flux boundary condition, which means that there are no fish moving from the sea onto the shore or the other way around. The no-flux boundary condition is the Neumann boundary condition $\partial_x u(0,t) = 0$.
 
-The PDE @eq-fish is a nonlinear PDE, so we cannot solve it analytically in general. However, we can still make progress by realising that before the population goes extinct, it will get small. We can then linearise the PDE around the extinction state $u=0$ and solve the linearised equation. If the extinction steady state is linearly unstable, then the population will not go extinct.
+The PDE in @eq-fish is a nonlinear PDE, so we cannot solve it analytically in general. However, we can still make progress by realising that before the population goes extinct, it will get small. We can then linearise the PDE around the extinction state $u=0$ and solve the linearised equation. If the extinction steady state is linearly unstable, then the population will not go extinct.
 
 Linearising the PDE @eq-fish around the extinction state $u=0$ means that we neglect the term $u^2$ in the logistic growth term. We then have the linearised equation
 $$
@@ -72,11 +72,11 @@ and after dividing by $XT$ we get
 $$
 \frac{T'}{T} = r-E + D \frac{X''}{X}.
 $$ {#eq-fishsep2}
-The left-hand side depends only on $t$ and the right-hand side only on $x$. Therefore both sides must be equal to a constant, which we call $gamma$. We then have the two ODEs
+The left-hand side depends only on $t$ and the right-hand side only on $x$. Therefore both sides must be equal to a constant, which we call $\gamma$. We then have the two ODEs
 $$
-T' = \gamma T, ~~~ X'' = \frac{\gamma-r+E}{D}X =:-\rho^2 X,
+T' = \gamma T, ~~~ X'' = \frac{\gamma-r+E}{D}X =-\rho^2 X,
 $$ {#eq-fishsep3}
-where, in order to save writing, we have defined 
+where, in order to save writing, we have introduced 
 $$
 \rho^2 = (r-E-\gamma)/D.
 $$ {#eq-fishrho}
@@ -395,7 +395,7 @@ The equation for the density of individuals is then
 $$
 \partial_t n=f(n)-\mathbf{\nabla}\cdot\mathbf{J}
 $$ {#eq-chemotaxisn}
-where $f(n)$ describes the local population dynamics.
+where $f(n)$ describes the local population dynamics. This is just the higher-dimensional version of @eq-transport.
 We can now plug in the expressions for the fluxes and get
 $$
 \partial_t n=f(n)-\mathbf{\nabla}\cdot(\chi n\mathbf{\nabla} a)
