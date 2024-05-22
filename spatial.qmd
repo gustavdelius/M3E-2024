@@ -195,27 +195,27 @@ This equation is equivalent to @eq-Sinf for $S_\infty$ in the case where $S_0=N$
 Next we want to learn about the wave speed $c$. We do this by linearising the equation around the leading edge of the wave, where $V$ is very small and $U$ is close to 1, i.e, $U=1-\epsilon$ for small $\epsilon$. Substituting this into the second equation in [-@eq-sirnondim5] we get
 $$
 -cV' = (1-\epsilon)V - r V + V''.
-$$
+$$ {#eq-wavespeed1}
 Because both $\epsilon$ and $V$ are small, we can neglect the product $\epsilon V$ and get
 $$
 -cV' = (1 - r) V + V''.
-$$
+$$ {#eq-wavespeed2}
 This is a linear ODE with constant coefficients and can thus be solved with the Ansatz $V(z) = e^{-\lambda z}$. Substituting this into the ODE and dividing by $e^{-\lambda z}$ gives
 $$
 \lambda^2 -c\lambda+ 1-r=0.
-$$
+$$ {#eq-wavespeed3}
 The solution of this quadratic equation is
 $$
 \lambda = \frac{c\pm\sqrt{c^2-4(1-r)}}{2}.
-$$
+$$ {#eq-wavespeed4}
 We need $\lambda$ to be real so that our solution correctly describes the exponential growth at the start of an epidemic, so we need the discriminant to be non-negative, i.e.,
 $$
 c^2-4(1-r)\geq 0
-$$
+$$ {#eq-wavespeed5}
 and thus we get a lower bound on the wave speed:
 $$
 c\geq 2\sqrt{1-r}.
-$$
+$$ {#eq-wavespeed6}
 
 
 ## Turing instabilities
@@ -279,7 +279,7 @@ The spatially homogeneous steady state to be unstable is that there is at least 
 As we know from studying the stability of non-spatial models of two interacting species, an easy way to determine the stability is to look at the signs of the trace and the determinant of the matrix $A(k)$. For the trace we find
 $$
 \text{tr}(A(k))=a_{11}-k^2D_1+a_{22}-k^2D_2=\text{tr}(A(0))-k^2(D_1+D_2).
-$$
+$$ {#eq-turingperttr}
 We are interested in the case where the steady state is stable in the absence of diffusion and is destabilised by the diffusion. Stability in the absence of diffusion requires $\text{tr}(A(0))<0$. We see that in that case also $\text{tr}(A(k))<0$ for all $k$ because the $k$-dependent term $-k^2(D_1+D_2)$ is negative. So the trace is not yet giving us a hint that there might be an instability. So next we look at the determinant.
 
 For the determinant we find
@@ -469,7 +469,7 @@ This makes sense: if the individuals diffuse too fast, the aggregation can not h
 We can also rewrite the condition for the aggregation as
 $$
 h>\frac{qD_n}{\chi n^*}.
-$$
+$$ {#eq-slimeinstab3}
 So aggregation only happens if the rate of production of the attractant is larger enough.
 
 
