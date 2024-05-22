@@ -226,9 +226,22 @@ window.Quarto = {
   <ul>
   <li><a href="#derivation-of-pde" id="toc-derivation-of-pde" class="nav-link active" data-scroll-target="#derivation-of-pde"><span class="header-section-number">7.1</span> Derivation of PDE</a></li>
   <li><a href="#fishing-model-with-diffusion" id="toc-fishing-model-with-diffusion" class="nav-link" data-scroll-target="#fishing-model-with-diffusion"><span class="header-section-number">7.2</span> Fishing model with diffusion</a></li>
-  <li><a href="#invasion-waves-in-sir-model" id="toc-invasion-waves-in-sir-model" class="nav-link" data-scroll-target="#invasion-waves-in-sir-model"><span class="header-section-number">7.3</span> Invasion waves in SIR model</a></li>
-  <li><a href="#turing-instabilities" id="toc-turing-instabilities" class="nav-link" data-scroll-target="#turing-instabilities"><span class="header-section-number">7.4</span> Turing instabilities</a></li>
-  <li><a href="#directed-motion" id="toc-directed-motion" class="nav-link" data-scroll-target="#directed-motion"><span class="header-section-number">7.5</span> Directed motion</a></li>
+  <li><a href="#invasion-waves-in-sir-model" id="toc-invasion-waves-in-sir-model" class="nav-link" data-scroll-target="#invasion-waves-in-sir-model"><span class="header-section-number">7.3</span> Invasion waves in SIR model</a>
+  <ul>
+  <li><a href="#travelling-wave-ansatz-and-boundary-conditions" id="toc-travelling-wave-ansatz-and-boundary-conditions" class="nav-link" data-scroll-target="#travelling-wave-ansatz-and-boundary-conditions"><span class="header-section-number">7.3.1</span> Travelling wave Ansatz and boundary conditions</a></li>
+  <li><a href="#wave-speed" id="toc-wave-speed" class="nav-link" data-scroll-target="#wave-speed"><span class="header-section-number">7.3.2</span> Wave speed</a></li>
+  </ul></li>
+  <li><a href="#turing-instabilities" id="toc-turing-instabilities" class="nav-link" data-scroll-target="#turing-instabilities"><span class="header-section-number">7.4</span> Turing instabilities</a>
+  <ul>
+  <li><a href="#deriving-conditions-for-turing-instabilities" id="toc-deriving-conditions-for-turing-instabilities" class="nav-link" data-scroll-target="#deriving-conditions-for-turing-instabilities"><span class="header-section-number">7.4.1</span> Deriving conditions for Turing instabilities</a></li>
+  <li><a href="#understanding-the-conditions-for-turing-instabilities" id="toc-understanding-the-conditions-for-turing-instabilities" class="nav-link" data-scroll-target="#understanding-the-conditions-for-turing-instabilities"><span class="header-section-number">7.4.2</span> Understanding the conditions for Turing instabilities</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example"><span class="header-section-number">7.4.3</span> Example</a></li>
+  <li><a href="#finite-domain" id="toc-finite-domain" class="nav-link" data-scroll-target="#finite-domain"><span class="header-section-number">7.4.4</span> Finite domain</a></li>
+  </ul></li>
+  <li><a href="#directed-motion" id="toc-directed-motion" class="nav-link" data-scroll-target="#directed-motion"><span class="header-section-number">7.5</span> Directed motion</a>
+  <ul>
+  <li><a href="#slime-mould-aggregation" id="toc-slime-mould-aggregation" class="nav-link" data-scroll-target="#slime-mould-aggregation"><span class="header-section-number">7.5.1</span> Slime mould aggregation</a></li>
+  </ul></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">7.6</span> Exercises</a>
   <ul>
   <li><a href="#fishing-model-with-diffusion-1" id="toc-fishing-model-with-diffusion-1" class="nav-link" data-scroll-target="#fishing-model-with-diffusion-1">Fishing model with diffusion</a></li>
@@ -289,16 +302,260 @@ J(x) = -D\partial_x u(x),
 </section>
 <section id="fishing-model-with-diffusion" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="fishing-model-with-diffusion"><span class="header-section-number">7.2</span> Fishing model with diffusion</h2>
-<p>We now consider a model for a population of fish that is subject to fishing and that moves around randomly. We assume that in the absence of fishing the population has a logistic growth rate. The population density <span class="math inline">\(u(x,t)\)</span> satisfies the equation</p>
+<p>We now consider a model for a population of fish that is subject to fishing and that moves around randomly. We want to model a marine protected area where fishing is limited to avoid a collapse of the fish population. <a href="#fig-mpa" class="quarto-xref">Figure&nbsp;<span>7.1</span></a> shows the spatial setup. The <span class="math inline">\(x\)</span>-axis runs perpendicular to the shore, which is at <span class="math inline">\(x=0\)</span>. A marine protected area runs out upto a distance <span class="math inline">\(L\)</span> from the shore. We assume that the marine protected area has infinite extension in the <span class="math inline">\(y\)</span>-direction, so that we can ignore the <span class="math inline">\(y\)</span>-coordinate and model the fish population as a function of <span class="math inline">\(x\)</span> only.</p>
+<p>Beyond <span class="math inline">\(x=L\)</span> there is no management of the fishing activity. We assume that the fishers are so efficient that they catch all fish that venture outside the protected area. So we set <span class="math inline">\(u(x,t)=0\)</span> for <span class="math inline">\(x\geq L\)</span>. This is of course an idealisation, but it allows us to focus on the dynamics within the protected area.</p>
+<div id="fig-mpa" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mpa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/Spatial/mpa.svg" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-mpa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7.1: Sketch of the marine protected area
+</figcaption>
+</figure>
+</div>
+<p>We assume that in the absence of fishing the population has a logistic growth rate. The population density <span class="math inline">\(u(x,t)\)</span> satisfies the equation <span id="eq-fish"><span class="math display">\[
+\partial_t u = r u \left(1-\frac{u}{K}\right) - E u + D \partial_x^2 u,
+\tag{7.8}\]</span></span> where <span class="math inline">\(r\)</span> is the intrinsic growth rate, <span class="math inline">\(K\)</span> is the carrying capacity, <span class="math inline">\(E\)</span> is the fishing rate and <span class="math inline">\(D\)</span> is the diffusion coefficient. The first term on the right-hand side describes the logistic growth, the second term the fishing and the third term the random motion of the fish.</p>
+<p>In the protected area, the fishing rate <span class="math inline">\(E\)</span> must certainly be below the intrinsic growth rate <span class="math inline">\(r\)</span>, otherwise the population is guaranteed to die out. However we must also take into account that some fish will be lost when they randomly move out of the protected area and are then fished immediately. We expect this extra loss to be proportionally larger when the protected area is smaller. So when the marine protected area is planned, there will be a trade-off between the width <span class="math inline">\(L\)</span> of the protected area and the allowed rate of fishing <span class="math inline">\(E\)</span>. Our aim is to describe this trade-off precisely by finding the condition on <span class="math inline">\(E\)</span> and <span class="math inline">\(L\)</span> such that the population does not collapse.</p>
+<p>To achieve our aim, we will need to solve the PDE. But before solving a PDE we always need to be clear about the boundary conditions on the solution. We have already discussed that we assume that <span class="math inline">\(u(x,t)=0\)</span> for <span class="math inline">\(x\geq L\)</span>, i.e., we have a Dirichlet boundary condition at <span class="math inline">\(x=L\)</span>. At <span class="math inline">\(x=0\)</span> we impose a no-flux boundary condition, which means that there are no fish moving from the sea onto the shore or the other way around. The no-flux boundary condition is the Neumann boundary condition <span class="math inline">\(\partial_x u(0,t) = 0\)</span>.</p>
+<p>The PDE in <a href="#eq-fish" class="quarto-xref">Eq.&nbsp;<span>7.73</span></a> is a nonlinear PDE, so we cannot solve it analytically in general. However, we can still make progress by realising that before the population goes extinct, it will get small. We can then linearise the PDE around the extinction state <span class="math inline">\(u=0\)</span> and solve the linearised equation. If the extinction steady state is linearly unstable, then the population will not go extinct.</p>
+<p>Linearising the PDE <a href="#eq-fish" class="quarto-xref">Eq.&nbsp;<span>7.73</span></a> around the extinction state <span class="math inline">\(u=0\)</span> means that we neglect the term <span class="math inline">\(u^2\)</span> in the logistic growth term. We then have the linearised equation <span id="eq-fishlin"><span class="math display">\[
+\partial_t u = (r - E)u + D \partial_x^2 u.
+\tag{7.9}\]</span></span> We can now solve this linear PDE with the method of separation of variables. We make the Ansatz <span class="math inline">\(u(x,t) = X(x)T(t)\)</span> and plug this into <a href="#eq-fishlin" class="quarto-xref">Eq.&nbsp;<span>7.9</span></a>. We get <span id="eq-fishsep"><span class="math display">\[
+XT'=(r-E)XT+DX''T
+\tag{7.10}\]</span></span> and after dividing by <span class="math inline">\(XT\)</span> we get <span id="eq-fishsep2"><span class="math display">\[
+\frac{T'}{T} = r-E + D \frac{X''}{X}.
+\tag{7.11}\]</span></span> The left-hand side depends only on <span class="math inline">\(t\)</span> and the right-hand side only on <span class="math inline">\(x\)</span>. Therefore both sides must be equal to a constant, which we call <span class="math inline">\(\gamma\)</span>. We then have the two ODEs <span id="eq-fishsep3"><span class="math display">\[
+T' = \gamma T, ~~~ X'' = \frac{\gamma-r+E}{D}X =-\rho^2 X,
+\tag{7.12}\]</span></span> where, in order to save writing, we have introduced <span id="eq-fishrho"><span class="math display">\[
+\rho^2 = (r-E-\gamma)/D.
+\tag{7.13}\]</span></span> The solution of the time ODE is <span id="eq-fishT"><span class="math display">\[
+T(t) = T(0)e^{\gamma t}
+\tag{7.14}\]</span></span> and the solution of the spatial ODE is <span id="eq-fishX"><span class="math display">\[
+X(x) = A \cos(\rho x) + B \sin(\rho x),
+\tag{7.15}\]</span></span> where <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are constants to be determined by the boundary conditions.</p>
+<p>Imposing the no-flux boundary condition <span class="math inline">\(\partial_xu(0,t)\)</span> gives <span id="eq-fishBC1"><span class="math display">\[
+X'(0) =-A\rho\sin(\rho 0)+B\rho\cos(\rho 0)=B\rho= 0.
+\tag{7.16}\]</span></span> So either <span class="math inline">\(\rho=0\)</span> or <span class="math inline">\(B=0\)</span>. The case <span class="math inline">\(\rho=0\)</span> gives the trivial solution <span class="math inline">\(X(x)=A\)</span>, which is not interesting. So we take <span class="math inline">\(B=0\)</span> and get <span class="math inline">\(X(x) = A\cos(\rho x)\)</span>.</p>
+<p>The Dirichlet boundary condition at <span class="math inline">\(x=L\)</span> gives <span class="math inline">\(X(L) = A\cos(\rho L) = 0\)</span>. So either <span class="math inline">\(A=0\)</span> or <span class="math inline">\(\cos(\rho L) = 0\)</span>. The former gives rise to the zero solution, so we want the latter, which requires <span class="math inline">\(\rho L\)</span> to be an odd multiple of <span class="math inline">\(\pi/2\)</span>, i.e., <span id="eq-fishrho2"><span class="math display">\[
+\rho=\rho_n = \frac{(2n+1)\pi}{2L}
+\tag{7.17}\]</span></span> for <span class="math inline">\(n=0,1,2,...\)</span>. To each of these <span class="math inline">\(\rho_n\)</span> there corresponds, according to <a href="#eq-fishrho" class="quarto-xref">Eq.&nbsp;<span>7.13</span></a>, a <span id="eq-fishgamma"><span class="math display">\[
+\gamma_n = r-E-D\rho_n^2
+\tag{7.18}\]</span></span> and a solution <span id="eq-fishsol"><span class="math display">\[
+u_n(x,t) = X_n(x)T_n(t) = A_ne^{\gamma_n t}\cos(\rho_n x)
+\tag{7.19}\]</span></span> The general solution is then a linear combination of these solutions, <span id="eq-fishgensol"><span class="math display">\[
+u(x,t) = \sum_{n=0}^\infty A_ne^{\gamma_n t}\cos(\rho_n x).
+\tag{7.20}\]</span></span></p>
+<p>The condition for the population not to go extinct is that the extinction steady state is linearly unstable. This means that there is at least one <span class="math inline">\(\gamma_n\)</span> with positive real part. We see from <a href="#eq-fishgamma" class="quarto-xref">Eq.&nbsp;<span>7.18</span></a> that <span class="math inline">\(\gamma_n\)</span> increases with <span class="math inline">\(n\)</span>. So the condition for the population not to go extinct is that <span class="math inline">\(\gamma_0\)</span> is positive. This gives the condition <span id="eq-fishcond"><span class="math display">\[
+\gamma_0=r-E-D\rho_0^2=r-E-\frac{D\pi^2}{4L^2}&gt;0.
+\tag{7.21}\]</span></span> We can now solve this inequality for <span class="math inline">\(L\)</span> to get the condition on the width of the marine protected area that ensures the population does not collapse. <span id="eq-fishcond2"><span class="math display">\[
+L&gt;\frac{\pi}{2}\sqrt{\frac{D}{r-E}}.
+\tag{7.22}\]</span></span> Alternatively we can solve the inequality for <span class="math inline">\(E\)</span> to get the condition on the fishing rate that ensures the population does not collapse. <span id="eq-fishcond3"><span class="math display">\[
+E&lt;r-\frac{D\pi^2}{4L^2}.
+\tag{7.23}\]</span></span> This can now be used to inform policy decisions on the width of the marine protected area and the allowed fishing rate.</p>
 </section>
 <section id="invasion-waves-in-sir-model" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="invasion-waves-in-sir-model"><span class="header-section-number">7.3</span> Invasion waves in SIR model</h2>
+<p>We now want to use our spatial modelling skills to study the spread of an infectious disease through space. For concreteness, think of a situation where rabies has infected foxes in Dover and we want to get an idea of how soon we will have rabid foxes in York. We model the fox population by the SIR model, where <span class="math inline">\(S(x,t)\)</span> is the density of susceptible foxes, <span class="math inline">\(I(x,t)\)</span> is the density of infected foxes and <span class="math inline">\(R(x,t)\)</span> is the density of removed foxes (which for rabies unfortunately means dead foxes). So where in <a href="epidemics.html#sec-sir" class="quarto-xref"><span>Section 6.1</span></a> we had ordinary differential equations for the total number of susceptible, infected and removed foxes, we now have partial differential equations for the densities of susceptible, infected and removed foxes in space.</p>
+<p>While foxes are usually very territorial and stay in their own territory, infected foxes become a bit insane and move around randomly. This is modelled by a diffusion term in the equation for the infected foxes. The equations are <span id="eq-sir"><span class="math display">\[\begin{split}
+\partial_t S&amp;=-\beta \frac{SI}{N},\\
+\partial_t I&amp;=\beta \frac{SI}{N}-\gamma I+D\partial_x^2I,\\
+\partial_t R&amp;=\gamma I,
+\end{split} \tag{7.24}\]</span></span> where <span class="math inline">\(N=S+I+R\)</span> is the total fox population density, <span class="math inline">\(\beta\)</span> is the infection rate, <span class="math inline">\(\gamma\)</span> is the recovery rate and <span class="math inline">\(D\)</span> is the diffusion coefficient. For simplicity we study the movement in the <span class="math inline">\(x\)</span> direction only. The above equations are valid for all <span class="math inline">\(x\)</span>. We will later concentrate on the equations for <span class="math inline">\(I\)</span> and <span class="math inline">\(S\)</span> only, as <span class="math inline">\(R\)</span> can then be calculated from <span class="math inline">\(N=S+I+R\)</span>.</p>
+<p>Before analysing these equations further, let us think about what we expect to happen. The infected foxes in Dover will infect more and more susceptible foxes. The infected foxes will then move around and infect susceptible foxes in neighbouring territories. This will lead to a wave of infection spreading out from Dover. The wave will move at a speed that depends on the infection rate, the recovery rate and the diffusion coefficient. The wave will have a front where the infected foxes are and a tail where the epidemic has died out.</p>
+<p>To make the further analysis easier, we will non-dimensionalise the equations. We introduce the non-dimensional variables <span id="eq-sirnondim"><span class="math display">\[
+u = S/N, ~~~ v = I/N,~~~ \tilde{t} = \beta t,
+\tag{7.25}\]</span></span> Then the equations become <span id="eq-sirnondim2"><span class="math display">\[\begin{split}
+\partial_{\tilde{t}} u&amp;=-uv\\
+\partial_{\tilde{t}} v&amp;=uv-\frac{\gamma}{\beta}v+\frac{D}{\beta}\partial_x^2v.
+\end{split} \tag{7.26}\]</span></span> We now also introduce the non-dimensional spatial variable <span class="math inline">\(\tilde{x} = \sqrt{\frac{\beta}{D}}x\)</span> and the non-dimensional parameter <span class="math inline">\(r = \frac{\gamma}{\beta}\)</span>. We now drop the tildes to avoid clutter and write the equations as <span id="eq-sirnondim3"><span class="math display">\[\begin{split}
+\partial_t u&amp;=-uv\\
+\partial_t v&amp;=uv-rv+\partial_x^2v.
+\end{split} \tag{7.27}\]</span></span></p>
+<section id="travelling-wave-ansatz-and-boundary-conditions" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="travelling-wave-ansatz-and-boundary-conditions"><span class="header-section-number">7.3.1</span> Travelling wave Ansatz and boundary conditions</h3>
+<p>We are looking for a solution describing the spread of the infection from Dover to York. We make the Ansatz that the solution is a travelling wave, i.e., that it is of the form <span id="eq-sirnondim4"><span class="math display">\[
+u(x,t)=U(z),~~~v(x,t)=V(z)
+\tag{7.28}\]</span></span> with <span class="math inline">\(z=x-ct\)</span> for some <span class="math inline">\(c&gt;0\)</span>. This means that the wave is a right-moving wave. We plug this into <a href="#eq-sirnondim3" class="quarto-xref">Eq.&nbsp;<span>7.27</span></a> and get the system of ODEs <span id="eq-sirnondim5"><span class="math display">\[\begin{split}
+-cU'&amp;=-UV,\\
+-cV'&amp;=UV-rV+V''.
+\end{split} \tag{7.29}\]</span></span> Next let us think about the boundary conditions. We expect that ahead of the wave all the individuals are still susceptible and there are no infecteds yet. So to the far right at <span class="math inline">\(z=infty\)</span> we have <span class="math inline">\(u(\infty)=1\)</span> (corresponding to S=N) and <span class="math inline">\(v(\infty)=0\)</span>. Behind the wave the epidemic will have run its course and so <span class="math inline">\(u(-\infty)=S_\infty/N=:a\)</span> and <span class="math inline">\(v(-\infty)=0\)</span>. In other words, the travelling wave interpolates between the state before an epidemic (at <span class="math inline">\(z=\infty\)</span>) and the state after an epidemic (at <span class="math inline">\(z=-\infty\)</span>). We also have that the solution becomes flat as <span class="math inline">\(z\to\pm\infty\)</span>, so in particular <span class="math inline">\(V'(\pm\infty)=0\)</span>.</p>
+<p>We now massage the equations a bit to get them into a form that we can integrate more easily. From the first equation we see that <span class="math inline">\(UV=cU'\)</span> and also that <span class="math inline">\(V=cU'/U=c(\log U)'\)</span>. We plug this into the second equation and get <span id="eq-sirnondim6"><span class="math display">\[
+-cV'=cU'-rc(\log U)' + V''.
+\tag{7.30}\]</span></span> Now that each term in the equation is a total derivative, we can integrate it by just removing the differentiations: <span id="eq-sirnondim7"><span class="math display">\[
+-cV=cU-rc\log U + V'+A,
+\tag{7.31}\]</span></span> where <span class="math inline">\(A\)</span> is a constant of integration. We use the boundary condition at <span class="math inline">\(z\to\infty\)</span> to determine <span class="math inline">\(A\)</span>: <span id="eq-sirnondim8"><span class="math display">\[
+0=c-rc\log 1 + 0 + A \Rightarrow A=-c.
+\tag{7.32}\]</span></span> At <span class="math inline">\(z\to-\infty\)</span> we get <span id="eq-sirnondim9"><span class="math display">\[
+0=ca-rc\log a + 0 - c \Rightarrow a-1=r\log a.
+\tag{7.33}\]</span></span> This equation is equivalent to <a href="epidemics.html#eq-Sinf" class="quarto-xref">Eq.&nbsp;<span>6.14</span></a> for <span class="math inline">\(S_\infty\)</span> in the case where <span class="math inline">\(S_0=N\)</span>. Again this transcendental equation can only be solved numerically.</p>
+</section>
+<section id="wave-speed" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="wave-speed"><span class="header-section-number">7.3.2</span> Wave speed</h3>
+<p>Next we want to learn about the wave speed <span class="math inline">\(c\)</span>. We do this by linearising the equation around the leading edge of the wave, where <span class="math inline">\(V\)</span> is very small and <span class="math inline">\(U\)</span> is close to 1, i.e, <span class="math inline">\(U=1-\epsilon\)</span> for small <span class="math inline">\(\epsilon\)</span>. Substituting this into the second equation in <a href="#eq-sirnondim5" class="quarto-xref"><span>7.29</span></a> we get <span class="math display">\[
+-cV' = (1-\epsilon)V - r V + V''.
+\]</span> Because both <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(V\)</span> are small, we can neglect the product <span class="math inline">\(\epsilon V\)</span> and get <span class="math display">\[
+-cV' = (1 - r) V + V''.
+\]</span> This is a linear ODE with constant coefficients and can thus be solved with the Ansatz <span class="math inline">\(V(z) = e^{-\lambda z}\)</span>. Substituting this into the ODE and dividing by <span class="math inline">\(e^{-\lambda z}\)</span> gives <span class="math display">\[
+\lambda^2 -c\lambda+ 1-r=0.
+\]</span> The solution of this quadratic equation is <span class="math display">\[
+\lambda = \frac{c\pm\sqrt{c^2-4(1-r)}}{2}.
+\]</span> We need <span class="math inline">\(\lambda\)</span> to be real so that our solution correctly describes the exponential growth at the start of an epidemic, so we need the discriminant to be non-negative, i.e., <span class="math display">\[
+c^2-4(1-r)\geq 0
+\]</span> and thus we get a lower bound on the wave speed: <span class="math display">\[
+c\geq 2\sqrt{1-r}.
+\]</span></p>
+</section>
 </section>
 <section id="turing-instabilities" class="level2" data-number="7.4">
 <h2 data-number="7.4" class="anchored" data-anchor-id="turing-instabilities"><span class="header-section-number">7.4</span> Turing instabilities</h2>
+<p>We now come to a very intriguing question: how can the complicated spatial patterns arise that one can observe in nature. One might have thought that to explain complicated patterns one would need complicated models that encode all that complexity. However, it turns out that patterns can arise from very simple, translation-invariant models. The key idea is that the spatially uniform steady state in a translation-invariant model can be unstable to small perturbations, which then grow and form spatial patterns. This is called a Turing instability.</p>
+<p>We consider a system of two species, described by densities <span class="math inline">\(u(x,t)\)</span> and <span class="math inline">\(v(x,t)\)</span>, that interact with each other locally but also move around randomly. The system is described by the reaction-diffusion equations <span id="eq-turing"><span class="math display">\[\begin{split}
+\frac{\partial u}{\partial t}&amp;=f(u,v)+D_1\frac{\partial^2u}{\partial x^2},\\
+\frac{\partial v}{\partial t}&amp;=g(u,v)+D_2\frac{\partial^2v}{\partial x^2},
+\end{split} \tag{7.34}\]</span></span> where <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are functions that describe the local dynamics of the two species. The diffusion terms model random motion of the individuals.</p>
+<p>For values <span class="math inline">\((u^*,v^*)\)</span> of the densities that satisfy <span class="math inline">\(f(u^*,v^*)=g(u^*,v^*)=0\)</span>, the spatially homogeneous steady state <span class="math inline">\(u(x,t)=u^*\)</span>, <span class="math inline">\(v(x,t)=v^*\)</span> is a solution of the system. Assume that in the absence of diffusion, this steady state is stable. Thus without diffusion, any perturbations to the spatially homogeneous steady state will decay. One would then expect that the spatially homogeneous steady state is stable also in the presence of diffusion, given that diffusion has the tendency to spread individuals out away from regions of higher concentration. The result would be the absence of any spatial structure in the solution. However, we will now see that this is not always the case. Rather counter-intuitively, the random motion of the individuals can destabilise the spatially homogeneous steady state and give rise to spatial patterns.</p>
+<section id="deriving-conditions-for-turing-instabilities" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="deriving-conditions-for-turing-instabilities"><span class="header-section-number">7.4.1</span> Deriving conditions for Turing instabilities</h3>
+<p>Mathematics is a great tool for dealing with counter-intuitive phenomena. We just have to do the maths and see what it tells us. So we now derive the equations that describe the time-evolution of small perturbations and solve them and see whether the perturbations grow or not. So we set <span id="eq-turingpert"><span class="math display">\[
+u(x,t)=u^*+\xi(x,t),~~~v(x,t)=v^*+\eta(x,t)
+\tag{7.35}\]</span></span> where <span class="math inline">\(\xi(x,t)\)</span> and <span class="math inline">\(\eta(x,t)\)</span> are small perturbations. If we plug this into <a href="#eq-turing" class="quarto-xref">Eq.&nbsp;<span>7.34</span></a> we get equations for the time evolution of the small perturbations: <span id="eq-turingpert2"><span class="math display">\[\begin{split}
+\frac{\partial \xi}{\partial t}&amp;=f(u^*+\xi(x,t),v^*+\eta(x,t))\xi+D_1\frac{\partial^2\xi}{\partial x^2},\\
+\frac{\partial \eta}{\partial t}&amp;=g(u^*+\xi(x,t),v^*+\eta(x,t))\xi+D_2\frac{\partial^2\eta}{\partial x^2}.
+\end{split} \tag{7.36}\]</span></span> We now use Taylor expansions to linearise the equations. We expand <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> around <span class="math inline">\((u^*,v^*)\)</span> to first order and drop all terms that are higher order in <span class="math inline">\(\xi\)</span> and/or <span class="math inline">\(\eta\)</span>. This gives the linear PDEs <span id="eq-turingpert3"><span class="math display">\[\begin{split}
+\frac{\partial \xi}{\partial t}&amp;=\frac{\partial f}{\partial u}(u^*,v^*)\xi+\frac{\partial f}{\partial v}(u^*,v^*)\eta+D_1\frac{\partial^2\xi}{\partial x^2}\\
+&amp;=a_{11}\xi+a_{12}\eta+D_1\frac{\partial^2\xi}{\partial x^2},\\
+\frac{\partial \eta}{\partial t}&amp;=\frac{\partial g}{\partial u}(u^*,v^*)\xi+\frac{\partial g}{\partial v}(u^*,v^*)\eta+D_2\frac{\partial^2\eta}{\partial x^2}\\
+&amp;=a_{21}\xi+a_{22}\eta+D_1\frac{\partial^2\xi}{\partial x^2}.
+\end{split} \tag{7.37}\]</span></span> Those partial derivatives of <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> with respect to <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are familiar to us from the stability analysis in non-spatial models as the entries of the Jacobian matrix and we are using the same shorthand notation for them here.</p>
+<p>We now make the harmonic wave Ansatz <span id="eq-turingpert4"><span class="math display">\[\begin{split}
+\xi(x,t)&amp;=B_1e^{\sigma_k t}\sin(kx+\alpha),\\
+\eta(x,t)&amp;=B_2e^{\sigma_k t}\sin(kx+\alpha).
+\end{split}
+\tag{7.38}\]</span></span> During your studies you will have seen this easy way to solve linear PDEs with constant coefficients already several times. Plugging this Ansatz into <a href="#eq-turingpert3" class="quarto-xref">Eq.&nbsp;<span>7.37</span></a> and dividing by <span class="math inline">\(e^{\sigma_k t}\sin(kx+\alpha)\)</span> we get <span id="eq-turingpert5"><span class="math display">\[\begin{split}
+\sigma_k B_1&amp;=a_{11}B_1+a_{12}B_2-k^2D_1B_1\\
+\sigma_k B_2&amp;=a_{21}B_1+a_{22}B_2k^2D_2B_2.
+\end{split} \tag{7.39}\]</span></span> We can write this in matrix form as <span id="eq-turingpert6"><span class="math display">\[
+\sigma_k\begin{pmatrix}B_1\\B_2\end{pmatrix}=A(k)\begin{pmatrix}B_1\\B_2\end{pmatrix}.
+\tag{7.40}\]</span></span> where <span id="eq-turingpert7"><span class="math display">\[
+A(k)=\begin{pmatrix}a_{11}-D_1k^2&amp;a_{12}\\a_{21}&amp;a_{22}-D_2k^2\end{pmatrix}.
+\tag{7.41}\]</span></span> This looks very similar to what we get when we do the stability analysis of a non-spatial model, except that now we have a whole family of matrices <span class="math inline">\(A(k)\)</span>, one for each <span class="math inline">\(k\)</span>. The condition for the spatially homogeneous steady state to be stable is that all the eigenvalues <span class="math inline">\(\sigma_k\)</span> of all the matrices <span class="math inline">\(A(k)\)</span> are negative. The spatially homogeneous steady state to be unstable is that there is at least one <span class="math inline">\(k\)</span> for which the real part of <span class="math inline">\(\sigma_k\)</span> is positive.</p>
+<p>As we know from studying the stability of non-spatial models of two interacting species, an easy way to determine the stability is to look at the signs of the trace and the determinant of the matrix <span class="math inline">\(A(k)\)</span>. For the trace we find <span class="math display">\[
+\text{tr}(A(k))=a_{11}-k^2D_1+a_{22}-k^2D_2=\text{tr}(A(0))-k^2(D_1+D_2).
+\]</span> We are interested in the case where the steady state is stable in the absence of diffusion and is destabilised by the diffusion. Stability in the absence of diffusion requires <span class="math inline">\(\text{tr}(A(0))&lt;0\)</span>. We see that in that case also <span class="math inline">\(\text{tr}(A(k))&lt;0\)</span> for all <span class="math inline">\(k\)</span> because the <span class="math inline">\(k\)</span>-dependent term <span class="math inline">\(-k^2(D_1+D_2)\)</span> is negative. So the trace is not yet giving us a hint that there might be an instability. So next we look at the determinant.</p>
+<p>For the determinant we find <span id="eq-turingpert8"><span class="math display">\[\begin{split}
+\det(A(k))&amp;=(a_{11}-D_1k^2)(a_{22}-D_2k^2)-a_{12}a_{21}\\
+&amp;=D_1D_2k^4-(D_1a_{22}+D_2a_{11})k^2+\det(A(0))
+\end{split} \tag{7.42}\]</span></span> Stability in the absence of diffusion tells us that <span class="math inline">\(\det(A(0))&gt;0\)</span>. We see that <span class="math inline">\(\det(A(k))\)</span> is a quadratic polynomial in <span class="math inline">\(k^2\)</span> with positive leading coefficient. Its graph is a parabola. This means that the determinant is positive for small <span class="math inline">\(k\)</span> and for large <span class="math inline">\(k\)</span> but there may be an intermediate region where the parabola dips below the axis and the determinant is negative in that region. Perturbations with wave numbers in that region would grow over time, making the homogeneous steady state unstable and leading to spatial structure. If that region exists, it is bounded by the values <span class="math inline">\(k_\pm\)</span> for which the determinant is zero. Using the quadratic formula we find that <span id="eq-turingk"><span class="math display">\[
+k_\pm^2=\frac{D_1a_{22}+D_2a_{11}\pm\sqrt{(D_1a_{22}+D_2a_{11})^2-4D_1D_2\det(A(0))}}{2D_1D_2}.
+\tag{7.43}\]</span></span> The unstable interval exists if <span class="math inline">\(k_\pm^2\)</span> are real and positive. They are real if the discriminant under the square root is non-negative. This gives the condition <span id="eq-turinginstab"><span class="math display">\[
+(D_1a_{22}+D_2a_{11})^2&gt;4D_1D_2\det(A(0)).
+\tag{7.44}\]</span></span> They are positive if the numerator is positive. This gives the condition <span id="eq-turinginstab2"><span class="math display">\[
+D_1a_{22}+D_2a_{11}&gt;0.
+\tag{7.45}\]</span></span> The condition for the spatially homogeneous steady state to be unstable is that both <a href="#eq-turinginstab" class="quarto-xref">Eq.&nbsp;<span>7.44</span></a> and <a href="#eq-turinginstab2" class="quarto-xref">Eq.&nbsp;<span>7.45</span></a> are satisfied.</p>
+</section>
+<section id="understanding-the-conditions-for-turing-instabilities" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="understanding-the-conditions-for-turing-instabilities"><span class="header-section-number">7.4.2</span> Understanding the conditions for Turing instabilities</h3>
+<p>We have now derived the conditions for Turing instabilities in terms of the entries of the Jacobian matrix <span class="math inline">\(A=A(0)\)</span> of the local dynamics of the two species and the diffusion coefficients: <span id="eq-turingconditions"><span class="math display">\[\begin{split}
+a)\qquad&amp;a_{11}+a_{22}&lt;0,\\
+b)\qquad&amp;a_{11}a_{22}-a_{12}a_{21}&gt;0,\\
+c)\qquad&amp;D_1a_{22}+D_2a_{11}&gt;0,\\
+d)\qquad&amp;(a_{11}+a_{22})^2&gt;4(a_{11}a_{22}-a_{12}a_{21}).
+\end{split} \tag{7.46}\]</span></span> Conditions a) and b) are the conditions for the spatially homogeneous steady state to be stable in the absence of diffusion. Condition c) and d) are the condition for the spatially homogeneous steady state to be unstable in the presence of diffusion.</p>
+<p>We will first look at what these conditions tell us about the sign structure of the Jacobian, which will introduce the concept of activator and inhibitor species. We make three observations:</p>
+<ol type="1">
+<li><p>We observe that condition a) implies that at least one of <span class="math inline">\(a_{11}\)</span> and <span class="math inline">\(a_{22}\)</span> is negative. We are free to choose the numbering of our species, so, without loss of generality, let’s say that <span class="math inline">\(a_{22}&lt;0\)</span>. This means that species 2 inhibits its own growth above the steady state. We call species 2 an <strong>inhibitor</strong> species.</p></li>
+<li><p>From condition c) we see that if <span class="math inline">\(a_{22}&lt;0\)</span> then <span class="math inline">\(a_{11}&gt;0\)</span>. This means that species 1 activates its own growth above the steady state. We call species 1 an <strong>activator</strong> species.</p></li>
+<li><p>From condition b) we now observe that, because <span class="math inline">\(a_{11}a_{22}&lt;0\)</span>, we must have that <span class="math inline">\(a_{12}a_{21}&lt;0\)</span>.</p></li>
+</ol>
+<p>Taking these three observations together tells us that there are only two possibilities for the sign structure of the Jacobian matrix: <span id="eq-turingjac"><span class="math display">\[
+\text{sign}(A)=\begin{pmatrix}+&amp;-\\+&amp;-\end{pmatrix}~~~\text{or}~~~\text{sign}(A)=\begin{pmatrix}+&amp;+\\-&amp;-\end{pmatrix}.
+\tag{7.47}\]</span></span> If the signs in the Jacobian are different from both of these possibilites you can immediately rule out a Turing instability.</p>
+<p>Next we look at what our conditions a) to d) tell us about the magnitude of the diffusion coefficients. From condition a) we know that <span class="math inline">\(a_{11}&lt;-a_{22}\)</span> and hence <span class="math inline">\(-a_{11}/a_{22}&lt;1\)</span>. From condition c) we see that <span class="math inline">\(D_1/D_2&lt;-a_{11}/a_{22}\)</span>. Putting these together gives <span class="math inline">\(D_1/D_2&lt;1\)</span> and hence <span class="math inline">\(D_1&lt;D_2\)</span>: <strong>The inhibitor must diffuse faster than the activator</strong>. This is a necessary condition for a Turing instability.</p>
+<p>Exactly how much faster the inhibitor must diffuse than the activator depends on the details of the local interactions and we will next study this in a concrete example.</p>
+</section>
+<section id="example" class="level3" data-number="7.4.3">
+<h3 data-number="7.4.3" class="anchored" data-anchor-id="example"><span class="header-section-number">7.4.3</span> Example</h3>
+<p>Let’s consider the following concrete reaction-diffusion system: <span id="eq-schnak"><span class="math display">\[\begin{split}
+\partial_tu&amp;=-u+u^2v+D_1\partial_x^2u=f(u,v)+D_1\partial_x^2u,\\
+\partial_tv&amp;=b-u^2v+D_2\partial_x^2v=g(u,v)+D_2\partial_x^2v.
+\end{split} \tag{7.48}\]</span></span></p>
+<p>The Jacobian matrix of the local dynamics is <span id="eq-schnakjac"><span class="math display">\[
+A=\begin{pmatrix}\frac{\partial f}{\partial u}&amp;\frac{\partial f}{\partial v}\\
+\frac{\partial g}{\partial u}&amp;\frac{\partial g}{\partial v}\end{pmatrix}=
+\begin{pmatrix}-1+2uv&amp;u^2\\-2uv&amp;-u^2\end{pmatrix}.
+\tag{7.49}\]</span></span> We are interested in the coexistence steady state <span class="math inline">\((u^*,v^*)\)</span> where both species coexist. Imposing that <span class="math inline">\(f(u^*,v^*)=0\)</span> gives us that <span class="math inline">\(u^*v^*=1\)</span> and then imposing that <span class="math inline">\(g(u^*,v^*)=0\)</span> gives us that <span class="math inline">\(u^*=b\)</span> and hence <span class="math inline">\(v^*=1/b\)</span>. So the coexistence steady state is <span id="eq-schnakss"><span class="math display">\[
+(u^*,v^*)=\left(b,\frac{1}{b}\right).
+\tag{7.50}\]</span></span> The Jacobian matrix evaluated at the coexistence steady state is <span id="eq-schnakjac2"><span class="math display">\[
+A=\begin{pmatrix}1&amp;b^2\\-2&amp;-b^2\end{pmatrix}.
+\tag{7.51}\]</span></span> We see that the sign structure of this matrix is one of those in <a href="#eq-turingjac" class="quarto-xref">Eq.&nbsp;<span>7.47</span></a> that can give rise to a Turing instability. Species <span class="math inline">\(u\)</span> is the activator and species <span class="math inline">\(v\)</span> is the inhibitor.</p>
+<p>Now let us check each of the conditions a) to d) from <a href="#eq-turingconditions" class="quarto-xref">Eq.&nbsp;<span>7.46</span></a>. Condition a) becomes <span class="math inline">\(1-b^2&lt;0\)</span> and hence <span class="math inline">\(b^2&gt;1\)</span>. Condition b) becomes <span class="math inline">\(-b^2+2b^2&gt;0\)</span> which is automatically satisfied. Condition c) becomes <span class="math inline">\(D_2-b^2D_1&gt;0\)</span> which implies <span class="math inline">\(D_1b^2&lt;D_2\)</span>, which means that the ratio <span class="math inline">\(d=D_2/D_1&gt;b^2\)</span>. Condition d) becomes <span class="math inline">\((D_2-b^2D_1)^2&gt;4D_1D_2b^2\)</span>. Multiplying out the square and bringing everything to one side gives <span class="math inline">\(b^4D_1^2-6D_1D_2+D_2^2&gt;0\)</span>. We can rewrite this in terms of the ratio <span class="math inline">\(d=D_2/D_1\)</span> as <span id="eq-schnakcond"><span class="math display">\[
+b^4-6db^2+d^2&gt;0.
+\tag{7.52}\]</span></span> The graph of the left-hand side against <span class="math inline">\(d\)</span> is a parabola that opens upwards and has roots at <span id="eq-schnakd"><span class="math display">\[
+d_\pm=3b^2\pm\sqrt{9b^4-b^4}=b^2(3\pm\sqrt{8}).
+\tag{7.53}\]</span></span> The condition in <a href="#eq-schnakcond" class="quarto-xref">Eq.&nbsp;<span>7.52</span></a> tells us that <span class="math inline">\(d\)</span> is outside the interval <span class="math inline">\((d_-,d_+)\)</span>. We have also already derived that <span class="math inline">\(d&gt;b^2&gt;d_-\)</span>. So the final condition on the ratio of the diffusion rates is <span id="eq-schnakcond2"><span class="math display">\[
+d=\frac{D_2}{D_1}&gt;b^2(3+\sqrt{8}).
+\tag{7.54}\]</span></span></p>
+</section>
+<section id="finite-domain" class="level3" data-number="7.4.4">
+<h3 data-number="7.4.4" class="anchored" data-anchor-id="finite-domain"><span class="header-section-number">7.4.4</span> Finite domain</h3>
+<p>We now restrict space to a finite interval <span class="math inline">\([0,L]\)</span> and impose no-flux boundary conditions at the boundaries: <span id="eq-schnakbc"><span class="math display">\[
+\partial_xu(0,t)=\partial_xu(L,t)=0,~~~\partial_xv(0,t)=\partial_xv(L,t)=0.
+\tag{7.55}\]</span></span> This implies that also the perturbations away from the homogeneous steady state must satisfy these boundary conditions: <span id="eq-schnakbc2"><span class="math display">\[
+\partial_x\xi(0,t)=\partial_x\xi(L,t)=0,~~~\partial_x\eta(0,t)=\partial_x\eta(L,t)=0.
+\tag{7.56}\]</span></span> Substituting our harmonic wave Ansatz <a href="#eq-turingpert4" class="quarto-xref">Eq.&nbsp;<span>7.38</span></a> into the boundary condition <span class="math inline">\(\partial_x\xi(0,t)=0\)</span> gives <span class="math inline">\(k\cos(\alpha)=0\)</span> and hence <span class="math inline">\(\alpha=\pi/2\)</span>. Substituting it into the boundary condition <span class="math inline">\(\partial_x\xi(L,t)=0\)</span> gives <span class="math inline">\(k\cos(kL+\pi/2)=0\)</span>. This means that <span class="math inline">\(kL\)</span> must be a multiple of <span class="math inline">\(\pi\)</span> and hence <span class="math inline">\(k\)</span> must be an integer multiple of <span class="math inline">\(\pi/L\)</span>. We can write this as <span id="eq-schnakk"><span class="math display">\[
+k=k_n=\frac{n\pi}{L},~~~n=1,2,...
+\tag{7.57}\]</span></span> The boundary conditions for <span class="math inline">\(\eta\)</span> are satisfied for the same set of wave numbers <span class="math inline">\(k_n\)</span>.</p>
+<p>We had seen that only perturbations with wave numbers in the interval <span class="math inline">\([k_-,k_+]\)</span> can grow, with <span class="math inline">\(k_\pm\)</span> given by <a href="#eq-turingk" class="quarto-xref">Eq.&nbsp;<span>7.43</span></a>. So the condition for a Turing instability in our bounded domain is that there is at least one <span class="math inline">\(n\)</span> for which <span class="math inline">\(k_n\)</span> is in the interval <span class="math inline">\([k_-,k_+]\)</span>. This gives the condition <span class="math inline">\(k_1=\pi/L&lt;k_+\)</span> or equivalently <span class="math inline">\(L&gt;\pi/k_+\)</span>. Turing instabilities can only occur in domains that are large enough.</p>
+</section>
 </section>
 <section id="directed-motion" class="level2" data-number="7.5">
 <h2 data-number="7.5" class="anchored" data-anchor-id="directed-motion"><span class="header-section-number">7.5</span> Directed motion</h2>
+<p>So far we have only discussed random motion. We now want to consider directed motion. There are many reasons for individuals to move in a directed way. For example, they might move towards a food source or away from a predator. This kind of movement is referred to as <strong>taxis</strong>: the movement towards (or away from) a higher concentration of something (prey, predator, light, nutrient). If the something is a chemical this is called <strong>chemotaxis</strong>. Chemotaxis is a very important mechanism in biology. For example, immune cells move towards sites of infection, sperm cells move towards the egg, and bacteria move towards nutrients.</p>
+<p>To model this, we introduce the density <span class="math inline">\(n(\mathbf{x},t)\)</span> of individuals and the density <span class="math inline">\(a(\mathbf{x},t)\)</span> of the chemical, which we will assume is an attractant, i.e., individuals move towards higher concentrations of the chemical. The individuals move in response to the gradient of the chemical, so the chemotactic movement is described by a flux <span id="eq-chemotaxis"><span class="math display">\[
+\mathbf{J}_c=\chi n\mathbf{\nabla} a,
+\tag{7.58}\]</span></span> where <span class="math inline">\(\chi&gt;0\)</span> is the chemotactic sensitivity. Compare this with the diffusive flux <span id="eq-diffusion"><span class="math display">\[
+\mathbf{J}_d=-D\mathbf{\nabla} n.
+\tag{7.59}\]</span></span></p>
+<p>The equation for the density of individuals is then <span id="eq-chemotaxisn"><span class="math display">\[
+\partial_t n=f(n)-\mathbf{\nabla}\cdot\mathbf{J},
+\tag{7.60}\]</span></span> where <span class="math inline">\(f(n)\)</span> describes the local population dynamics. This is just the higher-dimensional version of <a href="#eq-transport" class="quarto-xref">Eq.&nbsp;<span>7.5</span></a>. We can now plug in the expressions for the fluxes and get <span id="eq-chemotaxisn3"><span class="math display">\[
+\partial_t n=f(n)-\mathbf{\nabla}\cdot(\chi n\mathbf{\nabla} a)
++\mathbf{\nabla}\cdot(D_n\mathbf{\nabla} n).
+\tag{7.61}\]</span></span> The attractant <span class="math inline">\(a\)</span> is governed by the equation <span id="eq-chemotaxisa"><span class="math display">\[
+\partial_t a=g(a,n)+\mathbf{\nabla}\cdot(D_a\mathbf{\nabla} n).
+\tag{7.62}\]</span></span> The local dynamics of the attractant is described by <span class="math inline">\(g(a,n)\)</span> and the diffusion of the attractant has diffusion coefficient <span class="math inline">\(D_a\)</span>.</p>
+<section id="slime-mould-aggregation" class="level3" data-number="7.5.1">
+<h3 data-number="7.5.1" class="anchored" data-anchor-id="slime-mould-aggregation"><span class="header-section-number">7.5.1</span> Slime mould aggregation</h3>
+<p>A fascinating example of chemotaxis is the aggregation of slime moulds. Slime moulds are single-celled organisms that live in the soil and feed on bacteria. When the food supply runs out, the slime moulds aggregate to form a fruiting body that releases spores. The aggregation is guided by a chemical attractant. The slime moulds move towards higher concentrations of the attractant. The attractant is a chemical that is released by the slime moulds themselves.</p>
+<p>When modelling the slime mould aggregation we can neglect the population dynamics which are not relevant for the aggregation process and thus set <span class="math inline">\(f(n)=0\)</span>. For the local dynamics of the attractant we use <span id="eq-slimeg"><span class="math display">\[
+g(a,n)= h n - q a,
+\tag{7.63}\]</span></span> where <span class="math inline">\(h&gt;0\)</span> is the rate at which the attractant is produced by the slime moulds and <span class="math inline">\(q&gt;0\)</span> is the rate at which the attractant is degraded. We assume that the chemotactic sensitivity <span class="math inline">\(\chi\)</span> and the diffusion coefficients <span class="math inline">\(D_n\)</span> and <span class="math inline">\(D_a\)</span> are positive constants. We also restrict ourselves again to motion in one dimension. Then the equations for the slime mould aggregation are: <span id="eq-slime"><span class="math display">\[\begin{split}
+\partial_t n&amp;=-\chi\partial_x(n\partial_x a)+D_n\partial_x^2 n,\\
+\partial_t a&amp;=hn-q a+D_a\partial_x^2 a.
+\end{split} \tag{7.64}\]</span></span> The homogeneous steady state where <span class="math inline">\(n(x,t)=n^*\)</span> and <span class="math inline">\(a(x,t)=a^*\)</span> has to satisfies <span class="math inline">\(h n^*=q a^*\)</span>. We can now linearise the equations around the homogeneous steady state by setting <span class="math inline">\(n(x,t)=n^*+\xi(x,t)\)</span> and <span class="math inline">\(a(x,t)=a^*+\eta(x,t)\)</span> with <span class="math inline">\(\xi\)</span> and <span class="math inline">\(\eta\)</span> small. We get <span id="eq-slimepert"><span class="math display">\[\begin{split}
+\partial_t \xi&amp;=-\chi n^*\partial_x^2\eta+D_n\partial_x^2\xi,\\
+\partial_t \eta&amp;=h\xi-q\eta+D_a\partial_x^2\eta.
+\end{split} \tag{7.65}\]</span></span> We write this linear system in matrix form as <span id="eq-slimemat"><span class="math display">\[
+\partial_t\begin{pmatrix}\xi\\\eta\end{pmatrix}=\begin{pmatrix}D_n\partial_x^2&amp;-\chi n^*\partial_x^2\\h&amp;-q+D_a\partial_x^2\end{pmatrix}\begin{pmatrix}\xi\\\eta\end{pmatrix}.
+\tag{7.66}\]</span></span> To solve this we make the Ansatz <span id="eq-slimeansatz"><span class="math display">\[
+\begin{pmatrix}\xi\\\eta\end{pmatrix}=\begin{pmatrix}B_1\\B_2\end{pmatrix}e^{\sigma_k t}\sin(kx+\alpha).
+\tag{7.67}\]</span></span> Plugging this into <a href="#eq-slimemat" class="quarto-xref">Eq.&nbsp;<span>7.66</span></a> and dividing by <span class="math inline">\(e^{\sigma_k t}\sin(kx+\alpha)\)</span> gives <span id="eq-slimeeig"><span class="math display">\[
+\sigma\begin{pmatrix}B_1\\B_2\end{pmatrix}=\begin{pmatrix}-D_nk^2&amp;\chi n^*k^2\\h&amp;-q-D_ak^2\end{pmatrix}\begin{pmatrix}B_1\\B_2\end{pmatrix}.
+\tag{7.68}\]</span></span> We again denote the matrix above as <span class="math inline">\(A(k)\)</span>. The condition for the homogeneous steady state to be stable is that the real parts of the eigenvalues <span class="math inline">\(\sigma_k\)</span> are all negative. The condition for the homogeneous steady state to be unstable is that there is at least one <span class="math inline">\(k\)</span> for which the real part of <span class="math inline">\(\sigma_k\)</span> is positive.</p>
+<p>To determine the stability we again calculate the trace and determinant of the matrix in <a href="#eq-slimeeig" class="quarto-xref">Eq.&nbsp;<span>7.68</span></a>. The trace is <span id="eq-slimetrace"><span class="math display">\[
+\text{tr}(A(k))=-(D_n+D_a)k^2-q.
+\tag{7.69}\]</span></span> This is manifestly negative for all <span class="math inline">\(k\)</span>, so this does not yet indicate any instability. The determinant is <span id="eq-slimedet"><span class="math display">\[
+\det(A(k))=D_nD_ak^4+D_nqk^2-h\chi n^* k^2.
+\tag{7.70}\]</span></span> This is negative and hence gives an instability if <span id="eq-slimeinstab"><span class="math display">\[
+D_nD_ak^2&lt;h\chi n^* -D_nq
+\tag{7.71}\]</span></span> Because the left-hand side in this inequality is positive, the right-hand side must be positive as well. This gives us the condition <span id="eq-slimeinstab2"><span class="math display">\[
+D_n&lt;\frac{h\chi n^*}{q}.
+\tag{7.72}\]</span></span> This makes sense: if the individuals diffuse too fast, the aggregation can not happen. We can also rewrite the condition for the aggregation as <span class="math display">\[
+h&gt;\frac{qD_n}{\chi n^*}.
+\]</span> So aggregation only happens if the rate of production of the attractant is larger enough.</p>
+</section>
 </section>
 <section id="exercises" class="level2" data-number="7.6">
 <h2 data-number="7.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">7.6</span> Exercises</h2>
@@ -309,13 +566,13 @@ J(x) = -D\partial_x u(x),
 <!--- From Exam 2020 --->
 <p>A population of fish <span class="math inline">\(F(x,t)\)</span> in a river of width <span class="math inline">\(L\)</span> with banks at <span class="math inline">\(x=0\)</span> and <span class="math inline">\(x=L\)</span> can be modelled by the partial differential equation <span id="eq-fish"><span class="math display">\[
 \frac{\partial F}{\partial t} = rF\left( 1-\frac{F}{K} \right) + D\frac{\partial^2 F}{\partial x^2},
-\tag{7.8}\]</span></span> where <span class="math inline">\(r\)</span>, <span class="math inline">\(K\)</span> and <span class="math inline">\(D\)</span> are positive constants. No-flux boundary conditions are applied at <span class="math inline">\(x=L\)</span>. At precisely <span class="math inline">\(x=0\)</span> some shore-based fishermen catch all of the fish. We wish to find the minimum width of the river to ensure the fish population does not collapse.</p>
+\tag{7.73}\]</span></span> where <span class="math inline">\(r\)</span>, <span class="math inline">\(K\)</span> and <span class="math inline">\(D\)</span> are positive constants. No-flux boundary conditions are applied at <span class="math inline">\(x=L\)</span>. At precisely <span class="math inline">\(x=0\)</span> some shore-based fishermen catch all of the fish. We wish to find the minimum width of the river to ensure the fish population does not collapse.</p>
 <ol type="1">
 <li><p>First determine the spatially uniform steady states and indicate their stability.</p></li>
 <li><p>Linearise the system for small <span class="math inline">\(F\)</span>.</p></li>
 <li><p>By considering a solution of the form <span class="math inline">\(F(x,t) = e^{\lambda t} \left( A \cos kx + B \sin kx \right)\)</span> show that <span id="eq-fishlambda"><span class="math display">\[
 \lambda = \lambda_n =: r-k_n^2D,
-\tag{7.9}\]</span></span> where <span class="math display">\[
+\tag{7.74}\]</span></span> where <span class="math display">\[
 k = k_n =: \frac{(2n+1)\pi }{2L}, ~~~ n = 0,~1,~2,...
 \]</span></p></li>
 <li><p>Hence, determine the condition on <span class="math inline">\(L\)</span> for the fish population not to collapse.</p></li>
@@ -330,7 +587,7 @@ k = k_n =: \frac{(2n+1)\pi }{2L}, ~~~ n = 0,~1,~2,...
 <!--- From sheet 4 --->
 <p>A reaction-diffusion population model has the form <span id="eq-rd1"><span class="math display">\[
 \frac{\partial u}{\partial t}=f(u)+D\frac{\partial^2u}{\partial x^2}
-\tag{7.10}\]</span></span> where <span class="math inline">\(D&gt;0\)</span> and where <span class="math inline">\(f\)</span> satisfies <span class="math inline">\(f(0)=f(1)=0\)</span> and <span class="math inline">\(f(u)&gt;0\)</span> for <span class="math inline">\(u\in(0,1)\)</span>.</p>
+\tag{7.75}\]</span></span> where <span class="math inline">\(D&gt;0\)</span> and where <span class="math inline">\(f\)</span> satisfies <span class="math inline">\(f(0)=f(1)=0\)</span> and <span class="math inline">\(f(u)&gt;0\)</span> for <span class="math inline">\(u\in(0,1)\)</span>.</p>
 <ol type="a">
 <li><p>Convert this equation into travelling wave form by making the Ansatz that <span class="math inline">\(u(x,t)=U(z)\)</span> and <span class="math inline">\(v(x,t)=V(z)\)</span> with <span class="math inline">\(z=x-ct\)</span>.</p></li>
 <li><p>Assuming that a solution exists such that <span class="math inline">\(U(-\infty)=1\)</span>, <span class="math inline">\(U(\infty)=0\)</span> show, by linearising the equation at the leading edge, that for a biologically realistic solution the wave speed <span class="math inline">\(c\)</span> satisfies <span class="math inline">\(c\geq 2\sqrt{Df'(0)}\)</span>.</p></li>
@@ -350,10 +607,10 @@ k = k_n =: \frac{(2n+1)\pi }{2L}, ~~~ n = 0,~1,~2,...
 \frac{\partial v}{\partial t}&amp;=u^2v-\rho
 v+\frac{\partial^2v}{\partial x^2}
 \end{split}
-\tag{7.11}\]</span></span> where <span class="math inline">\(\rho\)</span> is a positive constant. Convert this system into travelling wave form by making the Ansatz that <span class="math inline">\(u(x,t)=U(z)\)</span> and <span class="math inline">\(v(x,t)=V(z)\)</span> with <span class="math inline">\(z=x-ct\)</span>, and show in particular that <span id="eq-rd3"><span class="math display">\[
+\tag{7.76}\]</span></span> where <span class="math inline">\(\rho\)</span> is a positive constant. Convert this system into travelling wave form by making the Ansatz that <span class="math inline">\(u(x,t)=U(z)\)</span> and <span class="math inline">\(v(x,t)=V(z)\)</span> with <span class="math inline">\(z=x-ct\)</span>, and show in particular that <span id="eq-rd3"><span class="math display">\[
 -c\frac{dV}{dz}=c\frac{dU}{dz}-\frac{\rho
   c}{U^2}\frac{dU}{dz}+\frac{d^2V}{dz^2}.
-\tag{7.12}\]</span></span> Consider a solution of the travelling wave equations such that <span class="math inline">\(U(\infty)=1\)</span>, <span class="math inline">\(U(-\infty)=a\)</span>, <span class="math inline">\(V(\pm\infty)=0\)</span> for some <span class="math inline">\(a&lt;1\)</span>. By integrating the above equation from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span> and imposing the boundary conditions, determine the value of <span class="math inline">\(a\)</span>. Also determine a lower bound on the wave velocity <span class="math inline">\(c\)</span> by linearising around the leading edge of the wave.</p>
+\tag{7.77}\]</span></span> Consider a solution of the travelling wave equations such that <span class="math inline">\(U(\infty)=1\)</span>, <span class="math inline">\(U(-\infty)=a\)</span>, <span class="math inline">\(V(\pm\infty)=0\)</span> for some <span class="math inline">\(a&lt;1\)</span>. By integrating the above equation from <span class="math inline">\(-\infty\)</span> to <span class="math inline">\(\infty\)</span> and imposing the boundary conditions, determine the value of <span class="math inline">\(a\)</span>. Also determine a lower bound on the wave velocity <span class="math inline">\(c\)</span> by linearising around the leading edge of the wave.</p>
 </div>
 <hr>
 </section>
@@ -365,29 +622,29 @@ v+\frac{\partial^2v}{\partial x^2}
 <p>Assume that in the absence of rabies, the fox population is described by a logistic model with intrinsic growth rate <span class="math inline">\(r\)</span> and carrying capacity <span class="math inline">\(K\)</span>. Adding this population dynamics to the SIR model gives the equations <span id="eq-sirlogistic"><span class="math display">\[\begin{split}
 \partial_t S&amp;=rS\left(1-\frac{S}{K}\right)-\beta SI\\
 \partial_t I&amp;=\beta SI-\gamma I.
-\end{split} \tag{7.13}\]</span></span> We ignore the removed component <span class="math inline">\(R\)</span>, which in this case would correspond to dead foxes.</p>
+\end{split} \tag{7.78}\]</span></span> We ignore the removed component <span class="math inline">\(R\)</span>, which in this case would correspond to dead foxes.</p>
 <ol type="a">
 <li><p>Show that this model can be written in non-dimensionalised form as <span id="eq-sirlogistic2"><span class="math display">\[\begin{split}
 \partial_{\tilde{t}} u&amp;=bu(1-u)-uv\\
 \partial_{\tilde{t}} v&amp;=uv-mv.
-\end{split} \tag{7.14}\]</span></span></p></li>
+\end{split} \tag{7.79}\]</span></span></p></li>
 <li><p>Determine the steady state solutions (fixed points). Under what condition on the parameters is there an endemic state?</p></li>
 </ol>
 <p>Now assume that both susceptible and infected foxes move around randomly, but at different rates. This adds diffusion terms to the SIR model, where now <span class="math inline">\(S=S(x,t)\)</span> and <span class="math inline">\(I=I(x,t)\)</span> denote densities in space. <span id="eq-sirlogistic3"><span class="math display">\[\begin{split}
 \partial_t S&amp;=rS\left(1-\frac{S}{K}\right)-\beta SI+D_1\partial_x^2S\\\
 \partial_t I&amp;=\beta SI-\gamma I+D_2\partial_x^2I.
-\end{split} \tag{7.15}\]</span></span></p>
+\end{split} \tag{7.80}\]</span></span></p>
 <ol start="3" type="a">
 <li>Give expressions for <span class="math inline">\(\tilde{x}\)</span> and <span class="math inline">\(d\)</span> such that this model can be written in non-dimensionalised form as <span id="eq-sirlogistic4"><span class="math display">\[\begin{split}
 \partial_{\tilde{t}} u&amp;=bu(1-u)-uv+\partial_{\tilde{x}}^2u\\
 \partial_{\tilde{t}} v&amp;=uv-m v+d\,\partial_{\tilde{x}}^2v
-\end{split} \tag{7.16}\]</span></span></li>
+\end{split} \tag{7.81}\]</span></span></li>
 </ol>
 <p>We will now work with these non-dimensional equations but drop the tildes to avoid clutter.</p>
 <ol start="4" type="a">
 <li><p>Make the travelling wave Ansatz <span id="eq-sirlogistic5"><span class="math display">\[
 u(x,t)=A(z),~~~v(x,t)=B(z)
-\tag{7.17}\]</span></span> with <span class="math inline">\(z=x-ct\)</span> for some <span class="math inline">\(c&gt;0\)</span> and derive the system of ODEs describing the functions <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.</p></li>
+\tag{7.82}\]</span></span> with <span class="math inline">\(z=x-ct\)</span> for some <span class="math inline">\(c&gt;0\)</span> and derive the system of ODEs describing the functions <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>.</p></li>
 <li><p>If <span class="math inline">\(A(\infty)=1\)</span>, what are <span class="math inline">\(A(-\infty), B(\infty)\)</span> and <span class="math inline">\(B(-\infty)\)</span>? Make a sketch of <span class="math inline">\(A(z)\)</span> and <span class="math inline">\(B(z)\)</span> and indicate the direction of travel with an arrow.</p></li>
 <li><p>By linearising about the leading edge of the wave where <span class="math inline">\(B\)</span> is very small, determine a lower limit on the wave speed <span class="math inline">\(c\)</span>.</p></li>
 </ol>
@@ -402,13 +659,13 @@ u(x,t)=A(z),~~~v(x,t)=B(z)
   x^2} \\
 \frac{\partial v}{\partial t}&amp;=b-u^2v+D_2\frac{\partial^2v}{\partial
   x^2}
-\end{split} \tag{7.18}\]</span></span> where <span class="math inline">\(b&gt;0\)</span> and <span class="math inline">\(a+b&gt;0\)</span>.</p>
+\end{split} \tag{7.83}\]</span></span> where <span class="math inline">\(b&gt;0\)</span> and <span class="math inline">\(a+b&gt;0\)</span>.</p>
 <p>Show that a spatially uniform steady state solution <span class="math inline">\((u^*,v^*)\)</span> exists for this model and is given by <span class="math inline">\((u^*,v^*)=(a+b\,,\;b/(a+b)^2)\)</span>. Show that the conditions for this steady state to be driven unstable by diffusion are that the three inequalities <span class="math display">\[
 b-a&lt;(a+b)^3\]</span> <span id="eq-turing2"><span class="math display">\[
 \left[D_2\left(\frac{b-a}{a+b}\right)-D_1(a+b)^2\right]^2&gt;4D_1D_2(a+b)^2
-\tag{7.19}\]</span></span> <span id="eq-turing3"><span class="math display">\[
+\tag{7.84}\]</span></span> <span id="eq-turing3"><span class="math display">\[
 D_2\left(\frac{b-a}{a+b}\right)-D_1(a+b)^2&gt;0
-\tag{7.20}\]</span></span> should all hold simultaneously.</p>
+\tag{7.85}\]</span></span> should all hold simultaneously.</p>
 </div>
 <hr>
 </section>
@@ -420,7 +677,7 @@ D_2\left(\frac{b-a}{a+b}\right)-D_1(a+b)^2&gt;0
   x^2} \\
 \frac{\partial c_2}{\partial t}&amp;=kc_1+c_1c_2^2 - c_2 + D_2\frac{\partial^2c_2}{\partial
   x^2}
-\end{split} \tag{7.21}\]</span></span> where <span class="math inline">\(k&gt;0\)</span> and <span class="math inline">\(\delta&gt;0\)</span>.</p>
+\end{split} \tag{7.86}\]</span></span> where <span class="math inline">\(k&gt;0\)</span> and <span class="math inline">\(\delta&gt;0\)</span>.</p>
 <p>Show that a spatially uniform steady state solution <span class="math inline">\((c_1^*,c_2^*)\)</span> exists for this model and give the conditions for this steady state to be driven unstable by diffusion. You may use any results derived in the lectures.</p>
 </div>
 <hr>
@@ -430,7 +687,7 @@ D_2\left(\frac{b-a}{a+b}\right)-D_1(a+b)^2&gt;0
 <div id="exr-spatial5" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 7.7</strong></span> In the model for the aggregation of slime mould amoebae suppose that the spatial domain is <span class="math inline">\(0\leq x\leq L\)</span> rather than <span class="math inline">\(-\infty&lt;x&lt;\infty\)</span>. Show that the conditions for aggregation to occur are <span class="math inline">\(\chi a^*f&gt;k\mu\)</span> and <span id="eq-slime2"><span class="math display">\[
 L&gt;\pi\sqrt{\frac{D\mu}{\chi a^* f-k\mu}}.
-\tag{7.22}\]</span></span></p>
+\tag{7.87}\]</span></span></p>
 </div>
 
 
