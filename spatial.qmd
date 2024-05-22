@@ -8,10 +8,10 @@ $$
 \frac{dN}{dt} = f(N),
 $$ {#eq-nonspatial}
 where $f(N)$ is the net growth rate that encodes the difference between birth and death rates for the population as a whole. In the spatial case we have to consider the net growth rate of the population in a small interval $[x,x+dx]$. This is again given by a function $f$ that encodes the births and deaths, but now we also have  movement of individuals into or out of the interval. We write the rate of change of the number of individuals in the interval as
-$$\begin{multline}
+$$
 \frac{\partial}{\partial t}\int_{x_0}^{x_0+\Delta x}u(x,t)dx = 
-\int_{x_0}^{x_0+\Delta x}f(u(x,t),x)dx\\ +J(x_0)-J(x_0+\Delta x).
-\end{multline}$$ {#eq-spatial}
+\int_{x_0}^{x_0+\Delta x}f(u(x,t),x)dx +J(x_0)-J(x_0+\Delta x).
+$$ {#eq-spatial}
 The flux $J(x)$ is defined as the net rate at which individuals move through point $x$ from left to right. If more individuals move from right to left than from left to right, the flux is negative. We have indicated explicitly that $f$ can depend on both the population density $u$ at $x$ as well as the position $x$ itself. This is because the birth and death rates can depend on the local environment, for example the availability of resources or the presence of predators. The flux $J$ can also depend on the local population density and the position. We did not indicate this explicitly to simplify the notation.
 
 We now use the integral mean value theorem that states that for a continuous function $g(x)$ the integral over $g(x)$ over an interval $[a,b]$ is equal to $g(\xi)(b-a)$ for some $\xi\in[a,b]$. We apply this to the integrals in @eq-spatial to get
