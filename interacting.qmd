@@ -565,7 +565,5 @@ How are the new dimensionless constants $\alpha, \beta$ expressed in terms of th
    
     ii) Evaluate the characteristic equation and study the stability of this fixed point as the parameter α varies within the range γ < α < 1, classifying the
     non-trivial fixed point accordingly (i.e. node, spiral, centre or saddle point).
-   
-    iii) Calculate the critical point where the Hopf bifurcation occurs and give an estimate
-    for the period of oscillation.
+
 :::
