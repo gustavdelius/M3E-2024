@@ -563,7 +563,7 @@ How are the new dimensionless constants $\alpha, \beta$ and $\gamma$ expressed i
 
     i) Calculate the Jacobian at this point in terms of the function $g(x), g'(x)$, where $'$      denotes derivative in respect with $x$.
    
-    ii) Evaluate the characteristic equation and study the stability of this fixed point as the parameter α varies within the range γ < α < 1, classifying the
+    ii) Evaluate the characteristic equation and study the stability of this fixed point as the parameter α varies within the range $\gamma<\alpha<1$, classifying the
     non-trivial fixed point accordingly (i.e. node, spiral, centre or saddle point).
 
 :::
