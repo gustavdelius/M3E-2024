@@ -546,8 +546,8 @@ where $N(T)$ is the number of prey and $P(T)$ is the number of predators at time
 (b) Introduce the dimensionless variables $\frac{N}{K} = x, \frac{cP}{r} = y, rT = t$ and show that the above system can be reduced to
 
 $$\begin{split}
-\frac{dx}{dt} &= x\left(\frac{x}{y} - 1\right)(1 - x) - y = x[g(x) - y],\\
-\frac{dy}{dt} &= \beta(x - \alpha y).
+\frac{dx}{dt} &= x\left(\left(\frac{x}{y} - 1\right)(1 - x) - y\right) = x[g(x) - y],\\
+\frac{dy}{dt} &= \beta(x - \alpha) y.
 \end{split}$$ {#eq-interacting-populations8}
 How are the new dimensionless constants $\alpha, \beta$ expressed in terms of the original parameters?
 
