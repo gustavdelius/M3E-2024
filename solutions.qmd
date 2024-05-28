@@ -31,7 +31,7 @@ Hence
 $$
 3\frac{du}{dt} = \frac{1}{u^2}\left( \alpha u^2-\beta u^3 \right) = \alpha-\beta u.
 $$ {#eq-ex_vonBertalanffy_growth3}
-So this change of variables has yielded a first-order ODE with linear coefficients, which is easy for us to solve:
+So this change of variables has yielded a linear first-order ODE with constant coefficients, which is easy for us to solve:
 $$
 u(t) = \frac{1}{\beta} \left( \alpha  - Ae^{-\beta t/3}\right)
 $$ {#eq-ex_vonBertalanffy_growth4}
