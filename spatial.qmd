@@ -249,7 +249,7 @@ $$\begin{split}
 \frac{\partial \xi}{\partial t}&=\frac{\partial f}{\partial u}(u^*,v^*)\xi+\frac{\partial f}{\partial v}(u^*,v^*)\eta+D_1\frac{\partial^2\xi}{\partial x^2}\\
 &=a_{11}\xi+a_{12}\eta+D_1\frac{\partial^2\xi}{\partial x^2},\\
 \frac{\partial \eta}{\partial t}&=\frac{\partial g}{\partial u}(u^*,v^*)\xi+\frac{\partial g}{\partial v}(u^*,v^*)\eta+D_2\frac{\partial^2\eta}{\partial x^2}\\
-&=a_{21}\xi+a_{22}\eta+D_1\frac{\partial^2\xi}{\partial x^2}.
+&=a_{21}\xi+a_{22}\eta+D_2\frac{\partial^2\eta}{\partial x^2}.
 \end{split}$$ {#eq-turingpert3}
 Those partial derivatives of $f$ and $g$ with respect to $u$ and $v$ are familiar to us from the stability analysis in non-spatial models as the entries of the Jacobian matrix and we are using the same shorthand notation for them here.
 
