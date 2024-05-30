@@ -20,7 +20,7 @@ $$
 $$ {#eq-spatial2}
 for some $\xi_1,\xi_2\in[x_0,x_0+\Delta x]$. We now divide both sides by $\Delta x$,
 $$
-\partial_t u(\xi_1,t) = f(u(\xi_2,t),\xi_2) x +\frac{J(x_0)-J(x_0+\Delta x)}{\Delta x}
+\partial_t u(\xi_1,t) = f(u(\xi_2,t),\xi_2) +\frac{J(x_0)-J(x_0+\Delta x)}{\Delta x}
 $$ {#eq-spatial3}
 and take the limit $\Delta x\to 0$, where $\xi_1\to x$ and $\xi_2\to x$ and the difference quotient becomes the derivative, to get
 $$

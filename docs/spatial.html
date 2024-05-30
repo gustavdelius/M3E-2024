@@ -289,7 +289,7 @@ window.Quarto = {
 <p>We now use the integral mean value theorem that states that for a continuous function <span class="math inline">\(g(x)\)</span> the integral over <span class="math inline">\(g(x)\)</span> over an interval <span class="math inline">\([a,b]\)</span> is equal to <span class="math inline">\(g(\xi)(b-a)\)</span> for some <span class="math inline">\(\xi\in[a,b]\)</span>. We apply this to the integrals in <a href="#eq-spatial" class="quarto-xref">Eq.&nbsp;<span>7.2</span></a> to get <span id="eq-spatial2"><span class="math display">\[
 \partial_t u(\xi_1,t)\Delta x = f(u(\xi_2,t),\xi_2)\Delta x +J(x_0)-J(x_0+\Delta x)
 \tag{7.3}\]</span></span> for some <span class="math inline">\(\xi_1,\xi_2\in[x_0,x_0+\Delta x]\)</span>. We now divide both sides by <span class="math inline">\(\Delta x\)</span>, <span id="eq-spatial3"><span class="math display">\[
-\partial_t u(\xi_1,t) = f(u(\xi_2,t),\xi_2) x +\frac{J(x_0)-J(x_0+\Delta x)}{\Delta x}
+\partial_t u(\xi_1,t) = f(u(\xi_2,t),\xi_2) +\frac{J(x_0)-J(x_0+\Delta x)}{\Delta x}
 \tag{7.4}\]</span></span> and take the limit <span class="math inline">\(\Delta x\to 0\)</span>, where <span class="math inline">\(\xi_1\to x\)</span> and <span class="math inline">\(\xi_2\to x\)</span> and the difference quotient becomes the derivative, to get <span id="eq-transport"><span class="math display">\[
 \partial_t u(x,t) = f(u(x,t),x)-\partial_x J(x).
 \tag{7.5}\]</span></span></p>
