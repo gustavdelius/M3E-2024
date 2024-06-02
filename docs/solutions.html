@@ -691,14 +691,15 @@ m=\frac{\gamma}{\beta K}.
 <li><p>By inspection we see that one steady state is <span class="math inline">\((u(x,t),v(x,t))=(0,0)\)</span> and that another is <span id="eq-spatial3ss"><span class="math display">\[
 (u(x,t),v(x,t))=(1,0).
 \tag{A.83}\]</span></span> The first describes a situation where the foxes are extinct, the second the situation where in the absence of the disease the fox population sits at its carrying capacity. We look for another steady state <span class="math inline">\((u(x,t),v(x,t))=(u^*,v^*)\)</span> with <span class="math inline">\(v^*\neq 0\)</span>. From the equation for <span class="math inline">\(v\)</span> we read off that <span class="math inline">\(u^*=m\)</span> and then from the equation for <span class="math inline">\(u\)</span> we get <span class="math inline">\(v^*=b(1-m)\)</span>. This is the endemic state because the number of infecteds is nonzero. It exists as long as <span class="math inline">\(m&lt;1\)</span>. This tells us that the existence of the endemic state is independent of the intrinsic growth rate <span class="math inline">\(r\)</span> of the fox population but does depend on its carrying capacity.</p></li>
-<li><p>We want <span class="math inline">\(D_1\partial_x^2S=\partial_{\tilde{x}}^2u\)</span>, where <span class="math inline">\(u=S/K\)</span>. Hence <span id="eq-spatial3x"><span class="math display">\[
+<li><p>We know from part a. that <span class="math inline">\(\partial_{\tilde t}u=\partial_t I/(\beta K^2)\)</span>. Thus we now want <span class="math inline">\(D_1\partial_x^2 S/(\beta K^2)=\partial_{\tilde{x}}^2 u\)</span>, where <span class="math inline">\(u=S/K\)</span>. Hence <span id="eq-spatial3x"><span class="math display">\[
 \tilde{x}=\sqrt{\frac{K\beta}{D_1}}x.
 \tag{A.84}\]</span></span> Then <span class="math inline">\(d\,\partial_{\tilde{x}}^2v =d\,D_1\partial_x^2I\)</span> but we want <span class="math inline">\(D_2\partial_x^2I\)</span> so we need <span id="eq-spatial3d"><span class="math display">\[
 d=\frac{D_2}{D_1}.
 \tag{A.85}\]</span></span></p></li>
-<li><p>Substituting the wave Ansatz into the PDEs for <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> gives <span id="eq-AB"><span class="math display">\[
--cA'=bA(1-A)-AB+A'',~~~-cB'=AB-mB+dB''.
-\tag{A.86}\]</span></span></p></li>
+<li><p>Substituting the wave Ansatz into the PDEs for <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> gives <span id="eq-AB"><span class="math display">\[\begin{split}
+-cA'&amp;=bA(1-A)-AB+A''\\
+-cB'&amp;=AB-mB+dB''.
+\end{split} \tag{A.86}\]</span></span></p></li>
 <li><p>If <span class="math inline">\(A(\infty)=1\)</span> (which corresponds to <span class="math inline">\(S=K\)</span>) then that means that at <span class="math inline">\(x=\infty\)</span> the system is in the disease-free state and thus <span class="math inline">\(B(\infty)=0\)</span>. At <span class="math inline">\(x=-\infty\)</span> the system must thus be in the endemic state, so <span class="math inline">\(A(-\infty)=u^*=m\)</span> and <span class="math inline">\(B(-\infty)=v^*=b(1-m)\)</span>. So the key to this question was the observation that the travelling wave will always have to interpolate between two steady states.</p></li>
 <li><p>At the leading edge where <span class="math inline">\(B\)</span> is very small, <span class="math inline">\(A\)</span> is very close to <span class="math inline">\(1\)</span>, so <span class="math inline">\(A=1-\epsilon\)</span> for a small <span class="math inline">\(\epsilon&gt;0\)</span>. The equations <a href="#eq-AB" class="quarto-xref">Eq.&nbsp;<span>A.86</span></a> can thus be approximated by the linear equations <span id="eq-ABl"><span class="math display">\[
 c\epsilon'=b\epsilon-B-\epsilon'',~~~-cB'=B-mB+dB''.

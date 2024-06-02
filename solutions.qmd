@@ -621,7 +621,7 @@ because the number of infecteds is nonzero. It exists as long as $m<1$.
 This tells us that the existence of the endemic state is independent of the
 intrinsic growth rate $r$ of the fox population but does depend on its carrying capacity.
 
-c. We want $D_1\partial_x^2S=\partial_{\tilde{x}}^2u$, where $u=S/K$. Hence
+c. We know from part a. that $\partial_{\tilde t}u=\partial_t I/(\beta K^2)$. Thus we now want $D_1\partial_x^2 S/(\beta K^2)=\partial_{\tilde{x}}^2 u$, where $u=S/K$. Hence
 $$
 \tilde{x}=\sqrt{\frac{K\beta}{D_1}}x.
 $$ {#eq-spatial3x}
@@ -632,9 +632,10 @@ d=\frac{D_2}{D_1}.
 $$ {#eq-spatial3d}
 
 d. Substituting the wave Ansatz into the PDEs for $u$ and $v$ gives
-$$
--cA'=bA(1-A)-AB+A'',~~~-cB'=AB-mB+dB''.
-$$ {#eq-AB}
+$$\begin{split}
+-cA'&=bA(1-A)-AB+A''\\
+-cB'&=AB-mB+dB''.
+\end{split}$$ {#eq-AB}
 
 e. If $A(\infty)=1$ (which corresponds to $S=K$) then that means that at $x=\infty$ the system is in
 the disease-free state and thus $B(\infty)=0$. At $x=-\infty$ the 
