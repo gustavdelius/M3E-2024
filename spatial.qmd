@@ -20,7 +20,7 @@ $$
 $$ {#eq-spatial2}
 for some $\xi_1,\xi_2\in[x_0,x_0+\Delta x]$. We now divide both sides by $\Delta x$,
 $$
-\partial_t u(\xi_1,t) = f(u(\xi_2,t),\xi_2) x +\frac{J(x_0)-J(x_0+\Delta x)}{\Delta x}
+\partial_t u(\xi_1,t) = f(u(\xi_2,t),\xi_2) +\frac{J(x_0)-J(x_0+\Delta x)}{\Delta x}
 $$ {#eq-spatial3}
 and take the limit $\Delta x\to 0$, where $\xi_1\to x$ and $\xi_2\to x$ and the difference quotient becomes the derivative, to get
 $$
@@ -249,7 +249,7 @@ $$\begin{split}
 \frac{\partial \xi}{\partial t}&=\frac{\partial f}{\partial u}(u^*,v^*)\xi+\frac{\partial f}{\partial v}(u^*,v^*)\eta+D_1\frac{\partial^2\xi}{\partial x^2}\\
 &=a_{11}\xi+a_{12}\eta+D_1\frac{\partial^2\xi}{\partial x^2},\\
 \frac{\partial \eta}{\partial t}&=\frac{\partial g}{\partial u}(u^*,v^*)\xi+\frac{\partial g}{\partial v}(u^*,v^*)\eta+D_2\frac{\partial^2\eta}{\partial x^2}\\
-&=a_{21}\xi+a_{22}\eta+D_1\frac{\partial^2\xi}{\partial x^2}.
+&=a_{21}\xi+a_{22}\eta+D_2\frac{\partial^2\eta}{\partial x^2}.
 \end{split}$$ {#eq-turingpert3}
 Those partial derivatives of $f$ and $g$ with respect to $u$ and $v$ are familiar to us from the stability analysis in non-spatial models as the entries of the Jacobian matrix and we are using the same shorthand notation for them here.
 

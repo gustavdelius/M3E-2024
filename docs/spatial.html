@@ -289,7 +289,7 @@ window.Quarto = {
 <p>We now use the integral mean value theorem that states that for a continuous function <span class="math inline">\(g(x)\)</span> the integral over <span class="math inline">\(g(x)\)</span> over an interval <span class="math inline">\([a,b]\)</span> is equal to <span class="math inline">\(g(\xi)(b-a)\)</span> for some <span class="math inline">\(\xi\in[a,b]\)</span>. We apply this to the integrals in <a href="#eq-spatial" class="quarto-xref">Eq.&nbsp;<span>7.2</span></a> to get <span id="eq-spatial2"><span class="math display">\[
 \partial_t u(\xi_1,t)\Delta x = f(u(\xi_2,t),\xi_2)\Delta x +J(x_0)-J(x_0+\Delta x)
 \tag{7.3}\]</span></span> for some <span class="math inline">\(\xi_1,\xi_2\in[x_0,x_0+\Delta x]\)</span>. We now divide both sides by <span class="math inline">\(\Delta x\)</span>, <span id="eq-spatial3"><span class="math display">\[
-\partial_t u(\xi_1,t) = f(u(\xi_2,t),\xi_2) x +\frac{J(x_0)-J(x_0+\Delta x)}{\Delta x}
+\partial_t u(\xi_1,t) = f(u(\xi_2,t),\xi_2) +\frac{J(x_0)-J(x_0+\Delta x)}{\Delta x}
 \tag{7.4}\]</span></span> and take the limit <span class="math inline">\(\Delta x\to 0\)</span>, where <span class="math inline">\(\xi_1\to x\)</span> and <span class="math inline">\(\xi_2\to x\)</span> and the difference quotient becomes the derivative, to get <span id="eq-transport"><span class="math display">\[
 \partial_t u(x,t) = f(u(x,t),x)-\partial_x J(x).
 \tag{7.5}\]</span></span></p>
@@ -427,7 +427,7 @@ u(x,t)=u^*+\xi(x,t),~~~v(x,t)=v^*+\eta(x,t)
 \frac{\partial \xi}{\partial t}&amp;=\frac{\partial f}{\partial u}(u^*,v^*)\xi+\frac{\partial f}{\partial v}(u^*,v^*)\eta+D_1\frac{\partial^2\xi}{\partial x^2}\\
 &amp;=a_{11}\xi+a_{12}\eta+D_1\frac{\partial^2\xi}{\partial x^2},\\
 \frac{\partial \eta}{\partial t}&amp;=\frac{\partial g}{\partial u}(u^*,v^*)\xi+\frac{\partial g}{\partial v}(u^*,v^*)\eta+D_2\frac{\partial^2\eta}{\partial x^2}\\
-&amp;=a_{21}\xi+a_{22}\eta+D_1\frac{\partial^2\xi}{\partial x^2}.
+&amp;=a_{21}\xi+a_{22}\eta+D_2\frac{\partial^2\eta}{\partial x^2}.
 \end{split} \tag{7.43}\]</span></span> Those partial derivatives of <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> with respect to <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are familiar to us from the stability analysis in non-spatial models as the entries of the Jacobian matrix and we are using the same shorthand notation for them here.</p>
 <p>We now make the harmonic wave Ansatz <span id="eq-turingpert4"><span class="math display">\[\begin{split}
 \xi(x,t)&amp;=B_1e^{\sigma_k t}\sin(kx+\alpha),\\
